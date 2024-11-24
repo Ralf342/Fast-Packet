@@ -52,6 +52,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void onClickEnvio(ActionEvent event) {
+        cargarEscenaEnvio();
     }
     
     
@@ -107,7 +108,12 @@ public class FXMLMenuPrincipalController implements Initializable {
     
     private void cargarEscenaEnvio(){
         try {
-            
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLEscenarioEnvio.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+            pn_EscenarioUno.getChildren().clear();
+            pn_EscenarioUno.getChildren().add(pane);
+            FXMLEscenarioEnvioController ee = loader.getController();
         } catch (Exception e) {
         }
     }
