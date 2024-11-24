@@ -1,21 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fastpacketfx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
-/**
- * FXML Controller class
- *
- * @author joska_
- */
 public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
@@ -28,13 +22,47 @@ public class FXMLMenuPrincipalController implements Initializable {
     private Button btn_paquetes;
     @FXML
     private Button btn_envios;
+    @FXML
+    private Pane pn_EscenarioUno;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
+
+    @FXML
+    private void onClickEmpleado(ActionEvent event) {
+        cargarEscenaEmpleado();
+    }
+
+    @FXML
+    private void onClickUnidad(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickCliente(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickPaquete(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClickEnvio(ActionEvent event) {
+    }
     
+    
+    
+    
+    private void cargarEscenaEmpleado(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLEscenarioEmpleados.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+            pn_EscenarioUno.getChildren().clear();
+            pn_EscenarioUno.getChildren().add(pane);
+            FXMLEscenarioEmpleadosController e = loader.getController();
+        } catch (Exception e) {
+        }
+    }
 }

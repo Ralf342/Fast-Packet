@@ -8,12 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fastpacketfx.FXMLMenuPrincipalController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLMenuPrincipalController">
    <children>
       <Pane prefHeight="400.0" prefWidth="170.0" style="-fx-background-color: #142B39;">
          <children>
-            <Button fx:id="btn_Empleado" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Empleados" textFill="WHITE">
+            <Button fx:id="btn_Empleado" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#onClickEmpleado" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Empleados" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -25,7 +24,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btn_Unidades" layoutX="20.0" layoutY="110.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Unidades" textFill="WHITE">
+            <Button fx:id="btn_Unidades" layoutX="20.0" layoutY="110.0" mnemonicParsing="false" onAction="#onClickUnidad" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Unidades" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -37,7 +36,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btn_clientes" layoutX="20.0" layoutY="180.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Clientes" textFill="WHITE">
+            <Button fx:id="btn_clientes" layoutX="20.0" layoutY="180.0" mnemonicParsing="false" onAction="#onClickCliente" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Clientes" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -49,7 +48,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btn_paquetes" layoutX="20.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Paquetes" textFill="WHITE">
+            <Button fx:id="btn_paquetes" layoutX="20.0" layoutY="250.0" mnemonicParsing="false" onAction="#onClickPaquete" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Paquetes" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -61,7 +60,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btn_envios" layoutX="20.0" layoutY="320.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Envios" textFill="WHITE">
+            <Button fx:id="btn_envios" layoutX="20.0" layoutY="320.0" mnemonicParsing="false" onAction="#onClickEnvio" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Envios" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -75,7 +74,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane layoutX="170.0" prefHeight="400.0" prefWidth="430.0" style="-fx-background-color: #142B39;">
+      <Pane fx:id="pn_EscenarioUno" layoutX="170.0" prefHeight="400.0" prefWidth="430.0" style="-fx-background-color: #142B39;">
          <children>
             <Separator orientation="VERTICAL" prefHeight="400.0" prefWidth="0.0" />
          </children>
