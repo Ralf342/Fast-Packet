@@ -47,6 +47,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void onClickPaquete(ActionEvent event) {
+        cargarEscenaPaquete();
     }
 
     @FXML
@@ -88,6 +89,25 @@ public class FXMLMenuPrincipalController implements Initializable {
             pn_EscenarioUno.getChildren().clear();
             pn_EscenarioUno.getChildren().add(pane);
             FXMLEscenarioClientesController c = loader.getController();
+        } catch (Exception e) {
+        }
+    }
+    
+    private void cargarEscenaPaquete(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLEscenaPaquete.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+            pn_EscenarioUno.getChildren().clear();
+            pn_EscenarioUno.getChildren().add(pane);
+            FXMLEscenaPaqueteController p = loader.getController();
+        } catch (Exception e) {
+        }
+    }
+    
+    private void cargarEscenaEnvio(){
+        try {
+            
         } catch (Exception e) {
         }
     }
