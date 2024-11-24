@@ -14,7 +14,7 @@
          <children>
             <Pane layoutY="100.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #142B39;">
                <children>
-                    <Button fx:id="button" layoutX="97.0" layoutY="316.0" onAction="#handleButtonAction" style="-fx-background-color: #F0371B; -fx-background-radius: 15; -fx-border-radius: 10;" text="Ingresar" textFill="WHITE">
+                    <Button fx:id="btn_Ingresar" layoutX="97.0" layoutY="306.0" onAction="#onClickIngresar" style="-fx-background-color: #F0371B; -fx-background-radius: 15; -fx-border-radius: 10;" text="Ingresar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -25,7 +25,7 @@
                         <Font name="System Bold Italic" size="26.0" />
                      </font>
                   </Label>
-                  <PasswordField layoutX="25.0" layoutY="230.0" prefHeight="31.0" prefWidth="250.0" promptText="******" style="-fx-background-radius: 10;" />
+                  <PasswordField fx:id="pf_password" layoutX="25.0" layoutY="230.0" prefHeight="31.0" prefWidth="250.0" promptText="******" style="-fx-background-radius: 10;" />
                   <Label layoutX="61.0" layoutY="111.0" prefHeight="36.0" prefWidth="179.0" text="Número de personal" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="20.0" />
@@ -34,6 +34,16 @@
                   <Label layoutX="97.0" layoutY="200.0" prefHeight="36.0" prefWidth="105.0" text="Contraseña" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lb_numeroFaltante" layoutX="25.0" layoutY="164.0" prefHeight="36.0" prefWidth="213.0" textFill="#e11111">
+                     <font>
+                        <Font name="System Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lb_passwordFaltante" layoutX="25.0" layoutY="255.0" prefHeight="36.0" prefWidth="171.0" textFill="#e11111">
+                     <font>
+                        <Font name="System Italic" size="16.0" />
                      </font>
                   </Label>
                </children>
@@ -59,7 +69,7 @@
             </Pane>
             <Pane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #142B39;">
                <children>
-                    <Label fx:id="label" layoutX="229.0" layoutY="14.0" minHeight="16" minWidth="69" text="¡Hola!" textFill="WHITE">
+                    <Label layoutX="229.0" layoutY="14.0" minHeight="16" minWidth="69" text="¡Hola!" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="50.0" />
                      </font>
