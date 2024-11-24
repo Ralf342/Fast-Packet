@@ -42,6 +42,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void onClickCliente(ActionEvent event) {
+        cargarEscenaCliente();
     }
 
     @FXML
@@ -75,6 +76,18 @@ public class FXMLMenuPrincipalController implements Initializable {
             pn_EscenarioUno.getChildren().clear();
             pn_EscenarioUno.getChildren().add(pane);
             FXMLEscenarioUnidadesController u = loader.getController();
+        } catch (Exception e) {
+        }
+    }
+    
+    private void cargarEscenaCliente(){
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("FXMLEscenarioClientes.fxml"));
+            AnchorPane pane = (AnchorPane) loader.load();
+            pn_EscenarioUno.getChildren().clear();
+            pn_EscenarioUno.getChildren().add(pane);
+            FXMLEscenarioClientesController c = loader.getController();
         } catch (Exception e) {
         }
     }
