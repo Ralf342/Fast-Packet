@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLInicioSesionController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLInicioSesionController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+      <Pane prefHeight="500.0" prefWidth="600.0">
+         <children>
+            <Pane layoutY="100.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #142B39;">
+               <children>
+                    <Button fx:id="button" layoutX="97.0" layoutY="316.0" onAction="#handleButtonAction" style="-fx-background-color: #F0371B; -fx-background-radius: 15; -fx-border-radius: 10;" text="Ingresar" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <TextField fx:id="tf_numeroPersonal" layoutX="25.0" layoutY="141.0" prefHeight="31.0" prefWidth="250.0" promptText="EJ: RP001" style="-fx-background-radius: 10;" />
+                  <Label layoutX="44.0" layoutY="14.0" prefHeight="84.0" prefWidth="213.0" text="Ingresa tus datos para entrar ;)" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="System Bold Italic" size="26.0" />
+                     </font>
+                  </Label>
+                  <PasswordField layoutX="25.0" layoutY="230.0" prefHeight="31.0" prefWidth="250.0" promptText="******" style="-fx-background-radius: 10;" />
+                  <Label layoutX="61.0" layoutY="111.0" prefHeight="36.0" prefWidth="179.0" text="Número de personal" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="97.0" layoutY="200.0" prefHeight="36.0" prefWidth="105.0" text="Contraseña" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="300.0" layoutY="100.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #142B39;">
+               <children>
+                  <ImageView fitHeight="228.0" fitWidth="255.0" layoutX="36.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@recursos/LOGO.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="50.0" layoutY="68.0" prefHeight="36.0" prefWidth="200.0" text="Cuidamos cada detalle" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="47.0" layoutY="278.0" prefHeight="36.0" prefWidth="206.0" text="Protegemos cada envío" textFill="WHITE">
+                     <font>
+                        <Font name="System Italic" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #142B39;">
+               <children>
+                    <Label fx:id="label" layoutX="229.0" layoutY="14.0" minHeight="16" minWidth="69" text="¡Hola!" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="50.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
     </children>
 </AnchorPane>
