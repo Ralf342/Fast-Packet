@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLInicioSesionController">
+<AnchorPane id="AnchorPane" maxHeight="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLInicioSesionController">
     <children>
       <Pane prefHeight="500.0" prefWidth="600.0">
          <children>
@@ -36,7 +36,7 @@
                         <Font name="System Italic" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lb_numeroFaltante" layoutX="25.0" layoutY="164.0" prefHeight="36.0" prefWidth="213.0" textFill="#e11111">
+                  <Label fx:id="lb_numeroFaltante" layoutX="25.0" layoutY="164.0" prefHeight="36.0" prefWidth="250.0" textFill="#e11111">
                      <font>
                         <Font name="System Italic" size="16.0" />
                      </font>

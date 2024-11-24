@@ -7,7 +7,9 @@ package fastpacketfx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 /**
  * FXML Controller class
@@ -15,6 +17,17 @@ import javafx.fxml.Initializable;
  * @author joska_
  */
 public class FXMLMenuPrincipalController implements Initializable {
+
+    @FXML
+    private Button btn_Empleado;
+    @FXML
+    private Button btn_Unidades;
+    @FXML
+    private Button btn_clientes;
+    @FXML
+    private Button btn_paquetes;
+    @FXML
+    private Button btn_envios;
 
     /**
      * Initializes the controller class.
