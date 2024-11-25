@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: #142B39;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fastpacketfx.FXMLFormularioPaqueteController">
+   <children>
+      <Label layoutX="95.0" layoutY="15.0" prefHeight="50.0" prefWidth="210.0" text="P A Q U E T E S" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="ta_Descripcion" layoutX="20.0" layoutY="95.0" prefHeight="65.0" prefWidth="360.0" style="-fx-background-radius: 5;" />
+      <Label layoutX="160.0" layoutY="75.0" prefHeight="20.0" text="Descripción" textFill="WHITE" />
+      <Label layoutX="92.0" layoutY="175.0" prefHeight="20.0" text="Alto:" textFill="WHITE" />
+      <TextField fx:id="tf_alto" layoutX="125.0" layoutY="170.0" prefHeight="20.0" prefWidth="200.0" />
+      <TextField fx:id="tf_ancho" layoutX="125.0" layoutY="210.0" prefHeight="20.0" prefWidth="200.0" />
+      <Label layoutX="75.0" layoutY="215.0" prefHeight="20.0" text="Ancho:" textFill="WHITE" />
+      <Label layoutX="35.0" layoutY="255.0" prefHeight="20.0" text="Profundidad:" textFill="WHITE" />
+      <TextField fx:id="tf_profundidad" layoutX="124.0" layoutY="250.0" prefHeight="20.0" prefWidth="200.0" />
+      <Button layoutX="100.0" layoutY="300.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="210.0" layoutY="300.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
