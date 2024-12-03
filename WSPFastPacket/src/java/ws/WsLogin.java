@@ -26,6 +26,9 @@ public class WsLogin {
     @Context
     private UriInfo context;
     
+    /*IniciarSesion
+    hecho por Rafael Vázquez*/
+    
     @Path("colaborador")
     @POST
     @Produces(MediaType.APPLICATION_JSON)

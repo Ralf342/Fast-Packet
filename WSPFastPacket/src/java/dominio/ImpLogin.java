@@ -17,6 +17,10 @@ import pojo.LoginColaborador;
  * @author joska_
  */
 public class ImpLogin {
+    
+    /*Iniciar sesión
+    hecho por Rafael Vázquez*/
+    
     public static LoginColaborador validarSesionColaborador(String noPersonal, String contrasenia){
         LoginColaborador respuesta = new LoginColaborador();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
