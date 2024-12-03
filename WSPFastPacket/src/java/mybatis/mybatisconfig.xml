@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <environments default="desarrollo">
+        <environment id="desarrollo">
+
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED" >
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/dbfastpacket?serverTimezone=UTC"/>  
+                <property name="username" value="adminFPp"/>    
+                <property name="password" value="8h=j?2WCb/4"/>
+                <property name="poolMaximumActiveConnections" value="50"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+
+    <mappers>
+        <mapper resource="mybatis/mappers/ColaboradorMapper.xml"/>
+        <mapper resource="mybatis/mappers/UnidadMapper.xml"/>
+    </mappers>
+
+</configuration>
