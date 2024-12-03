@@ -9,7 +9,7 @@ EXECUTE ON fastpacket.* TO 'adminFPp'@'localhost';
 
 FLUSH PRIVILEGES;
 -- ver que se hayan dado los permisos correctamente
-SHOW GRANTS FOR 'adminFP'@'localhost';
+SHOW GRANTS FOR 'adminFPp'@'localhost';
 
 
 CREATE TABLE IF NOT EXISTS cliente (
@@ -52,8 +52,9 @@ CREATE TABLE IF NOT EXISTS colaborador (
     nombre VARCHAR(20) NOT NULL,
     apellidoPaterno VARCHAR(20) NOT NULL,
     apellidoMaterno VARCHAR(20) NOT NULL,
-    noPersonal INT,
+    noPersonal INT NOT NULL,
     idRol INT NOT NULL,
+    foto BLOB DEFAULT NULL,
     FOREIGN KEY (idRol) REFERENCES rol(idRol)
 );
 
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS tipoUnidad (
 CREATE TABLE IF NOT EXISTS unidad (
     idUnidad INT PRIMARY KEY AUTO_INCREMENT,
     vin INT,
-    nii INT,
+    nii VARCHAR(30),
     modelo VARCHAR(30),
     marca VARCHAR(30),
     motivo VARCHAR(60),
@@ -155,3 +156,9 @@ VALUES
 (25.8, 4.5, 'Paquete grande', 4, 4),
 (3.7, 2.1, 'Paquete frágil', 5, 5),
 (12.4, 3.5, 'Paquete voluminoso', 6, 6);
+
+SELECT idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, 
+        noPersonal, correo, curp,contrasenia, colaborador.idRol, rol.tipo
+        FROM colaborador 
+        INNER JOIN rol ON rol.idRol = colaborador.idRol
+        WHERE rol.tipo = 'repartidor'
