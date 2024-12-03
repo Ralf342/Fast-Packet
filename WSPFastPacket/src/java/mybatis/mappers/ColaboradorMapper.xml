@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="colaborador">
+    <!--mapper de servicio de editarColaboradores-->
+    
+    <insert id="registro" parameterType="pojo.Colaborador">
+        INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol)
+         VALUES (#{correo}, #{contrasenia}, #{curp}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{noPersonal}, #{idRol}) 
+    </insert>
+    
+    <delete id="eliminar">
+        DELETE FROM colaborador WHERE idColaborador = #{idColaborador};
+    </delete>
+    <select id="obtenerColaboradores" resultType="pojo.Colaborador">
+        SELECT  idColaborador, correo, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol
+        FROM colaborador
+        INNER JOIN rol 
+        ON rol.idRol = colaborador.idRol
+        
+    </select>
+    
+    
+    <select id="obtenerColaboradorPorId" resultType="pojo.Colaborador">
+        SELECT  idColaborador, correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol
+        FROM colaborador
+        INNER JOIN rol 
+        ON rol.idRol = colaborador.idRol
+        WHERE colaborador.idColaborador = #{idColaborador}
+    </select>
+  
+    <update id="editar" parameterType="pojo.Colaborador">
+        UPDATE colaborador SET nombre = #{nombre}, apellidoPaterno = #{apellidoPaterno}, apellidoMaterno = #{apellidoMaterno}, correo = #{correo}, contrasenia = #{contrasenia}, curp = #{curp} WHERE idColaborador = #{idColaborador}
+    </update>
+    
+    <!--mapper deservicio  de buscarNombreColaborador-->
+    <select id="buscarNombreColaborador" resultType="pojo.Colaborador">
+        SELECT idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, 
+        fechaNacimiento, noPersonal, telefono, correo, rfc, curp,contrasenia, colaborador.idRol, rol.tipo  
+        FROM colaborador 
+        INNER JOIN rol ON rol.idRol = colaborador.idRol
+        WHERE colaborador.nombre = #{nombre}
+    </select>  
+    
+     <!--mapper de servicio de buscarRolColaborador-->
+    <select id="buscarRolColaborador" resultType="pojo.Colaborador">
+        SELECT idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, 
+        noPersonal, correo, curp,contrasenia, colaborador.idRol, rol.tipo
+        FROM colaborador 
+        INNER JOIN rol ON rol.idRol = colaborador.idRol
+        WHERE rol.tipo = #{tipo}
+    </select> 
+    
+</mapper>
