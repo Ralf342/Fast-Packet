@@ -118,4 +118,16 @@ public class ImpColaborador {
         }
         return msj;
     }
+    
+    public static List<Colaborador> obtenerColaboradores(){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+                List<Colaborador> colaboradores = conexionBD.selectList("colaborador.obtenerColaboradores");
+        return colaboradores;
+    }
+    
+    public static List<Colaborador> buscarNoPersonalColaborador(String noPersonal){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Colaborador> colaborador = conexionBD.selectList("colaborador.obtenerColaboradorPorNoPersonal", noPersonal);
+            return colaborador;    
+    }
 }
