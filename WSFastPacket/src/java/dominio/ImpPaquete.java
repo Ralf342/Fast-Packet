@@ -6,37 +6,39 @@
 package dominio;
 
 import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
-import pojo.Cliente;
-import pojo.Colaborador;
 import pojo.Mensaje;
+import pojo.Paquete;
 
 /**
  *
  * @author Jossellin
  */
-public class ImpCliente {
+public class ImpPaquete {
     
-    //registrar cliente
-    public static Mensaje registrarCliente(Cliente cliente){
-
+    //registrar paquete
+    public static Mensaje registrarPaquete(Paquete paquete){
         Mensaje msj = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
 
-                if(conexionBD!=null){
+        if(conexionBD!=null){
             try{
-                int filasAfectadas=conexionBD.insert("cliente.registrarCliente", cliente);
+                int filasAfectadas=conexionBD.insert("paquete.registrarPaquete", paquete);
                 conexionBD.commit();
                 if(filasAfectadas>0){
                     msj.setError(false);
-                    msj.setMensaje("El cliente " + cliente.getNombre() + " " 
-                    +cliente.getApellidoPaterno() + " " + cliente.getApellidoMaterno() 
-                    +", fue resgistrado con éxito.");
+                    msj.setMensaje("El paquete " + paquete.getIdPaquete()+ " " 
+                    +paquete.getDescripcion() +", fue resgistrado con éxito.");
                     
                 }else{
                     msj.setError(true);
-                    msj.setMensaje("El colaborador no pudo ser registrado");
+                    msj.setMensaje("El paquete no pudo ser registrado");
                 }
             }catch (Exception e){
                 msj.setError(true);
@@ -50,18 +52,25 @@ public class ImpCliente {
 
     }
     
-    
-    //editar cliente
-    public static Mensaje editarCliente(Cliente cliente){
-        Mensaje msj= new Mensaje();
+    //consultarPaquetePorEnvio
+    public static List<Paquete> consultarPaquetePorEnvio(Integer numeroDeGuia){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Paquete> paquete = conexionBD.selectList("paquete.consultarPaquetePorEnvio", numeroDeGuia);
+        return paquete;
+    }
+    
+    //actualizarPaquete
+    public static Mensaje actualizarPaquete(Paquete paquete){
+        Mensaje msj= new Mensaje();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();  
+        
         if(conexionBD!=null){
             try {
-                int filasAfectadas= conexionBD.update("cliente.editarCliente", cliente);
+                int filasAfectadas= conexionBD.update("paquete.actualizarPaquete", paquete);
                 conexionBD.commit();
                 if(filasAfectadas>0){
                     msj.setError(false);
-                    msj.setMensaje("El cliente "+cliente.getNombre()+" "+cliente.getApellidoPaterno()+" "+cliente.getApellidoMaterno()+", fue actualizado con exito.");
+                    msj.setMensaje("El paquete, fue actualizado con exito.");
                 }
             }catch(Exception e){
                 msj.setError(true);
@@ -74,20 +83,20 @@ public class ImpCliente {
         return msj;
     }
     
-    //eliminar cliente
-    public static Mensaje eliminarCliente(Integer idCliente){
+    //eliminar paquete
+    public static Mensaje eliminarPaquete(Integer idPaquete){
         Mensaje msj = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         if(conexionBD!=null){
             try{
-                int filasAfectadas=conexionBD.delete("cliente.eliminarCliente", idCliente);
+                int filasAfectadas=conexionBD.delete("paquete.eliminarPaquete", idPaquete);
                 conexionBD.commit();
                 if(filasAfectadas>0){
                     msj.setError(false);
-                    msj.setMensaje("El clienter ha sido borrado.");
+                    msj.setMensaje("El paquete ha sido borrado.");
                 }else{
                     msj.setError(true);
-                    msj.setMensaje("El cliente no pudo ser borrado");
+                    msj.setMensaje("El paquete no pudo ser borrado");
                 }
             }catch (Exception e){
                 msj.setError(true);
@@ -99,12 +108,4 @@ public class ImpCliente {
         }
         return msj;
     }
-    
-    //buscar cliente por correo
-    public static List<Cliente> buscarClientePorCorreo(String correo){
-        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-            List<Cliente> cliente = conexionBD.selectList("cliente.buscarClientePorCorreo", correo);
-        return cliente;
-    }
-    
 }

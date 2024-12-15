@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="paquete">
+    <!--mapper de servicio de registrar paquete-->
+    <insert id="registrarPaquete" parameterType="pojo.Paquete">
+        INSERT INTO paquete(
+            peso, dimensiones, descripcion, numeroDeGuia, idUnidad)
+        VALUES (
+        #{peso}, #{dimensiones}, #{descripcion}, #{numeroDeGuia}, #{idUnidad}
+        ) 
+    </insert>
+    
+    <!--mapper de servicio de consultar paquete por envio-->
+    <select id="consultarPaquetePorEnvio" resultType="pojo.Paquete">
+        SELECT p.idPaquete, p.peso, p.dimensiones, p.descripcion, p.idUnidad
+        FROM paquete p
+        INNER JOIN envio e
+        ON p.numeroDeGuia = e.numeroDeGuia
+        WHERE p.numeroDeGuia = #{numeroDeGuia};
+    </select>
+    
+    <!--mapper de servicio de actualizar paquete-->
+    <update id="actualizarPaquete" parameterType="pojo.Paquete">
+        UPDATE paquete 
+            SET peso = #{peso}, dimensiones = #{dimensiones}, 
+                descripcion = #{descripcion},
+                idUnidad = #{idUnidad}
+        WHERE  idPaquete = #{idPaquete};
+    </update>
+    
+    <!--mapper de servicio de eliminar paquete-->
+    <delete id="eliminarPaquete" parameterType="pojo.Paquete">
+        DELETE FROM paquete
+        WHERE idPaquete = #{idPaquete};
+    </delete>
+    
+</mapper>
