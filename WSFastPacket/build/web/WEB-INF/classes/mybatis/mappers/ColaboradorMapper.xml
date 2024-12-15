@@ -8,11 +8,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <insert id="registro" parameterType="pojo.Colaborador">
         INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol)
-         VALUES (#{correo}, #{contrasenia}, #{curp}, #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{noPersonal}, #{idRol}) 
+         VALUES (
+        #{correo}, 
+        #{contrasenia}, 
+        #{curp}, 
+        #{nombre}, 
+        #{apellidoPaterno},
+        #{apellidoMaterno}, 
+        #{noPersonal}, 
+        #{idRol}) 
     </insert>
     
     <delete id="eliminar">
-        DELETE FROM colaborador WHERE idColaborador = #{idColaborador};
+        DELETE FROM colaborador 
+        WHERE idColaborador = #{idColaborador};
     </delete>
+    
+    <update id="editar" parameterType="pojo.Colaborador">
+        UPDATE colaborador 
+        SET 
+        nombre = #{nombre}, 
+        apellidoPaterno = #{apellidoPaterno}, 
+        apellidoMaterno = #{apellidoMaterno}, 
+        correo = #{correo}, 
+        contrasenia = #{contrasenia}, 
+        curp = #{curp} 
+        WHERE idColaborador = #{idColaborador}
+    </update>
     
 </mapper>
