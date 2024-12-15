@@ -3,7 +3,8 @@ USE dbfastpacket;
 
 -- creacion de usuario desarrollador
 CREATE USER 'adminFPp'@localhost IDENTIFIED BY '8h=j?2WCb/4';
-REVOKE ALL PRIVILEGES ON dbfastpacket.* FROM 'adminFPp'@'localhost';
+
+
 GRANT CREATE, ALTER, DROP, INDEX, SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES, EXECUTE 
 ON dbfastpacket.* TO 'adminFPp'@'localhost';
 FLUSH PRIVILEGES;
@@ -128,16 +129,13 @@ VALUES
 ('martaramirez@paqueteria.com', 'c1247', 'RAM112233MDFRRL06', 'Marta', 'Ramírez', 'Díaz', 1006, 2),
 ('edgar@paqueteria.com', 'e1289', 'EDJ927982MDFRRL06', 'Edgar', 'Juarez', 'Cadena', 1007, 3);
 
-
 --  tabla tipoUnidad
 INSERT INTO tipoUnidad (tipo) 
 VALUES
-('Furgoneta'),
-('Furgoneta'),
-('Cuatri moto'),
-('Furgoneta'),
-('Moto'),
-('Furgoneta');
+('Gasolina'),
+('Disel'),
+('Electrica'),
+('Hibrida');
 
 --  tabla unidad
 INSERT INTO unidad (vin, nii, modelo, marca, motivo, idTipoUnidad) 
@@ -145,9 +143,8 @@ VALUES
 (235789, 'VIN12345', 'Furgoneta 2024', 'Ford', 'Transporte mercancía pesada', 1),
 (646701, 'VIN23456', 'Furgoneta 2023', 'Toyota', 'Transporte personal y paquetes pequeños', 2),
 (346012, 'VIN34567', 'Motocicleta 2022', 'Honda', 'Entrega urgente de paquetes pequeños', 3),
-(456733, 'VIN45678', 'Furgoneta 2023', 'Mercedes-Benz', 'Transporte de carga pesada', 4),
-(241284, 'VIN56789', 'Motocicleta 2024', 'Giant', 'Entrega ligera en zonas urbanas', 5),
-(790145, 'VIN67890', 'Furgoneta 2025', 'Volvo', 'Transporte de carga grande a larga distancia', 6);
+(456733, 'VIN45678', 'Furgoneta 2023', 'Mercedes-Benz', 'Transporte de carga pesada', 4);
+
 
 -- tabla paquete
 INSERT INTO paquete (peso, dimensiones, descripcion, numeroDeGuia, idUnidad) 
@@ -156,5 +153,5 @@ VALUES
 (15.0, 3.0, 'Paquete mediano', 2, 2),
 (5.2, 1.8, 'Paquete urgente', 3, 3),
 (25.8, 4.5, 'Paquete grande', 4, 4),
-(3.7, 2.1, 'Paquete frágil', 5, 5),
-(12.4, 3.5, 'Paquete voluminoso', 6, 6);
+(3.7, 2.1, 'Paquete frágil', 5, 1),
+(12.4, 3.5, 'Paquete voluminoso', 6, 3);
