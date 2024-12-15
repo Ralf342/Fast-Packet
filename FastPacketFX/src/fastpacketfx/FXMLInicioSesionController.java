@@ -1,5 +1,8 @@
 package fastpacketfx;
 
+import fastpacketfx.modelo.dao.LoginDAO;
+import fastpacketfx.pojo.Login;
+import fastpacketfx.utilidades.Utilidades;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,8 +40,10 @@ public class FXMLInicioSesionController implements Initializable {
 
     @FXML
     private void onClickIngresar(ActionEvent event) {
-        if(validarCampos(tf_numeroPersonal.getText(),pf_password.getText())){
-            irMenuPrincipal();
+        String noPersonal = tf_numeroPersonal.getText();
+        String contrasenia = pf_password.getText();
+        if(validarCampos(noPersonal,contrasenia)){
+            verificaCredencialesAcceso(noPersonal,contrasenia);
         }
     }
     
@@ -56,6 +61,24 @@ public class FXMLInicioSesionController implements Initializable {
         }
         return camposValidos;
     }
+    
+    private void verificaCredencialesAcceso(String noPersonal, String contrasenia){
+        Login respuestaLogin = LoginDAO.iniciarSesion(noPersonal, contrasenia);
+        System.out.println("Que me esta mandando esto? "+noPersonal+contrasenia);
+        System.out.println("Aqui esta mandando este mensaje: "+respuestaLogin.getMensaje());
+        if(!respuestaLogin.isError()){
+            Utilidades.mostrarAlertaSimple("Credenciales correctas","Bienvenid@ al programa "+respuestaLogin.getColaborador().getNombre() +
+                        " "+respuestaLogin.getColaborador().getApellidoMaterno()+ " "+
+                    respuestaLogin.getColaborador().getApellidoPaterno(),Alert.AlertType.INFORMATION);
+            tf_numeroPersonal.setText("");
+            pf_password.setText("");
+            irMenuPrincipal();
+        }else{
+            Utilidades.mostrarAlertaSimple("Credenciales incorrectas","Favor de verificar sus credenciales e intentarlo de nuevo",Alert.AlertType.ERROR);
+            pf_password.setText("");
+        }
+    }
+    
     
     private void irMenuPrincipal(){
         try{
