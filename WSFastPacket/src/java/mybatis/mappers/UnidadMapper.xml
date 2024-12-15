@@ -6,11 +6,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="unidad">
     <!--mapper de servicio de registrarUnidad-->
     <insert id="registrarUnidad" parameterType="pojo.Unidad">
-        INSERT INTO unidad(idUnidad, vin, nii, modelo, marca, motivo, idTipoUnidad
-        VALUES (#{idUnidad}, #{vin}, #{nii}, #{modelo}, #{marca}, #{motivo}, #{idTipoUnidad}})
+        INSERT INTO unidad
+        VALUES (
+        #{vin}, 
+        #{nii},
+        #{anio},
+        #{modelo}, 
+        #{marca}, 
+        #{motivo}, 
+        #{idTipoUnidad})
     </insert>
     
     <delete id="eliminar">
-        DELETE FROM unidad WHERE idUnidad = #{idUnidad};
+        DELETE FROM unidad 
+        WHERE idUnidad = #{idUnidad};
     </delete>
+    
+    <select id="mostrarUnidades" resultType="pojo.Unidad">
+        SELECT * FROM unidad
+    </select>
+    
+    <select id="obtenerUnidadesPorNII" resultType="pojo.Unidad">
+        SELECT * FROM unidad
+        WHERE nii LIKE CONCAT(#{nii},%)
+    </select>
 </mapper>

@@ -7,9 +7,11 @@ package ws;
 
 import com.google.gson.Gson;
 import dominio.ImpUnidad;
+import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -65,5 +67,18 @@ public class WSUnidad {
         
     }
     
+    @Path("mostrarUnidades")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> mostrarUnidades(){
+        return ImpUnidad.mostrarUnidad();
+    }
+    
+    @Path("buscarUnidadNII/{nii}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> buscarUnidadNII(@PathParam("nii") String nii){
+        return ImpUnidad.buscarUnidadPorNII(nii);
+    }
 }
 
