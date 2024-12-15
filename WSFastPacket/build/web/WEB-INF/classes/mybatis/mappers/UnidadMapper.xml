@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="unidad">
+    <!--mapper de servicio de registrarUnidad-->
+    <insert id="registrarUnidad" parameterType="pojo.Unidad">
+        INSERT INTO unidad(idUnidad, vin, nii, modelo, marca, motivo, idTipoUnidad
+        VALUES (#{idUnidad}, #{vin}, #{nii}, #{modelo}, #{marca}, #{motivo}, #{idTipoUnidad}})
+    </insert>
+    
+    <delete id="eliminar">
+        DELETE FROM unidad WHERE idUnidad = #{idUnidad};
+    </delete>
+</mapper>
