@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ws.WSColaborador.class);
         resources.add(ws.WSLogin.class);
+        resources.add(ws.WSUnidad.class);
         
     }
     

@@ -36,4 +36,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idColaborador = #{idColaborador}
     </update>
     
+    <select id="obtenerColaboradorPorNoPersonal" resultType="pojo.Colaborador">
+        SELECT 
+        idColaborador, 
+        correo, 
+        contrasenia, 
+        curp, 
+        nombre, 
+        apellidoPaterno, 
+        apellidoMaterno, 
+        noPersonal, 
+        idRol
+        FROM colaborador
+        INNER JOIN rol 
+        ON rol.idRol = colaborador.idRol
+        WHERE colaborador.idColaborador = #{idColaborador}
+    </select>
+    
+    <select id="obtenerColaboradores" resultType="pojo.Colaborador">
+        SELECT 
+        noPersonal, 
+        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
+        correo, 
+        curp,
+        colaborador.idRol, 
+        rol.tipo
+        FROM colaborador 
+        INNER JOIN rol ON rol.idRol = colaborador.idRol
+    </select>
+    
 </mapper>

@@ -22,6 +22,7 @@ public class Colaborador {
     private Integer idRol;
     private String foto;
     private String rol;
+    
 
     public Colaborador() {
     }

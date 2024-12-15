@@ -2,9 +2,11 @@ package dominio;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Colaborador;
+import pojo.LoginColaborador;
 import pojo.Mensaje;
 
 /**
@@ -68,10 +70,13 @@ public class ImpColaborador {
     }
     
     public static Mensaje editarColaborador(Colaborador colaborador){
+     
         Mensaje msj = new Mensaje();   
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        
         if(conexionBD != null){
             try{
+                
                 //validaciones para campos que no se editan
                 // Obtener datos actuales del colaborador desde la base de datos
                 Colaborador colaboradorExistente = conexionBD.selectOne("colaborador.obtenerColaboradorPorId", colaborador.getIdColaborador());
@@ -92,6 +97,7 @@ public class ImpColaborador {
                     msj.setMensaje("No está permitido modificar el rol del colaborador.");
                     return msj;
                 }
+                
                 //las otras validaciones  ala bd
                 int resultado = conexionBD.update("colaborador.editar", colaborador);
                 conexionBD.commit();
