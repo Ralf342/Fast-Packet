@@ -3,13 +3,16 @@ USE dbfastpacket;
 
 -- creacion de usuario desarrollador
 CREATE USER 'adminFPp'@localhost IDENTIFIED BY '8h=j?2WCb/4';
-
-GRANT CREATE, ALTER, DROP, INDEX, SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES, 
-EXECUTE ON fastpacket.* TO 'adminFPp'@'localhost';
-
+REVOKE ALL PRIVILEGES ON dbfastpacket.* FROM 'adminFPp'@'localhost';
+GRANT CREATE, ALTER, DROP, INDEX, SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES, EXECUTE 
+ON dbfastpacket.* TO 'adminFPp'@'localhost';
 FLUSH PRIVILEGES;
+
 -- ver que se hayan dado los permisos correctamente
-SHOW GRANTS FOR 'adminFPp'@'localhost';
+SHOW GRANTS FOR 'adminFP'@'localhost';
+
+SELECT user, host FROM mysql.user WHERE user = 'adminFP';
+
 
 
 CREATE TABLE IF NOT EXISTS cliente (
@@ -52,9 +55,8 @@ CREATE TABLE IF NOT EXISTS colaborador (
     nombre VARCHAR(20) NOT NULL,
     apellidoPaterno VARCHAR(20) NOT NULL,
     apellidoMaterno VARCHAR(20) NOT NULL,
-    noPersonal INT NOT NULL,
+    noPersonal INT,
     idRol INT NOT NULL,
-    foto BLOB DEFAULT NULL,
     FOREIGN KEY (idRol) REFERENCES rol(idRol)
 );
 
@@ -110,11 +112,8 @@ VALUES
 -- tabla rol
 INSERT INTO rol (tipo) 
 VALUES
-('Repartidor'),
-('Repartidor'),
-('Conductor'),
-('Repartidor'),
-('Repartidor'),
+('Administrador'),
+('Ejecutivo de tienda'),
 ('Conductor');
 
 -- tabla colaborador
@@ -123,9 +122,12 @@ VALUES
 ('juanperez@paqueteria.com', 'r1934', 'PEJ123456HDFRRL01', 'Juan', 'Pérez', 'Gómez', 1001, 1),
 ('analopez@paqueteria.com', 'r1235', 'LOA987654MDFRRL02', 'Ana', 'López', 'Martínez', 1002, 2),
 ('carlosgarcia@paqueteria.com', 'c1230', 'GAR13579HDFRRL03', 'Carlos', 'García', 'Rodríguez', 1003, 3),
-('laurahernandez@paqueteria.com', 'r1203', 'HER24680MDFRRL04', 'Laura', 'Hernández', 'Sánchez', 1004, 4),
-('luisgomez@paqueteria.com', 'r1236', 'GOM112233HDFRRL05', 'Luis', 'Gómez', 'Ruiz', 1005, 5),
-('martaramirez@paqueteria.com', 'c1247', 'RAM112233MDFRRL06', 'Marta', 'Ramírez', 'Díaz', 1006, 6);
+-- nuevos valores
+('laurahernandez@paqueteria.com', 'r1203', 'HER24680MDFRRL04', 'Laura', 'Hernández', 'Sánchez', 1004, 2),
+('luisgomez@paqueteria.com', 'r1236', 'GOM112233HDFRRL05', 'Luis', 'Gómez', 'Ruiz', 1005, 3),
+('martaramirez@paqueteria.com', 'c1247', 'RAM112233MDFRRL06', 'Marta', 'Ramírez', 'Díaz', 1006, 2),
+('edgar@paqueteria.com', 'e1289', 'EDJ927982MDFRRL06', 'Edgar', 'Juarez', 'Cadena', 1007, 3);
+
 
 --  tabla tipoUnidad
 INSERT INTO tipoUnidad (tipo) 
@@ -156,9 +158,3 @@ VALUES
 (25.8, 4.5, 'Paquete grande', 4, 4),
 (3.7, 2.1, 'Paquete frágil', 5, 5),
 (12.4, 3.5, 'Paquete voluminoso', 6, 6);
-
-SELECT idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, 
-        noPersonal, correo, curp,contrasenia, colaborador.idRol, rol.tipo
-        FROM colaborador 
-        INNER JOIN rol ON rol.idRol = colaborador.idRol
-        WHERE rol.tipo = 'repartidor'
