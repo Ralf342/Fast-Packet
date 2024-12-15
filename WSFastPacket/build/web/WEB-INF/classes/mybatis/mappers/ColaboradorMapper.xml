@@ -38,19 +38,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="obtenerColaboradorPorNoPersonal" resultType="pojo.Colaborador">
         SELECT 
-        idColaborador, 
-        correo, 
-        contrasenia, 
-        curp, 
-        nombre, 
-        apellidoPaterno, 
-        apellidoMaterno, 
         noPersonal, 
-        idRol
-        FROM colaborador
-        INNER JOIN rol 
-        ON rol.idRol = colaborador.idRol
-        WHERE colaborador.idColaborador = #{idColaborador}
+        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
+        correo, 
+        curp,
+        rol.tipo
+        FROM colaborador 
+        INNER JOIN rol ON rol.idRol = colaborador.idRol
+        WHERE colaborador.noPersonal LIKE CONCAT(#{noPersonal},'%')
     </select>
     
     <select id="obtenerColaboradores" resultType="pojo.Colaborador">
@@ -59,7 +54,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
         correo, 
         curp,
-        colaborador.idRol, 
         rol.tipo
         FROM colaborador 
         INNER JOIN rol ON rol.idRol = colaborador.idRol
