@@ -5,6 +5,7 @@
  */
 package dominio;
 
+import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Cliente;
@@ -52,33 +53,58 @@ public class ImpCliente {
     
     //editar cliente
     public static Mensaje editarCliente(Cliente cliente){
-        Mensaje respuesta = new Mensaje();
+        Mensaje msj= new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-        if(conexionBD != null){
+        if(conexionBD!=null){
             try {
-                int editado = conexionBD.update("cliente.editar", cliente);
+                int filasAfectadas= conexionBD.update("cliente.editarCliente", cliente);
                 conexionBD.commit();
-                if(editado > 0){
-                    respuesta.setError(false);
-                    respuesta.setMensaje("Información del cliente: " + cliente.getNombre() + " " 
-                        + cliente.getApellidoMaterno() + " " + cliente.getApellidoPaterno() + " "
-                        + "se actualizo exitosamente.");
-                }else {
-                    respuesta.setError(true);
-                    respuesta.setMensaje("No es posible editar la información");
-                    
+                if(filasAfectadas>0){
+                    msj.setError(false);
+                    msj.setMensaje("El cliente "+cliente.getNombre()+" "+cliente.getApellidoPaterno()+" "+cliente.getApellidoMaterno()+", fue actualizado con exito.");
                 }
-                
-            } catch (Exception e){  
-                    respuesta.setError(true);
-                    respuesta.setMensaje(e.getMessage());
+            }catch(Exception e){
+                msj.setError(true);
+                msj.setMensaje(e.getMessage());
             }
         }else{
-                    respuesta.setError(true);
-                    respuesta.setMensaje("Por el momento no se puede editar la información.");
+            msj.setError(true);
+            msj.setMensaje("Por el momento el servicio no esta disponible.");
         }
-        return respuesta;
+        return msj;
     }
     
+    //eliminar cliente
+    public static Mensaje eliminarCliente(Integer idCliente){
+        Mensaje msj = new Mensaje();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD!=null){
+            try{
+                int filasAfectadas=conexionBD.delete("cliente.eliminarCliente", idCliente);
+                conexionBD.commit();
+                if(filasAfectadas>0){
+                    msj.setError(false);
+                    msj.setMensaje("El clienter ha sido borrado.");
+                }else{
+                    msj.setError(true);
+                    msj.setMensaje("El cliente no pudo ser borrado");
+                }
+            }catch (Exception e){
+                msj.setError(true);
+                msj.setMensaje(e.getMessage());
+            }
+        }else{
+            msj.setError(true);
+            msj.setMensaje("Por le momento el servicio no esta disponible.");
+        }
+        return msj;
+    }
+    
+    //buscar cliente por correo
+    public static List<Cliente> buscarClientePorCorreo(String correo){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Cliente> clientes = conexionBD.selectList("cliente.buscarClientePorCorreo", correo);
+        return clientes;
+    }
     
 }

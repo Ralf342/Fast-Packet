@@ -3,32 +3,41 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="colaborador">
+<mapper namespace="cliente">
     <!--mapper de servicio de registrarCliente-->
     <insert id="registrarCliente" parameterType="pojo.Cliente">
         INSERT INTO cliente(nombre, apellidoPaterno, apellidoMaterno, telefono, 
         correo, codigoPostal, calle, colonia, numeroCasa)
         VALUES (
-        #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{teléfono}, 
+        #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{telefono}, 
         #{correo}, #{codigoPostal}, #{calle}, #{colonia}, #{numeroCasa}
         ) 
     </insert>
     
     <!--mapper de servicio de editarCliente-->
-    <update id="editar" parameterType="POJO.Cliente">
+    <update id="editarCliente" parameterType="pojo.Cliente">
         UPDATE cliente 
-            SET nombre = #{nombre}, apellidoPaterno = #{apellidoMaterno}, 
-            apellidoMaterno = #{apellidoPaterno}, telefono = #{teléfono}, 
-            correo = #{correo}, codigoPostal = #{codigoPostal}, calle #{calle}, 
+            SET nombre = #{nombre}, apellidoPaterno = #{apellidoPaterno}, 
+            apellidoMaterno = #{apellidoMaterno}, telefono = #{telefono}, 
+            correo = #{correo}, codigoPostal = #{codigoPostal}, calle = #{calle}, 
             colonia = #{colonia}, numeroCasa = #{numeroCasa}
-        WHERE  idCliente=#{idCliente};
+        WHERE  idCliente = #{idCliente};
     </update>
     
     <!--mapper de servicio de eliminar cliente-->
-    <delete id="eliminarCliente" parameterType="pojo.cliente">
+    <delete id="eliminarCliente" parameterType="pojo.Cliente">
         DELETE FROM cliente
         WHERE idCliente=#{idCliente};
     </delete>
+    
+    <!--mapper de servicio de buscar cliente por correo-->
+    <select id="buscarClientePorCorreo" resultType="pojo.Cliente">
+        SELECT 
+            idCliente, nombre, apellidoPaterno, apellidoMaterno, telefono, 
+            correo, codigoPostal, calle, colonia, numeroCasa
+        FROM cliente
+        WHERE correo = #{correo}
+    </select>
     
     
 </mapper>

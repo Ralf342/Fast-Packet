@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ballo/Desktop/ProyectoIS/Fast-Packet/WSFastPacket/src/java/pojo/LoginColaborador.java</file>
-            <file>file:/C:/Users/Ballo/Desktop/ProyectoIS/Fast-Packet/WSFastPacket/src/java/ws/WSColaborador.java</file>
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/ClienteMapper.xml</file>
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/ws/WSCliente.java</file>
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/dominio/ImpCliente.java</file>
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/ws/WSColaborador.java</file>
         </group>
     </open-files>
 </project-private>
