@@ -3,10 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/ClienteMapper.xml</file>
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/ws/WSCliente.java</file>
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/dominio/ImpCliente.java</file>
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/ws/WSColaborador.java</file>
+=======
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/ws/WSUnidad.java</file>
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/ws/WSColaborador.java</file>
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/dominio/ImpColaborador.java</file>
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/dominio/ImpUnidad.java</file>
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/UnidadMapper.xml</file>
+>>>>>>> e1426a9498cd5b9c0c549f02ed72b494046de749
         </group>
     </open-files>
 </project-private>
