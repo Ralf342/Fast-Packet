@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="colaborador">
     <!--mapper de servicio de insertarColaboradores-->
-    
     <insert id="registro" parameterType="pojo.Colaborador">
         INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol)
          VALUES (

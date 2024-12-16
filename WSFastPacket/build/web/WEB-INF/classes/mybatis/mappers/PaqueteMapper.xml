@@ -4,6 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="paquete">
+    <!--mapper de servicio de obtener paquetes-->
+    <select id="obtenerPaquetes" resultType="pojo.Paquete">
+        SELECT idPaquete, peso, dimensiones, descripcion, numeroDeGuia, idUnidad
+        FROM paquete
+    </select>
+    
+    
     <!--mapper de servicio de registrar paquete-->
     <insert id="registrarPaquete" parameterType="pojo.Paquete">
         INSERT INTO paquete(
