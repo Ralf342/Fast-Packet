@@ -30,11 +30,19 @@ import pojo.Paquete;
 @Path("paquete")
 public class WSPaquete {
 
+    @Context
+    private UriInfo context;
+    
     public WSPaquete() {
     }
     
-    @Context
-    private UriInfo context;
+    //obtener paquetes
+    @Path("obtenerPaquetes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Paquete> obtenerPaquetes(){
+        return ImpPaquete.obtenerPaquetes();
+    }
     
     //WS registrar paquete
     @Path("registrarPaquete")

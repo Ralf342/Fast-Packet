@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="envio">
+    <!--mapper de servicio de registrar envios-->
+    <insert id="registrarEnvio" parameterType="pojo.Envio">
+        INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, 
+            codigoPostal, idCliente)
+        VALUES (
+        #{costo}, #{destino}, #{ciudad}, #{estado}, #{calle}, 
+        #{colonia}, #{numero}, #{codigoPostal}, #{idCliente}
+        ) 
+    </insert>
+
+    <!--mapper de servicio de actualiar envio-->
+    <update id="actualizarEnvio" parameterType="pojo.Envio">
+        UPDATE cliente 
+            SET costo = #{costo}, destino = #{destino}, ciudad = #{ciudad}, estado = #{estado}, 
+        calle, colonia, numero, 
+            codigoPostal, idCliente
+        WHERE  numeroDeGuia = #{numeroDeGuia};
+    </update>
+
+</mapper>

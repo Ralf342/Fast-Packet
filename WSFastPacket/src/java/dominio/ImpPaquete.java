@@ -21,6 +21,12 @@ import pojo.Paquete;
  * @author Jossellin
  */
 public class ImpPaquete {
+    //obtener paquetes
+    public static List<Paquete> obtenerPaquetes(){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        List<Paquete> paquete = conexionBD.selectList("paquete.obtenerPaquetes");
+        return paquete;
+    }
     
     //registrar paquete
     public static Mensaje registrarPaquete(Paquete paquete){
