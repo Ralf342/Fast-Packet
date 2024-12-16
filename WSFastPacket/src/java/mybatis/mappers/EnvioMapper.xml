@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de obtener envios-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
-        SELECT e.numeroDeGuia, e.costo, e.destino, e.ciudad, e.estado, e.calle, 
-        e.colonia, e.numero, e.codigoPostal, c.idCliente, e.estatus
+        SELECT e.numeroDeGuia, e.destino, e.ciudad, e.estado, e.calle, 
+        e.colonia, e.numero, e.codigoPostal, c.idCliente,c.nombre AS 'cliente', e.estatus
         FROM envio e
         INNER JOIN cliente c
         ON e.idCliente = c.idCliente

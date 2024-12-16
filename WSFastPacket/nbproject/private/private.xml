@@ -3,10 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/dominio/ImpEnvio.java</file>
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/ws/WSEnvio.java</file>
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/EnvioMapper.xml</file>
             <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/pojo/Envio.java</file>
+=======
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/EnvioMapper.xml</file>
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/ws/WSEnvio.java</file>
+            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/pojo/Envio.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
