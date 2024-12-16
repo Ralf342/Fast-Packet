@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
         correo, 
         curp,
-        rol.tipo
+        rol.tipo AS 'rol'
         FROM colaborador 
         INNER JOIN rol ON rol.idRol = colaborador.idRol
     </select>
