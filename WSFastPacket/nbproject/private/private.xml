@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/pojo/TipoUnidad.java</file>
-            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/pojo/Paquete.java</file>
-            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/ws/WSCliente.java</file>
-            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/dominio/ImpPaquete.java</file>
-            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/dominio/ImpLogin.java</file>
-            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/ColaboradorMapper.xml</file>
-            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/PaqueteMapper.xml</file>
-=======
-            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/ws/WSUnidad.java</file>
-            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/dominio/ImpUnidad.java</file>
-            <file>file:/C:/Users/joska_/Documents/Integracion/Proyecto%20Integrador/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/UnidadMapper.xml</file>
->>>>>>> 31f8ec01ce77784a5c6fb575ce6f12be1dd2ed6a
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/dominio/ImpEnvio.java</file>
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/ws/WSEnvio.java</file>
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/mybatis/mappers/EnvioMapper.xml</file>
+            <file>file:/C:/Users/Ballo/Desktop/Proyecto/Fast-Packet/WSFastPacket/src/java/pojo/Envio.java</file>
         </group>
     </open-files>
 </project-private>
