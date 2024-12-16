@@ -98,4 +98,11 @@ public class WSCliente {
         return ImpCliente.buscarClientePorCorreo(correo);   
     }
     
+    @Path("obtenerClientes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Cliente> obtenerColaboradores(){
+        return ImpCliente.obtenerCliente();
+    }
+    
 }
