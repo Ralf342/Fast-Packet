@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    border: 20px;
+}
+.origen{
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.unidad{
+    align-content: center;
+}
+.en-ruta {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+.destino {
+    text-align: right;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.linea {
+    width: 100%;
+    height: 2px;
+    background-color: #ccc;
+    margin: 10px 0;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+}
