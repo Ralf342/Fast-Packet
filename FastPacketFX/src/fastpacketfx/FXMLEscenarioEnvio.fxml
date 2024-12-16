@@ -21,10 +21,18 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView layoutX="20.0" layoutY="90.0" prefHeight="220.0" prefWidth="390.0">
+      <TableView fx:id="tbEnvios" layoutX="20.0" layoutY="90.0" prefHeight="220.0" prefWidth="390.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn fx:id="tcNumeroGuia" prefWidth="75.0" text="Número Guia" />
+            <TableColumn fx:id="tcCliente" prefWidth="75.0" text="Cliente" />
+            <TableColumn fx:id="tcDestino" prefWidth="75.0" text="Destino" />
+            <TableColumn fx:id="tcCiudad" prefWidth="75.0" text="Cuidad" />
+            <TableColumn fx:id="tcEstado" prefWidth="75.0" text="Estado" />
+            <TableColumn fx:id="tcCalle" prefWidth="75.0" text="Calle" />
+            <TableColumn fx:id="tcColonia" prefWidth="75.0" text="Colonia" />
+            <TableColumn fx:id="tcNumeroCasa" prefWidth="75.0" text="Número casa" />
+            <TableColumn fx:id="tcCodigoPostal" prefWidth="75.0" text="Código postal" />
+            <TableColumn fx:id="tcEstatus" prefWidth="75.0" text="Estatus" />
          </columns>
       </TableView>
       <Button layoutX="81.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="30.0" prefWidth="95.0" style="-fx-background-color: F0371B;" text="Agregar" textFill="WHITE">
