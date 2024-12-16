@@ -43,7 +43,7 @@ public class WSUnidad {
             Gson gson = new Gson();
             Unidad unidad = gson.fromJson(jsonColaborador, Unidad.class);
             
-            if(unidad.getVin() != null && unidad.getVin() != 0 
+            if(unidad.getVin()!= null && !unidad.getVin().isEmpty()
                     && unidad.getNii() != null && !unidad.getNii().isEmpty()
                     && unidad.getModelo() != null && !unidad.getModelo().isEmpty()
                     && unidad.getMarca() != null && !unidad.getMarca().isEmpty()

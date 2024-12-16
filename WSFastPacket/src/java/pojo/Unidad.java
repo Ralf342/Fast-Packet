@@ -11,8 +11,9 @@ package pojo;
  */
 public class Unidad {
     private Integer idUnidad;
-    private Integer vin;
+    private String vin;
     private String nii;
+    private String anio;
     private String modelo;
     private String marca;
     private String motivo;
@@ -22,22 +23,15 @@ public class Unidad {
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, Integer vin, String nii, String modelo, String marca, String motivo, Integer idTipoUnidad, String tipo) {
+    public Unidad(Integer idUnidad, String vin, String nii, String anio, String modelo, String marca, String motivo, Integer idTipoUnidad, String tipo) {
         this.idUnidad = idUnidad;
         this.vin = vin;
         this.nii = nii;
+        this.anio = anio;
         this.modelo = modelo;
         this.marca = marca;
         this.motivo = motivo;
         this.idTipoUnidad = idTipoUnidad;
-        this.tipo = tipo;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -49,11 +43,11 @@ public class Unidad {
         this.idUnidad = idUnidad;
     }
 
-    public Integer getVin() {
+    public String getVin() {
         return vin;
     }
 
-    public void setVin(Integer vin) {
+    public void setVin(String vin) {
         this.vin = vin;
     }
 
@@ -63,6 +57,14 @@ public class Unidad {
 
     public void setNii(String nii) {
         this.nii = nii;
+    }
+
+    public String getAnio() {
+        return anio;
+    }
+
+    public void setAnio(String anio) {
+        this.anio = anio;
     }
 
     public String getModelo() {
@@ -95,6 +97,14 @@ public class Unidad {
 
     public void setIdTipoUnidad(Integer idTipoUnidad) {
         this.idTipoUnidad = idTipoUnidad;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
     
     
