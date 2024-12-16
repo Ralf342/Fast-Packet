@@ -107,4 +107,10 @@ public class ImpCliente {
         return cliente;
     }
     
+    public static List<Cliente> obtenerCliente(){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+                List<Cliente> cliente = conexionBD.selectList("cliente.buscarCliente");
+        return cliente;
+    }
+    
 }

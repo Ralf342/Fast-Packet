@@ -33,12 +33,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--mapper de servicio de buscar cliente por correo-->
     <select id="buscarClientePorCorreo" resultType="pojo.Cliente">
         SELECT 
-            idCliente, correo,
-            CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS nombre,  
-            CONCAT (calle, ' ',  colonia, ' ', numeroCasa, codigoPostal) AS direccion,
-            telefono
+            correo,
+            CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS nombre,
+            telefono,
+            CONCAT (calle, ' ',  colonia, ' ', numeroCasa, ' ', codigoPostal) AS direccion
         FROM cliente
         WHERE correo LIKE CONCAT('%', #{correo}, '%');
+    </select>
+    
+    <select id="buscarCliente" resultType="pojo.Cliente">
+        SELECT  
+            correo,
+            CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS nombre,
+            telefono,
+            CONCAT (calle, ' ',  colonia, ' ', numeroCasa, ' ',codigoPostal) AS direccion
+        FROM cliente
     </select>
     
     
