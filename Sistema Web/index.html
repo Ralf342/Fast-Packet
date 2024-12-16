@@ -5,22 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruta de envío del paquete</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="scriptModo.js" defer></script>
 </head>
 <body>
-    <div class="titulo">
-        <h1>Ruta de envío del paquete</h1>
-    </div>
-    <div class="container">
-        
-        <p>Con el número de guía de tu paquete que se generó al realizar el pedido, úsalo para saber cómo va tu envío!</p>
-        <form>
-            <input type="text" placeholder="Número de guía">
-            <button type="submit">Rastrear paquete</button>
-        </form>
-    </div>
-    <div class="logo">
-        <img src="recursos/LOGO.png" alt="Logo de la empresa" >
-    </div>
     
+    <div class="titulo">
+        <h1>RUTA DE ENVÍO DEL PAQUETE</h1>
+    </div>
+   
+    <div class="container"> 
+
+        <div class="search-container">
+            <p>Con el número de guía de tu paquete que se generó al realizar el pedido !Usalo para saber cómo va tu envío!</p>
+            <form>
+                <input type="text" placeholder="Número de guía">
+                <button type="submit">Rastrear paquete</button>
+            </form>
+        </div>
+
+        <div class="logo-container">
+            <img src="recursos/LOGO.png" alt="Logo de la empresa">
+        </div>
+    </div>
+
+    <button id="btn-cambiar-modo">🌙☀️</button>
 </body>
 </html>
