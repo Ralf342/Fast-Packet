@@ -9,6 +9,13 @@ import pojo.Mensaje;
 import pojo.Unidad;
 
 public class ImpUnidad {
+    //obtener unidades
+    public static List<Unidad> obtenerUnidades(){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        List<Unidad> unidad = conexionBD.selectList("unidad.obtenerUnidades");
+        return unidad;
+    }
+    
     public static Mensaje registrarUnidad(Unidad unidad){;
         Mensaje msj = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();

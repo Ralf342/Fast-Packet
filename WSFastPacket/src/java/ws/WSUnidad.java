@@ -24,8 +24,15 @@ import pojo.Unidad;
  *
  * @author Jossellin
  */
-@Path("Unidades")
+@Path("unidad")
 public class WSUnidad {
+    
+    @Path("obtenerUnidades")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> obtenerUnidades(){
+        return ImpUnidad.obtenerUnidades();
+    }
     
    @Path("registrarUnidad")
    @POST

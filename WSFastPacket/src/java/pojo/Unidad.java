@@ -17,11 +17,12 @@ public class Unidad {
     private String marca;
     private String motivo;
     private Integer idTipoUnidad;
+    private String tipo;
 
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, Integer vin, String nii, String modelo, String marca, String motivo, Integer idTipoUnidad) {
+    public Unidad(Integer idUnidad, Integer vin, String nii, String modelo, String marca, String motivo, Integer idTipoUnidad, String tipo) {
         this.idUnidad = idUnidad;
         this.vin = vin;
         this.nii = nii;
@@ -29,6 +30,15 @@ public class Unidad {
         this.marca = marca;
         this.motivo = motivo;
         this.idTipoUnidad = idTipoUnidad;
+        this.tipo = tipo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public Integer getIdUnidad() {

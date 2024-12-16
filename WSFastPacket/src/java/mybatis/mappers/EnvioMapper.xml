@@ -4,6 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="envio">
+    <!--mapper de servicio de obtener envios-->
+    <select id="obtenerEnvios" resultType="pojo.Envio">
+        SELECT costo, destino, ciudad, estado, calle, colonia, numero, codigoPostal, idCliente
+        FROM envio
+    </select>
+    
     <!--mapper de servicio de registrar envios-->
     <insert id="registrarEnvio" parameterType="pojo.Envio">
         INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, 

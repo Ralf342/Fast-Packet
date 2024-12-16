@@ -6,6 +6,7 @@
 package dominio;
 
 import com.google.gson.Gson;
+import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -17,11 +18,19 @@ import org.apache.ibatis.session.SqlSession;
 import pojo.Envio;
 import pojo.Mensaje;
 
+
 /**
  *
  * @author Jossellin
  */
 public class ImpEnvio {
+    //obtener envios
+    public static List<Envio> obtenerEnvios(){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        List<Envio> envio = conexionBD.selectList("envio.obtenerEnvios");
+        return envio;
+    }
+    
     //registrar envio
     public static Mensaje registrarEnvio(Envio envio){
         Mensaje msj = new Mensaje();
