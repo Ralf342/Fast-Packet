@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS tipoUnidad (
 DROP TABLE IF EXISTS unidad;
 CREATE TABLE IF NOT EXISTS unidad (
     idUnidad INT PRIMARY KEY AUTO_INCREMENT,
-    vin VARCHAR(20),
+    vin VARCHAR(30),
     nii VARCHAR(30),
     anio VARCHAR(10),
     modelo VARCHAR(30),
@@ -161,12 +161,4 @@ VALUES
 (10.5, 2.3, 5.7, 12, 'Paquete pequeño', 1, 3),
 (3.7, 2.1, 11, 4.5, 'Paquete frágil', 5, 3);
 
-SELECT 
-        noPersonal, 
-        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
-        correo, 
-        curp,
-        rol.tipo
-        FROM colaborador 
-        INNER JOIN rol ON rol.idRol = colaborador.idRol
-        WHERE colaborador.noPersonal like '10'
+SELECT * FROM UNIDAD; 

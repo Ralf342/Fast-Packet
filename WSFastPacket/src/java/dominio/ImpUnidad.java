@@ -74,7 +74,7 @@ public static Mensaje eliminarUnidad(String idUnidad) {
 
     public static List<Unidad> mostrarUnidad(){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-        List<Unidad> unidades = conexionBD.selectList("unidad.mostrarUnidades");
+        List<Unidad> unidades = conexionBD.selectList("unidad.obtenerUnidades");
         return unidades;
     }
     
