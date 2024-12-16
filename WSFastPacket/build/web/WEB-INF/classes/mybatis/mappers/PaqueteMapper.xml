@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="paquete">
     <!--mapper de servicio de obtener paquetes-->
     <select id="obtenerPaquetes" resultType="pojo.Paquete">
-        SELECT p.idPaquete, p.peso, p.dimensiones, p.descripcion, u.idUnidad, e.numeroDeGuia
+        SELECT p.idPaquete, p.peso, p.alto, p.ancho,p.profundidad, p.descripcion, u.idUnidad, e.numeroDeGuia
         FROM paquete p
         INNER JOIN envio e
         ON p.numeroDeGuia = e.numeroDeGuia

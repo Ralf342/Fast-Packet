@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pojo;
+package fastpacketfx.pojo;
 
 /**
  *
- * @author Jossellin
+ * @author edgar
  */
 public class Paquete {
     private Integer idPaquete;
-    private float peso;
-    private float alto;
-    private float ancho;
-    private float profundidad;
+    private Float peso;
+    private Float alto;
+    private Float ancho;
+    private Float profundidad;
     private String descripcion;
     private Integer numeroDeGuia;
     private Integer idUnidad;
@@ -22,7 +22,7 @@ public class Paquete {
     public Paquete() {
     }
 
-    public Paquete(Integer idPaquete, float peso, float alto, float ancho, float profundidad, String descripcion, Integer numeroDeGuia, Integer idUnidad) {
+    public Paquete(Integer idPaquete, Float peso, Float alto, Float ancho, Float profundidad, String descripcion, Integer numeroDeGuia, Integer idUnidad) {
         this.idPaquete = idPaquete;
         this.peso = peso;
         this.alto = alto;
@@ -41,35 +41,35 @@ public class Paquete {
         this.idPaquete = idPaquete;
     }
 
-    public float getPeso() {
+    public Float getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(Float peso) {
         this.peso = peso;
     }
 
-    public float getAlto() {
+    public Float getAlto() {
         return alto;
     }
 
-    public void setAlto(float alto) {
+    public void setAlto(Float alto) {
         this.alto = alto;
     }
 
-    public float getAncho() {
+    public Float getAncho() {
         return ancho;
     }
 
-    public void setAncho(float ancho) {
+    public void setAncho(Float ancho) {
         this.ancho = ancho;
     }
 
-    public float getProfundidad() {
+    public Float getProfundidad() {
         return profundidad;
     }
 
-    public void setProfundidad(float profundidad) {
+    public void setProfundidad(Float profundidad) {
         this.profundidad = profundidad;
     }
 
@@ -96,7 +96,8 @@ public class Paquete {
     public void setIdUnidad(Integer idUnidad) {
         this.idUnidad = idUnidad;
     }
-
+    
     
     
 }
+
