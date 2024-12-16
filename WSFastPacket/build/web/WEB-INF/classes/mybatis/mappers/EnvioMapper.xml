@@ -4,28 +4,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="envio">
+    
     <!--mapper de servicio de obtener envios-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
-        SELECT costo, destino, ciudad, estado, calle, colonia, numero, codigoPostal, idCliente
-        FROM envio
+        SELECT e.numeroDeGuia, e.costo, e.destino, e.ciudad, e.estado, e.calle, 
+        e.colonia, e.numero, e.codigoPostal, c.idCliente, e.estatus
+        FROM envio e
+        INNER JOIN cliente c
+        ON e.idCliente = c.idCliente
     </select>
     
     <!--mapper de servicio de registrar envios-->
     <insert id="registrarEnvio" parameterType="pojo.Envio">
         INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, 
-            codigoPostal, idCliente)
+            codigoPostal, idCliente, estatus)
         VALUES (
-        #{costo}, #{destino}, #{ciudad}, #{estado}, #{calle}, 
-        #{colonia}, #{numero}, #{codigoPostal}, #{idCliente}
+            #{costo}, #{destino}, #{ciudad}, #{estado}, #{calle}, 
+            #{colonia}, #{numero}, #{codigoPostal}, #{idCliente}, #{estatus}
         ) 
     </insert>
 
     <!--mapper de servicio de actualiar envio-->
     <update id="actualizarEnvio" parameterType="pojo.Envio">
-        UPDATE cliente 
+        UPDATE envio
             SET costo = #{costo}, destino = #{destino}, ciudad = #{ciudad}, estado = #{estado}, 
-        calle, colonia, numero, 
-            codigoPostal, idCliente
+            calle = #{calle}, colonia = #{colonia}, numero = #{numero}, codigoPostal = #{codigoPostal}, 
+            idCliente = #{idCliente}, estatus = #{estatus}
+        WHERE  numeroDeGuia = #{numeroDeGuia};
+    </update>
+    
+    <!--mapper de servicio de obtener info de clientes, destino y origen-->
+    <select id="obtenerEnviosInfo" resultType="pojo.Envio">
+        SELECT 
+        CONCAT(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno) AS cliente,
+        CONCAT(c.correo, ' ', c.telefono) AS contacto_cliente,
+        CONCAT(c.calle, ' ', c.colonia) AS direccion_de_cliente,
+        c.numeroCasa,
+        c.codigoPostal,
+        CONCAT (e.estado, ' ', e.ciudad, ' ', e.calle, ' ', e.colonia) AS direccion_origen,
+        e.codigoPostal,
+        e.numero,
+        e.destino,
+        e.costo
+        FROM envio e
+        INNER JOIN cliente c
+        ON e.idCliente = c.idCliente;
+    </select>
+    
+    <!--mapper de servicio de actualiar envio estatus-->
+    <update id="actualizarEstatusEnvio" parameterType="pojo.Envio">
+        UPDATE envio
+            SET estatus = #{estatus}
         WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
 

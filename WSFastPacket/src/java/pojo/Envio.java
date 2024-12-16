@@ -20,11 +20,22 @@ public class Envio {
     private Integer numero;
     private Integer codigoPostal;
     private Integer idCliente;
+    private String estatus;
+    //por los alias
+    private String cliente;
+    private String contacto_ciente;
+    private String direccion_de_cliente;
+    private String direccion_origen;
+
+    
 
     public Envio() {
     }
 
-    public Envio(Integer numeroDeGuia, float costo, String destino, String ciudad, String estado, String calle, String colonia, Integer numero, Integer codigoPostal, Integer idCliente) {
+    public Envio(Integer numeroDeGuia, float costo, String destino, 
+            String ciudad, String estado, String calle, String colonia, 
+            Integer numero, Integer codigoPostal, Integer idCliente, String estatus,
+            String cliente, String contacto_ciente, String direccion_de_cliente,  String direccion_origen) {
         this.numeroDeGuia = numeroDeGuia;
         this.costo = costo;
         this.destino = destino;
@@ -35,7 +46,56 @@ public class Envio {
         this.numero = numero;
         this.codigoPostal = codigoPostal;
         this.idCliente = idCliente;
+        this.estatus = estatus;
+        this.cliente = cliente;
+        this.contacto_ciente = contacto_ciente;
+        this.direccion_de_cliente = direccion_de_cliente;
+        this.direccion_origen = direccion_origen;
+        
     }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getContacto_ciente() {
+        return contacto_ciente;
+    }
+
+    public void setContacto_ciente(String contacto_ciente) {
+        this.contacto_ciente = contacto_ciente;
+    }
+
+    public String getDireccion_de_cliente() {
+        return direccion_de_cliente;
+    }
+
+    public void setDireccion_de_cliente(String direccion_de_cliente) {
+        this.direccion_de_cliente = direccion_de_cliente;
+    }
+
+    public String getDireccion_origen() {
+        return direccion_origen;
+    }
+
+    public void setDireccion_origen(String direccion_origen) {
+        this.direccion_origen = direccion_origen;
+    }
+
+
+    //los de originales son los de abajo
 
     public Integer getNumeroDeGuia() {
         return numeroDeGuia;

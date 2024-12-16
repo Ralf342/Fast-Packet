@@ -57,7 +57,16 @@ public class ImpEnvio {
         return msj;
     }
     
-    //actualizar envio
+     
+    //consultare envio info de clientes, origen y destino
+    public static List<Envio> obtenerEnviosInfo(Integer numeroDeGuia ){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosInfo", numeroDeGuia);
+        return envio;
+    }
+    
+    
+    //actualizar status
     public static Mensaje actualizarEnvio(Envio envio){
         Mensaje msj= new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -67,7 +76,7 @@ public class ImpEnvio {
                 conexionBD.commit();
                 if(filasAfectadas>0){
                     msj.setError(false);
-                    msj.setMensaje("El envio fue actualizado con exito.");
+                    msj.setMensaje("El paquete fue actualizado con exito.");
                 }
             }catch(Exception e){
                 msj.setError(true);
@@ -80,9 +89,31 @@ public class ImpEnvio {
         return msj;
     }
      
-     
-     
-     
+    //actualizar estatus envio
+    public static Mensaje actualizarEstatusEnvio(Envio envio){
+        Mensaje msj= new Mensaje();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD!=null){
+            try {
+                int filasAfectadas= conexionBD.update("envio.actualizarEstatusEnvio", envio);
+                conexionBD.commit();
+                if(filasAfectadas>0){
+                    msj.setError(false);
+                    msj.setMensaje("El estatus fue actualizado con exito.");
+                }else{
+                    msj.setError(true);
+                    msj.setMensaje("No se encontró el envío con ese número de guía para actualizar.");
+                }
+            }catch(Exception e){
+                msj.setError(true);
+                msj.setMensaje(e.getMessage());
+            }
+        }else{
+            msj.setError(true);
+            msj.setMensaje("Por el momento el servicio no esta disponible.");
+        }
+        return msj;
+    }
      
      
 }
