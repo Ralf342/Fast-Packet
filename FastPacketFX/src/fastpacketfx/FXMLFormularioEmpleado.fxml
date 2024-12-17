@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fastpacketfx.FXMLFormularioEmpleadoController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="450.0" style="-fx-background-color: #142B39;">
+         <children>
+            <Text fill="WHITE" layoutX="71.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C O L A B O R A D O R">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <Button layoutX="135.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="249.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <ComboBox fx:id="cbRol" layoutX="273.0" layoutY="99.0" prefWidth="150.0" />
+            <Text fill="WHITE" layoutX="336.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rol">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="51.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="162.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido Paterno">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="303.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido Materno">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tfNombre" layoutX="16.0" layoutY="172.0" prefHeight="25.0" prefWidth="132.0" />
+            <TextField fx:id="tfApellidoPaterno" layoutX="159.0" layoutY="172.0" prefHeight="25.0" prefWidth="132.0" />
+            <TextField fx:id="tfApellidoMaterno" layoutX="303.0" layoutY="172.0" prefHeight="25.0" prefWidth="132.0" />
+            <TextField fx:id="tfCURP" layoutX="16.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
+            <TextField fx:id="tfCorreo" layoutX="159.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
+            <TextField fx:id="tfLicencia" layoutX="303.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
+            <TextField fx:id="tfNoPersonal" layoutX="96.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
+            <PasswordField fx:id="pfPassword" layoutX="270.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
+            <Text fill="WHITE" layoutX="61.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURP">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="200.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="118.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Personal">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="294.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="328.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Licencia">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnFoto" contentDisplay="TOP" layoutX="83.0" layoutY="57.0" mnemonicParsing="false" onAction="#onClickSubir" prefHeight="84.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Subir foto" textFill="WHITE">
+               <graphic>
+                  <ImageView fx:id="ivLicencia" fitHeight="40.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
