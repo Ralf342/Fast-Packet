@@ -1,118 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".detalleEnvio"
+    android:orientation="vertical"
     android:padding="16dp"
-    android:background="#FFFFFF">
+    android:background="#595656"
+    android:gravity="center_horizontal">
 
     <TextView
         android:id="@+id/tvTituloDetalle"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:gravity="center"
-        android:paddingBottom="16dp"
         android:text="Detalle de envío"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="#45a049"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:id="@+id/tvOrigen"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Origen: Fedex, Ver."
-        app:layout_constraintTop_toBottomOf="@id/tvTituloDetalle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:background="#ffffff"/>
 
     <TextView
         android:id="@+id/tvDestino"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Destino: Dique #13"
-        app:layout_constraintTop_toBottomOf="@id/tvOrigen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:background="#ffffff"/>
 
     <TextView
         android:id="@+id/tvNoPaquetes"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="No. Paquetes: 3"
-        app:layout_constraintTop_toBottomOf="@id/tvDestino"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:background="#ffffff"/>
 
     <TextView
         android:id="@+id/tvDestinatario"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Destinatario: Luis Pérez Mora"
-        app:layout_constraintTop_toBottomOf="@id/tvNoPaquetes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        android:text="Destinatario: Victor Baez Mora"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:background="#ffffff"/>
 
     <TextView
         android:id="@+id/tvCorreo"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Correo: luis@gmail.com"
-        app:layout_constraintTop_toBottomOf="@id/tvDestinatario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:background="#ffffff"/>
 
     <TextView
         android:id="@+id/tvTelefono"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Teléfono: 2284023400"
-        app:layout_constraintTop_toBottomOf="@id/tvCorreo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:background="#ffffff"/>
 
     <TextView
         android:id="@+id/tvStatus"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Status: Pendiente de entregar"
-        app:layout_constraintTop_toBottomOf="@id/tvTelefono"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="8dp" />
+        android:textSize="16sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:padding="8dp"
+        android:background="#ffffff"/>
 
     <Button
         android:id="@+id/btnActualizarEstado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
+        android:layout_width="151dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="99dp"
+        android:backgroundTint="#45a049"
+        android:cornerRadius="25dp"
+        android:elevation="4dp"
         android:text="Actualizar estado"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvStatus" />
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:onClick="actualizarEstado"/>
 
     <Button
         android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#45a049"
+        android:cornerRadius="25dp"
+        android:elevation="4dp"
         android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnActualizarEstado"
-        app:layout_constraintVertical_bias="0.946" />
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
