@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="450.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioUnidadController">
+   <children>
+      <Label layoutX="155.0" layoutY="14.0" prefHeight="50.0" prefWidth="162.0" text="U N I D A D" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="118.0" layoutY="255.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="272.0" layoutY="255.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="53.0" layoutY="64.0" text="Marca" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="197.0" layoutY="64.0" text="Modelo" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="358.0" layoutY="64.0" text="Año" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfMarca" layoutX="14.0" layoutY="89.0" prefHeight="25.0" prefWidth="125.0" />
+      <TextField fx:id="tfModelo" layoutX="163.0" layoutY="89.0" prefHeight="25.0" prefWidth="125.0" />
+      <TextField fx:id="tfAnio" layoutX="311.0" layoutY="89.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="60.0" layoutY="125.0" text="VIN" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfVIN" layoutX="12.0" layoutY="150.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="169.0" layoutY="125.0" text="Tipo de unidad" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbTipoUnidad" layoutX="163.0" layoutY="150.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="362.0" layoutY="125.0" text="NII" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNII" layoutX="311.0" layoutY="150.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="108.0" layoutY="201.0" text="Conductor" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbConductor" layoutX="193.0" layoutY="201.0" prefHeight="25.0" prefWidth="125.0" />
+   </children>
+</AnchorPane>
