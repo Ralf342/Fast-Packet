@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="450.0" style="-fx-background-color: #142B39;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fastpacketfx.FXMLFormularioClienteController">
+   <children>
+      <Label layoutX="146.0" layoutY="14.0" prefHeight="50.0" prefWidth="173.0" text="C L I E N T E" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNombre" layoutX="30.0" layoutY="125.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="61.0" layoutY="100.0" text="Nombre" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="190.0" layoutY="75.0" prefHeight="50.0" prefWidth="74.0" text="Apellido Paterno" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfApellidoPaterno" layoutX="165.0" layoutY="125.0" prefHeight="25.0" prefWidth="125.0" />
+      <TextField fx:id="tfApellidoMaterno" layoutX="300.0" layoutY="125.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="323.0" layoutY="75.0" prefHeight="50.0" prefWidth="74.0" text="Apellido Materno" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="305.0" layoutY="165.0" prefHeight="25.0" prefWidth="105.0" text="Código Postal" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCodigoPostal" layoutX="300.0" layoutY="190.0" prefHeight="25.0" prefWidth="125.0" />
+      <TextField fx:id="tfColonia" layoutX="165.0" layoutY="190.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="200.0" layoutY="165.0" prefHeight="25.0" prefWidth="63.0" text="Colonia" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="75.0" layoutY="165.0" prefHeight="25.0" prefWidth="37.0" text="Calle" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCalle" layoutX="30.0" layoutY="190.0" prefHeight="25.0" prefWidth="125.0" />
+      <TextField fx:id="tfTelefono" layoutX="99.0" layoutY="255.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label layoutX="133.0" layoutY="230.0" text="Teléfono" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="266.0" layoutY="230.0" prefHeight="25.0" prefWidth="51.0" text="Correo" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfCorreo" layoutX="232.0" layoutY="255.0" prefHeight="25.0" prefWidth="125.0" />
+      <Button layoutX="247.0" layoutY="300.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="133.0" layoutY="300.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
