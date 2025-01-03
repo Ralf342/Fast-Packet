@@ -218,9 +218,13 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             camposValidos=false;
             lbNumPersonalFaltante.setText("*Formato Incorrecto");
         }
+        //Validacion Correo
         if(colaborador.getCorreo().isEmpty()){
             camposValidos=false;
-            lbCorreo.setText("*Correo faltante");
+            lbCorreo.setText("*Correo necesario");
+        }else if(!colaborador.getCorreo().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")){
+            camposValidos=false;
+            lbCorreo.setText("*Formato incorrecto");
         }
         //Validacion del numero de licencia en caso de conductores
         if (colaborador.getIdRol() == 3) {
