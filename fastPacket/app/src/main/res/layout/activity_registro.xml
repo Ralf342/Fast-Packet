@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="45dp"
-    android:background="#595656"
+    android:background="#D3D3D3"
     android:gravity="center_horizontal"
     tools:context=".registro">
 
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:text="Registro"
         android:textColor="#45a049"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:layout_marginBottom="40dp"
         android:gravity="center"
@@ -99,6 +100,7 @@
         android:text="Registrarme"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="registro"/>
 
 </LinearLayout>

@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/detalleEnvio"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#595656"
+    android:background="#D3D3D3"
     android:gravity="center_horizontal">
 
     <TextView
@@ -13,11 +14,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Detalle de envío"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="#45a049"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="35dp"/>
 
     <TextView
         android:id="@+id/tvOrigen"
@@ -26,7 +27,8 @@
         android:text="Origen: Fedex, Ver."
         android:textSize="16sp"
         android:padding="8dp"
-        android:background="#ffffff"/>
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/rounded_border"/>
 
     <TextView
         android:id="@+id/tvDestino"
@@ -35,7 +37,8 @@
         android:text="Destino: Dique #13"
         android:textSize="16sp"
         android:padding="8dp"
-        android:background="#ffffff"/>
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/rounded_border"/>
 
     <TextView
         android:id="@+id/tvNoPaquetes"
@@ -44,7 +47,8 @@
         android:text="No. Paquetes: 3"
         android:textSize="16sp"
         android:padding="8dp"
-        android:background="#ffffff"/>
+        android:background="@drawable/rounded_border"
+        android:layout_marginBottom="1dp"/>
 
     <TextView
         android:id="@+id/tvDestinatario"
@@ -53,7 +57,8 @@
         android:text="Destinatario: Victor Baez Mora"
         android:textSize="16sp"
         android:padding="8dp"
-        android:background="#ffffff"/>
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/rounded_border"/>
 
     <TextView
         android:id="@+id/tvCorreo"
@@ -62,7 +67,8 @@
         android:text="Correo: luis@gmail.com"
         android:textSize="16sp"
         android:padding="8dp"
-        android:background="#ffffff"/>
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/rounded_border"/>
 
     <TextView
         android:id="@+id/tvTelefono"
@@ -71,7 +77,8 @@
         android:text="Teléfono: 2284023400"
         android:textSize="16sp"
         android:padding="8dp"
-        android:background="#ffffff"/>
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/rounded_border"/>
 
     <TextView
         android:id="@+id/tvStatus"
@@ -81,13 +88,14 @@
         android:textSize="16sp"
         android:textColor="@android:color/holo_red_dark"
         android:padding="8dp"
-        android:background="#ffffff"/>
+        android:background="@drawable/rounded_border"/>
 
     <Button
         android:id="@+id/btnActualizarEstado"
         android:layout_width="151dp"
         android:layout_height="59dp"
-        android:layout_marginTop="99dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginBottom="40dp"
         android:backgroundTint="#45a049"
         android:cornerRadius="25dp"
         android:elevation="4dp"
@@ -101,14 +109,16 @@
         android:id="@+id/btnVolver"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="80dp"
+        android:padding="10dp"
         android:backgroundTint="#45a049"
         android:cornerRadius="25dp"
         android:elevation="4dp"
         android:text="Volver"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="volver"
+        android:layout_gravity="left"/>
 
 </LinearLayout>

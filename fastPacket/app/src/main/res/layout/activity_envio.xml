@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/envio"
     android:orientation="vertical"
     android:padding="15dp"
-    android:background="#595656"
+    android:background="#D3D3D3"
     android:gravity="center_horizontal"
     tools:context=".envio">
 
@@ -20,14 +21,40 @@
         android:paddingBottom="10dp"
         android:text="¡Hola!"
         android:textColor="#45a049"
-        android:textSize="35sp"
+        android:textSize="32sp"
         android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llcerrar"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="313dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#45a049"
+            android:cornerRadius="25dp"
+            android:elevation="4dp"
+            android:text="Cerrar sesión"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:onClick="cerrarSesion"/>
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingTop="1dp">
+        android:layout_marginTop="15dp"
+        android:paddingTop="-1dp">
 
         <TableLayout
             android:id="@+id/tableEnvios"
@@ -39,7 +66,7 @@
 
                 <TableRow
                     android:background="#45a049"
-                    android:padding="8dp">
+                    android:padding="3dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,7 +117,7 @@
                     android:padding="12dp"
                     android:text="Pendiente"
                     android:textAlignment="center"
-                    android:textColor="@android:color/holo_red_dark" />
+                    android:textColor="@color/design_default_color_error" />
             </TableRow>
 
             <TableRow
@@ -156,51 +183,39 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center"
-    android:paddingTop="5dp"
-    android:layout_marginTop="244dp"
-    android:background="#595656">
+    android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+    android:layout_marginTop="244dp">
 
     <Button
         android:id="@+id/btnMiPerfil"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:text="Mi perfil"
         android:backgroundTint="#45a049"
         android:cornerRadius="25dp"
         android:elevation="4dp"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:onClick="miPerfil"/>
 
     <Button
         android:id="@+id/btnBuscar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:text="Buscar"
         android:backgroundTint="#45a049"
         android:cornerRadius="25dp"
         android:elevation="4dp"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="16sp"/>
-
-    <Button
-        android:id="@+id/btnCerrarSesion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginEnd="8dp"
-        android:text="Cerrar sesión"
-        android:backgroundTint="#45a049"
-        android:cornerRadius="25dp"
-        android:elevation="4dp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        android:onClick="buscar"/>
 
     </LinearLayout>
 
