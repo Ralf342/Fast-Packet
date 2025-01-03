@@ -65,14 +65,14 @@ public class ColaboradorDAO {
         return msj;
     }
      
-     public static List <Colaborador> obtenerColaboradoresConductores(){
+     public static List <Colaborador> obtenerConductores(){
           List<Colaborador>colaborador =null;
           String url = Constantes.URL_wS+"colaborador/obtener-conductores";
           RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
           try{
               if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
                   Gson gson = new Gson();
-                  Type tipoLista = new TypeToken<List<RolEmpleado>>(){}.getType();
+                  Type tipoLista = new TypeToken<List<Colaborador>>(){}.getType();
                   colaborador =gson.fromJson(respuesta.getContenido(), tipoLista);
               }
           }catch (Exception e){
