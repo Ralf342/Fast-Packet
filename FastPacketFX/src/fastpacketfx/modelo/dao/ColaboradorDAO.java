@@ -3,7 +3,6 @@ package fastpacketfx.modelo.dao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
-import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Colaborador;
 import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.RespuestaHTTP;
@@ -64,5 +63,21 @@ public class ColaboradorDAO {
            msj.setMensaje(e.getMessage());
         }
         return msj;
+    }
+     
+     public static List <Colaborador> obtenerColaboradoresConductores(){
+          List<Colaborador>colaborador =null;
+          String url = Constantes.URL_wS+"colaborador/obtener-conductores";
+          RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+          try{
+              if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                  Gson gson = new Gson();
+                  Type tipoLista = new TypeToken<List<RolEmpleado>>(){}.getType();
+                  colaborador =gson.fromJson(respuesta.getContenido(), tipoLista);
+              }
+          }catch (Exception e){
+              e.printStackTrace();
+          }
+          return colaborador;
     }
 }

@@ -64,7 +64,7 @@ public class FXMLEscenarioUnidadesController implements Initializable {
         unidades = FXCollections.observableArrayList();
         //obtener lo que trae el dao
         System.out.print("Entrando a la lista");
-        List<Unidad> listaWS = UnidadDAO.obtenerColaboradores();
+        List<Unidad> listaWS = UnidadDAO.obtenerUnidades();
         if(listaWS != null){
             System.out.print("Entando a la condicion de busqueda");
             unidades.addAll(listaWS);

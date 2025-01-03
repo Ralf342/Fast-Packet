@@ -131,6 +131,7 @@ public class ImpColaborador {
             return colaborador;    
     }
     
+<<<<<<< HEAD
     
     //foto
     
@@ -171,10 +172,22 @@ public class ImpColaborador {
             try{
                 colaborador = conexionBD.selectOne("colaborador.obtenerFoto", idColaborador);
                 conexionBD.close();
+=======
+    public static List<Colaborador> obtenerConductores(){
+        List<Colaborador> conductores = null;
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD !=null){
+            try{
+                conductores = conexionBD.selectList("colaborador.obtenerConductores");
+>>>>>>> 316b41fc857e16f5767afee2be550022f22fea60
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
+<<<<<<< HEAD
         return colaborador;
+=======
+        return conductores;
+>>>>>>> 316b41fc857e16f5767afee2be550022f22fea60
     }
 }

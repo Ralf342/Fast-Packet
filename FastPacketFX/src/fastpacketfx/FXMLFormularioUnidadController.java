@@ -1,8 +1,15 @@
 package fastpacketfx;
 
+import fastpacketfx.modelo.dao.ColaboradorDAO;
+import fastpacketfx.modelo.dao.UnidadDAO;
 import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.RolEmpleado;
+import fastpacketfx.pojo.TipoUnidad;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +19,7 @@ import javafx.stage.Stage;
 
 public class FXMLFormularioUnidadController implements Initializable {
 
+    private ObservableList<TipoUnidad> tipos;
     @FXML
     private TextField tfMarca;
     @FXML
@@ -32,7 +40,7 @@ public class FXMLFormularioUnidadController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        cargarTipoUnidad();
     }    
 
     @FXML
@@ -41,6 +49,7 @@ public class FXMLFormularioUnidadController implements Initializable {
 
     @FXML
     private void onClickCancelar(ActionEvent event) {
+        cerrarVentana();
     }
     
     private void cerrarVentana(){
@@ -49,4 +58,12 @@ public class FXMLFormularioUnidadController implements Initializable {
         ( (Stage) tfAnio.getScene().getWindow()).close();
     }
     
+    private void cargarTipoUnidad(){
+        tipos = FXCollections.observableArrayList();
+        List<TipoUnidad> listaWS = UnidadDAO.obtenerTiposUnidades();
+        if(listaWS !=null){
+            tipos.addAll(listaWS);
+            cbTipoUnidad.setItems(tipos);
+        }
+    }
 }
