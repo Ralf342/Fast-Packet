@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ruta de envío del paquete</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="scriptModo.js" defer></script>
+    
 </head>
 <body>
     
@@ -17,10 +17,13 @@
 
         <div class="search-container">
             <p>Con el número de guía de tu paquete que se generó al realizar el pedido !Usalo para saber cómo va tu envío!</p>
-            <form>
-                <input type="text" placeholder="Número de guía">
-                <button type="submit">Rastrear paquete</button>
+            <form onsubmit="return false;">
+                <input id="inp-numeroGuia" class="inp-numeroGuia" placeholder="Número de guía">
+                <button id="btnRastreo" type="button" onclick="obtenerPaquete()">Rastrear paquete</button>
             </form>
+        </div>
+        
+        <div id="lista-pagos" class="lista-pagos">
         </div>
 
         <div class="logo-container">
@@ -29,5 +32,6 @@
     </div>
 
     <button id="btn-cambiar-modo">🌙☀️</button>
+    <script src="scriptModo.js" defer></script>
 </body>
 </html>
