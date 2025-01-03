@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 public class FXMLFormularioUnidadController implements Initializable {
 
     private ObservableList<TipoUnidad> tipos;
+    private ObservableList<Colaborador> conductor;
     @FXML
     private TextField tfMarca;
     @FXML
@@ -41,6 +42,7 @@ public class FXMLFormularioUnidadController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarTipoUnidad();
+        cargarConductor();
     }    
 
     @FXML
@@ -64,6 +66,15 @@ public class FXMLFormularioUnidadController implements Initializable {
         if(listaWS !=null){
             tipos.addAll(listaWS);
             cbTipoUnidad.setItems(tipos);
+        }
+    }
+    
+    private void cargarConductor(){
+        conductor = FXCollections.observableArrayList();
+        List<Colaborador> listaWS = ColaboradorDAO.obtenerConductores();
+        if(listaWS !=null){
+            conductor.addAll(listaWS);
+            cbConductor.setItems(conductor);
         }
     }
 }
