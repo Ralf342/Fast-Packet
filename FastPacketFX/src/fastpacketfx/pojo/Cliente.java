@@ -11,11 +11,12 @@ public class Cliente {
     private String calle;
     private String colonia;
     private Integer numeroCasa;
+    private String direccion;
 
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa, String direccion) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -26,6 +27,7 @@ public class Cliente {
         this.calle = calle;
         this.colonia = colonia;
         this.numeroCasa = numeroCasa;
+        this.direccion = direccion;
     }
 
     public Integer getIdCliente() {
@@ -108,5 +110,12 @@ public class Cliente {
         this.numeroCasa = numeroCasa;
     }
 
-   
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    
 }
