@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             correo,
             CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS nombre,
             telefono,
-            CONCAT (calle, ' ',  colonia, ' ', numeroCasa, ' ',codigoPostal) AS direccion
+            CONCAT (calle, ' ', IFNULL(numeroCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS direccion
         FROM cliente
     </select>
     

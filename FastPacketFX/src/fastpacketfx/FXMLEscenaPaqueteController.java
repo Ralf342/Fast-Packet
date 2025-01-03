@@ -43,6 +43,12 @@ public class FXMLEscenaPaqueteController implements Initializable {
     @FXML
     private TableColumn<?, ?> tcProfundidad;
     
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        configurarTabla();
+        cargarInformacionTabla();
+    }
+
     private void configurarTabla(){
         tcNumeroGuia.setCellValueFactory(new PropertyValueFactory("numeroDeGuia"));
         tcAlto.setCellValueFactory(new PropertyValueFactory("alto"));
@@ -67,12 +73,6 @@ public class FXMLEscenaPaqueteController implements Initializable {
             Utilidades.mostrarAlertaSimple("Datos no disponible", "Lo sentimos, por el momento no se puede cargar la info de colaboradores", Alert.AlertType.ERROR);
         }
     }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        configurarTabla();
-        cargarInformacionTabla();
-    }    
 
     @FXML
     private void onClickBuscar(ActionEvent event) {
@@ -124,7 +124,5 @@ public class FXMLEscenaPaqueteController implements Initializable {
             escenario.showAndWait();
         }catch (Exception e){
         }
-        
-        
         }
     }

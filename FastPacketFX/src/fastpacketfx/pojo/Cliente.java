@@ -5,7 +5,7 @@ public class Cliente {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private Integer telefono;
+    private String telefono;
     private String correo;
     private Integer codigoPostal;
     private String calle;
@@ -16,7 +16,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, Integer telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa, String direccion) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa, String direccion) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -62,11 +62,11 @@ public class Cliente {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -117,6 +117,5 @@ public class Cliente {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
     
 }

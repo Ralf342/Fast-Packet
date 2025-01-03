@@ -3,8 +3,11 @@ package fastpacketfx.modelo.dao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
+import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.RespuestaHTTP;
+import fastpacketfx.pojo.RolEmpleado;
 import fastpacketfx.utilidades.Constantes;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
@@ -26,5 +29,40 @@ public class ColaboradorDAO {
         }
         return colaboradores;
     }
-  
+    
+    public static List <RolEmpleado> obtenerRolesColaborador(){
+          List<RolEmpleado>roles =null;
+          String url = Constantes.URL_wS+"tipo/obtener-roles";
+          RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+          try{
+              if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                  Gson gson = new Gson();
+                  Type tipoLista = new TypeToken<List<RolEmpleado>>(){}.getType();
+                  roles =gson.fromJson(respuesta.getContenido(), tipoLista);
+              }
+          }catch (Exception e){
+              e.printStackTrace();
+          }
+          return roles;
+    }
+    
+     public static Mensaje registrarColaborador(Colaborador colaborador){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"colaborador/registro";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(colaborador);
+            RespuestaHTTP respuesta = ConexionWS.peticionPOSTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setMensaje(respuesta.getContenido());
+            }
+        }catch (Exception e){
+           msj.setError(true);
+           msj.setMensaje(e.getMessage());
+        }
+        return msj;
+    }
 }

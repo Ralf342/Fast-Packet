@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: #142B39;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fastpacketfx.FXMLFormularioPaqueteController">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="400.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioPaqueteController">
    <children>
       <Label layoutX="95.0" layoutY="15.0" prefHeight="50.0" prefWidth="210.0" text="P A Q U E T E S" textFill="WHITE">
          <font>
@@ -21,7 +20,7 @@
       <TextField fx:id="tf_alto" layoutX="125.0" layoutY="170.0" prefHeight="20.0" prefWidth="200.0" />
       <TextField fx:id="tf_ancho" layoutX="125.0" layoutY="210.0" prefHeight="20.0" prefWidth="200.0" />
       <Label layoutX="75.0" layoutY="215.0" prefHeight="20.0" text="Ancho:" textFill="WHITE" />
-      <Label layoutX="35.0" layoutY="255.0" prefHeight="20.0" text="Profundidad:" textFill="WHITE" />
+      <Label layoutX="48.0" layoutY="253.0" prefHeight="20.0" text="Profundidad:" textFill="WHITE" />
       <TextField fx:id="tf_profundidad" layoutX="124.0" layoutY="250.0" prefHeight="20.0" prefWidth="200.0" />
       <Button layoutX="100.0" layoutY="300.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
          <font>

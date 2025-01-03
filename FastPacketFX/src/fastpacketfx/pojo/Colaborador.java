@@ -10,13 +10,14 @@ public class Colaborador {
     private String apellidoMaterno;
     private Integer noPersonal;
     private Integer idRol;
+    private String numLicencia;
     private String foto;
     private String rol;
 
     public Colaborador() {
     }
 
-    public Colaborador(Integer idColaborador, String correo, String contrasenia, String curp, String nombre, String apellidoPaterno, String apellidoMaterno, Integer noPersonal, Integer idRol, String foto, String rol) {
+    public Colaborador(Integer idColaborador, String correo, String contrasenia, String curp, String nombre, String apellidoPaterno, String apellidoMaterno, Integer noPersonal, Integer idRol, String numLicencia, String foto, String rol) {
         this.idColaborador = idColaborador;
         this.correo = correo;
         this.contrasenia = contrasenia;
@@ -26,6 +27,7 @@ public class Colaborador {
         this.apellidoMaterno = apellidoMaterno;
         this.noPersonal = noPersonal;
         this.idRol = idRol;
+        this.numLicencia = numLicencia;
         this.foto = foto;
         this.rol = rol;
     }
@@ -102,6 +104,14 @@ public class Colaborador {
         this.idRol = idRol;
     }
 
+    public String getNumLicencia() {
+        return numLicencia;
+    }
+
+    public void setNumLicencia(String numLicencia) {
+        this.numLicencia = numLicencia;
+    }
+
     public String getFoto() {
         return foto;
     }
@@ -117,7 +127,4 @@ public class Colaborador {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    
-    
-    
 }
