@@ -58,4 +58,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN rol ON rol.idRol = colaborador.idRol
     </select>
     
+    <update id="guardarFoto" parameterType="map">
+        UPDATE colaborador
+        SET foto = #{foto}
+        WHERE idColaborador = #{idColaborador}
+    </update>
+    
+    <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
+        SELECT idColaborador, nombre, apellidoPaterno, apellidoMaterno, TO_BASE64(foto) AS fotoBase64
+        FROM colaborador
+        WHERE idColaborador = #{idColaborador};
+    </select>
+    
 </mapper>

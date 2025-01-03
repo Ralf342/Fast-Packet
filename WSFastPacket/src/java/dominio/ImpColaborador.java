@@ -130,4 +130,51 @@ public class ImpColaborador {
             List<Colaborador> colaborador = conexionBD.selectList("colaborador.obtenerColaboradorPorNoPersonal", noPersonal);
             return colaborador;    
     }
+    
+    
+    //foto
+    
+    public static Mensaje guardarFoto(Integer idColaborador, byte [] foto){
+        Mensaje respuesta = new Mensaje();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD != null){
+            try{
+                HashMap<String, Object> parametros = new HashMap<>();
+                parametros.put("idColaborador", idColaborador);
+                parametros.put("foto", foto);
+                int filasAfectadas = conexionBD.update("colaborador.guardarFoto", parametros);
+                conexionBD.commit();
+                if(filasAfectadas > 0){
+                    respuesta.setError(false);
+                    respuesta.setMensaje("Fotografia guardada correctamente");
+                }else{
+                    respuesta.setError(true);
+                    respuesta.setMensaje("Lo sentimos, no se pudo guardar la foto");
+                }
+                conexionBD.close();
+            }catch (Exception e){
+                respuesta.setError(true);
+                respuesta.setMensaje(e.getMessage());
+            }
+            
+        }else{
+            respuesta.setError(true);
+            respuesta.setMensaje("Lo sentimos, no se pudo almacenar a la Base de Datos");
+        }
+        return  respuesta;
+    }
+    
+    public static Colaborador obtenerFoto(Integer idColaborador){
+        Colaborador colaborador = null;
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD !=null){
+            try{
+                colaborador = conexionBD.selectOne("colaborador.obtenerFoto", idColaborador);
+                conexionBD.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return colaborador;
+    }
 }
