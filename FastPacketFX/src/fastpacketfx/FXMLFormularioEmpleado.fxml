@@ -8,8 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fastpacketfx.FXMLFormularioEmpleadoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioEmpleadoController">
    <children>
       <Pane prefHeight="400.0" prefWidth="450.0" style="-fx-background-color: #142B39;">
          <children>
@@ -18,12 +17,12 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
-            <Button layoutX="135.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+            <Button layoutX="103.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="249.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+            <Button layoutX="250.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -55,8 +54,8 @@
             <TextField fx:id="tfCURP" layoutX="16.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
             <TextField fx:id="tfCorreo" layoutX="159.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
             <TextField fx:id="tfLicencia" layoutX="303.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
-            <TextField fx:id="tfNoPersonal" layoutX="96.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
-            <PasswordField fx:id="pfPassword" layoutX="270.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
+            <TextField fx:id="tfNoPersonal" layoutX="75.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
+            <PasswordField fx:id="pfPassword" layoutX="243.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
             <Text fill="WHITE" layoutX="61.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURP">
                <font>
                   <Font name="System Bold" size="16.0" />
@@ -67,12 +66,12 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="118.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Personal">
+            <Text fill="WHITE" layoutX="97.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Personal">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="294.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+            <Text fill="WHITE" layoutX="267.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
