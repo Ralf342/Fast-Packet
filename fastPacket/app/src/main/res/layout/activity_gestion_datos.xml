@@ -1,110 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".gestionDatos">
-    
-    <TextView
-        android:id="@+id/tvCURP"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="CURP: VAZR030903HVZRDSA4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvApellidoMaterno" />
-
-    <TextView
-        android:id="@+id/tvCorreo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Correo: vazr@gmail.com"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCURP" />
-
-    <TextView
-        android:id="@+id/tvApellidoPaterno"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Apellido paterno: Vazquez"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNombre" />
+    android:id="@+id/gestionDatos"
+    android:orientation="vertical"
+    android:padding="45dp"
+    android:background="#D3D3D3">
 
     <TextView
         android:id="@+id/tvTituloDatos"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
         android:text="Mis datos"
-        android:textSize="20sp"
+        android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="#45a049"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:id="@+id/tvNombre"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="Nombre: Rafael"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloDatos" />
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/rounded_border"/>
+
+    <TextView
+        android:id="@+id/tvApellidoPaterno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apellido paterno: Vazquez"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_border"
+        android:layout_marginBottom="7dp" />
 
     <TextView
         android:id="@+id/tvApellidoMaterno"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Apellido materno: Juarez"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvApellidoPaterno" />
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_border"
+        android:layout_marginBottom="7dp" />
+
+    <TextView
+        android:id="@+id/tvCURP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CURP: VAZR030903HVZRDSA4"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_border"
+        android:layout_marginBottom="7dp" />
+
+    <TextView
+        android:id="@+id/tvCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Correo: vazr@gmail.com"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_border"
+        android:layout_marginBottom="7dp" />
 
     <TextView
         android:id="@+id/tvContrasena"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Contraseña: ********"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCorreo" />
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:background="@drawable/rounded_border"
+        android:layout_marginBottom="40dp" />
 
-    <!-- Botón Actualizar -->
-
-    <!-- Botón Atrás -->
     <Button
         android:id="@+id/btnActualizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="288dp"
+        android:layout_gravity="center_horizontal"
         android:text="Actualizar mis datos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvContrasena" />
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#45a049"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="80dp"
+        android:onClick="actualizarDatos"/>
 
-    <ImageButton
-        android:id="@+id/btnAtrasDatos"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnVolvera"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_media_previous"
-        android:contentDescription="Atrás"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_gravity="left"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#45a049"
+        android:cornerRadius="25dp"
+        android:elevation="4dp"
+        android:padding="1dp"
+        android:text="Volver"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:onClick="volver"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

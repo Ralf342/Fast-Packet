@@ -1,107 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".actualizarStatus"
-    android:padding="16dp"
-    android:background="#FFFFFF">
+    android:id="@+id/actualizarStatus"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:background="#D3D3D3"
+    android:gravity="center_horizontal"
+    tools:context=".actualizarStatus">
 
     <TextView
         android:id="@+id/tvTitulo"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Actualizar status"
-        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:text="Actualizar status"
+        android:textColor="#45a049"
+        android:textSize="32sp"
+        android:textStyle="bold" />
 
-    <!-- RadioGroup para opciones de estado -->
     <RadioGroup
         android:id="@+id/rgEstado"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp">
+        android:background="@drawable/edittext_shadow"
+        android:layout_marginBottom="16dp">
 
         <RadioButton
             android:id="@+id/rbEnTransito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="En tránsito" />
+            android:text="En tránsito"
+            android:textColor="#000000" />
 
         <RadioButton
             android:id="@+id/rbDetenido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detenido" />
+            android:text="Detenido"
+            android:textColor="#000000" />
 
         <RadioButton
             android:id="@+id/rbEntregado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entregado" />
+            android:text="Entregado"
+            android:textColor="#000000" />
 
         <RadioButton
             android:id="@+id/rbPendienteEntrega"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pendiente de entrega" />
+            android:text="Pendiente de entrega"
+            android:textColor="#000000" />
 
         <RadioButton
             android:id="@+id/rbCancelado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancelado" />
+            android:text="Cancelado"
+            android:textColor="#000000" />
     </RadioGroup>
 
-    <!-- Caja de texto para motivo -->
     <EditText
         android:id="@+id/etMotivo"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Motivo (Obligatorio)"
-        android:background="@android:drawable/edit_text"
-        android:gravity="start|top"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edittext_shadow"
+        android:hint="Motivo"
         android:inputType="textMultiLine"
         android:minHeight="100dp"
-        app:layout_constraintTop_toBottomOf="@+id/rgEstado"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
+        android:padding="8dp" />
 
-    <!-- Botón de guardar -->
     <Button
         android:id="@+id/btnGuardar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#45a049"
+        android:cornerRadius="25dp"
+        android:elevation="4dp"
         android:text="Guardar"
-        app:layout_constraintTop_toBottomOf="@+id/etMotivo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        android:textSize="16dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="guardar"/>
 
-    <!-- Botón de regreso -->
-    <ImageButton
-        android:id="@+id/btnRegresar"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_back_arrow"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="45dp"
+        android:backgroundTint="#45a049"
+        android:cornerRadius="25dp"
+        android:elevation="4dp"
+        android:text="Volver"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:onClick="volver"
+        android:layout_gravity="left"/>
+</LinearLayout>

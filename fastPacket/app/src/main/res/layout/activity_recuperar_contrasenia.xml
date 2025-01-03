@@ -1,10 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/recuperarContrasenia"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="35dp"
+    android:background="#D3D3D3"
     tools:context=".recuperarContrasenia">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvTitulorc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recupera tu contraseña"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        android:textColor="#45a049"
+        android:gravity="center"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="66dp" />
+
+    <TextView
+        android:id="@+id/tvDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingrese su número de personal para recuperar sus datos"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="5dp" />
+
+
+    <SearchView
+        android:id="@+id/svNumeroPersonal"
+        android:layout_width="227dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_border"
+        android:queryHint="Número de personal" />
+
+    <Button
+        android:id="@+id/btnObtenerDatos"
+        android:layout_width="126dp"
+        android:layout_height="59dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="#45a049"
+        android:cornerRadius="25dp"
+        android:elevation="4dp"
+        android:text="Obtener datos"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:onClick="obtenerDatos"/>
+
+    <Button
+        android:id="@+id/btnVolverat"
+        android:onClick="volverLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:backgroundTint="#45a049"
+        android:cornerRadius="25dp"
+        android:elevation="4dp"
+        android:layout_marginTop="179dp"
+        android:text="Volver"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_gravity="left"/>
+
+</LinearLayout>
