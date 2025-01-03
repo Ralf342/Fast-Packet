@@ -4,6 +4,7 @@ import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.RolEmpleado;
+import pojo.TipoUnidad;
 
 public class ImpTipos {
     public static List<RolEmpleado> obtenerRoles(){
@@ -17,5 +18,17 @@ public class ImpTipos {
             }
         }
         return roles;
+    }
+    public static List<TipoUnidad> obtenerUnidades(){
+        List<TipoUnidad> unidades = null;
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD !=null){
+            try{
+                unidades = conexionBD.selectList("tipos.tipoUnidad");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return unidades;
     }
 }

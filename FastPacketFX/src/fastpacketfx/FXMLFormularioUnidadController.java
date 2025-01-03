@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.pojo.Colaborador;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class FXMLFormularioUnidadController implements Initializable {
 
@@ -19,11 +21,11 @@ public class FXMLFormularioUnidadController implements Initializable {
     @FXML
     private TextField tfVIN;
     @FXML
-    private ComboBox<?> cbTipoUnidad;
+    private ComboBox<TipoUnidad> cbTipoUnidad;
     @FXML
     private TextField tfNII;
     @FXML
-    private ComboBox<?> cbConductor;
+    private ComboBox<Colaborador> cbConductor;
 
     /**
      * Initializes the controller class.
@@ -39,6 +41,12 @@ public class FXMLFormularioUnidadController implements Initializable {
 
     @FXML
     private void onClickCancelar(ActionEvent event) {
+    }
+    
+    private void cerrarVentana(){
+        Stage escenario = (Stage)tfAnio.getScene().getWindow();
+        escenario.close();
+        ( (Stage) tfAnio.getScene().getWindow()).close();
     }
     
 }
