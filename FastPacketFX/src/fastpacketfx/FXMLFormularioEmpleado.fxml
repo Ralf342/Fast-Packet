@@ -89,6 +89,15 @@
                   <Font size="16.0" />
                </font>
             </Button>
+            <Label fx:id="lbRolFaltante" layoutX="275.0" layoutY="124.0" prefHeight="17.0" prefWidth="142.0" textFill="RED" />
+            <Label fx:id="lbNombreFaltante" layoutX="22.0" layoutY="198.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbApellidoPaternoFaltante" layoutX="165.0" layoutY="198.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbApellidoMaternoFaltante" layoutX="309.0" layoutY="198.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbNumLicencia" layoutX="308.0" layoutY="263.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbCorreo" layoutX="164.0" layoutY="263.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbCURPFaltante" layoutX="21.0" layoutY="263.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbNumPersonalFaltante" layoutX="81.0" layoutY="331.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbContraseniaFaltante" layoutX="248.0" layoutY="331.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
          </children>
       </Pane>
    </children>
