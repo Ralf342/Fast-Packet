@@ -87,4 +87,11 @@ public class WSColaborador {
     public  List<Colaborador> buscarNombreColaborador(@PathParam("noPersonal") String noPersonal){
         return ImpColaborador.buscarNoPersonalColaborador(noPersonal);
     }
+    
+    @Path("obtener-conductores")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Colaborador> obtenerConductores(){
+        return ImpColaborador.obtenerConductores();
+    }
 }
