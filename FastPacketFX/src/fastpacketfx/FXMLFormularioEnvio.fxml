@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="500.0" style="-fx-background-color: #142B39;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="fastpacketfx.FXMLFormularioEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="500.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioEnvioController">
    <children>
       <Pane layoutY="55.0" prefHeight="285.0" prefWidth="250.0" style="-fx-border-color: WHITE;">
          <children>
@@ -73,7 +72,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="245.0" text="Envío:" textFill="WHITE">
+            <Label layoutX="52.0" layoutY="245.0" text="Estatus:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
