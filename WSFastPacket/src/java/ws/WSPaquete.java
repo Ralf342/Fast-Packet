@@ -54,9 +54,8 @@ public class WSPaquete {
             Gson gson = new Gson();
             Paquete paquete = gson.fromJson(jsonPaquete, Paquete.class);
             
-        if(paquete.getPeso() > 0 && paquete.getAlto() > 0 && paquete.getAncho()>0 && paquete.getProfundidad()>0&&
-           paquete.getDescripcion() != null && !paquete.getDescripcion().isEmpty() &&
-           paquete.getNumeroDeGuia() != null && paquete.getIdUnidad() != null
+        if(paquete.getAlto() > 0 && paquete.getAncho()>0 && paquete.getProfundidad()>0&&
+           paquete.getDescripcion() != null && !paquete.getDescripcion().isEmpty()
         ){
             return ImpPaquete.registrarPaquete(paquete);
         }else{

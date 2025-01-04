@@ -18,9 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--mapper de servicio de registrar paquete-->
     <insert id="registrarPaquete" parameterType="pojo.Paquete">
         INSERT INTO paquete(
-            peso, dimensiones, descripcion, numeroDeGuia, idUnidad)
+            alto, ancho, profundidad, descripcion, numeroDeGuia)
         VALUES (
-        #{peso}, #{dimensiones}, #{descripcion}, #{numeroDeGuia}, #{idUnidad}
+        #{alto},#{ancho}, #{profundidad}, #{descripcion}, #{numeroDeGuia}
         ) 
     </insert>
     
