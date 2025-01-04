@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de registrarUnidad-->
     <insert id="registrarUnidad" parameterType="pojo.Unidad">
-        INSERT INTO unidad
+        INSERT INTO unidad (vin, nii, anio, modelo,marca,idTipoUnidad,idColaborador)
         VALUES (
         #{vin}, 
         #{nii},

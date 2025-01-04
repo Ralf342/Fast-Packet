@@ -3,7 +3,10 @@ package fastpacketfx;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.modelo.dao.UnidadDAO;
 import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.TipoUnidad;
+import fastpacketfx.pojo.Unidad;
+import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -67,13 +71,41 @@ public class FXMLFormularioUnidadController implements Initializable {
         int conductor =(cbConductor.getSelectionModel().getSelectedItem() !=null)
                ? cbConductor.getSelectionModel().getSelectedItem().getIdColaborador(): 0;
         
-        System.err.println(tipoUnidad + " " + conductor);
+        Unidad unidad = new Unidad();
+        unidad.setMarca(marca);
+        unidad.setModelo(modelo);
+        unidad.setAnio(anio);
+        unidad.setVin(vin);
+        unidad.setIdTipoUnidad(tipoUnidad);
+        unidad.setIdColaborador(conductor);
         
+        if(camposValidos(unidad)){
+            unidad.setNii(tfNII.getText());
+            System.out.println(unidad.getNii());
+            try{
+                guardarDatosUnidad(unidad);
+            }catch(Exception e){
+                Utilidades.mostrarAlertaSimple("Error","El conductor ya se encuentra ligado a un vehiculo, por favor intenta con otro", Alert.AlertType.ERROR);
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al guardar","Existen algunos campos vacios necesarios para guardar la información", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
     private void onClickCancelar(ActionEvent event) {
         cerrarVentana();
+    }
+    
+    private void guardarDatosUnidad(Unidad unidad){
+        Mensaje msj = UnidadDAO.registrarUnidad(unidad);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Unidad registrada", "La unidad se registro correctamente", Alert.AlertType.INFORMATION);
+            cerrarVentana();
+            //observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al guardar","Ese conductor ya posee una unidad a su cargo, seleccione otro porfavor", Alert.AlertType.ERROR);
+        }
     }
     
     //Para cerrar la ventana
@@ -113,5 +145,68 @@ public class FXMLFormularioUnidadController implements Initializable {
     //Verifica que sea un numero
     private boolean esNumerico(String cadena) {
         return cadena.matches("\\d+"); // Verifica que la cadena contenga solo dígitos
+    }
+    
+    private boolean camposValidos(Unidad unidad){
+        boolean valido=true;
+        boolean validacionnii = true;
+        lbMarcaFaltante.setText(" ");
+        lbAnioFaltante.setText(" ");
+        lbConductorFaltante.setText(" ");
+        lbModeloFaltante.setText(" ");
+        lbNIIFaltante.setText(" ");
+        lbTipoUnidadFaltante.setText(" ");
+        lbVINFaltante.setText(" ");
+        
+        //Validacion de año
+        if(!esNumerico(unidad.getAnio()) || unidad.getAnio().length()>4){
+            valido=false;
+            validacionnii=false;
+            lbAnioFaltante.setText("formato incorrecto");
+        }else if(unidad.getAnio().isEmpty()){
+            valido=false;
+            validacionnii=false;
+            lbAnioFaltante.setText("Campo Año vacio");
+        }
+        //validacion de conductor
+        if(unidad.getIdColaborador()==0){
+            valido=false;
+            lbConductorFaltante.setText("Campo incompleto");
+        }
+        //validacion de unidad
+        if(unidad.getIdTipoUnidad() == 0){
+            valido = false;
+            lbTipoUnidadFaltante.setText("Campo incompleto");
+        }
+        //validacion marca
+        if(unidad.getMarca().isEmpty()){
+            valido=false;
+            lbMarcaFaltante.setText("Campo incompleto");
+        }
+        //validacion modelo
+        if(unidad.getModelo().isEmpty()){
+            valido=false;
+            lbModeloFaltante.setText("Campo incompleto");
+        }
+        //validacion año
+        if(unidad.getAnio().isEmpty()){
+            valido=false;
+            lbAnioFaltante.setText("Campo incompleto");
+        }
+        //validacion vii
+        if(unidad.getVin().isEmpty()){
+            valido=false;
+            validacionnii=false;
+            lbVINFaltante.setText("Campo faltante");
+        }else if(unidad.getVin().length()<4){
+            valido=false;
+            validacionnii=false;
+            lbVINFaltante.setText("Campo incompleto");
+        }
+        //validacion nii
+        if(validacionnii){
+            tfNII.setText(unidad.getAnio() + unidad.getVin().substring(0, 4));
+        }
+        return valido;
     }
 }

@@ -42,20 +42,16 @@ public class WSUnidad {
         try{
             Gson gson = new Gson();
             Unidad unidad = gson.fromJson(jsonColaborador, Unidad.class);
-            
             if(unidad.getVin()!= null && !unidad.getVin().isEmpty()
                     && unidad.getNii() != null && !unidad.getNii().isEmpty()
                     && unidad.getModelo() != null && !unidad.getModelo().isEmpty()
                     && unidad.getMarca() != null && !unidad.getMarca().isEmpty()
-                    && unidad.getMotivo() != null && !unidad.getMotivo().isEmpty()
                     && unidad.getIdTipoUnidad() != null && unidad.getIdTipoUnidad() != 0
-                    
             ){
-                return ImpUnidad.registrarUnidad(unidad);
+                return ImpUnidad.agregarUnidad(unidad);
             }else{
-               return new Mensaje(true, "Numero de personal y/o password faltantes o incorrectos");
+               return new Mensaje(true, "Existen campos vacios o incorrectos");
             }
-            
         }catch(Exception e){
             e.printStackTrace();
             throw new BadRequestException();

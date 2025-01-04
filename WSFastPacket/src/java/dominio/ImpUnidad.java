@@ -16,32 +16,33 @@ public class ImpUnidad {
         return unidad;
     }
     
-    public static Mensaje registrarUnidad(Unidad unidad){;
-        Mensaje msj = new Mensaje();
-        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-        if(conexionBD != null){
-            try{
-                int filasAfectadas = conexionBD.insert("unidad.registrarUnidad", unidad);
-                conexionBD.commit();
-                if(filasAfectadas > 0){
-                    msj.setError(false);
-                    msj.setMensaje("La unidad" + unidad.getVin()+" "+ unidad.getNii()+" "+unidad.getModelo()+
-                            " "+unidad.getMarca()+" "+unidad.getMotivo()+" "+unidad.getModelo()+
-                            " "+unidad.getIdTipoUnidad()+" fue registrada exitosamente");
-                    
-                }else{
-                    msj.setError(true);
-                    msj.setMensaje("La unidad no pudo ser registrada");
-                }  
-            }catch(Exception e){
+    public static Mensaje agregarUnidad(Unidad unidad){
+
+    Mensaje msj = new Mensaje();
+    SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+
+       if(conexionBD!=null){
+        try{
+            int filasAfectadas=conexionBD.insert("unidad.registrarUnidad", unidad);
+            conexionBD.commit();
+            if(filasAfectadas>0){
+                msj.setError(false);
+                msj.setMensaje("La unidad " + unidad.getMarca() + ", fue resgistrado con éxito.");
+            }else{
                 msj.setError(true);
-               // msj.setMensaje(e.getMessage());
-               msj.setMensaje("Por el momento el servicio no esta disponible");
+                msj.setMensaje("La unidad no pudo ser registrada");
             }
+        }catch (Exception e){
+            msj.setError(true);
+            msj.setMensaje(e.getMessage());
         }
-        return msj;
-       
+    }else{
+        msj.setError(true);
+        msj.setMensaje("Por le momento el servicio de unidad no esta disponible.");
     }
+    return msj;
+
+}
     
 public static Mensaje eliminarUnidad(String idUnidad) {
     Mensaje respuesta = new Mensaje();
