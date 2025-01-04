@@ -74,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="obtenerConductores" resultType="pojo.Colaborador">
         SELECT idColaborador,nombre, apellidoPaterno
         FROM colaborador
-        WHERE idRol = #{idRol}
+        WHERE idRol = 3
     </select>
     
 </mapper>

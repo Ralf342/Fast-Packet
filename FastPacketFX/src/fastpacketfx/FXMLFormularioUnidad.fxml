@@ -19,7 +19,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="272.0" layoutY="255.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+      <Button layoutX="243.0" layoutY="255.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -59,12 +59,19 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="tfNII" layoutX="311.0" layoutY="150.0" prefHeight="25.0" prefWidth="125.0" />
+      <TextField fx:id="tfNII" disable="true" layoutX="311.0" layoutY="150.0" prefHeight="25.0" prefWidth="125.0" promptText="Cálculo Automatico" />
       <Label layoutX="108.0" layoutY="201.0" text="Conductor" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <ComboBox fx:id="cbConductor" layoutX="193.0" layoutY="201.0" prefHeight="25.0" prefWidth="125.0" />
+      <Label fx:id="lbMarcaFaltante" layoutX="15.0" layoutY="112.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
+      <Label fx:id="lbModeloFaltante" layoutX="164.0" layoutY="112.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
+      <Label fx:id="lbAnioFaltante" layoutX="311.0" layoutY="112.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
+      <Label fx:id="lbNIIFaltante" layoutX="311.0" layoutY="175.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
+      <Label fx:id="lbTipoUnidadFaltante" layoutX="164.0" layoutY="175.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
+      <Label fx:id="lbVINFaltante" layoutX="15.0" layoutY="175.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
+      <Label fx:id="lbConductorFaltante" layoutX="193.0" layoutY="226.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
    </children>
 </AnchorPane>

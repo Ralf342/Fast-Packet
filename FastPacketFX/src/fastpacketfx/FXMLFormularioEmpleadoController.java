@@ -152,6 +152,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         ( (Stage) tfNombre.getScene().getWindow()).close();
     }
     
+    //Verifica que sea un numero
     private boolean esNumerico(String cadena) {
         return cadena.matches("\\d+"); // Verifica que la cadena contenga solo dígitos
     }

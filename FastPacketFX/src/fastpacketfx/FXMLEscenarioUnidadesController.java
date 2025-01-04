@@ -43,6 +43,8 @@ public class FXMLEscenarioUnidadesController implements Initializable {
     private TableColumn tcMarca;
     @FXML
     private TableColumn tcTipo;
+    @FXML
+    private TableColumn tcConductor;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,6 +59,7 @@ public class FXMLEscenarioUnidadesController implements Initializable {
         tcAnio.setCellValueFactory(new PropertyValueFactory("anio"));
         tcMarca.setCellValueFactory(new PropertyValueFactory("marca"));
         tcTipo.setCellValueFactory(new PropertyValueFactory("tipo"));
+        tcConductor.setCellValueFactory(new PropertyValueFactory("conductor"));
     }
     
     private void cargarInformacionTabla(){
