@@ -88,12 +88,12 @@ public class WSColaborador {
         return ImpColaborador.buscarNoPersonalColaborador(noPersonal);
     }
     
-<<<<<<< HEAD
+
     @Path("subirFoto/{idColaborador}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje subirFoto(@PathParam("idColaborador")Integer idColaborador, byte[] foto){
-        if(idColaborador !=null && idColaborador > 0 && foto.length > 0){
+        if(idColaborador != null && idColaborador > 0 && foto.length > 0){
             return ImpColaborador.guardarFoto(idColaborador, foto);
         }
         throw new BadRequestException();
@@ -107,12 +107,13 @@ public class WSColaborador {
             return ImpColaborador.obtenerFoto(idColaborador);
         }
         throw new BadRequestException();
-=======
+    }
+    
     @Path("obtener-conductores")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Colaborador> obtenerConductores(){
         return ImpColaborador.obtenerConductores();
->>>>>>> 316b41fc857e16f5767afee2be550022f22fea60
+    
     }
 }
