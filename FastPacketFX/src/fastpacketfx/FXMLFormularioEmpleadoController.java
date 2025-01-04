@@ -110,7 +110,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             try{
                 guardarDatosColaborador(colaborador);
             }catch(Exception e){
-                System.out.println(e);   
+                Utilidades.mostrarAlertaSimple("Error","error: " + e, Alert.AlertType.ERROR);  
             }
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar","Existen algunos campos vacios necesarios para guardar la información", Alert.AlertType.ERROR);

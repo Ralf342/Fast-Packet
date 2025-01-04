@@ -3,7 +3,7 @@ package fastpacketfx.modelo.dao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
-import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.RespuestaHTTP;
 import fastpacketfx.pojo.TipoUnidad;
 import fastpacketfx.pojo.Unidad;
@@ -43,5 +43,26 @@ public class UnidadDAO {
               e.printStackTrace();
           }
           return tipos;
+    }
+    
+    public static Mensaje registrarUnidad(Unidad unidad){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"unidad/registrarUnidad";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(unidad);
+            System.out.println("JSON Enviado: " + parametros);
+            RespuestaHTTP respuesta = ConexionWS.peticionPOSTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setMensaje(respuesta.getContenido());
+            }
+        }catch (Exception e){
+           msj.setError(true);
+           msj.setMensaje(e.getMessage());
+        }
+        return msj;
     }
 }

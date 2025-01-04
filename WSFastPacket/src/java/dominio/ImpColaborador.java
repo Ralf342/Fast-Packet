@@ -19,7 +19,7 @@ public class ImpColaborador {
     Mensaje msj = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
 
-            if(conexionBD!=null){
+       if(conexionBD!=null){
         try{
             int filasAfectadas=conexionBD.insert("colaborador.registro", colaborador);
             conexionBD.commit();
