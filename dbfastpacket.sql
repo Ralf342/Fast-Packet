@@ -17,13 +17,14 @@ CREATE TABLE IF NOT EXISTS cliente (
     nombre VARCHAR(20) NOT NULL,
     apellidoPaterno VARCHAR(20) NOT NULL,
     apellidoMaterno VARCHAR(20) NOT NULL,
-    telefono INT,
+    telefono VARCHAR(20),
     correo VARCHAR(50),
     codigoPostal INT NOT NULL,
     calle VARCHAR(30) NOT NULL,
     colonia VARCHAR(30) NOT NULL,
-    numeroCasa INT
+    numeroCasa INT NOT NULL
 );
+
 
 CREATE TABLE IF NOT EXISTS envio (
     numeroDeGuia INT PRIMARY KEY AUTO_INCREMENT,
@@ -35,8 +36,10 @@ CREATE TABLE IF NOT EXISTS envio (
     colonia VARCHAR(30) NOT NULL,
     numero INT,
     codigoPostal INT NOT NULL,
+    estatus VARCHAR(30),
+    fechaModificacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     idCliente INT,
-    FOREIGN KEY (idCliente) REFERENCES cliente(idCliente)
+    FOREIGN KEY (idCliente) REFERENCES cliente(idCliente) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rol (
@@ -54,18 +57,19 @@ CREATE TABLE IF NOT EXISTS colaborador (
     apellidoPaterno VARCHAR(20) NOT NULL,
     apellidoMaterno VARCHAR(20) NOT NULL,
     noPersonal INT NOT NULL,
+    numLicencia VARCHAR(30) DEFAULT NULL,
+    foto LONGBLOB DEFAULT NULL,
     idRol INT NOT NULL,
-    foto BLOB DEFAULT NULL,
-    FOREIGN KEY (idRol) REFERENCES rol(idRol)
+    FOREIGN KEY (idRol) REFERENCES rol(idRol) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS tipoUnidad;
+
 CREATE TABLE IF NOT EXISTS tipoUnidad (
     idTipoUnidad INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(30)
 );
 
-DROP TABLE IF EXISTS unidad;
+
 CREATE TABLE IF NOT EXISTS unidad (
     idUnidad INT PRIMARY KEY AUTO_INCREMENT,
     vin VARCHAR(30),
@@ -74,11 +78,13 @@ CREATE TABLE IF NOT EXISTS unidad (
     modelo VARCHAR(30),
     marca VARCHAR(30),
     motivo VARCHAR(60),
+    idColaborador INT UNIQUE INDEX,
     idTipoUnidad INT NOT NULL,
-    FOREIGN KEY (idTipoUnidad) REFERENCES tipoUnidad(idTipoUnidad)
+    FOREIGN KEY (idTipoUnidad) REFERENCES tipoUnidad(idTipoUnidad) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (idColaborador) REFERENCES colaborador(idColaborador) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS paquete;
+
 CREATE TABLE IF NOT EXISTS paquete (
     idPaquete INT PRIMARY KEY AUTO_INCREMENT,
     peso FLOAT,
@@ -88,8 +94,8 @@ CREATE TABLE IF NOT EXISTS paquete (
     descripcion VARCHAR(60),
     numeroDeGuia INT,
     idUnidad INT,
-    FOREIGN KEY (numeroDeGuia) REFERENCES envio(numeroDeGuia),
-    FOREIGN KEY (idUnidad) REFERENCES unidad(idUnidad)
+    FOREIGN KEY (numeroDeGuia) REFERENCES envio(numeroDeGuia) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (idUnidad) REFERENCES unidad(idUnidad) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -105,14 +111,13 @@ VALUES
 ('Marta', 'Ramírez', 'Díaz', 953115, 'martaramirez@paqueteria.com', 64050, 'Calle Sol', 'Colonia Norte', 606);
 
 --  tabla envio
-INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, codigoPostal, idCliente) 
+INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, codigoPostal, estatus, fechaModificacion, idCliente) 
 VALUES
-(150.75, 'México', 'Ciudad de México', 'CDMX', 'Calle Falsa', 'Colonia Centro', 101, 64000, 1),
-(200.50, 'Guadalajara', 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2),
-(120.30, 'Monterrey', 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3),
-(175.60, 'Puebla', 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4),
-(180.00, 'Cancún', 'Quintana Roo', 'Quintana Roo', 'Av. Hidalgo', 'Colonia Este', 505, 64040, 5),
-(250.80, 'Tijuana', 'Baja California', 'Baja California', 'Calle Sol', 'Colonia Norte', 606, 64050, 6);
+(150.75, 'México', 'Ciudad de México', 'CDMX', 'Calle Falsa', 'Colonia Centro', 101, 64000, 'Pendiente', 1),
+(200.50, 'Guadalajara', 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 'Pendiente', 2),
+(120.30, 'Monterrey', 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 'Enviado', 3),
+(175.60, 'Puebla', 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 'Pendiente', 4),
+(180.00, 'Cancún', 'Quintana Roo', 'Quintana Roo', 'Av. Hidalgo', 'Colonia Este', 505, 64040, 'Enviado, 5);
 
 -- tabla rol
 INSERT INTO rol (tipo) 
@@ -122,17 +127,17 @@ VALUES
 ('Conductor');
 
 
--- tabla colaborador
-INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol) 
+-- tabla colaborador 
+INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol, numLicencia) 
 VALUES
-('juanperez@paqueteria.com', 'r1934', 'PEJ123456HDFRRL01', 'Juan', 'Pérez', 'Gómez', 1001, 1),
-('analopez@paqueteria.com', 'r1235', 'LOA987654MDFRRL02', 'Ana', 'López', 'Martínez', 1002, 2),
-('carlosgarcia@paqueteria.com', 'c1230', 'GAR13579HDFRRL03', 'Carlos', 'García', 'Rodríguez', 1003, 3),
+('juanperez@paqueteria.com', 'r1934', 'PEJ123456HDFRRL01', 'Juan', 'Pérez', 'Gómez', 1001, 1, MXD12569),
+('analopez@paqueteria.com', 'r1235', 'LOA987654MDFRRL02', 'Ana', 'López', 'Martínez', 1002, 2,MXD03812),
+('carlosgarcia@paqueteria.com', 'c1230', 'GAR13579HDFRRL03', 'Carlos', 'García', 'Rodríguez', 1003, 3, MXD07028),
 -- nuevos valores
-('laurahernandez@paqueteria.com', 'r1203', 'HER24680MDFRRL04', 'Laura', 'Hernández', 'Sánchez', 1004, 2),
-('luisgomez@paqueteria.com', 'r1236', 'GOM112233HDFRRL05', 'Luis', 'Gómez', 'Ruiz', 1005, 3),
-('martaramirez@paqueteria.com', 'c1247', 'RAM112233MDFRRL06', 'Marta', 'Ramírez', 'Díaz', 1006, 2),
-('edgar@paqueteria.com', 'e1289', 'EDJ927982MDFRRL06', 'Edgar', 'Juarez', 'Cadena', 1007, 3);
+('laurahernandez@paqueteria.com', 'r1203', 'HER24680MDFRRL04', 'Laura', 'Hernández', 'Sánchez', 1004, 2, MXD00362),
+('luisgomez@paqueteria.com', 'r1236', 'GOM112233HDFRRL05', 'Luis', 'Gómez', 'Ruiz', 1005, 3, MXD3407),
+('martaramirez@paqueteria.com', 'c1247', 'RAM112233MDFRRL06', 'Marta', 'Ramírez', 'Díaz', 1006, 2, MXD07247),
+('edgar@paqueteria.com', 'e1289', 'EDJ927982MDFRRL06', 'Edgar', 'Juarez', 'Cadena', 1007, 3, MXD11678);
 
 --  tabla tipoUnidad
 INSERT INTO tipoUnidad (tipo) 
@@ -143,13 +148,12 @@ VALUES
 ('Hibrida');
 
 --  tabla unidad
-INSERT INTO unidad (vin, nii, anio, modelo, marca, motivo,idTipoUnidad) 
+INSERT INTO unidad (vin, nii, modelo, marca, motivo, idTipoUnidad, idColaborador) 
 VALUES
-('JH4NA1261RT000013', '1994JH4N', '1994','Acura NSX', 'Honda', 'Transporte mercancía pesada', 2),
-('JM3ER29L070133282', '2007JM3E', '2007','CX 7', 'Mazda', 'Transporte personal y paquetes pequeños', 3),
-('JH4KA4630LC007479', '1990JH4K', '1990','Acura Legend', 'Honda', 'Entrega urgente de paquetes pequeños', 4),
-('JH4KA4630JC008595', '1988JH4K', '1988','Furgoneta 2023', 'Mercedes-Benz', 'Transporte de carga media', 1),
-('SCFAC23302B500083', 'VIN56789', '2002','Martin V12 Vanquish', 'Aston', 'Entrega ligera en zonas urbanas', 3);
+(235789, 'VIN12345', 'Furgoneta 2024', 'Ford', 'Transporte mercancía pesada', 1, 1001),
+(646701, 'VIN23456', 'Furgoneta 2023', 'Toyota', 'Transporte personal y paquetes pequeños', 2, 1002),
+(346012, 'VIN34567', 'Motocicleta 2022', 'Honda', 'Entrega urgente de 1paquetes pequeños', 3, 1003),
+(456733, 'VIN45678', 'Furgoneta 2023', 'Mercedes-Benz', 'Transporte de carga pesada', 4, 1004);
 
 -- tabla paquete
 INSERT INTO paquete (peso, alto, ancho, profundidad, descripcion, numeroDeGuia, idUnidad) 
@@ -160,5 +164,3 @@ VALUES
 (25.8, 4.5, 7.6, 9.8, 'Paquete grande', 4, 2),
 (10.5, 2.3, 5.7, 12, 'Paquete pequeño', 1, 3),
 (3.7, 2.1, 11, 4.5, 'Paquete frágil', 5, 3);
-
-SELECT * FROM UNIDAD; 

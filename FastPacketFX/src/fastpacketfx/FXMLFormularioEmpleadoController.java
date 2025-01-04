@@ -1,13 +1,21 @@
 package fastpacketfx;
 
+import fastpacketfx.modelo.ConexionWS;
 import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Colaborador;
 import fastpacketfx.pojo.Mensaje;
+import fastpacketfx.pojo.RespuestaHTTP;
 import fastpacketfx.pojo.RolEmpleado;
 import fastpacketfx.utilidades.Utilidades;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.file.Files;
+import java.util.Base64;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -24,7 +32,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -71,6 +81,8 @@ public class FXMLFormularioEmpleadoController implements Initializable {
     private Label lbNumPersonalFaltante;
     @FXML
     private Label lbContraseniaFaltante;
+    private Integer idColaborador;
+    private String fotoBase64;
 
     /**
      * Initializes the controller class.
@@ -124,9 +136,43 @@ public class FXMLFormularioEmpleadoController implements Initializable {
 
     @FXML
     private void onClickSubir(ActionEvent event) {
+        
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg"));
+        File archivoSeleccionado = fileChooser.showOpenDialog(null);
+        
+        if(archivoSeleccionado != null){
+            try{
+                byte[] imageBytes = Files.readAllBytes(archivoSeleccionado.toPath());
+                String fotoBase64 = Base64.getEncoder().encodeToString(imageBytes);
+
+                Image imagen = new Image(new ByteArrayInputStream(imageBytes));
+                ivLicencia.setImage(imagen);  
+                //envia la foto al server
+                String url = "http://localhost:8084/WSFastPacket/api/colaborador/subirFoto/" + idColaborador;
+                RespuestaHTTP respuesta = ConexionWS.peticionPUTImg(url, imageBytes);  // Usar los bytes para la petición PUT
+
+                if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+                System.out.println("Foto guardada exitosamente");
+            } else {
+                System.out.println("Error al guardar la foto: " + respuesta.getContenido());
+            } 
+                
+            // Aqui se llama a l método para subir la foto al servidor
+            ColaboradorDAO.subirFotoColaborador(idColaborador, fotoBase64); 
+            
+            }catch(IOException e){
+                e.printStackTrace();
+                Utilidades.mostrarAlertaSimple("Error al cargar imagen", "Hubo un problema al cargar la imagen", Alert.AlertType.ERROR);
+            }
+           
+        }else{
+            Utilidades.mostrarAlertaSimple("Sin imagen", "No se seleccionó ninguna imagen", Alert.AlertType.WARNING);
+        }
+       // cargarFoto(idColaborador);
     }
     
-    private void cargarRolesEmpleados(){
+    private void cargarRolesEmpleados() {
         roles = FXCollections.observableArrayList();
         List<RolEmpleado> listaWS = ColaboradorDAO.obtenerRolesColaborador();
         if(listaWS !=null){
@@ -240,4 +286,40 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         }
         return camposValidos;
     }
+
+    //para a foto
+    private void cargarFoto(Integer idColaborador) {
+        String fotoBase = ColaboradorDAO.subirFotoColaborador(idColaborador, fotoBase64);
+        if(fotoBase != null && !fotoBase.isEmpty()){
+            Image imagen = decodificarAFotoBase64(fotoBase);
+            
+            if (imagen != null) {
+            ivLicencia.setImage(imagen);
+            } else {
+                Utilidades.mostrarAlertaSimple("Error de Decodificación", "No se pudo decodificar la imagen correctamente.", Alert.AlertType.ERROR);
+            }
+
+        }else{
+            Utilidades.mostrarAlertaSimple("Sin foto", "Cargue una imagen", Alert.AlertType.WARNING);
+        }
+    }
+    
+    
+    private Image decodificarAFotoBase64(String fotoBase64){
+        try{
+            //para eliminar los espacios en blanco si hay en la cadena base64
+            String base64decodificada = fotoBase64.replaceAll("\\s", "");
+            byte[] imageBytes = Base64.getDecoder().decode(base64decodificada);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(imageBytes);
+            return new Image(byteArrayInputStream); // crea la imagen
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+            System.out.println("Error al decodificar la imagen" +e.getMessage());
+            return null;
+        }
+        
+    }
+    
+
+    
 }

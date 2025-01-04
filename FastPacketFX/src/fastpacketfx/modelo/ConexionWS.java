@@ -201,4 +201,43 @@ public class ConexionWS {
         return respuestaEntrada.toString();
     }
     
+    public static RespuestaHTTP peticionPUTImg (String url, byte[] parametros) {
+    RespuestaHTTP respuesta = new RespuestaHTTP();
+    try {
+        // Convertir la URL
+        URL urlDestino = new URL(url);
+        HttpURLConnection conexionHttp = (HttpURLConnection) urlDestino.openConnection();
+        
+        // Configurar la solicitud como PUT
+        conexionHttp.setRequestMethod("PUT");
+        conexionHttp.setRequestProperty("Content-Type", "application/octet-stream");  // Enviar como datos binarios
+        conexionHttp.setDoOutput(true);  // Para enviar datos en el cuerpo de la solicitud
+        
+        // Escribir los bytes de la foto en la salida
+        OutputStream os = conexionHttp.getOutputStream();
+        os.write(parametros);  // Escribir los bytes de la imagen
+        os.flush();
+        os.close();
+        
+        // Leer la respuesta
+        int codigoRespuesta = conexionHttp.getResponseCode();
+        respuesta.setCodigoRespuesta(codigoRespuesta);
+        
+        // Si la respuesta es OK, obtener el contenido
+        if (codigoRespuesta == HttpURLConnection.HTTP_OK) {
+            respuesta.setContenido(obtenerContenidoWS(conexionHttp.getInputStream()));
+        } else {
+            respuesta.setContenido("Código de respuesta HTTP: " + codigoRespuesta);
+        }
+    } catch (MalformedURLException e) {
+        respuesta.setCodigoRespuesta(Constantes.ERROR_URL);
+        respuesta.setContenido("Error en la dirección de conexión.");
+    } catch (IOException io) {
+        respuesta.setCodigoRespuesta(Constantes.ERROR_PETICION);
+        respuesta.setContenido("Error: no se pudo realizar la solicitud.");
+    }
+    return respuesta;
+}
+
+    
 }

@@ -1,6 +1,7 @@
 package fastpacketfx.modelo.dao;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
 import fastpacketfx.pojo.Colaborador;
@@ -73,11 +74,51 @@ public class ColaboradorDAO {
               if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
                   Gson gson = new Gson();
                   Type tipoLista = new TypeToken<List<Colaborador>>(){}.getType();
-                  colaborador =gson.fromJson(respuesta.getContenido(), tipoLista);
+                  colaborador = gson.fromJson(respuesta.getContenido(), tipoLista);
               }
           }catch (Exception e){
               e.printStackTrace();
           }
           return colaborador;
     }
+     
+    public static String subirFotoColaborador(Integer idColaborador, String fotoBase64) {
+    String url = Constantes.URL_wS + "colaborador/subirFoto" + idColaborador;
+   // RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+            try {
+                // Crear un objeto que represente los datos a enviar
+                Colaborador colaborador = new Colaborador();
+                colaborador.setIdColaborador(idColaborador);
+                colaborador.setFotoBase64(fotoBase64);
+
+                // Serializar el objeto a JSON usando Gson
+                Gson gson = new Gson();
+                String json = gson.toJson(colaborador);
+
+                RespuestaHTTP respuesta = ConexionWS.peticionPUT(url, json);
+
+                // Validar la respuesta del servidor
+                if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK || 
+                    respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_CREATED) {
+                    System.out.println("Foto guardada exitosamente para el colaborador con ID: " + idColaborador);
+                } else {
+                    System.out.println("Error al guardar la foto: " + respuesta.getContenido());
+                }
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+    }
+    
+     public static String obtenerFotoColaborador(Integer idColaborador) {
+        String url = Constantes.URL_wS + "colaborador/obtenerFoto/" + idColaborador;
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
+            return respuesta.getContenido();  // Devuelve la foto en base64
+        }
+        return null;
+    }
+
+
 }
