@@ -20,14 +20,16 @@ public class Colaborador {
     private String apellidoMaterno;
     private Integer noPersonal;
     private Integer idRol;
-    private String rol;
-    private String fotoBase64;
+    private String foto;
+    private String numLicencia;
     
-
+    //para los alias
+    private String rol;
+   
     public Colaborador() {
     }
 
-    public Colaborador(Integer idColaborador, String correo, String contrasenia, String curp, String nombre, String apellidoPaterno, String apellidoMaterno, Integer noPersonal, Integer idRol, String fotoBase64, String rol) {
+    public Colaborador(Integer idColaborador, String correo, String contrasenia, String curp, String nombre, String apellidoPaterno, String apellidoMaterno, Integer noPersonal, Integer idRol, String foto, String numLicencia, String rol) {
         this.idColaborador = idColaborador;
         this.correo = correo;
         this.contrasenia = contrasenia;
@@ -37,7 +39,8 @@ public class Colaborador {
         this.apellidoMaterno = apellidoMaterno;
         this.noPersonal = noPersonal;
         this.idRol = idRol;
-        this.fotoBase64 = fotoBase64;
+        this.foto = foto;
+        this.numLicencia = numLicencia;
         this.rol = rol;
     }
 
@@ -113,12 +116,20 @@ public class Colaborador {
         this.idRol = idRol;
     }
 
-    public String getFotoBase64() {
-        return fotoBase64;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setFotoBase64(String fotoBase64) {
-        this.fotoBase64 = fotoBase64;
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getNumLicencia() {
+        return numLicencia;
+    }
+
+    public void setNumLicencia(String numLicencia) {
+        this.numLicencia = numLicencia;
     }
 
     public String getRol() {
@@ -128,6 +139,8 @@ public class Colaborador {
     public void setRol(String rol) {
         this.rol = rol;
     }
-
-   
+    
+    
+    
+    
 }

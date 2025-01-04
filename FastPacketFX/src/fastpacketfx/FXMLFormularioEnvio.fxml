@@ -61,10 +61,10 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="tfCiudadDestino" layoutX="110.0" layoutY="205.0" prefHeight="25.0" prefWidth="125.0" />
-            <TextField fx:id="tfCPDestino" layoutX="110.0" layoutY="165.0" prefHeight="25.0" prefWidth="125.0" />
-            <TextField fx:id="tfColoniaDestino" layoutX="110.0" layoutY="125.0" prefHeight="25.0" prefWidth="125.0" />
-            <TextField fx:id="tfCalleDestino" layoutX="110.0" layoutY="85.0" prefHeight="25.0" prefWidth="125.0" />
+            <TextField fx:id="tfCiudadDestino" disable="true" layoutX="110.0" layoutY="205.0" prefHeight="25.0" prefWidth="125.0" />
+            <TextField fx:id="tfCPDestino" disable="true" layoutX="110.0" layoutY="165.0" prefHeight="25.0" prefWidth="125.0" />
+            <TextField fx:id="tfColoniaDestino" disable="true" layoutX="110.0" layoutY="125.0" prefHeight="25.0" prefWidth="125.0" />
+            <TextField fx:id="tfCalleDestino" disable="true" layoutX="110.0" layoutY="85.0" prefHeight="25.0" prefWidth="125.0" />
             <ComboBox fx:id="cbCliente" layoutX="110.0" layoutY="45.0" prefWidth="125.0" />
             <ComboBox fx:id="cbEnvio" layoutX="110.0" layoutY="245.0" prefWidth="125.0" />
             <Label layoutX="56.0" layoutY="45.0" text="Cliente:" textFill="WHITE">

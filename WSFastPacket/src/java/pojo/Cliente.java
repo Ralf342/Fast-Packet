@@ -20,6 +20,8 @@ public class Cliente {
     private String calle;
     private String colonia;
     private Integer numeroCasa;
+    
+    //PARA LOS ALIAS
     private String direccion;
 
     public Cliente() {
