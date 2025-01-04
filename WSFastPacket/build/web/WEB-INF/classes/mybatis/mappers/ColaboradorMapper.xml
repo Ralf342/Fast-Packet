@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="colaborador">
     <!--mapper de servicio de insertarColaboradores-->
     <insert id="registro" parameterType="pojo.Colaborador">
-        INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol)
+        INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol,numLicencia)
          VALUES (
         #{correo}, 
         #{contrasenia}, 
@@ -15,14 +15,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{apellidoPaterno},
         #{apellidoMaterno}, 
         #{noPersonal}, 
-        #{idRol}) 
+        #{idRol},
+        #{numLicencia}) 
     </insert>
     
+    <!--mapper de servicio de borrarColaboradores-->
     <delete id="eliminar">
         DELETE FROM colaborador 
         WHERE idColaborador = #{idColaborador};
     </delete>
     
+    <!--mapper de servicio de editarColaboradores-->
     <update id="editar" parameterType="pojo.Colaborador">
         UPDATE colaborador 
         SET 
@@ -31,7 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         apellidoMaterno = #{apellidoMaterno}, 
         correo = #{correo}, 
         contrasenia = #{contrasenia}, 
-        curp = #{curp} 
+        curp = #{curp},
+        numLicencia = #{numLicencia} 
         WHERE idColaborador = #{idColaborador}
     </update>
     
@@ -66,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
-        SELECT idColaborador, nombre, apellidoPaterno, apellidoMaterno, TO_BASE64(foto) AS fotoBase64
+        SELECT idColaborador, nombre, apellidoPaterno, apellidoMaterno, TO_BASE64(foto) AS foto
         FROM colaborador
         WHERE idColaborador = #{idColaborador};
     </select>
