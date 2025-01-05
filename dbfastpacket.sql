@@ -22,7 +22,9 @@ CREATE TABLE IF NOT EXISTS cliente (
     codigoPostal INT NOT NULL,
     calle VARCHAR(30) NOT NULL,
     colonia VARCHAR(30) NOT NULL,
-    numeroCasa INT NOT NULL
+    numeroCasa INT NOT NULL,
+    estado VARCHAR(30) NOT NULL,
+    ciudad VARCHAR(30) NOT NULL
 );
 
 
@@ -118,14 +120,14 @@ VALUES
 ('Cancelado');
 
 -- tabla cliente
-INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, codigoPostal, calle, colonia, numeroCasa) 
+INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, codigoPostal, calle, colonia, numeroCasa, estado, ciudad) 
 VALUES
-('Juan', 'Pérez', 'Gómez', 095554, 'juanperez@paqueteria.com', 64000, 'Calle Falsa', 'Colonia Centro', 101),
-('Ana', 'López', 'Martínez', 987654, 'analopez@paqueteria.com', 64010, 'Av. Reforma', 'Colonia Norte', 202),
-('Carlos', 'García', 'Rodríguez', 987654, 'carlosgarcia@paqueteria.com', 64020, 'Calle 10', 'Colonia Sur', 303),
-('Laura', 'Hernández', 'Sánchez', 124669, 'laurahernandez@paqueteria.com', 64030, 'Calle Luna', 'Colonia Oeste', 404),
-('Luis', 'Gómez', 'Ruiz', 764321, 'luisgomez@paqueteria.com', 64040, 'Av. Hidalgo', 'Colonia Este', 505),
-('Marta', 'Ramírez', 'Díaz', 953115, 'martaramirez@paqueteria.com', 64050, 'Calle Sol', 'Colonia Norte', 606);
+('Juan', 'Pérez', 'Gómez', 095554, 'juanperez@paqueteria.com', 64000, 'Calle Falsa', 'Colonia Centro', 101, 'Puebla', 'Puebla de Zaragoza'),
+('Ana', 'López', 'Martínez', 987654, 'analopez@paqueteria.com', 64010, 'Av. Reforma', 'Colonia Norte', 202, 'Veracruz', 'Xalapa'),
+('Carlos', 'García', 'Rodríguez', 987654, 'carlosgarcia@paqueteria.com', 64020, 'Calle 10', 'Colonia Sur', 303, 'Nuevo Leon', 'Monterrey'),
+('Laura', 'Hernández', 'Sánchez', 124669, 'laurahernandez@paqueteria.com', 64030, 'Calle Luna', 'Colonia Oeste', 404, 'Baja California', 'Ensenada'),
+('Luis', 'Gómez', 'Ruiz', 764321, 'luisgomez@paqueteria.com', 64040, 'Av. Hidalgo', 'Colonia Este', 505, 'Queretaro', 'Santiago de Queretaro'),
+('Marta', 'Ramírez', 'Díaz', 953115, 'martaramirez@paqueteria.com', 64050, 'Calle Sol', 'Colonia Norte', 606, 'Mexico', 'CDMX');
 
 --  tabla envio
 INSERT INTO envio (costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, numeroOrigen, codigoPostalOrigen, fechaModificacion, idClienteDestino, idEstatus, idUnidad, idColaboradorModificacion) 
