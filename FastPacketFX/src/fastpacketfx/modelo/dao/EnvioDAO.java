@@ -28,4 +28,20 @@ public class EnvioDAO {
         return clientes;
     }
     
+    public static List <Envio> obtenerNumeroGuia(){
+          List<Envio>numero =null;
+          String url = Constantes.URL_wS+"envio/numeroGuia";
+          RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+          try{
+              if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                  Gson gson = new Gson();
+                  Type tipoLista = new TypeToken<List<Envio>>(){}.getType();
+                  numero = gson.fromJson(respuesta.getContenido(), tipoLista);
+              }
+          }catch (Exception e){
+              e.printStackTrace();
+          }
+          return numero;
+    }
+    
 }

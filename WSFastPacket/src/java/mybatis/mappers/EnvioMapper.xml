@@ -126,5 +126,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             on cl.idColaborador = u.idColaborador
         WHERE e.numeroDeGuia LIKE CONCAT(#{numeroDeGuia},'%')
     </select>
+    
+    <select id="obtenerNumerosDeGuia" resultType="pojo.Envio">
+        SELECT numeroDeGuia 
+        FROM envio
+    </select>
 
 </mapper>

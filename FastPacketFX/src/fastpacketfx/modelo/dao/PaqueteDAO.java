@@ -8,6 +8,7 @@ package fastpacketfx.modelo.dao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.Paquete;
 import fastpacketfx.pojo.RespuestaHTTP;
 import fastpacketfx.utilidades.Constantes;
@@ -34,5 +35,25 @@ public class PaqueteDAO {
             e.printStackTrace();
         }
         return paquetes;
+    }
+    
+    public static Mensaje registrarPaquete(Paquete paquete){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"paquete/registrarPaquete";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(paquete);
+            RespuestaHTTP respuesta = ConexionWS.peticionPOSTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setMensaje(respuesta.getContenido());
+            }
+        }catch (Exception e){
+           msj.setError(true);
+           msj.setMensaje(e.getMessage());
+        }
+        return msj;
     }
 }

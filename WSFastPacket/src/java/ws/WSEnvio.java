@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -123,5 +118,13 @@ public class WSEnvio {
     @Produces(MediaType.APPLICATION_JSON) 
     public List<Envio> buscarClientePorCorreo(@PathParam("numeroDeGuia") Integer numeroDeGuia){
         return ImpEnvio.buscarEnvioPorNumeroGuia(numeroDeGuia);   
+    }
+    
+    @Path("numeroGuia")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerConductores(){
+        return ImpEnvio.obtenerNumeroDeGuia();
+    
     }
 }

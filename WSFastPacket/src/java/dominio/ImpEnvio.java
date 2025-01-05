@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import com.google.gson.Gson;
@@ -120,5 +115,18 @@ public class ImpEnvio {
             List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosPorNumeroGuia", numeroGuia);
         return envio;
     }
-     
+    
+    public static List<Envio> obtenerNumeroDeGuia(){
+        List<Envio> numeros = null;
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD !=null){
+            try{
+                numeros = conexionBD.selectList("envio.obtenerNumerosDeGuia");
+            
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return numeros;
+    }
 }
