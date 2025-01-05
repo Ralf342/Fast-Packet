@@ -13,7 +13,7 @@
    <children>
       <Pane layoutY="100.0" prefHeight="400.0" prefWidth="170.0" style="-fx-background-color: #142B39;">
          <children>
-            <Button fx:id="btn_Empleado" layoutX="20.0" layoutY="40.0" mnemonicParsing="false" onAction="#onClickEmpleado" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Empleados" textFill="WHITE">
+            <Button fx:id="btn_Empleado" layoutX="10.0" layoutY="40.0" mnemonicParsing="false" onAction="#onClickEmpleado" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #F0371B;" text="Colaborador" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -28,7 +28,7 @@
                   <DropShadow />
                </effect>
             </Button>
-            <Button fx:id="btn_Unidades" layoutX="20.0" layoutY="110.0" mnemonicParsing="false" onAction="#onClickUnidad" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Unidades" textFill="WHITE">
+            <Button fx:id="btn_Unidades" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#onClickUnidad" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #F0371B;" text="Unidades" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
                   <DropShadow />
                </effect>
             </Button>
-            <Button fx:id="btn_clientes" layoutX="20.0" layoutY="180.0" mnemonicParsing="false" onAction="#onClickCliente" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Clientes" textFill="WHITE">
+            <Button fx:id="btn_clientes" layoutX="10.0" layoutY="180.0" mnemonicParsing="false" onAction="#onClickCliente" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #F0371B;" text="Clientes" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -58,7 +58,7 @@
                   <DropShadow />
                </effect>
             </Button>
-            <Button fx:id="btn_paquetes" layoutX="20.0" layoutY="250.0" mnemonicParsing="false" onAction="#onClickPaquete" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Paquetes" textFill="WHITE">
+            <Button fx:id="btn_paquetes" layoutX="10.0" layoutY="250.0" mnemonicParsing="false" onAction="#onClickPaquete" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #F0371B;" text="Paquetes" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -73,7 +73,7 @@
                   <DropShadow />
                </effect>
             </Button>
-            <Button fx:id="btn_envios" layoutX="20.0" layoutY="320.0" mnemonicParsing="false" onAction="#onClickEnvio" prefHeight="40.0" prefWidth="134.0" style="-fx-background-color: #F0371B;" text="Envios" textFill="WHITE">
+            <Button fx:id="btn_envios" layoutX="10.0" layoutY="320.0" mnemonicParsing="false" onAction="#onClickEnvio" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #F0371B;" text="Envios" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -108,12 +108,12 @@
          <children>
             <Pane layoutX="115.0" layoutY="70.0" prefHeight="30.0" prefWidth="595.0">
                <children>
-                  <Label fx:id="lbFecha" layoutX="186.0" layoutY="4.0" text="24/12/2083" textFill="WHITE">
+                  <Label fx:id="lbFecha" layoutX="186.0" layoutY="4.0" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbHora" layoutX="321.0" layoutY="4.0" text="24/12/2304" textFill="WHITE">
+                  <Label fx:id="lbHora" layoutX="321.0" layoutY="4.0" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

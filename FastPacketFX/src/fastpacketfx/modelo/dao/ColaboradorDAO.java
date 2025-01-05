@@ -82,14 +82,14 @@ public class ColaboradorDAO {
           return colaborador;
     }
      
-    public static String subirFotoColaborador(Integer idColaborador, String fotoBase64) {
+    public static String subirFotoColaborador(Integer idColaborador, String foto) {
     String url = Constantes.URL_wS + "colaborador/subirFoto" + idColaborador;
    // RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
             try {
                 // Crear un objeto que represente los datos a enviar
                 Colaborador colaborador = new Colaborador();
                 colaborador.setIdColaborador(idColaborador);
-                colaborador.setFotoBase64(fotoBase64);
+                colaborador.setFoto(foto);
 
                 // Serializar el objeto a JSON usando Gson
                 Gson gson = new Gson();

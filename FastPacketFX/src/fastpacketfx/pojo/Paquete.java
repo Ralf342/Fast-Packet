@@ -6,18 +6,17 @@ package fastpacketfx.pojo;
  */
 public class Paquete {
     private Integer idPaquete;
-    private Float peso;
-    private Float alto;
-    private Float ancho;
-    private Float profundidad;
+    private float peso;
+    private float alto;
+    private float ancho;
+    private float profundidad;
     private String descripcion;
     private Integer numeroDeGuia;
-    private Integer idUnidad;
 
     public Paquete() {
     }
 
-    public Paquete(Integer idPaquete, Float peso, Float alto, Float ancho, Float profundidad, String descripcion, Integer numeroDeGuia, Integer idUnidad) {
+    public Paquete(Integer idPaquete, float peso, float alto, float ancho, float profundidad, String descripcion, Integer numeroDeGuia) {
         this.idPaquete = idPaquete;
         this.peso = peso;
         this.alto = alto;
@@ -25,7 +24,6 @@ public class Paquete {
         this.profundidad = profundidad;
         this.descripcion = descripcion;
         this.numeroDeGuia = numeroDeGuia;
-        this.idUnidad = idUnidad;
     }
 
     public Integer getIdPaquete() {
@@ -36,35 +34,35 @@ public class Paquete {
         this.idPaquete = idPaquete;
     }
 
-    public Float getPeso() {
+    public float getPeso() {
         return peso;
     }
 
-    public void setPeso(Float peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 
-    public Float getAlto() {
+    public float getAlto() {
         return alto;
     }
 
-    public void setAlto(Float alto) {
+    public void setAlto(float alto) {
         this.alto = alto;
     }
 
-    public Float getAncho() {
+    public float getAncho() {
         return ancho;
     }
 
-    public void setAncho(Float ancho) {
+    public void setAncho(float ancho) {
         this.ancho = ancho;
     }
 
-    public Float getProfundidad() {
+    public float getProfundidad() {
         return profundidad;
     }
 
-    public void setProfundidad(Float profundidad) {
+    public void setProfundidad(float profundidad) {
         this.profundidad = profundidad;
     }
 
@@ -84,15 +82,4 @@ public class Paquete {
         this.numeroDeGuia = numeroDeGuia;
     }
 
-    public Integer getIdUnidad() {
-        return idUnidad;
-    }
-
-    public void setIdUnidad(Integer idUnidad) {
-        this.idUnidad = idUnidad;
-    }
-    
-    
-    
 }
-

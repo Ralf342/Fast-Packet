@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -8,11 +9,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="430.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLEscenaPaqueteController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="630.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLEscenaPaqueteController">
    <children>
-      <Separator orientation="VERTICAL" prefHeight="400.0" />
-      <TextField fx:id="tf_buscar" layoutX="50.0" layoutY="30.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar paquete por envío" style="-fx-background-radius: 5;" />
-      <Button layoutX="350.0" layoutY="30.0" mnemonicParsing="false" onAction="#onClickBuscar" prefHeight="31.0" prefWidth="40.0" style="-fx-background-color: #F0371B; -fx-background-radius: 5;">
+      <Separator orientation="VERTICAL" prefHeight="400.0">
+         <effect>
+            <DropShadow />
+         </effect></Separator>
+      <TextField fx:id="tf_buscar" layoutX="150.0" layoutY="65.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar paquete por envío" style="-fx-background-radius: 5;">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Button layoutX="450.0" layoutY="65.0" mnemonicParsing="false" onAction="#onClickBuscar" prefHeight="31.0" prefWidth="40.0" style="-fx-background-color: #F0371B; -fx-background-radius: 5;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,30 +28,38 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView fx:id="tbPaquetes" layoutX="20.0" layoutY="90.0" prefHeight="220.0" prefWidth="390.0">
+      <TableView fx:id="tbPaquetes" layoutX="40.0" layoutY="105.0" prefHeight="218.0" prefWidth="550.0">
          <columns>
-            <TableColumn fx:id="tcNumeroGuia" prefWidth="103.0" text="Numero Guia" />
-            <TableColumn fx:id="tcAlto" prefWidth="47.0" text="Alto" />
-            <TableColumn fx:id="tcAncho" prefWidth="75.0" text="Ancho" />
-            <TableColumn fx:id="tcPeso" prefWidth="75.0" text="Peso" />
-            <TableColumn fx:id="tcProfundidad" prefWidth="75.0" text="Profundidad" />
-            <TableColumn fx:id="tcDescripcion" prefWidth="75.0" text="Descripcion" />
+            <TableColumn fx:id="tcNumeroGuia" prefWidth="84.0" text="Numero Guia" />
+            <TableColumn fx:id="tcAlto" prefWidth="75.0" text="Alto" />
+            <TableColumn fx:id="tcAncho" prefWidth="66.0" text="Ancho" />
+            <TableColumn fx:id="tcPeso" prefWidth="81.0" text="Peso" />
+            <TableColumn fx:id="tcProfundidad" prefWidth="93.0" text="Profundidad" />
+            <TableColumn fx:id="tcDescripcion" prefWidth="150.0" text="Descripcion" />
          </columns>
       </TableView>
-      <Button layoutX="30.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: F0371B;" text="Agregar" textFill="WHITE">
+      <Button layoutX="100.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: F0371B;" text="Agregar" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="175.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickEditar" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: F0371B;" text="Editar" textFill="WHITE">
+      <Button layoutX="265.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickEditar" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: F0371B;" text="Editar" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="320.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickEliminar" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: F0371B;" text="Eliminar" textFill="WHITE">
+      <Button layoutX="440.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickEliminar" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: F0371B;" text="Eliminar" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
+      <Label layoutX="211.0" layoutY="14.0" text="P A Q U E T E S" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
    </children>
 </AnchorPane>

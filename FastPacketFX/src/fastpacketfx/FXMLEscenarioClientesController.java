@@ -37,6 +37,10 @@ public class FXMLEscenarioClientesController implements Initializable {
     private TableColumn tcTelefono;
     @FXML
     private TableColumn tcCorreo;
+    @FXML
+    private TableColumn tbEstado;
+    @FXML
+    private TableColumn tbCiudad;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -49,6 +53,8 @@ public class FXMLEscenarioClientesController implements Initializable {
         tcDireccion.setCellValueFactory(new PropertyValueFactory("direccion"));
         tcTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
         tcCorreo.setCellValueFactory(new PropertyValueFactory("correo"));
+        tbEstado.setCellValueFactory(new PropertyValueFactory("estado"));
+        tbCiudad.setCellValueFactory(new PropertyValueFactory("ciudad"));
     }
     
     private void cargarInformacionTabla(){
