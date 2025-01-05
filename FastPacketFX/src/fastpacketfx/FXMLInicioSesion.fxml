@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -8,32 +9,41 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="400.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLInicioSesionController">
+<AnchorPane id="AnchorPane" maxHeight="400.0" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLInicioSesionController">
     <children>
-      <Pane prefHeight="500.0" prefWidth="600.0">
+      <Pane prefHeight="500.0" prefWidth="700.0">
          <children>
-            <Pane layoutY="100.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #142B39;">
+            <Pane layoutY="100.0" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #142B39;">
                <children>
-                    <Button fx:id="btn_Ingresar" layoutX="97.0" layoutY="306.0" onAction="#onClickIngresar" style="-fx-background-color: #F0371B; -fx-background-radius: 15; -fx-border-radius: 10;" text="Ingresar" textFill="WHITE">
+                    <Button fx:id="btn_Ingresar" layoutX="122.0" layoutY="306.0" onAction="#onClickIngresar" style="-fx-background-color: #F0371B; -fx-background-radius: 15; -fx-border-radius: 10;" text="Ingresar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
                   </Button>
-                  <TextField fx:id="tf_numeroPersonal" layoutX="25.0" layoutY="141.0" prefHeight="31.0" prefWidth="250.0" promptText="EJ: RP001" style="-fx-background-radius: 10;" />
-                  <Label layoutX="44.0" layoutY="14.0" prefHeight="84.0" prefWidth="213.0" text="Ingresa tus datos para entrar ;)" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <TextField fx:id="tf_numeroPersonal" layoutX="50.0" layoutY="141.0" prefHeight="31.0" prefWidth="250.0" promptText="Ej: 10087" style="-fx-background-radius: 10;">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextField>
+                  <Label layoutX="69.0" layoutY="14.0" prefHeight="84.0" prefWidth="213.0" text="Ingresa tus datos para entrar ;)" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold Italic" size="26.0" />
                      </font>
+                     <effect>
+                        <DropShadow spread="0.3" />
+                     </effect>
                   </Label>
-                  <PasswordField fx:id="pf_password" layoutX="25.0" layoutY="230.0" prefHeight="31.0" prefWidth="250.0" promptText="******" style="-fx-background-radius: 10;" />
-                  <Label layoutX="61.0" layoutY="111.0" prefHeight="36.0" prefWidth="179.0" text="Número de personal" textFill="WHITE">
+                  <PasswordField fx:id="pf_password" layoutX="50.0" layoutY="230.0" prefHeight="31.0" prefWidth="250.0" promptText="******" style="-fx-background-radius: 10;">
                      <font>
-                        <Font name="System Italic" size="20.0" />
+                        <Font size="14.0" />
+                     </font></PasswordField>
+                  <Label layoutX="79.0" layoutY="111.0" prefHeight="36.0" prefWidth="192.0" text="Número de personal" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="97.0" layoutY="200.0" prefHeight="36.0" prefWidth="105.0" text="Contraseña" textFill="WHITE">
+                  <Label layoutX="117.0" layoutY="200.0" prefHeight="36.0" prefWidth="115.0" text="Contraseña" textFill="WHITE">
                      <font>
-                        <Font name="System Italic" size="20.0" />
+                        <Font name="System Bold Italic" size="21.0" />
                      </font>
                   </Label>
                   <Label fx:id="lb_numeroFaltante" layoutX="25.0" layoutY="164.0" prefHeight="36.0" prefWidth="250.0" textFill="#e11111">
@@ -47,32 +57,58 @@
                      </font>
                   </Label>
                </children>
+               <effect>
+                  <InnerShadow />
+               </effect>
             </Pane>
-            <Pane layoutX="300.0" layoutY="100.0" prefHeight="400.0" prefWidth="300.0" style="-fx-background-color: #142B39;">
+            <Pane layoutX="350.0" layoutY="100.0" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #142B39;">
                <children>
-                  <ImageView fitHeight="228.0" fitWidth="255.0" layoutX="36.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="228.0" fitWidth="255.0" layoutX="61.0" layoutY="86.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@recursos/LOGO.png" />
                      </image>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </ImageView>
-                  <Label layoutX="50.0" layoutY="68.0" prefHeight="36.0" prefWidth="200.0" text="Cuidamos cada detalle" textFill="WHITE">
+                  <Label layoutX="78.0" layoutY="86.0" prefHeight="36.0" prefWidth="200.0" text="Cuidamos cada detalle" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="20.0" />
                      </font>
+                     <effect>
+                        <DropShadow height="1.0" radius="0.0" width="0.0">
+                           <input>
+                              <Bloom threshold="1.0" />
+                           </input>
+                        </DropShadow>
+                     </effect>
                   </Label>
-                  <Label layoutX="47.0" layoutY="278.0" prefHeight="36.0" prefWidth="206.0" text="Protegemos cada envío" textFill="WHITE">
+                  <Label layoutX="75.0" layoutY="278.0" prefHeight="36.0" prefWidth="206.0" text="Protegemos cada envío" textFill="WHITE">
                      <font>
                         <Font name="System Italic" size="20.0" />
                      </font>
+                     <effect>
+                        <DropShadow height="1.0" radius="0.0" width="0.0">
+                           <input>
+                              <Bloom threshold="1.0" />
+                           </input>
+                        </DropShadow>
+                     </effect>
                   </Label>
                </children>
+               <effect>
+                  <InnerShadow />
+               </effect>
             </Pane>
-            <Pane prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #142B39;">
+            <Pane prefHeight="100.0" prefWidth="700.0" style="-fx-background-color: #142B39;">
                <children>
-                    <Label layoutX="229.0" layoutY="14.0" minHeight="16" minWidth="69" text="¡Hola!" textFill="WHITE">
+                    <Label layoutX="49.0" layoutY="14.0" minHeight="16" minWidth="69" text="¡Bienvenido a FastPacket!" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="50.0" />
                      </font>
+                     <effect>
+                        <DropShadow height="38.79" radius="22.6025" spread="0.26" width="53.62" />
+                     </effect>
                   </Label>
                </children>
             </Pane>
