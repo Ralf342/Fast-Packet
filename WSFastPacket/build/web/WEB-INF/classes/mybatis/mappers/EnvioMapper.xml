@@ -70,22 +70,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
     
-    <!--mapper de servicio de obtener info de clientes, destino y origen-->
+    <!--mapper de servicio de obtener info para el servicio web-->
     <select id="obtenerEnviosInfo" resultType="pojo.Envio">
-        SELECT 
-        CONCAT(c.nombre, ' ', c.apellidoPaterno, ' ', c.apellidoMaterno) AS cliente,
-        CONCAT(c.correo, ' ', c.telefono) AS contacto_cliente,
-        CONCAT(c.calle, ' ', c.colonia) AS direccion_de_cliente,
-        c.numeroCasa,
-        c.codigoPostal,
-        CONCAT (e.estado, ' ', e.ciudad, ' ', e.calle, ' ', e.colonia) AS direccion_origen,
-        e.codigoPostal,
-        e.numero,
-        e.destino,
-        e.costo
+        SELECT  e.ciudadOrigen, 
+                e.estadoOrigen, 
+                e.calleOrigen, 
+                e.coloniaOrigen, 
+                IFNULL(e.numeroCasaOrigen,'S/N'), 
+                e.codigoPostalOrigen,
+                c.calle,
+                IFNULL(c.numeroCasa,'S/N'),
+                c.codigoPostal,
+                c.ciudad,
+                c.estado,
+                es.estatus,
+                e.fechaModificacion
         FROM envio e
         INNER JOIN cliente c
-        ON e.idCliente = c.idCliente;
+            ON e.idClienteDestino = c.idCliente
+        INNER JOIN estatus es
+            ON es.idEstatus = e.idEstatus
+        INNER JOIN unidad u
+            on u.idUnidad = e.idUnidad
+        WHERE e.numeroDeGuia = #{numeroDeGuia}
     </select>
     
     <!--mapper de servicio de actualiar envio estatus-->

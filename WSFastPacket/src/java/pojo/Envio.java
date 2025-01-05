@@ -6,7 +6,7 @@ package pojo;
  */
 public class Envio {
     private Integer numeroDeGuia;
-    private float costo;
+    private Float costo;
     private String ciudadOrigen;
     private String estadoOrigen;
     private String calleOrigen;
@@ -23,15 +23,16 @@ public class Envio {
     private String destino;
     private String estatus;
     private String conductor;
-    private String cliente;
-    private String contacto_ciente;
-    private String direccion_de_cliente;
-    private String direccion_origen;
+    private String calle;
+    private String numeroCasa;
+    private String codigoPostal;
+    private String ciudad;
+    private String estado;
 
     public Envio() {
     }
 
-    public Envio(Integer numeroDeGuia, float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String destino, String estatus, String conductor, String cliente, String contacto_ciente, String direccion_de_cliente, String direccion_origen) {
+    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String destino, String estatus, String conductor, String calle, String numeroCasa, String codigoPostal, String ciudad, String estado) {
         this.numeroDeGuia = numeroDeGuia;
         this.costo = costo;
         this.ciudadOrigen = ciudadOrigen;
@@ -48,10 +49,11 @@ public class Envio {
         this.destino = destino;
         this.estatus = estatus;
         this.conductor = conductor;
-        this.cliente = cliente;
-        this.contacto_ciente = contacto_ciente;
-        this.direccion_de_cliente = direccion_de_cliente;
-        this.direccion_origen = direccion_origen;
+        this.calle = calle;
+        this.numeroCasa = numeroCasa;
+        this.codigoPostal = codigoPostal;
+        this.ciudad = ciudad;
+        this.estado = estado;
     }
 
     public Integer getNumeroDeGuia() {
@@ -62,11 +64,11 @@ public class Envio {
         this.numeroDeGuia = numeroDeGuia;
     }
 
-    public float getCosto() {
+    public Float getCosto() {
         return costo;
     }
 
-    public void setCosto(float costo) {
+    public void setCosto(Float costo) {
         this.costo = costo;
     }
 
@@ -182,37 +184,44 @@ public class Envio {
         this.conductor = conductor;
     }
 
-    public String getCliente() {
-        return cliente;
+    public String getCalle() {
+        return calle;
     }
 
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
+    public void setCalle(String calle) {
+        this.calle = calle;
     }
 
-    public String getContacto_ciente() {
-        return contacto_ciente;
+    public String getNumeroCasa() {
+        return numeroCasa;
     }
 
-    public void setContacto_ciente(String contacto_ciente) {
-        this.contacto_ciente = contacto_ciente;
+    public void setNumeroCasa(String numeroCasa) {
+        this.numeroCasa = numeroCasa;
     }
 
-    public String getDireccion_de_cliente() {
-        return direccion_de_cliente;
+    public String getCodigoPostal() {
+        return codigoPostal;
     }
 
-    public void setDireccion_de_cliente(String direccion_de_cliente) {
-        this.direccion_de_cliente = direccion_de_cliente;
+    public void setCodigoPostal(String codigoPostal) {
+        this.codigoPostal = codigoPostal;
     }
 
-    public String getDireccion_origen() {
-        return direccion_origen;
+    public String getCiudad() {
+        return ciudad;
     }
 
-    public void setDireccion_origen(String direccion_origen) {
-        this.direccion_origen = direccion_origen;
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
-    
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
 }

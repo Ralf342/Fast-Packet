@@ -7,10 +7,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--mapper de servicio de registrarCliente-->
     <insert id="registrarCliente" parameterType="pojo.Cliente">
         INSERT INTO cliente(nombre, apellidoPaterno, apellidoMaterno, telefono, 
-        correo, codigoPostal, calle, colonia, numeroCasa)
+        correo, codigoPostal, calle, colonia, numeroCasa,estado,ciudad)
         VALUES (
-        #{nombre}, #{apellidoPaterno}, #{apellidoMaterno}, #{telefono}, 
-        #{correo}, #{codigoPostal}, #{calle}, #{colonia}, #{numeroCasa}
+            #{nombre}, 
+            #{apellidoPaterno}, 
+            #{apellidoMaterno}, 
+            #{telefono}, 
+            #{correo}, 
+            #{codigoPostal}, 
+            #{calle}, 
+            #{colonia}, 
+            #{numeroCasa},
+            #{estado},
+            #{ciudad}
         ) 
     </insert>
     
@@ -26,7 +35,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             codigoPostal = #{codigoPostal}, 
             calle = #{calle}, 
             colonia = #{colonia}, 
-            numeroCasa = #{numeroCasa}
+            numeroCasa = #{numeroCasa},
+            estado= #{estado},
+            ciudad=#{ciudad}
             WHERE  idCliente = #{idCliente};
     </update>
     
@@ -42,7 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             correo,
             CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombre',
             telefono,
-            CONCAT (calle, ' ',  colonia, ' ', numeroCasa, ' ', codigoPostal) AS 'direccion'
+            CONCAT (calle, ' ',  colonia, ' ', numeroCasa, ' ', codigoPostal) AS 'direccion',
+            estado,
+            ciudad
         FROM cliente
         WHERE correo LIKE CONCAT( #{correo}, '%');
     </select>
@@ -53,6 +66,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombre',
             telefono,
             CONCAT (calle, ' ', IFNULL(numeroCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS 'direccion'
+            estado,
+            ciudad
         FROM cliente
     </select>
     

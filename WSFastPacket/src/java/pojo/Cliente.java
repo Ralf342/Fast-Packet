@@ -20,6 +20,8 @@ public class Cliente {
     private String calle;
     private String colonia;
     private Integer numeroCasa;
+    private String estado;
+    private String ciudad;
     
     //PARA LOS ALIAS
     private String direccion;
@@ -27,7 +29,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa, String direccion) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa, String estado, String ciudad, String direccion) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -38,6 +40,8 @@ public class Cliente {
         this.calle = calle;
         this.colonia = colonia;
         this.numeroCasa = numeroCasa;
+        this.estado = estado;
+        this.ciudad = ciudad;
         this.direccion = direccion;
     }
 
@@ -121,6 +125,22 @@ public class Cliente {
         this.numeroCasa = numeroCasa;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
     public String getDireccion() {
         return direccion;
     }
@@ -129,6 +149,5 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    
     
 }
