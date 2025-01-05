@@ -23,7 +23,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de registrarUnidad-->
     <insert id="registrarUnidad" parameterType="pojo.Unidad">
-        INSERT INTO unidad (vin, nii, anio, modelo,marca,idTipoUnidad,idColaborador)
+        INSERT INTO unidad 
+        (vin, nii, anio, modelo,marca,idTipoUnidad,idColaborador)
         VALUES (
         #{vin}, 
         #{nii},
@@ -39,9 +40,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idUnidad = #{idUnidad};
     </delete>
 
-    
     <select id="obtenerUnidadesPorNII" resultType="pojo.Unidad">
-        SELECT * FROM unidad
-        WHERE nii LIKE CONCAT(#{nii},%)
+        SELECT  
+            vin, 
+            nii, 
+            modelo,
+            anio, 
+            marca, 
+            tu.tipo AS 'tipo',
+            CONCAT(c.nombre,' ', c.apellidoPaterno) AS conductor
+        FROM unidad u
+        INNER JOIN tipoUnidad tu
+            ON u.idTipoUnidad = tu.idTipoUnidad
+        INNER JOIN colaborador c
+            ON u.idColaborador = c.idColaborador    
+        WHERE nii LIKE CONCAT(#{nii},'%')
     </select>
 </mapper>
