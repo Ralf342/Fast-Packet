@@ -30,16 +30,17 @@ CREATE TABLE IF NOT EXISTS envio (
     numeroDeGuia INT PRIMARY KEY AUTO_INCREMENT,
     costo FLOAT NOT NULL,
     destino VARCHAR(30) NOT NULL,
-    ciudad VARCHAR(30) NOT NULL,
-    estado VARCHAR(30) NOT NULL,
-    calle VARCHAR(30) NOT NULL,
-    colonia VARCHAR(30) NOT NULL,
-    numero INT,
-    codigoPostal INT NOT NULL,
-    estatus VARCHAR(30),
+    ciudadOrigen VARCHAR(30) NOT NULL,
+    estadoOrigen VARCHAR(30) NOT NULL,
+    calleOrigen VARCHAR(30) NOT NULL,
+    coloniaOrigen VARCHAR(30) NOT NULL,
+    numeroCasaOrigen INT,
+    codigoPostalOrigen INT NOT NULL,
     fechaModificacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    idCliente INT,
-    FOREIGN KEY (idCliente) REFERENCES cliente(idCliente) ON DELETE CASCADE ON UPDATE CASCADE
+    idClienteDestino INT NOT NULL,
+    idEstatus INT NOT NULL,
+    FOREIGN KEY (idClienteDestino) REFERENCES cliente(idCliente) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (idEstatus) REFERENCES estatus(idEstatus) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rol (
@@ -81,7 +82,7 @@ CREATE TABLE IF NOT EXISTS unidad (
     idColaborador INT UNIQUE INDEX,
     idTipoUnidad INT NOT NULL,
     FOREIGN KEY (idTipoUnidad) REFERENCES tipoUnidad(idTipoUnidad) ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY (idColaborador) REFERENCES colaborador(idColaborador) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (idColaborador) REFERENCES colaborador(idColaborador) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 
@@ -98,8 +99,22 @@ CREATE TABLE IF NOT EXISTS paquete (
     FOREIGN KEY (idUnidad) REFERENCES unidad(idUnidad) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS estatus (
+    idEstatus INT PRIMARY KEY AUTO_INCREMENT,
+    estatus VARCHAR(30) NOT NULL
+);
+
 
 -- insercion de registros
+-- tabla estatus
+INSERT INTO estatus (estatus)
+VALUES
+('Pendiente'),
+('En tránsito'),
+('Detenido'),
+('Entregado'),
+('Cancelado');
+
 -- tabla cliente
 INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, codigoPostal, calle, colonia, numeroCasa) 
 VALUES
@@ -111,13 +126,13 @@ VALUES
 ('Marta', 'Ramírez', 'Díaz', 953115, 'martaramirez@paqueteria.com', 64050, 'Calle Sol', 'Colonia Norte', 606);
 
 --  tabla envio
-INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, codigoPostal, estatus, fechaModificacion, idCliente) 
+INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, codigoPostal, fechaModificacion, idCliente) 
 VALUES
-(150.75, 'México', 'Ciudad de México', 'CDMX', 'Calle Falsa', 'Colonia Centro', 101, 64000, 'Pendiente', 1),
-(200.50, 'Guadalajara', 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 'Pendiente', 2),
-(120.30, 'Monterrey', 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 'Enviado', 3),
-(175.60, 'Puebla', 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 'Pendiente', 4),
-(180.00, 'Cancún', 'Quintana Roo', 'Quintana Roo', 'Av. Hidalgo', 'Colonia Este', 505, 64040, 'Enviado, 5);
+(150.75, 'México', 'Ciudad de México', 'CDMX', 'Calle Falsa', 'Colonia Centro', 101, 64000, 1),
+(200.50, 'Guadalajara', 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2),
+(120.30, 'Monterrey', 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3),
+(175.60, 'Puebla', 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4),
+(180.00, 'Cancún', 'Quintana Roo', 'Quintana Roo', 'Av. Hidalgo', 'Colonia Este', 505, 64040, 5);
 
 -- tabla rol
 INSERT INTO rol (tipo) 
