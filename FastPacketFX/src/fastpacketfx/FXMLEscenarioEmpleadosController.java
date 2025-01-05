@@ -58,10 +58,8 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
         //no se inicializa con new sino con: FXCollections
         colaboradores = FXCollections.observableArrayList();
         //obtener lo que trae el dao
-        System.out.print("Entrando a la lista");
         List<Colaborador> listaWS = ColaboradorDAO.obtenerColaboradores();
         if(listaWS != null){
-            System.out.print("Entando a la condicion de busqueda");
             colaboradores.addAll(listaWS);
             tbColaboradores.setItems(colaboradores);
         }else{
@@ -77,7 +75,6 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
     @FXML
     private void onClickAgregar(ActionEvent event) {
         agregar();
-        System.out.println("fastpacketfx.FXMLEscenarioEmpleadosController.onClickAgregar()");
     }
 
     @FXML

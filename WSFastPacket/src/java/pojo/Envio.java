@@ -20,6 +20,7 @@ public class Envio {
     private Integer idColaboradorModificacion;
     
     //por los alias
+    private String cliente;
     private String destino;
     private String estatus;
     private String conductor;
@@ -28,11 +29,12 @@ public class Envio {
     private String codigoPostal;
     private String ciudad;
     private String estado;
+    private String origen;
 
     public Envio() {
     }
 
-    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String destino, String estatus, String conductor, String calle, String numeroCasa, String codigoPostal, String ciudad, String estado) {
+    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String cliente, String destino, String estatus, String conductor, String calle, String numeroCasa, String codigoPostal, String ciudad, String estado, String origen) {
         this.numeroDeGuia = numeroDeGuia;
         this.costo = costo;
         this.ciudadOrigen = ciudadOrigen;
@@ -46,6 +48,7 @@ public class Envio {
         this.idEstatus = idEstatus;
         this.idUnidad = idUnidad;
         this.idColaboradorModificacion = idColaboradorModificacion;
+        this.cliente = cliente;
         this.destino = destino;
         this.estatus = estatus;
         this.conductor = conductor;
@@ -54,6 +57,7 @@ public class Envio {
         this.codigoPostal = codigoPostal;
         this.ciudad = ciudad;
         this.estado = estado;
+        this.origen = origen;
     }
 
     public Integer getNumeroDeGuia() {
@@ -160,6 +164,14 @@ public class Envio {
         this.idColaboradorModificacion = idColaboradorModificacion;
     }
 
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
     public String getDestino() {
         return destino;
     }
@@ -224,4 +236,13 @@ public class Envio {
         this.estado = estado;
     }
 
+    public String getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    
 }

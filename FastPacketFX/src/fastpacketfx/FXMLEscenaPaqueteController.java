@@ -29,19 +29,19 @@ public class FXMLEscenaPaqueteController implements Initializable {
     @FXML
     private TextField tf_buscar;
     @FXML
-    private TableColumn<?, ?> tcNumeroGuia;
+    private TableColumn tcNumeroGuia;
     @FXML
-    private TableColumn<?, ?> tcAlto;
+    private TableColumn tcAlto;
     @FXML
-    private TableColumn<?, ?> tcAncho;
+    private TableColumn tcAncho;
     @FXML
-    private TableColumn<?, ?> tcPeso;
+    private TableColumn tcPeso;
     @FXML
-    private TableColumn<?, ?> tcDescripcion;
+    private TableColumn tcDescripcion;
     @FXML
     private TableView<Paquete> tbPaquetes;
     @FXML
-    private TableColumn<?, ?> tcProfundidad;
+    private TableColumn tcProfundidad;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,10 +63,8 @@ public class FXMLEscenaPaqueteController implements Initializable {
         //no se inicializa con new sino con: FXCollections
         paquetes = FXCollections.observableArrayList();
         //obtener lo que trae el dao
-        System.out.print("Entrando a la lista");
         List<Paquete> listaWS = PaqueteDAO.obtenerPaquetes();
         if(listaWS != null){
-            System.out.print("Entando a la condicion de busqueda");
             paquetes.addAll(listaWS);
             tbPaquetes.setItems(paquetes);
         }else{
@@ -82,7 +80,6 @@ public class FXMLEscenaPaqueteController implements Initializable {
     @FXML
     private void onClickAgregar(ActionEvent event) {
         agregar();
-        System.out.println("fastpacketfx.FXMLEscenaPaqueteController.onClickAgregar()");
     }
 
     @FXML
@@ -95,21 +92,7 @@ public class FXMLEscenaPaqueteController implements Initializable {
         System.out.println("fastpacketfx.FXMLEscenaPaqueteController.onClickEliminar()");
     }
     
-    private void agregar(){
-        /*try {
-            Stage escenario = new Stage();
-            FXMLLoader cargador = FXMLLoader.load(getClass().getResource("FXMLFormularioPaquete.fxml"));
-            Parent vista = cargador.load();
-            FXMLFormularioPaqueteController controlador = cargador.getController();
-            
-            Scene escenaPrincipal = new Scene(vista);
-            escenario.setScene(escenaPrincipal);
-            escenario.setTitle("Agregar");
-            escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
-        }catch(IOException e){
-        }*/
-        
+    private void agregar(){       
         try{
             Stage escenario = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioPaquete.fxml"));

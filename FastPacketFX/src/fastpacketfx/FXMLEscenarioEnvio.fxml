@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -8,11 +9,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="430.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLEscenarioEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="630.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLEscenarioEnvioController">
    <children>
-      <Separator orientation="VERTICAL" prefHeight="400.0" />
-      <TextField fx:id="tf_buscar" layoutX="50.0" layoutY="30.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar por n° de guía" style="-fx-background-radius: 5;" />
-      <Button layoutX="350.0" layoutY="30.0" mnemonicParsing="false" onAction="#onClickBuscar" prefHeight="31.0" prefWidth="40.0" style="-fx-background-color: #F0371B; -fx-background-radius: 5;">
+      <Separator orientation="VERTICAL" prefHeight="400.0">
+         <effect>
+            <DropShadow />
+         </effect></Separator>
+      <TextField fx:id="tf_buscar" layoutX="150.0" layoutY="65.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar por n° de guía" style="-fx-background-radius: 5;">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <Button layoutX="450.0" layoutY="65.0" mnemonicParsing="false" onAction="#onClickBuscar" prefHeight="31.0" prefWidth="40.0" style="-fx-background-color: #F0371B; -fx-background-radius: 5;">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,29 +28,38 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView fx:id="tbEnvios" layoutX="20.0" layoutY="90.0" prefHeight="220.0" prefWidth="390.0">
+      <TableView fx:id="tbEnvios" layoutX="40.0" layoutY="105.0" prefHeight="220.0" prefWidth="550.0">
          <columns>
             <TableColumn fx:id="tcNumeroGuia" prefWidth="75.0" text="Número Guia" />
+            <TableColumn fx:id="tcCiudadOrigen" prefWidth="75.0" text="Cuidad Origen" />
+            <TableColumn fx:id="tcEstadoOrigen" prefWidth="75.0" text="Estado Origen" />
+            <TableColumn fx:id="tcOrigen" prefWidth="75.0" text="Origen" />
+            <TableColumn fx:id="tcCosto" prefWidth="75.0" text="Costo" />
             <TableColumn fx:id="tcCliente" prefWidth="75.0" text="Cliente" />
             <TableColumn fx:id="tcDestino" prefWidth="75.0" text="Destino" />
-            <TableColumn fx:id="tcCiudad" prefWidth="75.0" text="Cuidad" />
-            <TableColumn fx:id="tcEstado" prefWidth="75.0" text="Estado" />
-            <TableColumn fx:id="tcCalle" prefWidth="75.0" text="Calle" />
-            <TableColumn fx:id="tcColonia" prefWidth="75.0" text="Colonia" />
-            <TableColumn fx:id="tcNumeroCasa" prefWidth="75.0" text="Número casa" />
-            <TableColumn fx:id="tcCodigoPostal" prefWidth="75.0" text="Código postal" />
+            <TableColumn fx:id="tcCiudadDestino" prefWidth="75.0" text="Ciudad Destino" />
+            <TableColumn fx:id="tcEstadoDestino" prefWidth="75.0" text="Estado Destino" />
             <TableColumn fx:id="tcEstatus" prefWidth="75.0" text="Estatus" />
+            <TableColumn fx:id="tcConductor" prefWidth="75.0" text="Conductor" />
          </columns>
       </TableView>
-      <Button layoutX="81.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="30.0" prefWidth="95.0" style="-fx-background-color: F0371B;" text="Agregar" textFill="WHITE">
+      <Button layoutX="150.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: F0371B;" text="Agregar" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <Button layoutX="247.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickActualizar" prefHeight="31.0" prefWidth="95.0" style="-fx-background-color: F0371B;" text="Actualizar" textFill="WHITE">
+      <Button layoutX="390.0" layoutY="340.0" mnemonicParsing="false" onAction="#onClickActualizar" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: F0371B;" text="Actualizar" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Button>
+      <Label layoutX="240.0" layoutY="14.0" text="E N V I O S" textFill="WHITE">
+         <effect>
+            <DropShadow />
+         </effect>
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

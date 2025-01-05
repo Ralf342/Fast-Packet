@@ -61,10 +61,8 @@ public class FXMLEscenarioClientesController implements Initializable {
         //no se inicializa con new sino con: FXCollections
         clientes = FXCollections.observableArrayList();
         //obtener lo que trae el dao
-        System.out.print("Entrando a la lista");
         List<Cliente> listaWS = ClienteDAO.obtenerClientes();
         if(listaWS != null){
-            System.out.print("Entando a la condicion de busqueda");
             clientes.addAll(listaWS);
             tbClientes.setItems(clientes);
         }else{

@@ -34,23 +34,27 @@ public class FXMLEscenarioEnvioController implements Initializable {
     @FXML
     private TableColumn tcNumeroGuia;
     @FXML
+    private TableColumn tcCiudadOrigen;
+    @FXML
+    private TableColumn tcEstadoOrigen;
+    @FXML
+    private TableColumn tcOrigen;
+    @FXML
+    private TableColumn tcCosto;
+    @FXML
     private TableColumn tcCliente;
     @FXML
     private TableColumn tcDestino;
     @FXML
-    private TableColumn tcCiudad;
+    private TableColumn tcCiudadDestino;
     @FXML
-    private TableColumn tcEstado;
-    @FXML
-    private TableColumn tcCalle;
-    @FXML
-    private TableColumn tcColonia;
-    @FXML
-    private TableColumn tcNumeroCasa;
-    @FXML
-    private TableColumn tcCodigoPostal;
+    private TableColumn tcEstadoDestino;
     @FXML
     private TableColumn tcEstatus;
+    @FXML
+    private TableColumn tcConductor;
+    
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,25 +64,24 @@ public class FXMLEscenarioEnvioController implements Initializable {
 
     private void configurarTabla(){
         tcNumeroGuia.setCellValueFactory(new PropertyValueFactory("numeroDeGuia"));
+        tcCiudadOrigen.setCellValueFactory(new PropertyValueFactory("ciudadOrigen"));
+        tcEstadoOrigen.setCellValueFactory(new PropertyValueFactory("estadoOrigen"));
+        tcOrigen.setCellValueFactory(new PropertyValueFactory("origen"));
+        tcCosto.setCellValueFactory(new PropertyValueFactory("costo"));
         tcCliente.setCellValueFactory(new PropertyValueFactory("cliente"));
         tcDestino.setCellValueFactory(new PropertyValueFactory("destino"));
-        tcCiudad.setCellValueFactory(new PropertyValueFactory("ciudad"));
-        tcEstado.setCellValueFactory(new PropertyValueFactory("estado"));
-        tcCalle.setCellValueFactory(new PropertyValueFactory("calle"));
-        tcColonia.setCellValueFactory(new PropertyValueFactory("colonia"));
-        tcNumeroCasa.setCellValueFactory(new PropertyValueFactory("numero"));
-        tcCodigoPostal.setCellValueFactory(new PropertyValueFactory("codigoPostal"));
+        tcCiudadDestino.setCellValueFactory(new PropertyValueFactory("ciudad"));
+        tcEstadoDestino.setCellValueFactory(new PropertyValueFactory("estado"));
         tcEstatus.setCellValueFactory(new PropertyValueFactory("estatus"));
+        tcConductor.setCellValueFactory(new PropertyValueFactory("conductor"));
     }
     
     private void cargarInformacionTabla(){
         //no se inicializa con new sino con: FXCollections
         envios = FXCollections.observableArrayList();
         //obtener lo que trae el dao
-        System.out.print("Entrando a la lista");
         List<Envio> listaWS = EnvioDAO.obtenerEnvios();
         if(listaWS != null){
-            System.out.print("Entando a la condicion de busqueda");
             envios.addAll(listaWS);
             tbEnvios.setItems(envios);
         }else{

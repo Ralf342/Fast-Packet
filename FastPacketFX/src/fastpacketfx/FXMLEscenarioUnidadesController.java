@@ -66,10 +66,8 @@ public class FXMLEscenarioUnidadesController implements Initializable {
         //no se inicializa con new sino con: FXCollections
         unidades = FXCollections.observableArrayList();
         //obtener lo que trae el dao
-        System.out.print("Entrando a la lista");
         List<Unidad> listaWS = UnidadDAO.obtenerUnidades();
         if(listaWS != null){
-            System.out.print("Entando a la condicion de busqueda");
             unidades.addAll(listaWS);
             tvUnidad.setItems(unidades);
         }else{
