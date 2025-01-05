@@ -53,15 +53,13 @@ public class WSEnvio {
             Gson gson = new Gson();
             Envio envio = gson.fromJson(jsonEnvio, Envio.class);
             
-            if(envio.getCosto() > 0 &&
-                envio.getDestino() != null && !envio.getDestino().isEmpty() &&  
-                envio.getCiudad() != null && !envio.getCiudad().isEmpty() &&    
-                envio.getEstado() != null && !envio.getEstado().isEmpty() &&     
-                envio.getCalle() != null && !envio.getCalle().isEmpty() &&       
-                envio.getColonia() != null && !envio.getColonia().isEmpty() &&   
-                envio.getNumero() != null && envio.getCodigoPostal() != null && envio.getIdCliente() != null
-                && envio.getEstatus() != null && !envio.getEstatus().isEmpty()
-            ){
+            if(envio.getCosto() > 0 &&  
+                envio.getCiudadOrigen()!= null && !envio.getCiudadOrigen().isEmpty() &&    
+                envio.getEstadoOrigen()!= null && !envio.getEstadoOrigen().isEmpty() &&     
+                envio.getCalleOrigen()!= null && !envio.getCalleOrigen().isEmpty() &&       
+                envio.getColoniaOrigen()!= null && !envio.getColoniaOrigen().isEmpty() &&   
+                envio.getCodigoPostalOrigen()!= null && envio.getIdClienteDestino()!= null
+                && envio.getIdEstatus()!= null){
                 return ImpEnvio.registrarEnvio(envio);
             }else{
                return new Mensaje(true, "Datos faltantes o incorrectos");
@@ -109,7 +107,7 @@ public class WSEnvio {
         try{
             Gson gson= new Gson();
             Envio envio = gson.fromJson(jsonEnvio, Envio.class);
-            if(envio.getNumeroDeGuia() != null && envio.getEstatus() != null){
+            if(envio.getNumeroDeGuia() != null && envio.getIdEstatus()!= null){
               return ImpEnvio.actualizarEstatusEnvio(envio);
             }else{
                 return new Mensaje(true, "Numero de guia del envio es vacio o incorrecto para actualizarlo");
