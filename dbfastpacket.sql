@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS cliente (
 CREATE TABLE IF NOT EXISTS envio (
     numeroDeGuia INT PRIMARY KEY AUTO_INCREMENT,
     costo FLOAT NOT NULL,
-    destino VARCHAR(30) NOT NULL,
     ciudadOrigen VARCHAR(30) NOT NULL,
     estadoOrigen VARCHAR(30) NOT NULL,
     calleOrigen VARCHAR(30) NOT NULL,
@@ -39,8 +38,12 @@ CREATE TABLE IF NOT EXISTS envio (
     fechaModificacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     idClienteDestino INT NOT NULL,
     idEstatus INT NOT NULL,
+    idUnidad INT NOT NULL,
+    idColaboradorModificacion INT NOT NULL,
     FOREIGN KEY (idClienteDestino) REFERENCES cliente(idCliente) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (idEstatus) REFERENCES estatus(idEstatus) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (idEstatus) REFERENCES estatus(idEstatus) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (idUnidad) REFERENCES unidad(idUnidad) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (idColaboradorModificacion) REFERENCES colaborador(idColaborador) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS rol (
@@ -95,8 +98,7 @@ CREATE TABLE IF NOT EXISTS paquete (
     descripcion VARCHAR(60),
     numeroDeGuia INT,
     idUnidad INT,
-    FOREIGN KEY (numeroDeGuia) REFERENCES envio(numeroDeGuia) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (idUnidad) REFERENCES unidad(idUnidad) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (numeroDeGuia) REFERENCES envio(numeroDeGuia) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS estatus (
@@ -126,13 +128,13 @@ VALUES
 ('Marta', 'Ramírez', 'Díaz', 953115, 'martaramirez@paqueteria.com', 64050, 'Calle Sol', 'Colonia Norte', 606);
 
 --  tabla envio
-INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, codigoPostal, fechaModificacion, idCliente) 
+INSERT INTO envio (costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, numeroOrigen, codigoPostalOrigen, fechaModificacion, idClienteDestino, idEstatus, idUnidad, idColaboradorModificacion) 
 VALUES
-(150.75, 'México', 'Ciudad de México', 'CDMX', 'Calle Falsa', 'Colonia Centro', 101, 64000, 1),
-(200.50, 'Guadalajara', 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2),
-(120.30, 'Monterrey', 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3),
-(175.60, 'Puebla', 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4),
-(180.00, 'Cancún', 'Quintana Roo', 'Quintana Roo', 'Av. Hidalgo', 'Colonia Este', 505, 64040, 5);
+(150.75, 'México', 'Ciudad de México', 'CDMX', 'Calle Falsa', 'Colonia Centro', 101, 64000, 1, 2, 4, 1),
+(200.50, 'Guadalajara', 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2, 4, 2, 3),
+(120.30, 'Monterrey', 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3, 1, 1, 2),
+(175.60, 'Puebla', 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4, 3, 3, 1),
+(180.00, 'Cancún', 'Quintana Roo', 'Quintana Roo', 'Av. Hidalgo', 'Colonia Este', 505, 64040, 5, 5, 1, 3);
 
 -- tabla rol
 INSERT INTO rol (tipo) 
@@ -171,11 +173,11 @@ VALUES
 (456733, 'VIN45678', 'Furgoneta 2023', 'Mercedes-Benz', 'Transporte de carga pesada', 4, 1004);
 
 -- tabla paquete
-INSERT INTO paquete (peso, alto, ancho, profundidad, descripcion, numeroDeGuia, idUnidad) 
+INSERT INTO paquete (peso, alto, ancho, profundidad, descripcion, numeroDeGuia) 
 VALUES
-(12.4, 3.5, 8.2, 9.0, 'Paquete voluminoso', 6, 2),
-(15.0, 3.0, 8, 7.1, 'Paquete mediano', 2, 1),
-(5.2, 1.8, 2, 5.3, 'Paquete urgente', 3, 4),
-(25.8, 4.5, 7.6, 9.8, 'Paquete grande', 4, 2),
-(10.5, 2.3, 5.7, 12, 'Paquete pequeño', 1, 3),
-(3.7, 2.1, 11, 4.5, 'Paquete frágil', 5, 3);
+(12.4, 3.5, 8.2, 9.0, 'Paquete voluminoso', 6),
+(15.0, 3.0, 8, 7.1, 'Paquete mediano', 2),
+(5.2, 1.8, 2, 5.3, 'Paquete urgente', 3),
+(25.8, 4.5, 7.6, 9.8, 'Paquete grande', 4),
+(10.5, 2.3, 5.7, 12, 'Paquete pequeño', 1),
+(3.7, 2.1, 11, 4.5, 'Paquete frágil', 5);
