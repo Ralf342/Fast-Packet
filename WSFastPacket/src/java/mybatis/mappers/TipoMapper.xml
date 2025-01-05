@@ -14,5 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT idTipoUnidad,tipo
         FROM tipoUnidad
     </select>
+    
+    <select id="estatus" resultType="pojo.Estatus">
+        SELECT idEstatus,estatus
+        FROM estatus
+    </select>
 
 </mapper>

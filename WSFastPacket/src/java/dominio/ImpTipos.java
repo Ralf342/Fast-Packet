@@ -3,6 +3,7 @@ package dominio;
 import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import pojo.Estatus;
 import pojo.RolEmpleado;
 import pojo.TipoUnidad;
 
@@ -30,5 +31,18 @@ public class ImpTipos {
             }
         }
         return unidades;
+    }
+    
+    public static List<Estatus> obtenerEstatus(){
+        List<Estatus> estatus = null;
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD !=null){
+            try{
+                estatus = conexionBD.selectList("tipos.estatus");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return estatus;
     }
 }

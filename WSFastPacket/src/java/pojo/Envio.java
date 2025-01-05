@@ -21,6 +21,7 @@ public class Envio {
     
     //por los alias
     private String destino;
+    private String estatus;
     private String conductor;
     private String cliente;
     private String contacto_ciente;
@@ -30,7 +31,7 @@ public class Envio {
     public Envio() {
     }
 
-    public Envio(Integer numeroDeGuia, float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String destino, String conductor, String cliente, String contacto_ciente, String direccion_de_cliente, String direccion_origen) {
+    public Envio(Integer numeroDeGuia, float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String destino, String estatus, String conductor, String cliente, String contacto_ciente, String direccion_de_cliente, String direccion_origen) {
         this.numeroDeGuia = numeroDeGuia;
         this.costo = costo;
         this.ciudadOrigen = ciudadOrigen;
@@ -45,6 +46,7 @@ public class Envio {
         this.idUnidad = idUnidad;
         this.idColaboradorModificacion = idColaboradorModificacion;
         this.destino = destino;
+        this.estatus = estatus;
         this.conductor = conductor;
         this.cliente = cliente;
         this.contacto_ciente = contacto_ciente;
@@ -164,6 +166,14 @@ public class Envio {
         this.destino = destino;
     }
 
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
+    }
+
     public String getConductor() {
         return conductor;
     }
@@ -204,4 +214,5 @@ public class Envio {
         this.direccion_origen = direccion_origen;
     }
 
+    
 }

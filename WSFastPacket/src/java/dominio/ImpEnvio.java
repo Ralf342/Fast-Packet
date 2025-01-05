@@ -114,6 +114,11 @@ public class ImpEnvio {
         }
         return msj;
     }
-     
+    
+    public static List<Envio> buscarEnvioPorNumeroGuia(Integer numeroGuia){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosPorNumeroGuia", numeroGuia);
+        return envio;
+    }
      
 }

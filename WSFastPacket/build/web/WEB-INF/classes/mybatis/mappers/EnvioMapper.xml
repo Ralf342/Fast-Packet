@@ -13,11 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 e.calleOrigen, 
                 e.coloniaOrigen, 
                 e.numeroCasaOrigen, 
-                e.codigoPostalOrigen, 
+                e.codigoPostalOrigen,
+                e.costo,
                 c.nombre AS 'cliente',
-                CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),' C.P:', codigoPostal) AS destino, 
+                CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),' C.P:', codigoPostal) AS 'destino', 
                 es.estatus,
-                CONCAT(cl.nombre, ' ', cl.apellidoPaterno) AS conductor, 
+                CONCAT(cl.nombre, ' ', cl.apellidoPaterno) AS 'conductor', 
                 e.fechaModificacion
         FROM envio e
         INNER JOIN cliente c
@@ -93,5 +94,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             SET estatus = #{estatus}
         WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
+    
+    <select id="obtenerEnviosPorNumeroGuia" resultType="pojo.Envio">
+        SELECT e.numeroDeGuia, 
+		e.ciudadOrigen, 
+                e.estadoOrigen, 
+                e.calleOrigen, 
+                e.coloniaOrigen, 
+                e.numeroCasaOrigen, 
+                e.codigoPostalOrigen,
+                e.costo,
+                c.nombre AS 'cliente',
+                CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),' C.P:', codigoPostal) AS 'destino', 
+                es.estatus,
+                CONCAT(cl.nombre, ' ', cl.apellidoPaterno) AS 'conductor', 
+                e.fechaModificacion
+        FROM envio e
+        INNER JOIN cliente c
+            ON e.idClienteDestino = c.idCliente
+        INNER JOIN estatus es
+            ON es.idEstatus = e.idEstatus
+        INNER JOIN unidad u
+            on u.idUnidad = e.idUnidad
+        INNER JOIN colaborador cl
+            on cl.idColaborador = u.idColaborador
+        WHERE e.numeroDeGuia LIKE CONCAT(#{numeroDeGuia},'%')
+    </select>
 
 </mapper>

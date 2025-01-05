@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import pojo.Estatus;
 import pojo.RolEmpleado;
 import pojo.TipoUnidad;
 
@@ -24,6 +25,13 @@ public class WSTipo {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TipoUnidad> obtenerUnidades(){
         return ImpTipos.obtenerUnidades();
+    }
+    
+    @Path("obtener-estatus")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Estatus> obtenerEstatus(){
+        return ImpTipos.obtenerEstatus();
     }
     
 }

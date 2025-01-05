@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         anio, 
         marca, 
         tu.tipo AS 'tipo',
-        CONCAT(c.nombre,' ', c.apellidoPaterno) AS conductor
+        CONCAT(c.nombre,' ', c.apellidoPaterno) AS 'conductor'
         FROM unidad u
         INNER JOIN tipoUnidad tu
         ON u.idTipoUnidad = tu.idTipoUnidad
@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             anio, 
             marca, 
             tu.tipo AS 'tipo',
-            CONCAT(c.nombre,' ', c.apellidoPaterno) AS conductor
+            CONCAT(c.nombre,' ', c.apellidoPaterno) AS 'conductor'
         FROM unidad u
         INNER JOIN tipoUnidad tu
             ON u.idTipoUnidad = tu.idTipoUnidad
