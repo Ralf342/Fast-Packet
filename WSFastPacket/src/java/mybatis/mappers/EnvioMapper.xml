@@ -79,6 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 e.codigoPostalOrigen,
                 c.calle,
                 IFNULL(c.numeroCasa,'S/N'),
+                c.colonia,
                 c.codigoPostal,
                 c.ciudad,
                 c.estado,
