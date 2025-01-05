@@ -7,36 +7,72 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de obtener envios-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
-        SELECT e.numeroDeGuia, e.destino, e.ciudad, e.estado, e.calle, 
-        e.colonia, e.numero, e.codigoPostal, c.idCliente,c.nombre AS 'cliente', e.estatus
+        SELECT e.numeroDeGuia, 
+		e.ciudadOrigen, 
+                e.estadoOrigen, 
+                e.calleOrigen, 
+                e.coloniaOrigen, 
+                e.numeroCasaOrigen, 
+                e.codigoPostalOrigen, 
+                c.nombre AS 'cliente',
+                CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),' C.P:', codigoPostal) AS destino, 
+                es.estatus,
+                CONCAT(cl.nombre, ' ', cl.apellidoPaterno) AS conductor, 
+                e.fechaModificacion
         FROM envio e
         INNER JOIN cliente c
-        ON e.idCliente = c.idCliente
+            ON e.idClienteDestino = c.idCliente
+        INNER JOIN estatus es
+            ON es.idEstatus = e.idEstatus
+        INNER JOIN unidad u
+            on u.idUnidad = e.idUnidad
+        INNER JOIN colaborador cl
+            on cl.idColaborador = u.idColaborador
     </select>
     
     <!--mapper de servicio de registrar envios-->
     <insert id="registrarEnvio" parameterType="pojo.Envio">
-        INSERT INTO envio (costo, destino, ciudad, estado, calle, colonia, numero, 
-            codigoPostal, idCliente, estatus)
+        INSERT INTO envio
+        (numeroDeGuia, costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, 
+        numeroCasaOrigen, codigoPostalOrigen, idClienteDestino, idEstatus) 
         VALUES (
-            #{costo}, #{destino}, #{ciudad}, #{estado}, #{calle}, 
-            #{colonia}, #{numero}, #{codigoPostal}, #{idCliente}, #{estatus}
-        ) 
+            #{numeroDeGuia},
+            #{costo}, 
+            #{ciudadOrigen}, 
+            #{estadoOrigen}, 
+            #{calleOrigen}, 
+            #{coloniaOrigen}, 
+            #{numeroCasaOrigen}, 
+            #{codigoPostalOrigen}, 
+            #{idClienteDestino},
+            #{idEstatus},
+            #{idUnidad},
+            #{idColaboradorModificacion}
+            ) 
     </insert>
 
     <!--mapper de servicio de actualiar envio-->
     <update id="actualizarEnvio" parameterType="pojo.Envio">
         UPDATE envio
-            SET costo = #{costo}, destino = #{destino}, ciudad = #{ciudad}, estado = #{estado}, 
-            calle = #{calle}, colonia = #{colonia}, numero = #{numero}, codigoPostal = #{codigoPostal}, 
-            idCliente = #{idCliente}, estatus = #{estatus}
-        WHERE  numeroDeGuia = #{numeroDeGuia};
+            SET 
+                costo = #{costo}, 
+                ciudadOrigen = #{ciudadOrigen}, 
+                estadoOrigen = #{estadoOrigen}, 
+                calleOrigen = #{calleOrigen}, 
+                coloniaOrigen = #{coloniaOrigen}, 
+                numeroCasaOrigen = #{numeroCasaOrigen}, 
+                codigoPostalOrigen = #{codigoPostalOrigen}, 
+                idClienteDestino = #{idClienteDestino},
+                idEstatus = #{idEstatus},
+                idUnidad = #{idUnidad},
+                idColaboradorModificacion=#{idColaboradorModificacion}
+            WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
     
     <!--mapper de servicio de obtener info de clientes, destino y origen-->
     <select id="obtenerEnviosInfo" resultType="pojo.Envio">
         SELECT 
-        CONCAT(nombre, ' ', apellidoPaterno, ' ', apellidoMaterno) AS cliente,
+        CONCAT(c.nombre, ' ', c.apellidoPaterno, ' ', c.apellidoMaterno) AS cliente,
         CONCAT(c.correo, ' ', c.telefono) AS contacto_cliente,
         CONCAT(c.calle, ' ', c.colonia) AS direccion_de_cliente,
         c.numeroCasa,
