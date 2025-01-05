@@ -8,71 +8,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioEnvioController">
    <children>
-      <Pane layoutX="275.0" layoutY="70.0" prefHeight="335.0" prefWidth="275.0" style="-fx-background-color: #142B39; -fx-border-color: WHITE;">
-         <children>
-            <Label layoutX="105.0" layoutY="-1.0" text="DESTINO" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="tfCiudadDestino" disable="true" layoutX="110.0" layoutY="205.0" prefHeight="25.0" prefWidth="125.0">
-               <font>
-                  <Font size="14.0" />
-               </font></TextField>
-            <TextField fx:id="tfCPDestino" disable="true" layoutX="110.0" layoutY="165.0" prefHeight="25.0" prefWidth="125.0">
-               <font>
-                  <Font size="14.0" />
-               </font></TextField>
-            <TextField fx:id="tfColoniaDestino" disable="true" layoutX="110.0" layoutY="125.0" prefHeight="25.0" prefWidth="125.0">
-               <font>
-                  <Font size="14.0" />
-               </font></TextField>
-            <TextField fx:id="tfCalleDestino" disable="true" layoutX="110.0" layoutY="85.0" prefHeight="25.0" prefWidth="125.0">
-               <font>
-                  <Font size="14.0" />
-               </font></TextField>
-            <ComboBox fx:id="cbCliente" layoutX="110.0" layoutY="45.0" prefHeight="30.0" prefWidth="125.0" />
-            <ComboBox fx:id="cbEnvio" layoutX="110.0" layoutY="245.0" prefHeight="30.0" prefWidth="125.0" />
-            <Label layoutX="56.0" layoutY="45.0" text="Cliente:" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="52.0" layoutY="245.0" text="Estatus:" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="52.0" layoutY="205.0" text="Ciudad:" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="4.0" layoutY="165.0" text="Código Postal:" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="50.0" layoutY="125.0" text="Colonia:" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="70.0" layoutY="85.0" text="Calle:" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-         </children>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </Pane>
       <Pane prefHeight="70.0" prefWidth="550.0" style="-fx-background-color: #142B39;">
          <children>
             <Label layoutX="130.0" layoutY="13.0" text="N U E V O   E N V I O" textFill="WHITE">
@@ -88,9 +25,9 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Pane layoutY="70.0" prefHeight="335.0" prefWidth="275.0" style="-fx-background-color: #142B39; -fx-border-color: WHITE;">
+      <Pane layoutX="275.0" layoutY="70.0" prefHeight="335.0" prefWidth="275.0" style="-fx-background-color: #142B39; -fx-border-color: WHITE;">
          <children>
-            <Label layoutX="110.0" layoutY="-1.0" text="ORIGEN" textFill="WHITE">
+            <Label layoutX="105.0" layoutY="2.0" text="DESTINO" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -98,64 +35,61 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="tfCalleOrigen" layoutX="115.0" layoutY="43.0" prefHeight="25.0" prefWidth="150.0">
+            <TextField fx:id="tfCiudadDestino" disable="true" layoutX="115.0" layoutY="235.0" prefHeight="25.0" prefWidth="150.0">
                <font>
                   <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="tfColoniaOrigen" layoutX="115.0" layoutY="83.0" prefHeight="25.0" prefWidth="150.0">
+               </font></TextField>
+            <TextField fx:id="tfCPDestino" disable="true" layoutX="115.0" layoutY="185.0" prefHeight="25.0" prefWidth="150.0">
                <font>
                   <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="tfCPOrigen" layoutX="115.0" layoutY="123.0" prefHeight="25.0" prefWidth="150.0">
+               </font></TextField>
+            <TextField fx:id="tfColoniaDestino" disable="true" layoutX="115.0" layoutY="135.0" prefHeight="25.0" prefWidth="150.0">
                <font>
                   <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="tfCiudadOrigen" layoutX="115.0" layoutY="160.0" prefHeight="25.0" prefWidth="150.0">
+               </font></TextField>
+            <TextField fx:id="tfCalleDestino" disable="true" layoutX="115.0" layoutY="85.0" prefHeight="25.0" prefWidth="150.0">
                <font>
                   <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="tfEstadoOrigen" layoutX="115.0" layoutY="203.0" prefHeight="25.0" prefWidth="150.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="tfCosto" layoutX="110.0" layoutY="245.0" prefHeight="25.0" prefWidth="150.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="70.0" layoutY="45.0" text="Calle:" textFill="WHITE">
+               </font></TextField>
+            <ComboBox fx:id="cbCliente" layoutX="115.0" layoutY="35.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="60.0" layoutY="35.0" text="Cliente:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="50.0" layoutY="85.0" text="Colonia:" textFill="WHITE">
+            <Label layoutX="57.0" layoutY="238.0" text="Ciudad:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="4.0" layoutY="125.0" text="Código Postal:" textFill="WHITE">
+            <Label layoutX="9.0" layoutY="188.0" text="Código Postal:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="52.0" layoutY="165.0" text="Ciudad:" textFill="WHITE">
+            <Label layoutX="55.0" layoutY="138.0" text="Colonia:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="55.0" layoutY="205.0" text="Estado:" textFill="WHITE">
+            <Label layoutX="75.0" layoutY="88.0" text="Calle:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="60.0" layoutY="245.0" text="Costo:" textFill="WHITE">
+            <Label layoutX="61.0" layoutY="285.0" text="Estado:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfEstadoDestino" disable="true" layoutX="115.0" layoutY="282.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="lbClienteFaltante" layoutX="115.0" layoutY="60.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
                </font>
             </Label>
          </children>
@@ -163,22 +97,147 @@
             <InnerShadow />
          </effect>
       </Pane>
-      <Pane layoutY="405.0" prefHeight="95.0" prefWidth="550.0" style="-fx-background-color: #142B39;">
+      <Pane layoutY="70.0" prefHeight="335.0" prefWidth="275.0" style="-fx-background-color: #142B39; -fx-border-color: WHITE;">
          <children>
-            <Button layoutX="45.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+            <Label layoutX="110.0" layoutY="2.0" text="ORIGEN" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
-            </Button>
-            <Button layoutX="194.0" layoutY="16.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <TextField fx:id="tfCalleOrigen" layoutX="115.0" layoutY="35.0" prefHeight="25.0" prefWidth="150.0">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font size="14.0" />
                </font>
-            </Button>
-            <TextField fx:id="tfNumGuia" layoutX="165.0" layoutY="56.0" prefWidth="125.0" />
-            <Label layoutX="34.0" layoutY="56.0" text="N° Guia:" textFill="WHITE">
+            </TextField>
+            <TextField fx:id="tfColoniaOrigen" layoutX="115.0" layoutY="85.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tfCPOrigen" layoutX="115.0" layoutY="135.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tfCiudadOrigen" layoutX="115.0" layoutY="185.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tfEstadoOrigen" layoutX="115.0" layoutY="235.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tfCosto" layoutX="115.0" layoutY="285.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="72.0" layoutY="38.0" text="Calle:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="52.0" layoutY="88.0" text="Colonia:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="8.0" layoutY="138.0" text="Código Postal:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="54.0" layoutY="188.0" text="Ciudad:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="238.0" text="Estado:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="60.0" layoutY="288.0" text="Costo:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbCalleFaltante" layoutX="115.0" layoutY="65.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbColoniaFaltante" layoutX="115.0" layoutY="115.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbCodigoPostalFaltante" layoutX="115.0" layoutY="165.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbCiudadFaltante" layoutX="115.0" layoutY="215.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbEstadoFaltante" layoutX="115.0" layoutY="265.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbCostoFaltante" layoutX="115.0" layoutY="314.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Pane>
+      <Pane layoutY="405.0" prefHeight="125.0" prefWidth="550.0" style="-fx-background-color: #142B39;">
+         <children>
+            <Button layoutX="156.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="305.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <TextField fx:id="tfNumGuia" layoutX="110.0" layoutY="18.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="50.0" layoutY="20.0" text="N° Guia:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbEstatus" layoutX="359.0" layoutY="20.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="303.0" layoutY="20.0" text="Estatus:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbNumeroGuiaFaltante" layoutX="110.0" layoutY="48.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbEstatusFaltante" layoutX="360.0" layoutY="48.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
                </font>
             </Label>
          </children>

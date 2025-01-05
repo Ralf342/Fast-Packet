@@ -1,7 +1,7 @@
 package fastpacketfx.pojo;
 
 public class Envio {
-private Integer numeroDeGuia;
+    private Integer numeroDeGuia;
     private Float costo;
     private String ciudadOrigen;
     private String estadoOrigen;

@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 CONCAT(e.calleOrigen, ' ', IFNULL(e.numeroCasaOrigen,'S/N'),' ',e.coloniaOrigen,' C.P:',e.codigoPostalOrigen)AS 'origen',
                 e.costo,
                 c.nombre AS 'cliente',
-                CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),c.colonia,' C.P:', codigoPostal) AS 'destino', 
+                CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),' ',c.colonia,' C.P:', codigoPostal) AS 'destino', 
                 c.ciudad,
                 c.estado,
                 es.estatus,

@@ -28,4 +28,8 @@ public class Estatus {
         this.estatus = estatus;
     }
     
+    @Override
+    public String toString(){
+        return "- "+ estatus;
+    }
 }
