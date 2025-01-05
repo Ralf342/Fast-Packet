@@ -26,6 +26,7 @@ public class Envio {
     private String conductor;
     private String calle;
     private String numeroCasa;
+    private String colonia;
     private String codigoPostal;
     private String ciudad;
     private String estado;
@@ -34,7 +35,7 @@ public class Envio {
     public Envio() {
     }
 
-    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String cliente, String destino, String estatus, String conductor, String calle, String numeroCasa, String codigoPostal, String ciudad, String estado, String origen) {
+    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String cliente, String destino, String estatus, String conductor, String calle, String numeroCasa, String colonia, String codigoPostal, String ciudad, String estado, String origen) {
         this.numeroDeGuia = numeroDeGuia;
         this.costo = costo;
         this.ciudadOrigen = ciudadOrigen;
@@ -54,6 +55,7 @@ public class Envio {
         this.conductor = conductor;
         this.calle = calle;
         this.numeroCasa = numeroCasa;
+        this.colonia = colonia;
         this.codigoPostal = codigoPostal;
         this.ciudad = ciudad;
         this.estado = estado;
@@ -212,6 +214,14 @@ public class Envio {
         this.numeroCasa = numeroCasa;
     }
 
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
+    }
+
     public String getCodigoPostal() {
         return codigoPostal;
     }
@@ -244,5 +254,4 @@ public class Envio {
         this.origen = origen;
     }
 
-    
 }
