@@ -1,0 +1,419 @@
+openapi: 3.0.0
+info:
+  title: API FastPacket
+  version: 1.0.0
+  description: API para gestionar el sistema de FastPacket, incluyendo colaboradores, unidades, tipos, clientes, paquetes, login y envíos.
+servers:
+  - url: http://localhost:3000/api
+    description: Servidor local de desarrollo
+paths:
+  /login/probarConexion:
+    get:
+      summary: Probar conexión
+      description: Verifica si la conexión con la base de datos es exitosa.
+      responses:
+        '200':
+          description: Conexión exitosa
+          content:
+            application/json:
+              schema:
+                type: boolean
+
+  /login/inicioSesion:
+    post:
+      summary: Inicio de sesión
+      description: Verifica las credenciales de un colaborador para iniciar sesión.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                noPersonal:
+                  type: string
+                  description: Número de personal del colaborador
+                contrasenia:
+                  type: string
+                  description: Contraseña del colaborador
+      responses:
+        '200':
+          description: Sesión iniciada exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  mensaje:
+                    type: string
+                  nombre:
+                    type: string
+                  rol:
+                    type: string
+        '400':
+          description: Datos faltantes o incorrectos
+
+  /colaborador/registro:
+    post:
+      summary: Registrar colaborador
+      description: Agrega un nuevo colaborador.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Colaborador'
+      responses:
+        '201':
+          description: Colaborador registrado exitosamente
+        '400':
+          description: Datos faltantes o incorrectos
+
+  /colaborador/editarColaborador:
+    put:
+      summary: Editar colaborador
+      description: Actualiza los datos de un colaborador existente.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Colaborador'
+      responses:
+        '200':
+          description: Colaborador actualizado exitosamente
+        '404':
+          description: Colaborador no encontrado
+
+  /colaborador/eliminarColaborador/{idColaborador}:
+    delete:
+      summary: Eliminar colaborador
+      description: Elimina un colaborador por su ID.
+      parameters:
+        - name: idColaborador
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Colaborador eliminado exitosamente
+        '404':
+          description: Colaborador no encontrado
+
+  /colaborador/obtenerColaboradores:
+    get:
+      summary: Obtener colaboradores
+      description: Devuelve una lista de todos los colaboradores.
+      responses:
+        '200':
+          description: Lista de colaboradores obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Colaborador'
+
+  /colaborador/buscarNoPersonalColaborador/{noPersonal}:
+    get:
+      summary: Buscar colaborador por número de personal
+      description: Devuelve los datos de un colaborador por su número de personal.
+      parameters:
+        - name: noPersonal
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Colaborador encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Colaborador'
+        '404':
+          description: Colaborador no encontrado
+
+  /colaborador/obtener-conductores:
+    get:
+      summary: Obtener conductores
+      description: Devuelve una lista de colaboradores con el rol de conductores.
+      responses:
+        '200':
+          description: Lista de conductores obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Colaborador'
+
+  /colaborador/subirFoto/{idColaborador}:
+    put:
+      summary: Subir foto de colaborador
+      description: Permite subir una foto al perfil del colaborador.
+      parameters:
+        - name: idColaborador
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                foto:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Foto subida exitosamente
+        '400':
+          description: Error al subir la foto
+
+  /colaborador/obtenerFoto/{idColaborador}:
+    get:
+      summary: Obtener foto de colaborador
+      description: Devuelve la foto de un colaborador por su ID.
+      parameters:
+        - name: idColaborador
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Foto obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  idColaborador:
+                    type: integer
+                  fotoBase64:
+                    type: string
+        '404':
+          description: Colaborador no encontrado
+
+  /cliente/registrarCliente:
+    post:
+      summary: Registrar cliente
+      description: Agrega un nuevo cliente.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '201':
+          description: Cliente registrado exitosamente
+        '400':
+          description: Datos faltantes o incorrectos
+
+  /cliente/editarCliente:
+    put:
+      summary: Editar cliente
+      description: Actualiza los datos de un cliente existente.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '200':
+          description: Cliente actualizado exitosamente
+        '404':
+          description: Cliente no encontrado
+
+  /cliente/eliminarCliente/{idCliente}:
+    delete:
+      summary: Eliminar cliente
+      description: Elimina un cliente por su ID.
+      parameters:
+        - name: idCliente
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cliente eliminado exitosamente
+        '404':
+          description: Cliente no encontrado
+
+  /cliente/buscarClientePorCorreo/{correo}:
+    get:
+      summary: Buscar cliente por correo
+      description: Devuelve los datos de un cliente por su correo electrónico.
+      parameters:
+        - name: correo
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cliente encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        '404':
+          description: Cliente no encontrado
+
+  /cliente/obtenerClientes:
+    get:
+      summary: Obtener clientes
+      description: Devuelve una lista de todos los clientes.
+      responses:
+        '200':
+          description: Lista de clientes obtenida exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+
+components:
+  schemas:
+    Cliente:
+      type: object
+      properties:
+        idCliente:
+          type: integer
+          description: ID único del cliente
+        nombre:
+          type: string
+          description: Nombre del cliente
+        apellidoPaterno:
+          type: string
+        apellidoMaterno:
+          type: string
+        telefono:
+          type: string
+        correo:
+          type: string
+        codigoPostal:
+          type: string
+        calle:
+          type: string
+        colonia:
+          type: string
+        numeroCasa:
+          type: string
+
+    Colaborador:
+      type: object
+      properties:
+        idColaborador:
+          type: integer
+          description: ID único del colaborador
+        noPersonal:
+          type: string
+          description: Número de personal del colaborador
+        nombre:
+          type: string
+        apellidoPaterno:
+          type: string
+        apellidoMaterno:
+          type: string
+        correo:
+          type: string
+        contrasenia:
+          type: string
+        curp:
+          type: string
+        idRol:
+          type: integer
+        rol:
+          type: string
+
+    Envio:
+      type: object
+      properties:
+        numeroDeGuia:
+          type: integer
+        costo:
+          type: number
+        destino:
+          type: string
+        ciudad:
+          type: string
+        estado:
+          type: string
+        calle:
+          type: string
+        colonia:
+          type: string
+        numero:
+          type: string
+        codigoPostal:
+          type: string
+        idCliente:
+          type: integer
+        estatus:
+          type: string
+
+    Unidad:
+      type: object
+      properties:
+        idUnidad:
+          type: integer
+        vin:
+          type: string
+        nii:
+          type: string
+        modelo:
+          type: string
+        anio:
+          type: integer
+        marca:
+          type: string
+        idTipoUnidad:
+          type: integer
+        idColaborador:
+          type: integer
+
+    Paquete:
+      type: object
+      properties:
+        idPaquete:
+          type: integer
+        alto:
+          type: number
+        ancho:
+          type: number
+        profundidad:
+          type: number
+        descripcion:
+          type: string
+        numeroDeGuia:
+          type: integer
+
+    Login:
+      type: object
+      properties:
+        noPersonal:
+          type: string
+          description: Número de personal del colaborador
+        contrasenia:
+          type: string
+          description: Contraseña del colaborador
+
+    Tipo:
+      type: object
+      properties:
+        idTipo:
+          type: integer
+          description: ID único del tipo
+        tipo:
+          type: string
+          description: Nombre del tipo
