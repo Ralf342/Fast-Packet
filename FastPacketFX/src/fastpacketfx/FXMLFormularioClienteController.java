@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 
 public class FXMLFormularioClienteController implements Initializable {
 
+    private Cliente clienteEdicion;
+    private boolean modoEdicion;
+    
     @FXML
     private TextField tfNombre;
     @FXML
@@ -52,9 +55,14 @@ public class FXMLFormularioClienteController implements Initializable {
     private Label lbCorreoFaltante;
     @FXML
     private Label lbNumeroCasaFaltante;
-    
-    private Cliente clienteEdicion;
-    private boolean modoEdicion;
+    @FXML
+    private TextField tfCiudad;
+    @FXML
+    private TextField tfEstado;
+    @FXML
+    private Label lbCiudadFaltante;
+    @FXML
+    private Label lbEstadoFaltante;
 
     /**
      * Initializes the controller class.
@@ -83,6 +91,9 @@ public class FXMLFormularioClienteController implements Initializable {
         String correo = tfCorreo.getText();
         String numeroCasa = tfNumCasa.getText();
         Integer numCasa = (numeroCasa.isEmpty() || !esNumerico(numeroCasa)) ? null : Integer.valueOf(numeroCasa);
+        String ciudad = tfCiudad.getText();
+        String estado = tfEstado.getText();
+        
         Cliente cliente = new Cliente();
         cliente.setNombre(nombre);
         cliente.setApellidoMaterno(apellidoMaterno);
@@ -93,9 +104,13 @@ public class FXMLFormularioClienteController implements Initializable {
         cliente.setNumeroCasa(numCasa);
         cliente.setCorreo(correo);
         cliente.setTelefono(telefono);
+        cliente.setCiudad(ciudad);
+        cliente.setEstado(estado);
         
         if(sonCamposValidos(cliente)){
           guardarDatosCliente(cliente);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos Faltantes", "Existen campos vacios necesarios por llenar", Alert.AlertType.INFORMATION);
         }
         
         /*if(sonCamposValidos(cliente)){
@@ -122,15 +137,17 @@ public class FXMLFormularioClienteController implements Initializable {
     
     private boolean sonCamposValidos(Cliente cliente){
         boolean camposValidos=true;
-        lbApellidoMaternoFaltante.setText("");
-        lbApellidoPaternoFaltante.setText("");
-        lbCalleFaltante.setText("");
-        lbCodigoPostalFaltante.setText("");
-        lbColoniaFaltante.setText("");
-        lbCorreoFaltante.setText("");
-        lbNombreFaltante.setText("");
-        lbTelefonoFaltante.setText("");
-        lbNumeroCasaFaltante.setText("");
+        lbApellidoMaternoFaltante.setText(" ");
+        lbApellidoPaternoFaltante.setText(" ");
+        lbCalleFaltante.setText(" ");
+        lbCodigoPostalFaltante.setText(" ");
+        lbColoniaFaltante.setText(" ");
+        lbCorreoFaltante.setText(" ");
+        lbNombreFaltante.setText(" ");
+        lbTelefonoFaltante.setText(" ");
+        lbNumeroCasaFaltante.setText(" ");
+        lbCiudadFaltante.setText(" ");
+        lbEstadoFaltante.setText(" ");
         
         //validacion del nombre completo
         if(cliente.getNombre().isEmpty()){
@@ -172,11 +189,21 @@ public class FXMLFormularioClienteController implements Initializable {
             camposValidos=false;
             lbTelefonoFaltante.setText("*Telefono obligatorio");
         }
+        //Validacion de la ciudad
+        if(cliente.getCiudad().isEmpty()){
+            camposValidos=false;
+            lbCiudadFaltante.setText("*Ciudad obligatoria");
+        }
+        //validacion del estado
+        if(cliente.getEstado().isEmpty()){
+            camposValidos=false;
+            lbEstadoFaltante.setText("*Estado obligatorio");
+        }
         //validacion del Correo
         if(cliente.getCorreo().isEmpty()){
             camposValidos=false;
             lbCorreoFaltante.setText("*Correo necesario");
-        }else if(!cliente.getCorreo().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")){
+        }else if(!cliente.getCorreo().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")){
             camposValidos=false;
             lbCorreoFaltante.setText("*Formato incorrecto");
         }
