@@ -5,7 +5,7 @@ const URL_WS = 'http://localhost:8084/WSFastPacket/api/paquete/consultarPaqueteP
 
 //CONSUMO DE SERVICIOS WEB
 
-async function obtenerPaquete() {
+/*async function obtenerPaquete() {
     const inputData = document.getElementById('inp-numeroGuia');
     const numeroGuia = inputData.value; // Obtén el valor del input
     const listaPagos = document.getElementById('lista-pagos'); // Contenedor para mostrar información
@@ -26,6 +26,22 @@ async function obtenerPaquete() {
         console.error('Error en la petición:', error);
         listaPagos.innerHTML = '<p>Hubo un error al consultar la información.</p>';
     }
+}*/
+
+async function obtenerPaquete() {
+    const inputData = document.getElementById('inp-numeroGuia');
+    const numeroGuia = inputData.value.trim(); // Obtén el valor del input y elimina espacios en blanco
+
+    if (!numeroGuia) {
+        alert('Por favor, ingresa un número de guía válido.');
+        return;
+    }
+
+    // Guarda el número de guía en localStorage
+    localStorage.setItem('numeroGuia', numeroGuia);
+
+    // Redirige a ruta.html
+    window.location.href = 'ruta.html';
 }
 
 
@@ -45,17 +61,6 @@ function mostrarInformacion(listaPagos, pagos){
         listaPagos.appendChild(pagoElemento);
     });
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 //fun pa cambiar modos
