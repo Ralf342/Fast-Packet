@@ -6,39 +6,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="paquete">
     <!--mapper de servicio de obtener paquetes-->
     <select id="obtenerPaquetes" resultType="pojo.Paquete">
-        SELECT p.idPaquete, p.peso, p.alto, p.ancho,p.profundidad, p.descripcion, u.idUnidad, e.numeroDeGuia
+        SELECT  
+            p.peso, 
+            p.alto, 
+            p.ancho,
+            p.profundidad, 
+            p.descripcion, 
+            p.numeroDeGuia
         FROM paquete p
-        INNER JOIN envio e
-        ON p.numeroDeGuia = e.numeroDeGuia
-        INNER JOIN unidad u
-        ON u.idUnidad = p.idUnidad
     </select>
-    
     
     <!--mapper de servicio de registrar paquete-->
     <insert id="registrarPaquete" parameterType="pojo.Paquete">
-        INSERT INTO paquete(
-            alto, ancho, profundidad, descripcion, numeroDeGuia)
-        VALUES (
-        #{alto},#{ancho}, #{profundidad}, #{descripcion}, #{numeroDeGuia}
-        ) 
+        INSERT INTO paquete
+            (peso,
+            alto, 
+            ancho, 
+            profundidad, 
+            descripcion, 
+            numeroDeGuia)
+        VALUES
+            (#{peso},
+            #{alto},
+            #{ancho}, 
+            #{profundidad}, 
+            #{descripcion}, 
+            #{numeroDeGuia}) 
     </insert>
     
     <!--mapper de servicio de consultar paquete por envio-->
     <select id="consultarPaquetePorEnvio" resultType="pojo.Paquete">
-        SELECT p.idPaquete, p.peso, p.dimensiones, p.descripcion, p.idUnidad
+        SELECT  
+            p.peso, 
+            p.alto, 
+            p.ancho,
+            p.profundidad, 
+            p.descripcion, 
+            p.numeroDeGuia
         FROM paquete p
-        INNER JOIN envio e
-        ON p.numeroDeGuia = e.numeroDeGuia
-        WHERE p.numeroDeGuia = #{numeroDeGuia};
+        WHERE p.numeroDeGuia LIKE CONCAT( #{numeroDeGuia}, '%')
     </select>
     
     <!--mapper de servicio de actualizar paquete-->
     <update id="actualizarPaquete" parameterType="pojo.Paquete">
         UPDATE paquete 
-            SET peso = #{peso}, dimensiones = #{dimensiones}, 
+            SET 
+                peso = #{peso},
+                alto = #{alto},
+                ancho = #{ancho},
+                profundidad = #{profundidad}, 
                 descripcion = #{descripcion},
-                idUnidad = #{idUnidad}
         WHERE  idPaquete = #{idPaquete};
     </update>
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pojo;
 
 /**
@@ -17,12 +12,11 @@ public class Paquete {
     private float profundidad;
     private String descripcion;
     private Integer numeroDeGuia;
-    private Integer idUnidad;
 
     public Paquete() {
     }
 
-    public Paquete(Integer idPaquete, float peso, float alto, float ancho, float profundidad, String descripcion, Integer numeroDeGuia, Integer idUnidad) {
+    public Paquete(Integer idPaquete, float peso, float alto, float ancho, float profundidad, String descripcion, Integer numeroDeGuia) {
         this.idPaquete = idPaquete;
         this.peso = peso;
         this.alto = alto;
@@ -30,7 +24,6 @@ public class Paquete {
         this.profundidad = profundidad;
         this.descripcion = descripcion;
         this.numeroDeGuia = numeroDeGuia;
-        this.idUnidad = idUnidad;
     }
 
     public Integer getIdPaquete() {
@@ -89,14 +82,5 @@ public class Paquete {
         this.numeroDeGuia = numeroDeGuia;
     }
 
-    public Integer getIdUnidad() {
-        return idUnidad;
-    }
-
-    public void setIdUnidad(Integer idUnidad) {
-        this.idUnidad = idUnidad;
-    }
-
-    
     
 }

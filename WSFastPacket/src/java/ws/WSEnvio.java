@@ -22,8 +22,6 @@ import javax.ws.rs.core.UriInfo;
 import pojo.Envio;
 import pojo.Mensaje;
 
-
-
 /**
  *
  * @author Ballo
