@@ -89,6 +89,7 @@ public class FXMLFormularioEnvioController implements Initializable {
         String calleOrigen = tfCalleOrigen.getText();
         String coloniaOrigen = tfColoniaOrigen.getText();
         String codigoPostalOrigen = tfCPOrigen.getText();
+        Integer codigoPostal = (codigoPostalOrigen.isEmpty() || !esNumerico(codigoPostalOrigen)) ? 0: Integer.valueOf(codigoPostalOrigen);
         String ciudadOrigen = tfCiudadOrigen.getText();
         String estadoOrigen = tfEstadoOrigen.getText();
         String costoString = tfCosto.getText();
@@ -100,6 +101,22 @@ public class FXMLFormularioEnvioController implements Initializable {
         int idUnidad = (cbUnidad.getSelectionModel().getSelectedItem() !=null)
                ? cbUnidad.getSelectionModel().getSelectedItem().getIdUnidad(): 0;
         
+        Envio envio = new Envio();
+        envio.setCalle(calleOrigen);
+        envio.setColoniaOrigen(coloniaOrigen);
+        envio.setCodigoPostalOrigen(codigoPostal);
+        envio.setCiudadOrigen(ciudadOrigen);
+        envio.setEstadoOrigen(estadoOrigen);
+        envio.setCosto(costo);
+        envio.setIdClienteDestino(idCliente);
+        envio.setIdEstatus(idestatus);
+        envio.setIdUnidad(idUnidad);
+        
+        if(sonCamposValidos(envio)){
+            guardarDatosEnvio(envio);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos faltantes", "Existen ciertos campos que deben ser llenados, favor de verificar", Alert.AlertType.INFORMATION);
+        }
     }
 
     @FXML
@@ -140,7 +157,7 @@ public class FXMLFormularioEnvioController implements Initializable {
         return cadena.matches("\\d+(\\.\\d+)?"); // Permite enteros y decimales positivos
     }
     
-    private boolean sonCamposValidos(Cliente cliente){
+    private boolean sonCamposValidos(Envio envio){
         boolean camposValidos=true;
         lbClienteFaltante.setText(" ");
         lbCalleFaltante.setText(" ");
@@ -151,7 +168,76 @@ public class FXMLFormularioEnvioController implements Initializable {
         lbCostoFaltante.setText(" ");
         lbNumeroGuiaFaltante.setText(" ");
         lbEstatusFaltante.setText(" ");
+        lbUnidadFaltante.setText(" ");
         
+        if(envio.getCalleOrigen().isEmpty()){
+            camposValidos=false;
+            lbCalleFaltante.setText("*Campo obligatorio");
+        }else if(!tfCiudadOrigen.getText().isEmpty() && !soloLetras(tfCiudadOrigen.getText())){
+            camposValidos=false;
+            lbCalleFaltante.setText("*Formato incorrecto");
+        }
+        //
+        if(envio.getIdClienteDestino() == 0){
+            camposValidos=false;
+            lbClienteFaltante.setText("*Campo obligatorio");
+        }
+        //
+        if(envio.getCodigoPostalOrigen()==0){
+            camposValidos=false;
+            lbCodigoPostalFaltante.setText("*Campo obligatorio");
+        }else if(!tfCPOrigen.getText().isEmpty() && !esNumerico(tfCPOrigen.getText())){
+            camposValidos=false;
+            lbCodigoPostalFaltante.setText("*Formato incorrecto");
+        }
+        //
+        if(envio.getColonia().isEmpty()){
+            camposValidos=false;
+            lbColoniaFaltante.setText("*Campo obligatorio");
+        }else if(!tfColoniaOrigen.getText().isEmpty() && !soloLetras(tfColoniaOrigen.getText())){
+            camposValidos=false;
+            lbColoniaFaltante.setText("*Formato incorrecto");
+        }
+        //
+        if(envio.getCiudadOrigen().isEmpty()){
+            camposValidos=false;
+            lbCiudadFaltante.setText("*Campo obligatorio");
+        }else if(!tfCiudadOrigen.getText().isEmpty() && !soloLetras(tfCiudadOrigen.getText())){
+            camposValidos=false;
+            lbCiudadFaltante.setText("*Formato incorrecto");
+        }
+        //
+        if(envio.getEstadoOrigen().isEmpty()){
+            camposValidos=false;
+            lbEstadoFaltante.setText("*Campo obligatorio");
+        }else if(!tfEstadoOrigen.getText().isEmpty() && !soloLetras(tfEstadoOrigen.getText())){
+            camposValidos=false;
+            lbEstadoFaltante.setText("*Formato incorrecto");
+        }
+        //
+        if(envio.getCosto()==0){
+            camposValidos=false;
+            lbCostoFaltante.setText("*Campo obligatorio");
+        }else if(!tfCosto.getText().isEmpty() && !esDecimal(tfCosto.getText())){
+            camposValidos=false;
+            lbCostoFaltante.setText("*Formato incorrecto");
+        }
+        //
+        if(envio.getNumeroDeGuia()== 0){
+            camposValidos=false;
+            lbNumeroGuiaFaltante.setText("*Campo obligatorio");
+        }else if(!tfNumGuia.getText().isEmpty() && !esNumerico(tfNumGuia.getText())){
+            camposValidos=false;
+            lbNumeroGuiaFaltante.setText("*Formato incorrecto");
+        }
+        if(envio.getIdEstatus() == 0){
+            camposValidos=false;
+            lbEstatusFaltante.setText("*Campo obligatorio");
+        }
+        if(envio.getIdUnidad()== 0){
+            camposValidos=false;
+            lbUnidadFaltante.setText("*Campo obligatorio");
+        }
         return camposValidos;
     }
     

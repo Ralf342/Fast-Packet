@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="registrarEnvio" parameterType="pojo.Envio">
         INSERT INTO envio
         (numeroDeGuia, costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, 
-        numeroCasaOrigen, codigoPostalOrigen, idClienteDestino, idEstatus) 
+        numeroCasaOrigen, codigoPostalOrigen, idClienteDestino) 
         VALUES (
             #{numeroDeGuia},
             #{costo}, 
@@ -46,8 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{codigoPostalOrigen}, 
             #{idClienteDestino},
             #{idEstatus},
-            #{idUnidad},
-            #{idColaboradorModificacion}
+            #{idUnidad}
             ) 
     </insert>
 
