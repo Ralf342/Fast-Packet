@@ -46,7 +46,7 @@ public class FXMLEscenarioEmpleadosController implements Initializable, INotific
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.observador = observador;
+        this.observador = this;
         this.colaboradorEdicion = colaboradorEdicion;
         configurarTabla();
         cargarInformacionTabla();
@@ -118,6 +118,7 @@ public class FXMLEscenarioEmpleadosController implements Initializable, INotific
             boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al colaborador "+ colaborador.getNombre() + "?");
             if(seElimina){
                 eliminarColaborador(colaborador.getIdColaborador());
+                observador.notificarOperacionExitosa("Eliminar", colaborador.getNombre());
             }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccionar Colaborador","Para poder eliminar debes seleccionar al colaborador de la tabla",Alert.AlertType.WARNING);
