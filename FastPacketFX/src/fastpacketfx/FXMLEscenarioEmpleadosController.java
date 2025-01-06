@@ -101,10 +101,6 @@ public class FXMLEscenarioEmpleadosController implements Initializable, INotific
     private void onClickEditar(ActionEvent event) {
         Colaborador colaborador = tbColaboradores.getSelectionModel().getSelectedItem();
         if(colaborador !=null){
-            System.out.println("Datos del colaborador seleccionado:");
-            System.out.println("ID: " + colaborador.getIdColaborador());
-            System.out.println("Nombre: " + colaborador.getNombre());
-            System.out.println("Puesto: " + colaborador.getIdRol());
             agregar(this,colaborador);
         }else{
             Utilidades.mostrarAlertaSimple("Seleccionar Colaborador de la tabla","Para poder editar debes elecir al colaborado en la tabla", Alert.AlertType.WARNING);

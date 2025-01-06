@@ -45,10 +45,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
         idColaborador, 
         noPersonal, 
-        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS 'nombreCompleto', 
+        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS 'nombreCompleto',
+        colaborador.nombre AS nombre,
+        colaborador.apellidoPaterno,
+        colaborador.apellidoMaterno, 
         correo, 
         curp,
+        contrasenia,
+        numLicencia,
         rol.tipo AS 'rol',
+        colaborador.idrol
         FROM colaborador 
         INNER JOIN rol ON rol.idRol = colaborador.idRol
         WHERE colaborador.noPersonal LIKE CONCAT(#{noPersonal},'%')

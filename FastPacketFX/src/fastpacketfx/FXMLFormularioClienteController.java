@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Mensaje;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 public class FXMLFormularioClienteController implements Initializable {
 
+    private INotificadorOperacion observador;
     private Cliente clienteEdicion;
     private boolean modoEdicion;
     
@@ -71,6 +73,30 @@ public class FXMLFormularioClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    public void inicializarValores(INotificadorOperacion observador, Cliente clienteEdicion){
+        this.observador = observador;
+        this.clienteEdicion = clienteEdicion;
+        if(clienteEdicion !=null){
+            modoEdicion = true;
+            cargarDatosEdicion();
+        }
+    }
+    
+    private void cargarDatosEdicion(){
+        tfNombre.setText(this.clienteEdicion.getNombre());
+        tfApellidoPaterno.setText(this.clienteEdicion.getApellidoPaterno());
+        tfApellidoMaterno.setText(this.clienteEdicion.getApellidoMaterno());
+        tfCiudad.setText(this.clienteEdicion.getCiudad());
+        tfEstado.setText(this.clienteEdicion.getEstado());
+        tfCodigoPostal.setText(this.clienteEdicion.getCodigoPostal().toString());
+        tfCalle.setText(this.clienteEdicion.getCalle());
+        tfNumCasa.setText(this.clienteEdicion.getNumeroCasa() != null ? this.clienteEdicion.getNumeroCasa().toString() : "");
+        tfColonia.setText(this.clienteEdicion.getColonia());
+        tfCorreo.setText(this.clienteEdicion.getCorreo());
+        tfTelefono.setText(this.clienteEdicion.getTelefono());
+        
+    }
 
     @FXML
     private void onClickCancelar(ActionEvent event) {
@@ -108,20 +134,15 @@ public class FXMLFormularioClienteController implements Initializable {
         cliente.setEstado(estado);
         
         if(sonCamposValidos(cliente)){
-          guardarDatosCliente(cliente);
-        }else{
-            Utilidades.mostrarAlertaSimple("Datos Faltantes", "Existen campos vacios necesarios por llenar", Alert.AlertType.INFORMATION);
-        }
-        
-        /*if(sonCamposValidos(cliente)){
             if(!modoEdicion){
-                guardarDatosColaborador(colaborador);
+                guardarDatosCliente(cliente);
             }else{
-                editarDatosColaborador(colaborador);   
+                cliente.setIdCliente(clienteEdicion.getIdCliente());
+                editarDatosColaborador(cliente);
             }
         }else{
-            //DATOS FALTANTES
-        }*/
+            Utilidades.mostrarAlertaSimple("Error al guardar","Existen algunos campos vacios necesarios para guardar la información", Alert.AlertType.ERROR);
+        }
     }
     
     private void guardarDatosCliente(Cliente cliente){
@@ -129,9 +150,21 @@ public class FXMLFormularioClienteController implements Initializable {
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Cliente registrado", "La información del cliente "+cliente.getNombre() + ", "+"se registro correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
-            //observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
+            observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar",msj.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void editarDatosColaborador(Cliente cliente){
+        Mensaje msj = ClienteDAO.editarCliente(cliente);
+        System.out.println("Datos del colaborador: " + cliente);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Cliente editado","La información del cliente " +cliente.getNombre() +" se a modificado correctamente", Alert.AlertType.INFORMATION);
+            cerrarVentana();
+            observador.notificarOperacionExitosa("Editar", cliente.getNombre());
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al editaar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
     

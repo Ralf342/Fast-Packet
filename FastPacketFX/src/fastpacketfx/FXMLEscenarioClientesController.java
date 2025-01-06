@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Mensaje;
@@ -23,8 +24,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class FXMLEscenarioClientesController implements Initializable {
+public class FXMLEscenarioClientesController implements Initializable, INotificadorOperacion{
 
+    private INotificadorOperacion observador;
+    private Cliente clienteEdicion;
     private ObservableList<Cliente> clientes;
     @FXML
     private TextField tf_buscar;
@@ -45,12 +48,14 @@ public class FXMLEscenarioClientesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.observador = this;
+        this.clienteEdicion = clienteEdicion;
         configurarTabla();
         cargarInformacionTabla();
     }
 
     private void configurarTabla(){
-        tcNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+        tcNombre.setCellValueFactory(new PropertyValueFactory("nombreCompleto"));
         tcDireccion.setCellValueFactory(new PropertyValueFactory("direccion"));
         tcTelefono.setCellValueFactory(new PropertyValueFactory("telefono"));
         tcCorreo.setCellValueFactory(new PropertyValueFactory("correo"));
@@ -91,25 +96,17 @@ public class FXMLEscenarioClientesController implements Initializable {
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
-         try{
-            Stage escenario = new Stage();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioCliente.fxml"));
-            Parent vista = cargador.load();
-            //--
-            FXMLFormularioClienteController controlador = cargador.getController();
-            //--
-            Scene escenaFormulario = new Scene(vista);
-            escenario.setScene(escenaFormulario);
-            escenario.setTitle("Nuevo Cliente");
-            escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
-        }catch (Exception e){
-        }
+         agregar(this,null);
     }
 
     @FXML
     private void onClickEditar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioClientesController.onClickEditar()");
+        Cliente cliente = tbClientes.getSelectionModel().getSelectedItem();
+        if(cliente !=null){
+            agregar(this,cliente);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar Colaborador de la tabla","Para poder editar debes elecir al colaborado en la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -119,9 +116,28 @@ public class FXMLEscenarioClientesController implements Initializable {
             boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al cliente "+ cliente.getNombre() + "?");
             if(seElimina){
                 eliminarColaborador(cliente.getIdCliente());
+                observador.notificarOperacionExitosa("Eliminar", cliente.getNombre());
             }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccionar Cliente","Para poder eliminar debes seleccionar al cliente de la tabla",Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void agregar(INotificadorOperacion observador, Cliente cliente){
+        try{
+            Stage escenario = new Stage();
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioCliente.fxml"));
+            Parent vista = cargador.load();
+            //--
+            FXMLFormularioClienteController controlador = cargador.getController();
+            controlador.inicializarValores(observador, cliente);
+            //--
+            Scene escenaFormulario = new Scene(vista);
+            escenario.setScene(escenaFormulario);
+            escenario.setTitle("Nuevo Cliente");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+        }catch (Exception e){
         }
     }
     
@@ -135,5 +151,12 @@ public class FXMLEscenarioClientesController implements Initializable {
             Utilidades.mostrarAlertaSimple("Error al borrar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
-    
+
+    @Override
+    public void notificarOperacionExitosa(String tipo, String nombre) {
+        System.out.println("Operacion: " + tipo);
+        System.err.println("Nombre: "+nombre);
+        cargarInformacionTabla();
+    }
+
 }
