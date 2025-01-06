@@ -14,12 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         anio, 
         marca, 
         tu.tipo AS 'tipo',
-        CONCAT(c.nombre,' ', c.apellidoPaterno) AS 'conductor'
+        IFNULL(CONCAT(c.nombre,' ', c.apellidoPaterno),'Sin asignar')AS 'conductor'
         FROM unidad u
         INNER JOIN tipoUnidad tu
         ON u.idTipoUnidad = tu.idTipoUnidad
-        INNER JOIN colaborador c
-        ON u.idColaborador = c.idColaborador    
+        LEFT JOIN colaborador c
+        ON u.idColaborador = c.idColaborador   
     </select>
     
     <!--mapper de servicio de registrarUnidad-->
@@ -43,19 +43,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="obtenerUnidadesPorNII" resultType="pojo.Unidad">
         SELECT
-            idUnidad,
-            vin, 
-            nii, 
-            modelo,
-            anio, 
-            marca, 
-            tu.tipo AS 'tipo',
-            CONCAT(c.nombre,' ', c.apellidoPaterno) AS 'conductor'
+        idUnidad,  
+        vin, 
+        nii, 
+        modelo,
+        anio, 
+        marca, 
+        tu.tipo AS 'tipo',
+        IFNULL(CONCAT(c.nombre,' ', c.apellidoPaterno),'Sin asignar')AS 'conductor'
         FROM unidad u
         INNER JOIN tipoUnidad tu
-            ON u.idTipoUnidad = tu.idTipoUnidad
-        INNER JOIN colaborador c
-            ON u.idColaborador = c.idColaborador    
+        ON u.idTipoUnidad = tu.idTipoUnidad
+        LEFT JOIN colaborador c
+        ON u.idColaborador = c.idColaborador   
         WHERE nii LIKE CONCAT(#{nii},'%')
     </select>
     

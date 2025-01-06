@@ -118,14 +118,14 @@ public class FXMLEscenarioClientesController implements Initializable {
         if(cliente !=null){
             boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al cliente "+ cliente.getNombre() + "?");
             if(seElimina){
-                eliminarPaquete(cliente.getIdCliente());
+                eliminarColaborador(cliente.getIdCliente());
             }
         }else{
-            Utilidades.mostrarAlertaSimple("Seleccionar Paquete","Para poder eliminar debes seleccionar al paquete de la tabla",Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Seleccionar Cliente","Para poder eliminar debes seleccionar al cliente de la tabla",Alert.AlertType.WARNING);
         }
     }
     
-    private void eliminarPaquete(Integer idCliente){
+    private void eliminarColaborador(Integer idCliente){
         System.out.println("ID: "+idCliente);
         Mensaje msj = ClienteDAO.borrarCliente(idCliente);
         if(!msj.isError()){
