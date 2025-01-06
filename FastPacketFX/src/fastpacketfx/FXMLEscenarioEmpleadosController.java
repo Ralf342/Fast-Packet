@@ -69,7 +69,21 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
 
     @FXML
     private void onClickBuscar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioEmpleadosController.onClickBuscar()");
+        String numPersonalString=tf_Buscar.getText();
+        Integer numPersonal = (numPersonalString.isEmpty()) ?  0 : Integer.valueOf(numPersonalString);
+        colaboradores = FXCollections.observableArrayList();
+        //obtener lo que trae el dao
+        if(numPersonal==0 || numPersonal<0){
+            cargarInformacionTabla();
+        }else{
+            List<Colaborador> listaWS = ColaboradorDAO.buscarColaborador(numPersonal);
+        if(listaWS != null){
+            colaboradores.addAll(listaWS);
+            tbColaboradores.setItems(colaboradores);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos no disponible", "Lo sentimos, por el momento no se puede cargar la info de colaboradores", Alert.AlertType.ERROR);
+        }
+        }
     }
 
     @FXML

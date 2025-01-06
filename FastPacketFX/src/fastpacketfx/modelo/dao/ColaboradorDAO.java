@@ -120,5 +120,20 @@ public class ColaboradorDAO {
         return null;
     }
 
+     public static List<Colaborador> buscarColaborador(Integer numPersonal){
+        List<Colaborador> paquetes = null;
+        String url = Constantes.URL_wS+"colaborador/buscarNoPersonalColaborador/"+numPersonal;
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        try{
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<Colaborador>>(){}.getType();
+                paquetes = gson.fromJson(respuesta.getContenido(), tipoLista);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return paquetes;
+    }
 
 }
