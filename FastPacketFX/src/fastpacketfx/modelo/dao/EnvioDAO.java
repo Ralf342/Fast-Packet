@@ -6,6 +6,7 @@ import fastpacketfx.modelo.ConexionWS;
 import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Envio;
 import fastpacketfx.pojo.Estatus;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.RespuestaHTTP;
 import fastpacketfx.utilidades.Constantes;
 import java.lang.reflect.Type;
@@ -59,6 +60,26 @@ public class EnvioDAO {
               e.printStackTrace();
           }
           return estatus;
+    }
+    
+    public static Mensaje registrarEnvio(Envio envio){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"envio/registrarEnvio";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(envio);
+            RespuestaHTTP respuesta = ConexionWS.peticionPOSTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setMensaje(respuesta.getContenido());
+            }
+        }catch (Exception e){
+           msj.setError(true);
+           msj.setMensaje(e.getMessage());
+        }
+        return msj;
     }
     
 }

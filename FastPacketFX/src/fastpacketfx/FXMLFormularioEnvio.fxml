@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioEnvioController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioEnvioController">
    <children>
       <Pane prefHeight="70.0" prefWidth="550.0" style="-fx-background-color: #142B39;">
          <children>
@@ -202,40 +202,51 @@
             <InnerShadow />
          </effect>
       </Pane>
-      <Pane layoutY="405.0" prefHeight="125.0" prefWidth="550.0" style="-fx-background-color: #142B39;">
+      <Pane layoutY="405.0" prefHeight="145.0" prefWidth="550.0" style="-fx-background-color: #142B39;">
          <children>
-            <Button layoutX="156.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+            <Button layoutX="156.0" layoutY="92.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="305.0" layoutY="75.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+            <Button layoutX="305.0" layoutY="92.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <TextField fx:id="tfNumGuia" layoutX="110.0" layoutY="18.0" prefWidth="150.0">
+            <TextField fx:id="tfNumGuia" layoutX="20.0" layoutY="30.0" prefWidth="150.0">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="50.0" layoutY="20.0" text="N° Guia:" textFill="WHITE">
+            <Label layoutX="66.0" layoutY="8.0" text="N° Guia:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cbEstatus" layoutX="359.0" layoutY="20.0" prefHeight="25.0" prefWidth="150.0" />
-            <Label layoutX="303.0" layoutY="20.0" text="Estatus:" textFill="WHITE">
+            <ComboBox fx:id="cbEstatus" layoutX="200.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="248.0" layoutY="8.0" text="Estatus:" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lbNumeroGuiaFaltante" layoutX="110.0" layoutY="48.0" textFill="RED">
+            <Label fx:id="lbNumeroGuiaFaltante" layoutX="20.0" layoutY="62.0" textFill="RED">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <Label fx:id="lbEstatusFaltante" layoutX="360.0" layoutY="48.0" textFill="RED">
+            <Label fx:id="lbEstatusFaltante" layoutX="200.0" layoutY="55.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label layoutX="428.0" layoutY="8.0" text="Unidad:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbUnidad" layoutX="380.0" layoutY="30.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label fx:id="lbUnidadFaltante" layoutX="380.0" layoutY="55.0" textFill="RED">
                <font>
                   <Font size="10.0" />
                </font>
