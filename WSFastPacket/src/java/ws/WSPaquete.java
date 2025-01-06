@@ -62,7 +62,6 @@ public class WSPaquete {
         }
     }
     
-    
     //WS consultar paquete por envio
     @Path("consultarPaquetePorEnvio/{numeroDeGuia}")
     @GET

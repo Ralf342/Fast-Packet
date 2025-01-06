@@ -74,7 +74,21 @@ public class FXMLEscenaPaqueteController implements Initializable {
 
     @FXML
     private void onClickBuscar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenaPaqueteController.onClickBuscar()");
+        String numGuiaString=tf_buscar.getText();
+        Integer numGuia = (numGuiaString.isEmpty()) ?  0 : Integer.valueOf(numGuiaString);
+        paquetes = FXCollections.observableArrayList();
+        //obtener lo que trae el dao
+        if(numGuia==0 || numGuia<0){
+            cargarInformacionTabla();
+        }else{
+            List<Paquete> listaWS = PaqueteDAO.buscarPaquete(numGuia);
+        if(listaWS != null){
+            paquetes.addAll(listaWS);
+            tbPaquetes.setItems(paquetes);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos no disponible", "Lo sentimos, por el momento no se puede cargar la info de colaboradores", Alert.AlertType.ERROR);
+        }
+        }
     }
 
     @FXML
