@@ -77,7 +77,20 @@ public class FXMLEscenarioUnidadesController implements Initializable {
 
     @FXML
     private void onClickBuscar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioUnidadesController.onClickBuscar()");
+        String nii=tf_buscar.getText();
+        unidades = FXCollections.observableArrayList();
+        //obtener lo que trae el dao
+        if(nii.isEmpty()){
+            cargarInformacionTabla();
+        }else{
+            List<Unidad> listaWS = UnidadDAO.buscarUnidad(nii);
+        if(listaWS != null){
+            unidades.addAll(listaWS);
+            tvUnidad.setItems(unidades);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos no disponible", "Lo sentimos, por el momento no se puede cargar la info de colaboradores", Alert.AlertType.ERROR);
+        }
+        }
     }
 
     @FXML
