@@ -8,8 +8,11 @@ import fastpacketfx.pojo.Colaborador;
 import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.RespuestaHTTP;
 import fastpacketfx.pojo.RolEmpleado;
+import fastpacketfx.utilidades.Constantes;
 import fastpacketfx.utilidades.Utilidades;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +41,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
 
 public class FXMLFormularioEmpleadoController implements Initializable {
 
@@ -60,8 +65,6 @@ public class FXMLFormularioEmpleadoController implements Initializable {
     @FXML
     private PasswordField pfPassword;
     @FXML
-    private Button btnFoto;
-    @FXML
     private ImageView ivLicencia;
     @FXML
     private Label lbRolFaltante;
@@ -83,6 +86,8 @@ public class FXMLFormularioEmpleadoController implements Initializable {
     private Label lbContraseniaFaltante;
     private Integer idColaborador;
     private String fotoBase64;
+    @FXML
+    private Label lbFotoFaltante;
 
     /**
      * Initializes the controller class.
@@ -106,7 +111,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         String correo = tfCorreo.getText();
         int idRol =(cbRol.getSelectionModel().getSelectedItem() !=null)
                 ? cbRol.getSelectionModel().getSelectedItem().getIdRol(): 0;
-
+        
         Colaborador colaborador = new Colaborador();
         colaborador.setNombre(nombre);
         colaborador.setApellidoMaterno(apellidoMaterno);
@@ -117,6 +122,27 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         colaborador.setContrasenia(password);
         colaborador.setCorreo(correo);
         colaborador.setIdRol(idRol);
+        colaborador.setFoto(correo);
+        
+        if (ivLicencia.getImage() != null) {
+        try {
+            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(ivLicencia.getImage(), null);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", outputStream);
+            byte[] imageBytes = outputStream.toByteArray();
+            String fotoBase64 = Base64.getEncoder().encodeToString(imageBytes);
+
+            
+            colaborador.setFoto(fotoBase64);
+
+        } catch (IOException e) {
+            Utilidades.mostrarAlertaSimple("Error al procesar la imagen", "No se pudo procesar la imagen seleccionada.", Alert.AlertType.ERROR);
+            return; 
+        }
+    } else {
+        Utilidades.mostrarAlertaSimple("Falta la foto", "Debe cargar una foto para registrar el colaborador.", Alert.AlertType.WARNING);
+        return;
+    }
         
         if(sonCamposValidos(colaborador)){
             try{
@@ -147,19 +173,20 @@ public class FXMLFormularioEmpleadoController implements Initializable {
                 String fotoBase64 = Base64.getEncoder().encodeToString(imageBytes);
 
                 Image imagen = new Image(new ByteArrayInputStream(imageBytes));
-                ivLicencia.setImage(imagen);  
+                ivLicencia.setImage(imagen);
+                
                 //envia la foto al server
-                String url = "http://localhost:8084/WSFastPacket/api/colaborador/subirFoto/" + idColaborador;
-                RespuestaHTTP respuesta = ConexionWS.peticionPUTImg(url, imageBytes);  // Usar los bytes para la petición PUT
+                //String url = Constantes.URL_wS+ "colaborador/subirFoto/" + idColaborador;
+                /*RespuestaHTTP respuesta = ConexionWS.peticionPUTImg(url, imageBytes);  // Usar los bytes para la petición PUT
 
                 if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
                 System.out.println("Foto guardada exitosamente");
             } else {
                 System.out.println("Error al guardar la foto: " + respuesta.getContenido());
-            } 
+            }*/
                 
             // Aqui se llama a l método para subir la foto al servidor
-            ColaboradorDAO.subirFotoColaborador(idColaborador, fotoBase64); 
+            //ColaboradorDAO.subirFotoColaborador(idColaborador, fotoBase64); 
             
             }catch(IOException e){
                 e.printStackTrace();
@@ -228,6 +255,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         lbNumLicencia.setText(" ");
         lbNumPersonalFaltante.setText(" ");
         lbRolFaltante.setText(" ");
+        lbFotoFaltante.setText(" ");
         
         //Validacion de nombre completo
         if(colaborador.getNombre().isEmpty()){
@@ -279,13 +307,19 @@ public class FXMLFormularioEmpleadoController implements Initializable {
                 camposValidos = false;
                 lbNumLicencia.setText("*Para conductores se requiere el número de licencia de manejo");
             } else {
-                lbNumLicencia.setText(""); // Limpia el error si el número de licencia es válido
+                lbNumLicencia.setText(""); 
             }
         } else {
-            lbNumLicencia.setText(""); // Limpia el error si el rol no es de conductor
+            lbNumLicencia.setText("");
+        }
+        //validacion para foto
+        if(colaborador.getFoto().isEmpty()){
+            camposValidos = false;
+            lbFotoFaltante.setText("*El campo foto no puede ir vacio");
         }
         return camposValidos;
     }
+    
 
     //para a foto
     private void cargarFoto(Integer idColaborador) {
@@ -319,7 +353,5 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         }
         
     }
-    
 
-    
 }

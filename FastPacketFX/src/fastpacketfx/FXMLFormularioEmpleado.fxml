@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -10,95 +11,158 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLFormularioEmpleadoController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="450.0" style="-fx-background-color: #142B39;">
+      <Pane prefHeight="70.0" prefWidth="500.0" style="-fx-background-color: #142B39;">
          <children>
-            <Text fill="WHITE" layoutX="71.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C O L A B O R A D O R">
+            <Text fill="WHITE" layoutX="96.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C O L A B O R A D O R">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Text>
-            <Button layoutX="103.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
+         </children>
+      </Pane>
+      <Pane layoutY="70.0" prefHeight="380.0" prefWidth="500.0" style="-fx-background-color: #142B39;">
+         <children>
+            <Button layoutX="143.0" layoutY="333.0" mnemonicParsing="false" onAction="#onClickAgregar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Agregar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button layoutX="250.0" layoutY="355.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
+            <Button layoutX="290.0" layoutY="333.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="20.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Cancelar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <ComboBox fx:id="cbRol" layoutX="273.0" layoutY="99.0" prefWidth="150.0" />
-            <Text fill="WHITE" layoutX="336.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rol">
+            <ComboBox fx:id="cbRol" layoutX="293.0" layoutY="55.0" prefWidth="150.0" />
+            <Text fill="WHITE" layoutX="356.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rol">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="51.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
+            <Text fill="WHITE" layoutX="59.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="162.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido Paterno">
+            <Text fill="WHITE" layoutX="188.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido Paterno">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="303.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido Materno">
+            <Text fill="WHITE" layoutX="344.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido Materno">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <TextField fx:id="tfNombre" layoutX="16.0" layoutY="172.0" prefHeight="25.0" prefWidth="132.0" />
-            <TextField fx:id="tfApellidoPaterno" layoutX="159.0" layoutY="172.0" prefHeight="25.0" prefWidth="132.0" />
-            <TextField fx:id="tfApellidoMaterno" layoutX="303.0" layoutY="172.0" prefHeight="25.0" prefWidth="132.0" />
-            <TextField fx:id="tfCURP" layoutX="16.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
-            <TextField fx:id="tfCorreo" layoutX="159.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
-            <TextField fx:id="tfLicencia" layoutX="303.0" layoutY="238.0" prefHeight="25.0" prefWidth="132.0" />
-            <TextField fx:id="tfNoPersonal" layoutX="75.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
-            <PasswordField fx:id="pfPassword" layoutX="243.0" layoutY="306.0" prefHeight="25.0" prefWidth="132.0" />
-            <Text fill="WHITE" layoutX="61.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURP">
+            <TextField fx:id="tfNombre" layoutX="15.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="tfApellidoPaterno" layoutX="175.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="tfApellidoMaterno" layoutX="335.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="tfCURP" layoutX="15.0" layoutY="210.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="tfCorreo" layoutX="176.0" layoutY="209.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="tfLicencia" layoutX="335.0" layoutY="210.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <TextField fx:id="tfNoPersonal" layoutX="90.0" layoutY="273.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></TextField>
+            <PasswordField fx:id="pfPassword" layoutX="270.0" layoutY="273.0" prefHeight="25.0" prefWidth="150.0">
+               <font>
+                  <Font size="14.0" />
+               </font></PasswordField>
+            <Text fill="WHITE" layoutX="75.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CURP">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="200.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo">
+            <Text fill="WHITE" layoutX="223.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="97.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Personal">
+            <Text fill="WHITE" layoutX="121.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Personal">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="267.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
+            <Text fill="WHITE" layoutX="302.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="328.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Licencia">
+            <Text fill="WHITE" layoutX="369.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N° Licencia">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <Button fx:id="btnFoto" contentDisplay="TOP" layoutX="83.0" layoutY="57.0" mnemonicParsing="false" onAction="#onClickSubir" prefHeight="84.0" prefWidth="90.0" style="-fx-background-color: #F0371B;" text="Subir foto" textFill="WHITE">
+            <Button contentDisplay="TOP" layoutX="14.0" layoutY="5.0" mnemonicParsing="false" onAction="#onClickSubir" prefHeight="99.0" prefWidth="163.0" style="-fx-background-color: #F0371B;" text="Subir foto" textFill="WHITE">
                <graphic>
-                  <ImageView fx:id="ivLicencia" fitHeight="40.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="ivLicencia" fitHeight="60.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Label fx:id="lbRolFaltante" layoutX="275.0" layoutY="124.0" prefHeight="17.0" prefWidth="142.0" textFill="RED" />
-            <Label fx:id="lbNombreFaltante" layoutX="22.0" layoutY="198.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
-            <Label fx:id="lbApellidoPaternoFaltante" layoutX="165.0" layoutY="198.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
-            <Label fx:id="lbApellidoMaternoFaltante" layoutX="309.0" layoutY="198.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
-            <Label fx:id="lbNumLicencia" layoutX="308.0" layoutY="263.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
-            <Label fx:id="lbCorreo" layoutX="164.0" layoutY="263.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
-            <Label fx:id="lbCURPFaltante" layoutX="21.0" layoutY="263.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
-            <Label fx:id="lbNumPersonalFaltante" layoutX="81.0" layoutY="331.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
-            <Label fx:id="lbContraseniaFaltante" layoutX="248.0" layoutY="331.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbRolFaltante" layoutX="298.0" layoutY="80.0" prefHeight="17.0" prefWidth="142.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbNombreFaltante" layoutX="15.0" layoutY="170.0" prefHeight="17.0" prefWidth="120.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbApellidoPaternoFaltante" layoutX="175.0" layoutY="170.0" prefHeight="17.0" prefWidth="120.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbApellidoMaternoFaltante" layoutX="335.0" layoutY="170.0" prefHeight="17.0" prefWidth="120.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbNumLicencia" layoutX="335.0" layoutY="240.0" prefWidth="120.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbCorreo" layoutX="175.0" layoutY="240.0" prefHeight="17.0" prefWidth="120.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbCURPFaltante" layoutX="15.0" layoutY="239.0" prefHeight="17.0" prefWidth="120.0" textFill="RED" />
+            <Label fx:id="lbNumPersonalFaltante" layoutX="90.0" layoutY="303.0" prefHeight="17.0" prefWidth="120.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbContraseniaFaltante" layoutX="270.0" layoutY="303.0" prefHeight="17.0" prefWidth="120.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbFotoFaltante" layoutX="178.0" layoutY="8.0" prefHeight="91.0" prefWidth="90.0" textFill="RED" wrapText="true">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Pane>
    </children>
 </AnchorPane>

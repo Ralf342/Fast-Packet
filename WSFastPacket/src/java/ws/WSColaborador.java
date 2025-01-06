@@ -16,7 +16,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import pojo.Colaborador;
-import pojo.LoginColaborador;
 import pojo.Mensaje;
 
 @Path("colaborador")
@@ -88,7 +87,6 @@ public class WSColaborador {
         return ImpColaborador.buscarNoPersonalColaborador(noPersonal);
     }
     
-
     @Path("subirFoto/{idColaborador}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)

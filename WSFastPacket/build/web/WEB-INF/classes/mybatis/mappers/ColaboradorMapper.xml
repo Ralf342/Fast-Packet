@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="colaborador">
     <!--mapper de servicio de insertarColaboradores-->
     <insert id="registro" parameterType="pojo.Colaborador">
-        INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol,numLicencia)
+        INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol,foto,numLicencia)
          VALUES (
         #{correo}, 
         #{contrasenia}, 
@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{apellidoMaterno}, 
         #{noPersonal}, 
         #{idRol},
+        #{foto},
         #{numLicencia}) 
     </insert>
     
@@ -62,15 +63,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN rol ON rol.idRol = colaborador.idRol
     </select>
     
-    
     <update id="guardarFoto" parameterType="map">
         UPDATE colaborador
-        SET foto = #{foto}
-        WHERE idColaborador = #{idColaborador}
+            SET foto = #{foto}
+        WHERE noPersonal = #{noPersonal}
     </update>
     
     <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
-        SELECT idColaborador, nombre, apellidoPaterno, apellidoMaterno, TO_BASE64(foto) AS foto
+        SELECT idColaborador, nombre, apellidoPaterno, apellidoMaterno, TO_BASE64(foto) AS 'foto'
         FROM colaborador
         WHERE idColaborador = #{idColaborador};
     </select>
