@@ -97,4 +97,21 @@ public class UnidadDAO {
         }
         return unidades;
     }
+    
+    public static Mensaje borrarUnidad(Integer idUnidad){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"unidad/eliminarUnidad/" + idUnidad;
+        Gson gson = new Gson();
+        try{
+            RespuestaHTTP respuesta = ConexionWS.peticionDELETE(url,null);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                System.out.print("Estoy borrando los datos");
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }
+        }catch(Exception e){
+            msj.setError(true);
+            msj.setMensaje(e.getMessage());
+        }       
+        return msj;
+        }
 }
