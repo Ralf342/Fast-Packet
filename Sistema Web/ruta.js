@@ -105,6 +105,10 @@ function cambiarModo() {
     }
 }
 
+async function regresarBuscador() {
+    window.location.href = 'index.html';
+} 
+
 const botonModo = document.getElementById('btn-cambiar-modo');
 if (botonModo) {
     botonModo.addEventListener('click', cambiarModo);
