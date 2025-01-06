@@ -16,19 +16,16 @@
             android:name=".ActualizarEstatusActivity"
             android:exported="false" />
         <activity
-            android:name=".ActEstatusActivity"
-            android:exported="false" />
-        <activity
             android:name=".GestionDatosActivity"
             android:exported="false" />
         <activity
             android:name=".DetalleEnvioActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

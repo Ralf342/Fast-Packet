@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.fastpacketvmovil"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.fastpacketvmovil"
@@ -45,6 +45,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation ("com.google.code.gson:gson:2.11.0")
+    implementation ("com.koushikdutta.ion:ion:2.+")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -99,7 +99,6 @@
         android:layout_height="59dp"
         android:backgroundTint="#45a049"
         android:layout_marginBottom="26dp"
-        android:cornerRadius="25dp"
         android:elevation="4dp"
         android:text="Iniciar Sesión"
         android:textColor="#FFFFFF"

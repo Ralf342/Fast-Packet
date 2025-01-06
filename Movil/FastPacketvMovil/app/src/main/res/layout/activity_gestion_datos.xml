@@ -102,7 +102,6 @@
         android:layout_gravity="left"
         android:layout_marginTop="30dp"
         android:backgroundTint="#45a049"
-        android:cornerRadius="25dp"
         android:elevation="4dp"
         android:padding="1dp"
         android:text="Volver"
