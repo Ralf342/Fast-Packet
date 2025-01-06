@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
 import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Envio;
+import fastpacketfx.pojo.Estatus;
 import fastpacketfx.pojo.RespuestaHTTP;
 import fastpacketfx.utilidades.Constantes;
 import java.lang.reflect.Type;
@@ -42,6 +43,22 @@ public class EnvioDAO {
               e.printStackTrace();
           }
           return numero;
+    }
+    
+    public static List <Estatus> obtenerEstatus(){
+          List<Estatus>estatus =null;
+          String url = Constantes.URL_wS+"tipo/obtener-estatus";
+          RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+          try{
+              if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                  Gson gson = new Gson();
+                  Type tipoLista = new TypeToken<List<Estatus>>(){}.getType();
+                  estatus =gson.fromJson(respuesta.getContenido(), tipoLista);
+              }
+          }catch (Exception e){
+              e.printStackTrace();
+          }
+          return estatus;
     }
     
 }
