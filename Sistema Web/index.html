@@ -18,9 +18,10 @@
         <div class="search-container">
             <p>Con el número de guía de tu paquete que se generó al realizar el pedido !Usalo para saber cómo va tu envío!</p>
             <form onsubmit="return false;">
-                <input id="inp-numeroGuia" class="inp-numeroGuia" placeholder="Número de guía">
-                <button id="btnRastreo" type="button" onclick="obtenerPaquete()">Rastrear paquete</button>
-            </form>
+                <input id="inp-numeroGuia" class="inp-numeroGuia" placeholder="Número de guía" oninput="validarInput()" maxlength="20">
+                <span id="error-msg" style="color: red; font-size: 0.9em;"></span>
+            <button id="btnRastreo" type="button" onclick="obtenerPaquete()" disabled>Rastrear paquete</button>
+        </form>
         </div>
         
         <div id="lista-pagos" class="lista-pagos">

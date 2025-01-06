@@ -28,14 +28,42 @@ const URL_WS = 'http://localhost:8084/WSFastPacket/api/paquete/consultarPaqueteP
     }
 }*/
 
+// Validar el campo de entrada
+function validarInput() {
+    const inputData = document.getElementById('inp-numeroGuia');
+    const numeroGuia = inputData.value.trim(); // Eliminar espacios en blanco
+    const errorMsg = document.getElementById('error-msg');
+    const botonRastreo = document.getElementById('btnRastreo');
+
+    // Verificar si contiene solo números
+    if (!/^\d+$/.test(numeroGuia)) {
+        errorMsg.textContent = 'Solo se permiten números.';
+        botonRastreo.disabled = true; // Deshabilitar el botón
+        return false;
+    }
+
+    // Verificar si el campo está vacío
+    if (!numeroGuia) {
+        errorMsg.textContent = 'Por favor, ingresa un número de guía.';
+        botonRastreo.disabled = true; // Deshabilitar el botón
+        return false;
+    }
+
+    // Limpiar mensaje de error si todo está bien
+    errorMsg.textContent = '';
+    botonRastreo.disabled = false; // Habilitar el botón
+    return true;
+}
+
 async function obtenerPaquete() {
     const inputData = document.getElementById('inp-numeroGuia');
     const numeroGuia = inputData.value.trim(); // Obtén el valor del input y elimina espacios en blanco
 
-    if (!numeroGuia) {
-        alert('Por favor, ingresa un número de guía válido.');
+    if (!validarInput()) {
         return;
     }
+
+    
 
     // Guarda el número de guía en localStorage
     localStorage.setItem('numeroGuia', numeroGuia);
