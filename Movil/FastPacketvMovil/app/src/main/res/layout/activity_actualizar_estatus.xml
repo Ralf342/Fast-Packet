@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/actualizarEstatus"
+    android:orientation="vertical"
+    android:padding="30dp"
+    android:background="#D3D3D3"
+    android:gravity="center_horizontal"
+    tools:context=".ActualizarEstatusActivity">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:gravity="center"
+        android:text="Actualizar status"
+        android:textColor="#45a049"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/rgEstado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/edittext_shadow"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/rbEnTransito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En tránsito"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rbDetenido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detenido"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rbEntregado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entregado"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rbPendienteEntrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendiente de entrega"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rbCancelado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelado"
+            android:textColor="#000000" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/etMotivo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edittext_shadow"
+        android:hint="Motivo"
+        android:inputType="textMultiLine"
+        android:minHeight="100dp"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#45a049"
+        android:elevation="4dp"
+        android:text="Guardar"
+        android:textSize="16dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:onClick="guardar"/>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:backgroundTint="#45a049"
+        android:elevation="4dp"
+        android:text="Volver"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:onClick="volver"
+        android:layout_gravity="left"/>
+</LinearLayout>

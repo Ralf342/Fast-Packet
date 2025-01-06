@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/login"
+    android:orientation="vertical"
+    android:padding="35dp"
+    android:background="#D3D3D3"
+    android:gravity="center_horizontal"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inicio de sesión"
+        android:textColor="#45a049"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:fontFamily="sans-serif"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"/>
+
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="190dp"
+        android:layout_height="190dp"
+        android:layout_marginBottom="40dp"
+        android:contentDescription="Logo"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/logo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="28dp">
+
+        <ImageView
+            android:id="@+id/ivUsuario"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="Icono Usuario"
+            app:srcCompat="@drawable/usuario" />
+
+        <EditText
+            android:id="@+id/etNumeroPersonal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_border"
+            android:hint="Número de personal"
+            android:inputType="number"
+            android:padding="12dp"
+            android:textColor="#1b2a47"
+            android:textColorHint="#7d7f7d" />
+    </LinearLayout>
+
+    <!-- Contraseña con ícono -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="56dp">
+
+        <ImageView
+            android:id="@+id/ivCandado"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="Icono Candado"
+            app:srcCompat="@drawable/candado" />
+
+        <EditText
+            android:id="@+id/etContrasenia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_border"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColor="#1b2a47"
+            android:textColorHint="#7d7f7d" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnIniciarSesion"
+        android:layout_width="214dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#45a049"
+        android:layout_marginBottom="26dp"
+        android:elevation="4dp"
+        android:text="Iniciar Sesión"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:onClick="iniciarSesion"/>
+
+</LinearLayout>
