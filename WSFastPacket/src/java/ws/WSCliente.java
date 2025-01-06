@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -25,6 +20,7 @@ import javax.ws.rs.core.UriInfo;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Cliente;
+import pojo.ListaClientes;
 import pojo.Mensaje;
 
 /**
@@ -103,6 +99,13 @@ public class WSCliente {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cliente> obtenerColaboradores(){
         return ImpCliente.obtenerCliente();
+    }
+    
+    @Path("obtenerListaClientes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ListaClientes> obtenerListaClientes(){
+        return ImpCliente.obtenerListaClientes();
     }
     
 }

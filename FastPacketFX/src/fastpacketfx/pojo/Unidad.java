@@ -120,5 +120,8 @@ public class Unidad {
         this.tipo = tipo;
     }
 
+    public String toString(){
+        return "- " + marca + " " +modelo;
+    }
    
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Cliente;
+import pojo.ListaClientes;
 import pojo.Mensaje;
 
 /**
@@ -104,6 +105,12 @@ public class ImpCliente {
     public static List<Cliente> obtenerCliente(){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
                 List<Cliente> cliente = conexionBD.selectList("cliente.buscarCliente");
+        return cliente;
+    }
+    
+    public static List<ListaClientes> obtenerListaClientes(){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+                List<ListaClientes> cliente = conexionBD.selectList("cliente.buscarListaClientes");
         return cliente;
     }
     

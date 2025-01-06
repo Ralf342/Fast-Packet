@@ -71,4 +71,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM cliente
     </select>
     
+    <select id="buscarListaClientes" resultType="pojo.ListaClientes">
+        SELECT
+            idCliente, nombre, apellidoPaterno, calle, colonia, codigoPostal, ciudad, estado
+            FROM cliente
+    </select>
+    
 </mapper>

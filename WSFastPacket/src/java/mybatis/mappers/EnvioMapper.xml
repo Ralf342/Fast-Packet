@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT e.numeroDeGuia, 
 		e.ciudadOrigen, 
                 e.estadoOrigen,
-                CONCAT(e.calleOrigen, ' ', IFNULL(e.numeroCasaOrigen,'S/N'),' ',e.coloniaOrigen,' C.P:',e.codigoPostalOrigen)AS 'origen',
+                CONCAT(e.calleOrigen, ' ',e.coloniaOrigen,' C.P:',e.codigoPostalOrigen)AS 'origen',
                 e.costo,
                 c.nombre AS 'cliente',
                 CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),' ',c.colonia,' C.P:', codigoPostal) AS 'destino', 
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="registrarEnvio" parameterType="pojo.Envio">
         INSERT INTO envio
         (numeroDeGuia, costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, 
-        numeroCasaOrigen, codigoPostalOrigen, idClienteDestino) 
+        codigoPostalOrigen, idClienteDestino, idEstatus, idUnidad) 
         VALUES (
             #{numeroDeGuia},
             #{costo}, 
@@ -42,7 +42,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{estadoOrigen}, 
             #{calleOrigen}, 
             #{coloniaOrigen}, 
-            #{numeroCasaOrigen}, 
             #{codigoPostalOrigen}, 
             #{idClienteDestino},
             #{idEstatus},
@@ -59,7 +58,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 estadoOrigen = #{estadoOrigen}, 
                 calleOrigen = #{calleOrigen}, 
                 coloniaOrigen = #{coloniaOrigen}, 
-                numeroCasaOrigen = #{numeroCasaOrigen}, 
                 codigoPostalOrigen = #{codigoPostalOrigen}, 
                 idClienteDestino = #{idClienteDestino},
                 idEstatus = #{idEstatus},
@@ -105,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT e.numeroDeGuia, 
 		e.ciudadOrigen, 
                 e.estadoOrigen,
-                CONCAT(e.calleOrigen, ' ', IFNULL(e.numeroCasaOrigen,'S/N'),' ',e.coloniaOrigen,' C.P:',e.codigoPostalOrigen)AS 'origen',
+                CONCAT(e.calleOrigen, ' ',e.coloniaOrigen,' C.P:',e.codigoPostalOrigen)AS 'origen',
                 e.costo,
                 c.nombre AS 'cliente',
                 CONCAT(c.calle,' ', IFNULL(c.numeroCasa,'S/N'),c.colonia,' C.P:', codigoPostal) AS 'destino', 

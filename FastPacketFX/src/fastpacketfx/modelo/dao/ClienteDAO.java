@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
 import fastpacketfx.pojo.Cliente;
+import fastpacketfx.pojo.ListaClientes;
 import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.RespuestaHTTP;
 import fastpacketfx.utilidades.Constantes;
@@ -46,6 +47,22 @@ public class ClienteDAO {
            msj.setMensaje(e.getMessage());
         }
         return msj;
+    }
+    
+    public static List<ListaClientes> obtenerListaClientes(){
+        List<ListaClientes> clientes = null;
+        String url = Constantes.URL_wS+"cliente/obtenerListaClientes";
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        try{
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<ListaClientes>>(){}.getType();
+                clientes = gson.fromJson(respuesta.getContenido(), tipoLista);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return clientes;
     }
     
 }

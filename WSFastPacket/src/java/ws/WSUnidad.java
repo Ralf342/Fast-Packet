@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -82,6 +77,13 @@ public class WSUnidad {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Unidad> buscarUnidadNII(@PathParam("nii") String nii){
         return ImpUnidad.buscarUnidadPorNII(nii);
+    }
+    
+    @Path("listaUnidad")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> listaUnidad(){
+        return ImpUnidad.listarUnidades();
     }
 }
 

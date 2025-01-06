@@ -56,4 +56,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ON u.idColaborador = c.idColaborador    
         WHERE nii LIKE CONCAT(#{nii},'%')
     </select>
+    
+    <select id="obtenerListaUnidades" resultType="pojo.Unidad">
+        SELECT
+            idUnidad, modelo, marca
+        FROM unidad
+    </select>
 </mapper>

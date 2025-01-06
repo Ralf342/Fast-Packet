@@ -65,4 +65,20 @@ public class UnidadDAO {
         }
         return msj;
     }
+    
+    public static List <Unidad> listarUnidades(){
+          List<Unidad>tipos =null;
+          String url = Constantes.URL_wS+"unidad/listaUnidad";
+          RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+          try{
+              if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                  Gson gson = new Gson();
+                  Type tipoLista = new TypeToken<List<Unidad>>(){}.getType();
+                  tipos =gson.fromJson(respuesta.getContenido(), tipoLista);
+              }
+          }catch (Exception e){
+              e.printStackTrace();
+          }
+          return tipos;
+    }
 }
