@@ -79,24 +79,7 @@ public class ImpColaborador {
                 
                 //validaciones para campos que no se editan
                 // Obtener datos actuales del colaborador desde la base de datos
-                Colaborador colaboradorExistente = conexionBD.selectOne("colaborador.obtenerColaboradorPorId", colaborador.getIdColaborador());
-                if (colaboradorExistente == null) {
-                    msj.setError(true);
-                    msj.setMensaje("El colaborador no existe en el sistema.");
-                    return msj;
-                }
-                // Validar que no se modifiquen noPersonal e idRol
-                if (!colaboradorExistente.getNoPersonal().equals(colaborador.getNoPersonal())) {
-                    msj.setError(true);
-                    msj.setMensaje("No está permitido modificar el número de personal.");
-                    return msj;
-                }
-
-                if (!colaboradorExistente.getIdRol().equals(colaborador.getIdRol())) {
-                    msj.setError(true);
-                    msj.setMensaje("No está permitido modificar el rol del colaborador.");
-                    return msj;
-                }
+               
                 
                 //las otras validaciones  ala bd
                 int resultado = conexionBD.update("colaborador.editar", colaborador);
