@@ -1,6 +1,7 @@
 package fastpacketfx;
 
 import fastpacketfx.modelo.dao.PaqueteDAO;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.Paquete;
 import fastpacketfx.utilidades.Utilidades;
 import java.io.IOException;
@@ -103,7 +104,26 @@ public class FXMLEscenaPaqueteController implements Initializable {
 
     @FXML
     private void onClickEliminar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenaPaqueteController.onClickEliminar()");
+        Paquete paquete = tbPaquetes.getSelectionModel().getSelectedItem();
+        if(paquete !=null){
+            boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al paquete?");
+            if(seElimina){
+                eliminarPaquete(paquete.getIdPaquete());
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar Paquete","Para poder eliminar debes seleccionar al paquete de la tabla",Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void eliminarPaquete(Integer idPaquete){
+        System.out.println("ID: "+idPaquete);
+        Mensaje msj = PaqueteDAO.borrarPaquete(idPaquete);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Colaborador eliminado","La información del colaborador se a borrado correctamente", Alert.AlertType.INFORMATION);
+            //observador.notificarOperacionExitosa("Eliminar", null);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al editaar", msj.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
     
     private void agregar(){       

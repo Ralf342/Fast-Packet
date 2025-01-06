@@ -2,6 +2,7 @@ package fastpacketfx;
 
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
 import java.util.List;
@@ -98,7 +99,26 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
 
     @FXML
     private void onClickEliminar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioEmpleadosController.onClickEliminar()");
+        Colaborador colaborador = tbColaboradores.getSelectionModel().getSelectedItem();
+        if(colaborador !=null){
+            boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al colaborador "+ colaborador.getNombre() + "?");
+            if(seElimina){
+                eliminarColaborador(colaborador.getIdColaborador());
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar Colaborador","Para poder eliminar debes seleccionar al colaborador de la tabla",Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void eliminarColaborador(Integer idColaborador){
+        System.out.println("ID: "+idColaborador);
+        Mensaje msj = ColaboradorDAO.borrarColaborador(idColaborador);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Colaborador eliminado","La información del Colaborador se a borrado correctamente", Alert.AlertType.INFORMATION);
+            //observador.notificarOperacionExitosa("Eliminar", null);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al borrar", msj.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
     
     private void agregar(){      

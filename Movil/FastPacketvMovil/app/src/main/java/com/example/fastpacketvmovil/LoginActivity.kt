@@ -2,14 +2,11 @@ package com.example.fastpacketvmovil
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.fastpacketvmovil.databinding.ActivityLoginBinding
-import com.example.fastpacketvmovil.poko.LoginConductor
+import com.example.fastpacketvmovil.poko.LoginColaborador
 import com.example.fastpacketvmovil.util.Constantes
 import com.google.gson.Gson
 import com.koushikdutta.ion.Ion
@@ -39,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         Ion.getDefault(this@LoginActivity).conscryptMiddleware.enable(false)
 
         Ion.with(this@LoginActivity)
-            .load("POST","${Constantes().URL_WS}/Login/colaborador")
+            .load("POST","${Constantes().URL_WS}/Login/conductor")
             .setHeader("Content-Type","application/x-www-form-urlencoded")
             .setBodyParameter("noPersonal",noPersonal.toString())
             .setBodyParameter("contrasenia",contrasenia)
@@ -47,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
             .setCallback { e, result ->
                 if (e == null){
                     serializarRespuesta(result)
+                    Log.d("LoginActivity", "Respuesta del result: $result")
                 }else
                     Toast.makeText(this@LoginActivity,"error",Toast.LENGTH_LONG).show()
             }
@@ -55,11 +53,13 @@ class LoginActivity : AppCompatActivity() {
 
     fun serializarRespuesta(json:String){
         val gson = Gson()
-        val resultadoLoginConductor = gson.fromJson(json,LoginConductor::class.java)
-        Toast.makeText(this@LoginActivity,resultadoLoginConductor.mensaje, Toast.LENGTH_LONG).show()
-        if (!resultadoLoginConductor.error){
+        val resultadoLoginColaborador = gson.fromJson(json, LoginColaborador::class.java)
+        Log.d("LoginActivity", "Respuesta del resultadoLOgin: $resultadoLoginColaborador")
+        Toast.makeText(this@LoginActivity,resultadoLoginColaborador.mensaje, Toast.LENGTH_LONG).show()
+        if (!resultadoLoginColaborador.error){
             Toast.makeText(this@LoginActivity,"serializacion",Toast.LENGTH_LONG).show()
-            val jsonConductor = gson.toJson(resultadoLoginConductor.conductor)
+            val jsonConductor = gson.toJson(resultadoLoginColaborador.colaborador)
+            Log.d("LoginActivity", "Respuesta del servidor: $jsonConductor")
             irPantallaPrincipal(jsonConductor)
         }
     }
@@ -81,9 +81,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun irPantallaPrincipal(jsonConductor : String){
+    fun irPantallaPrincipal(jsonColaborador : String){
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        intent.putExtra("conductor",jsonConductor)
+        intent.putExtra("conductor",jsonColaborador)
+        Log.d("LoginActivity", "Respuesta del intent: $jsonColaborador")
         startActivity(intent)
         finish()
     }

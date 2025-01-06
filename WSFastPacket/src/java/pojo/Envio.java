@@ -31,11 +31,15 @@ public class Envio {
     private String ciudad;
     private String estado;
     private String origen;
+    private String direccionOrigen;
+    private String direccion_destino;
+    private String paquetes_contenidos;
+    private String contacto_cliente;
 
     public Envio() {
     }
 
-    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String cliente, String destino, String estatus, String conductor, String calle, String numeroCasa, String colonia, String codigoPostal, String ciudad, String estado, String origen) {
+    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String cliente, String destino, String estatus, String conductor, String calle, String numeroCasa, String colonia, String codigoPostal, String ciudad, String estado, String origen, String direccionOrigen, String direccion_destino, String paquetes_contenidos, String contacto_cliente) {
         this.numeroDeGuia = numeroDeGuia;
         this.costo = costo;
         this.ciudadOrigen = ciudadOrigen;
@@ -60,7 +64,13 @@ public class Envio {
         this.ciudad = ciudad;
         this.estado = estado;
         this.origen = origen;
+        this.direccionOrigen = direccionOrigen;
+        this.direccion_destino = direccion_destino;
+        this.paquetes_contenidos = paquetes_contenidos;
+        this.contacto_cliente = contacto_cliente;
     }
+
+    
 
     public Integer getNumeroDeGuia() {
         return numeroDeGuia;
@@ -252,6 +262,38 @@ public class Envio {
 
     public void setOrigen(String origen) {
         this.origen = origen;
+    }
+
+    public String getDireccionOrigen() {
+        return direccionOrigen;
+    }
+
+    public void setDireccionOrigen(String direccionOrigen) {
+        this.direccionOrigen = direccionOrigen;
+    }
+
+    public String getDireccion_destino() {
+        return direccion_destino;
+    }
+
+    public void setDireccion_destino(String direccion_destino) {
+        this.direccion_destino = direccion_destino;
+    }
+
+    public String getPaquetes_contenidos() {
+        return paquetes_contenidos;
+    }
+
+    public void setPaquetes_contenidos(String paquetes_contenidos) {
+        this.paquetes_contenidos = paquetes_contenidos;
+    }
+
+    public String getContacto_cliente() {
+        return contacto_cliente;
+    }
+
+    public void setContacto_cliente(String contacto_cliente) {
+        this.contacto_cliente = contacto_cliente;
     }
 
 }

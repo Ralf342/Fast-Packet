@@ -12,7 +12,7 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="630.0" style="-fx-background-color: #142B39;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fastpacketfx.FXMLEscenarioUnidadesController">
    <children>
       <Separator orientation="VERTICAL" prefHeight="400.0" />
-      <TextField fx:id="tf_buscar" layoutX="150.0" layoutY="65.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar por VIN" style="-fx-background-radius: 5;">
+      <TextField fx:id="tf_buscar" layoutX="150.0" layoutY="65.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar por NII" style="-fx-background-radius: 5;">
          <font>
             <Font size="14.0" />
          </font></TextField>

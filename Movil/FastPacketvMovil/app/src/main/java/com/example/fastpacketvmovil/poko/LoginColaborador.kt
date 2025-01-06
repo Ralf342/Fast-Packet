@@ -1,7 +1,7 @@
 package com.example.fastpacketvmovil.poko
 
-data class LoginConductor(
+data class LoginColaborador(
     val error : Boolean,
     val mensaje : String,
-    val conductor: Conductor
+    val colaborador: Colaborador
 )

@@ -129,4 +129,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM envio
     </select>
 
+    <!--mapper para ver la lista de envios asignados app movil -->
+    <select id="listaEnviosAsignados" resultType="pojo.Envio">
+        SELECT 
+        e.numeroDeGuia, 
+        CONCAT(c.calle, ' ' , c.colonia, ' ', c.numeroDeCasa, ' ', c.codigoPostal) AS direccion_destino, 
+        es.estatus, 
+        e.costo
+        FROM cliente c
+        INNER JOIN envio e
+        ON c.idCliente = e.idClienteDestino
+        INNER JOIN estatus es
+        ON es.idEstatus = e.idEstatus;
+    </select>
+    
+    <!--mapper para ver detalles de envios app movil -->
+    <select id="detalleEnvios" resultType="pojo.Envio">
+        SELECT 
+        CONCAT(e.calleOrigen, ' ', e.coloniaOrigen, ' ', e.numeroCasaOrigen, ' ', e.codigoPostalOrigen) AS direccionOrigen,
+        CONCAT(c.calle, ' ' , c.colonia, ' ' , c.numeroDeCasa, ' ', c.codigoPostal) AS direccion_destino, 
+        CONCAT('NoGuia ', p.numeroDeGuia, ' ', p.descripcion) AS paquetes_contenidos,
+        es.estatus,
+        CONCAT('Nombre: ', c.nombre, ' ', c.apellidoMaterno, ' ', c.apellidoPaterno, ' Telefono ', c.telefono, ' Correo ' , c.correo) AS contacto_cliente,
+        e.costo
+        FROM cliente c
+        INNER JOIN envio e
+        ON c.idCliente = e.idClienteDestino
+        INNER JOIN paquete p
+        ON e.numeroDeGuia = p.numeroDeGuia
+        INNER JOIN estatus es
+        ON e.idEstatus = es.idEstatus;
+    </select>
+    
 </mapper>

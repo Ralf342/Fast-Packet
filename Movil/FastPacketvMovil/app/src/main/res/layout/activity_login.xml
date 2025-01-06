@@ -103,7 +103,6 @@
         android:text="Iniciar Sesión"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:onClick="iniciarSesion"/>
+        android:textSize="20sp" />
 
 </LinearLayout>

@@ -3,6 +3,7 @@ package fastpacketfx;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.modelo.dao.UnidadDAO;
 import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.Unidad;
 import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
@@ -77,7 +78,20 @@ public class FXMLEscenarioUnidadesController implements Initializable {
 
     @FXML
     private void onClickBuscar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioUnidadesController.onClickBuscar()");
+        String nii=tf_buscar.getText();
+        unidades = FXCollections.observableArrayList();
+        //obtener lo que trae el dao
+        if(nii.isEmpty()){
+            cargarInformacionTabla();
+        }else{
+            List<Unidad> listaWS = UnidadDAO.buscarUnidad(nii);
+        if(listaWS != null){
+            unidades.addAll(listaWS);
+            tvUnidad.setItems(unidades);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos no disponible", "Lo sentimos, por el momento no se puede cargar la info de colaboradores", Alert.AlertType.ERROR);
+        }
+        }
     }
 
     @FXML
@@ -105,7 +119,26 @@ public class FXMLEscenarioUnidadesController implements Initializable {
 
     @FXML
     private void onClickEliminar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioUnidadesController.onClickEliminar()");
+         Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
+        if(unidad !=null){
+            boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar la unidad?");
+            if(seElimina){
+                eliminarColaborador(unidad.getIdUnidad());
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar Colaborador","Para poder eliminar debes seleccionar al colaborador de la tabla",Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void eliminarColaborador(Integer idUnidad){
+        System.out.println("ID: "+idUnidad);
+        Mensaje msj = UnidadDAO.borrarUnidad(idUnidad);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Unidad eliminada","La información de la unidad se a borrado correctamente", Alert.AlertType.INFORMATION);
+            //observador.notificarOperacionExitosa("Eliminar", null);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al borrar", msj.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
     
 }

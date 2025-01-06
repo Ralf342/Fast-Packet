@@ -66,4 +66,21 @@ public class PaqueteDAO {
         }
         return paquetes;
     }
-}
+    
+    public static Mensaje borrarPaquete(Integer idPaquete){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"paquete/eliminarPaquete/" + idPaquete;
+        Gson gson = new Gson();
+        try{
+            RespuestaHTTP respuesta = ConexionWS.peticionDELETE(url,null);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                System.out.print("Estoy borrando los datos");
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }
+        }catch(Exception e){
+            msj.setError(true);
+            msj.setMensaje(e.getMessage());
+        }       
+        return msj;
+        }
+   }

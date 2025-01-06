@@ -2,6 +2,7 @@ package fastpacketfx;
 
 import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.pojo.Cliente;
+import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
 import java.util.List;
@@ -113,7 +114,26 @@ public class FXMLEscenarioClientesController implements Initializable {
 
     @FXML
     private void onClickBorrar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioClientesController.onClickBorrar()");
+         Cliente cliente = tbClientes.getSelectionModel().getSelectedItem();
+        if(cliente !=null){
+            boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al cliente "+ cliente.getNombre() + "?");
+            if(seElimina){
+                eliminarColaborador(cliente.getIdCliente());
+            }
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar Cliente","Para poder eliminar debes seleccionar al cliente de la tabla",Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void eliminarColaborador(Integer idCliente){
+        System.out.println("ID: "+idCliente);
+        Mensaje msj = ClienteDAO.borrarCliente(idCliente);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Cliente eliminado","La información del Cliente se a borrado correctamente", Alert.AlertType.INFORMATION);
+            //observador.notificarOperacionExitosa("Eliminar", null);
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al borrar", msj.getMensaje(), Alert.AlertType.ERROR);
+        }
     }
     
 }

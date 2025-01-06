@@ -66,11 +66,11 @@ public class WSEnvio {
     }
     
     //WS
-    @Path("obtenerEnviosInfo/{numeroDeGuia}")
+    @Path("obtenerEnviosPorNumeroGuia/{numeroDeGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON) 
     public List<Envio> obtenerEnviosInfo(@PathParam("numeroDeGuia") Integer numeroDeGuia){
-        return ImpEnvio.obtenerEnviosInfo(numeroDeGuia);   
+        return ImpEnvio.buscarEnvioPorNumeroGuia(numeroDeGuia);   
     }
     
     //WS actualizar envio
@@ -126,5 +126,20 @@ public class WSEnvio {
     public List<Envio> obtenerConductores(){
         return ImpEnvio.obtenerNumeroDeGuia();
     
+    }
+    
+    //WS para movil
+    @Path("listaEnviosAsignados")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerListaEnviosAsignados() {
+        return ImpEnvio.obtenerListaEnviosAsignados();
+    }
+    
+    @Path("detalleEnvios")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerDetalleEnvios() {
+        return ImpEnvio.obtenerDetalleEnvios();
     }
 }

@@ -83,7 +83,7 @@ public class EnvioDAO {
     
     public static List<Envio> buscarEnvio(Integer numeroGuia){
         List<Envio> paquetes = null;
-        String url = Constantes.URL_wS+"envio/obtenerEnviosInfo/"+numeroGuia;
+        String url = Constantes.URL_wS+"envio/obtenerEnviosPorNumeroGuia/"+numeroGuia;
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
         try{
             if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
