@@ -90,4 +90,26 @@ public static Mensaje eliminarUnidad(String idUnidad) {
         List<Unidad> unidad = conexionBD.selectList("unidad.obtenerListaUnidades");
         return unidad;
     }
+    
+    public static Mensaje editarUnidad(Unidad unidad){
+        Mensaje msj= new Mensaje();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD!=null){
+            try {
+                int filasAfectadas= conexionBD.update("unidad.actualizarUnidad", unidad);
+                conexionBD.commit();
+                if(filasAfectadas>0){
+                    msj.setError(false);
+                    msj.setMensaje("La unidad "+unidad.getMarca()+ " fue actualizado con exito.");
+                }
+            }catch(Exception e){
+                msj.setError(true);
+                msj.setMensaje(e.getMessage());
+            }
+        }else{
+            msj.setError(true);
+            msj.setMensaje("Por el momento el servicio no esta disponible.");
+        }
+        return msj;
+    }
 }

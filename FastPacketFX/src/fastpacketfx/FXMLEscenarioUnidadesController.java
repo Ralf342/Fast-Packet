@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.modelo.dao.UnidadDAO;
 import fastpacketfx.pojo.Colaborador;
@@ -8,6 +9,7 @@ import fastpacketfx.pojo.Unidad;
 import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,12 +23,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class FXMLEscenarioUnidadesController implements Initializable {
+public class FXMLEscenarioUnidadesController implements Initializable,INotificadorOperacion {
 
+    private INotificadorOperacion observador;
+    private Unidad unidadEdicion;
     private ObservableList<Unidad> unidades;
     @FXML
     private TextField tf_buscar;
@@ -49,6 +54,8 @@ public class FXMLEscenarioUnidadesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.observador = this;
+        this.unidadEdicion = unidadEdicion;
        configurarTabla();
        cargarInformacionTabla();
     }
@@ -96,42 +103,46 @@ public class FXMLEscenarioUnidadesController implements Initializable {
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
-        try{
-            Stage escenario = new Stage();
-            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioUnidad.fxml"));
-            Parent vista = cargador.load();
-            //--
-            FXMLFormularioUnidadController controlador = cargador.getController();
-            //--
-            Scene escenaFormulario = new Scene(vista);
-            escenario.setScene(escenaFormulario);
-            escenario.setTitle("Agregar");
-            escenario.initModality(Modality.APPLICATION_MODAL);
-            escenario.showAndWait();
-        }catch (Exception e){
-        }
+        agregar(this,null);
     }
 
     @FXML
     private void onClickEditar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioUnidadesController.onClickEditar()");
+       Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
+        if(unidad !=null){
+            agregar(this,unidad);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar unidad de la tabla","Para poder editar debes elecir la unidad en la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void onClickEliminar(ActionEvent event) {
-         Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
-        if(unidad !=null){
-            boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar la unidad?");
-            if(seElimina){
-                eliminarColaborador(unidad.getIdUnidad());
+        Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
+        if (unidad != null) {
+            TextInputDialog dialogoTexto = new TextInputDialog();
+            dialogoTexto.setTitle("Eliminar Unidad");
+            dialogoTexto.setHeaderText("Motivo de la eliminación");
+            dialogoTexto.setContentText("Por favor, ingresa el motivo de la eliminación:");
+            Optional<String> resultado = dialogoTexto.showAndWait();
+
+            if (resultado.isPresent() && !resultado.get().isEmpty()) {
+                String motivo = resultado.get();
+                boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estás seguro de eliminar la unidad?");
+                if (seElimina) {
+                    eliminarColaborador(unidad.getIdUnidad());
+                    observador.notificarOperacionExitosa("Eliminar", unidad.getVin());
+                    Utilidades.mostrarAlertaSimple("Unidad Eliminada", "La unidad ha sido eliminada. Motivo: " + motivo, Alert.AlertType.INFORMATION);
+                }
+            } else {
+                Utilidades.mostrarAlertaSimple("Acción cancelada", "No se proporcionó un motivo, la eliminación fue cancelada.", Alert.AlertType.WARNING);
             }
-        }else{
-            Utilidades.mostrarAlertaSimple("Seleccionar Colaborador","Para poder eliminar debes seleccionar al colaborador de la tabla",Alert.AlertType.WARNING);
+        } else {
+            Utilidades.mostrarAlertaSimple("Seleccionar Unidad", "Para poder eliminar debes seleccionar una unidad de la tabla.", Alert.AlertType.WARNING);
         }
     }
     
     private void eliminarColaborador(Integer idUnidad){
-        System.out.println("ID: "+idUnidad);
         Mensaje msj = UnidadDAO.borrarUnidad(idUnidad);
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Unidad eliminada","La información de la unidad se a borrado correctamente", Alert.AlertType.INFORMATION);
@@ -141,4 +152,27 @@ public class FXMLEscenarioUnidadesController implements Initializable {
         }
     }
     
+    private void agregar(INotificadorOperacion observador, Unidad unidad){
+        try{
+            Stage escenario = new Stage();
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioUnidad.fxml"));
+            Parent vista = cargador.load();
+            //--
+            FXMLFormularioUnidadController controlador = cargador.getController();
+            controlador.inicializarValores(observador, unidad);
+            //--
+            Scene escenaFormulario = new Scene(vista);
+            escenario.setScene(escenaFormulario);
+            escenario.setTitle("Agregar");
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+        }catch (Exception e){
+        }
+    }
+    @Override
+    public void notificarOperacionExitosa(String tipo, String nombre) {
+        System.out.println("Operacion: " + tipo);
+        System.err.println("Nombre: "+nombre);
+        cargarInformacionTabla();
+    }
 }

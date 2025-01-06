@@ -12,7 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         nii, 
         modelo,
         anio, 
-        marca, 
+        marca,
+        u.idTipoUnidad,
+        u.idColaborador, 
         tu.tipo AS 'tipo',
         IFNULL(CONCAT(c.nombre,' ', c.apellidoPaterno),'Sin asignar')AS 'conductor'
         FROM unidad u
@@ -48,14 +50,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         nii, 
         modelo,
         anio, 
-        marca, 
+        marca,
+        u.idTipoUnidad,
+        u.idColaborador, 
         tu.tipo AS 'tipo',
         IFNULL(CONCAT(c.nombre,' ', c.apellidoPaterno),'Sin asignar')AS 'conductor'
         FROM unidad u
         INNER JOIN tipoUnidad tu
         ON u.idTipoUnidad = tu.idTipoUnidad
         LEFT JOIN colaborador c
-        ON u.idColaborador = c.idColaborador   
+        ON u.idColaborador = c.idColaborador    
         WHERE nii LIKE CONCAT(#{nii},'%')
     </select>
     
@@ -64,4 +68,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             idUnidad, modelo, marca
         FROM unidad
     </select>
+    
+    <update id="actualizarUnidad" parameterType="pojo.Unidad">
+        UPDATE unidad
+            SET 
+                marca = #{marca}, 
+                modelo = #{modelo}, 
+                anio = #{anio}, 
+                idUnidad = #{idUnidad}, 
+                nii = #{nii}, 
+                idColaborador = #{idColaborador} 
+            WHERE  idUnidad = #{idUnidad};
+    </update>
+    
 </mapper>
