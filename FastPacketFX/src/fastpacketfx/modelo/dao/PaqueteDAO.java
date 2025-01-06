@@ -83,4 +83,24 @@ public class PaqueteDAO {
         }       
         return msj;
         }
-   }
+    
+    public static Mensaje editarPaquete(Paquete paquete){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"paquete/actualizarPaquete";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(paquete);
+            RespuestaHTTP respuesta = ConexionWS.peticionPUTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setMensaje(respuesta.getContenido());
+            }
+        }catch (Exception e){
+           msj.setError(true);
+           msj.setMensaje(e.getMessage());
+        }
+        return msj;
+    }
+}

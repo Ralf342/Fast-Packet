@@ -105,7 +105,7 @@ public class FXMLEscenarioClientesController implements Initializable, INotifica
         if(cliente !=null){
             agregar(this,cliente);
         }else{
-            Utilidades.mostrarAlertaSimple("Seleccionar Colaborador de la tabla","Para poder editar debes elecir al colaborado en la tabla", Alert.AlertType.WARNING);
+            Utilidades.mostrarAlertaSimple("Seleccionar Colaborador de la tabla","Para poder editar debes elegir al cliente en la tabla", Alert.AlertType.WARNING);
         }
     }
 
@@ -146,7 +146,6 @@ public class FXMLEscenarioClientesController implements Initializable, INotifica
         Mensaje msj = ClienteDAO.borrarCliente(idCliente);
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Cliente eliminado","La información del Cliente se a borrado correctamente", Alert.AlertType.INFORMATION);
-            //observador.notificarOperacionExitosa("Eliminar", null);
         }else{
             Utilidades.mostrarAlertaSimple("Error al borrar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
