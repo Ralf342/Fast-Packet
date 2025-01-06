@@ -1,9 +1,13 @@
 package fastpacketfx;
 
+import fastpacketfx.modelo.dao.EnvioDAO;
 import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Estatus;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +18,8 @@ import javafx.stage.Stage;
 
 public class FXMLFormularioEnvioController implements Initializable {
 
+    private ObservableList<Estatus> estatus;
+    private ObservableList<Cliente> cliente;
     @FXML
     private TextField tfCalleOrigen;
     @FXML
@@ -76,6 +82,30 @@ public class FXMLFormularioEnvioController implements Initializable {
     @FXML
     private void onClickCancelar(ActionEvent event) {
         cerrarVentana();
+    }
+    
+    private void cargarEstatus(){
+        estatus = FXCollections.observableArrayList();
+        List<Estatus> listaWS = EnvioDAO.obtenerEstatus();
+        if(listaWS !=null){
+            estatus.addAll(listaWS);
+            cbEstatus.setItems(estatus);
+        }
+    }
+    
+    private boolean sonCamposValidos(Cliente cliente){
+        boolean camposValidos=true;
+        lbClienteFaltante.setText(" ");
+        lbCalleFaltante.setText(" ");
+        lbCodigoPostalFaltante.setText(" ");
+        lbColoniaFaltante.setText(" ");
+        lbCiudadFaltante.setText(" ");
+        lbEstadoFaltante.setText(" ");
+        lbCostoFaltante.setText(" ");
+        lbNumeroGuiaFaltante.setText(" ");
+        lbEstatusFaltante.setText(" ");
+        
+        return camposValidos;
     }
     
     private void cerrarVentana(){
