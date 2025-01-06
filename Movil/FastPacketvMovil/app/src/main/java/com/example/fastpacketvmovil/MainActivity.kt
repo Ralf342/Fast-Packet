@@ -1,11 +1,13 @@
-package com.example.fastpacket.ui
+package com.example.fastpacketvmovil
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.fastpacket.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,4 +20,21 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
+    fun onFilaClick(view: View) {
+        Toast.makeText(this, "Fila clickeada", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, DetalleEnvioActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun onCerrarSesionClick(View: View){
+
+    }
+
+    fun onMiPerfilClick(view: View) {
+        Toast.makeText(this, "Redirigiendo a Mi perfil", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, GestionDatosActivity::class.java)
+        startActivity(intent)
+    }
+
+
 }

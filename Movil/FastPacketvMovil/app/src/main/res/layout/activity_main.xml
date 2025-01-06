@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="#D3D3D3"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvBienvenida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="12dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:text="¡Hola!"
+        android:textColor="#45a049"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <!-- LinearLayout para los botones en la parte superior -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnMiPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi perfil"
+            android:backgroundTint="#45a049"
+            android:cornerRadius="25dp"
+            android:elevation="4dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:onClick="onMiPerfilClick"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnCerrarSesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#45a049"
+            android:cornerRadius="25dp"
+            android:elevation="4dp"
+            android:text="Cerrar sesión"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:onClick="onCerrarSesionClick"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingTop="-1dp">
+
+        <TableLayout
+            android:id="@+id/tableEnvios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"
+            android:layout_marginTop="50dp"
+            android:background="#ffffff">
+
+            <TableRow
+                android:background="#45a049"
+                android:padding="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="No. Guía"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Destino"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Estatus"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"/>
+            </TableRow>
+
+            <TableRow
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onFilaClick">
+                <TextView
+                    android:id="@+id/tvNoGuia1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="1"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:id="@+id/tvDestino1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Dique #13"/>
+                <TextView
+                    android:id="@+id/tvEstatus1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Pendiente"
+                    android:textAlignment="center"
+                    android:textColor="@color/design_default_color_error" />
+            </TableRow>
+
+            <TableRow
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onFilaClick">
+                <TextView
+                    android:id="@+id/tvNoGuia2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="2"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:id="@+id/tvDestino2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Centro #2" />
+                <TextView
+                    android:id="@+id/tvEstatus2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Entregado"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_green_dark" />
+            </TableRow>
+
+            <TableRow
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="onFilaClick">
+                <TextView
+                    android:id="@+id/tvNoGuia3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="3"
+                    android:textAlignment="center"/>
+                <TextView
+                    android:id="@+id/tvDestino3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Sauces #5" />
+                <TextView
+                    android:id="@+id/tvEstatus3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="Pendiente"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/holo_red_dark" />
+            </TableRow>
+
+        </TableLayout>
+    </ScrollView>
+
+</LinearLayout>
