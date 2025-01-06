@@ -41,4 +41,14 @@ public class WSLogin {
         }
         throw new BadRequestException();
     }
+    
+    @Path("conductor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public LoginColaborador verificarSesionConductor(@FormParam("noPersonal") String noPersonal, @FormParam("contrasenia") String contrasenia){
+        if((noPersonal !=null && !noPersonal.isEmpty()) && (contrasenia != null && !contrasenia.isEmpty())){
+            return ImpLogin.validarSesionConductor(noPersonal, contrasenia);
+        }
+        throw new BadRequestException();
+    }
 }

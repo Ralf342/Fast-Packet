@@ -13,4 +13,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE noPersonal = #{noPersonal} AND contrasenia = #{contrasenia}
     </select>
     
+    <select id="LoginConductor" resultType="pojo.Colaborador">
+        SELECT idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, 
+        noPersonal, correo,contrasenia, curp,colaborador.idRol, rol.tipo AS 'rol',numLicencia 
+        FROM colaborador 
+        INNER JOIN rol ON rol.idRol = colaborador.idRol
+        WHERE noPersonal = #{noPersonal} AND contrasenia = #{contrasenia} AND colaborador.idRol = 3
+    </select>
+    
 </mapper>

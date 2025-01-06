@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import java.util.HashMap;
@@ -46,4 +41,30 @@ public class ImpLogin {
         return respuesta;
     }
     
+    public static LoginColaborador validarSesionConductor(String noPersonal, String contrasenia){
+        LoginColaborador respuesta = new LoginColaborador();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD!= null){
+            try {
+                HashMap<String,Object> parametros = new LinkedHashMap<>();
+                parametros.put("noPersonal", noPersonal);
+                parametros.put("contrasenia",contrasenia);
+             Colaborador conductor = conexionBD.selectOne("login.LoginConductor",parametros);
+                if(conductor!=null){
+                  respuesta.setError(false);
+                  respuesta.setMensaje("Credenciales correctas del conductor: "+conductor.getNombre());
+                  respuesta.setColaborador(conductor);
+                }else{
+                respuesta.setError(true);
+                respuesta.setMensaje("No. de personal y/o password incorrectos");
+              } 
+           }catch(Exception e){
+               respuesta.setError(true);
+               respuesta.setMensaje(e.getMessage());
+           } 
+        }else{
+            respuesta.setMensaje("Por el momento no hay servicio a la base de datos");
+        }
+        return respuesta;
+    }
 }

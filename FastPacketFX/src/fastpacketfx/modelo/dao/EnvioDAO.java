@@ -3,7 +3,6 @@ package fastpacketfx.modelo.dao;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import fastpacketfx.modelo.ConexionWS;
-import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Envio;
 import fastpacketfx.pojo.Estatus;
 import fastpacketfx.pojo.Mensaje;
@@ -80,6 +79,22 @@ public class EnvioDAO {
            msj.setMensaje(e.getMessage());
         }
         return msj;
+    }
+    
+    public static List<Envio> buscarEnvio(Integer numeroGuia){
+        List<Envio> paquetes = null;
+        String url = Constantes.URL_wS+"envio/obtenerEnviosInfo/"+numeroGuia;
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        try{
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<Envio>>(){}.getType();
+                paquetes = gson.fromJson(respuesta.getContenido(), tipoLista);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return paquetes;
     }
     
 }
