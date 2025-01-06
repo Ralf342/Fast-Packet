@@ -36,7 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         correo = #{correo}, 
         contrasenia = #{contrasenia}, 
         curp = #{curp},
-        numLicencia = #{numLicencia} 
+        numLicencia = #{numLicencia},
+        foto = #{foto} 
         WHERE idColaborador = #{idColaborador}
     </update>
     
@@ -44,10 +45,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
         idColaborador, 
         noPersonal, 
-        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
+        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS 'nombreCompleto', 
         correo, 
         curp,
-        rol.tipo AS 'rol'
+        rol.tipo AS 'rol',
         FROM colaborador 
         INNER JOIN rol ON rol.idRol = colaborador.idRol
         WHERE colaborador.noPersonal LIKE CONCAT(#{noPersonal},'%')
@@ -57,10 +58,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
         idColaborador, 
         noPersonal, 
-        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
+        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS 'nombreCompleto',
+        colaborador.nombre AS nombre,
+        colaborador.apellidoPaterno,
+        colaborador.apellidoMaterno, 
         correo, 
         curp,
-        rol.tipo AS 'rol'
+        contrasenia,
+        numLicencia,
+        rol.tipo AS 'rol',
+        colaborador.idrol
         FROM colaborador 
         INNER JOIN rol ON rol.idRol = colaborador.idRol
     </select>

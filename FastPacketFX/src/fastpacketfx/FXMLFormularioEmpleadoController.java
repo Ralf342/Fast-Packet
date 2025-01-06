@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.ConexionWS;
 import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
@@ -46,6 +47,7 @@ import javax.imageio.ImageIO;
 public class FXMLFormularioEmpleadoController implements Initializable {
 
     private ObservableList<RolEmpleado> roles;
+    
     @FXML
     private ComboBox<RolEmpleado> cbRol;
     @FXML
@@ -84,10 +86,13 @@ public class FXMLFormularioEmpleadoController implements Initializable {
     private Label lbNumPersonalFaltante;
     @FXML
     private Label lbContraseniaFaltante;
-    private Integer idColaborador;
     private String fotoBase64;
     @FXML
     private Label lbFotoFaltante;
+    
+    private INotificadorOperacion observador;
+    private Colaborador colaboradorEdicion;
+    private boolean modoEdicion;
 
     /**
      * Initializes the controller class.
@@ -96,7 +101,32 @@ public class FXMLFormularioEmpleadoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarRolesEmpleados();
         configurarCambioDeRol();
-    }    
+    }
+
+    public void inicializarValores(INotificadorOperacion observador, Colaborador colaboradorEdicion){
+        this.observador = observador;
+        this.colaboradorEdicion = colaboradorEdicion;
+        if(colaboradorEdicion !=null){
+            modoEdicion = true;
+            cargarDatosEdicion();
+        }
+    }
+    
+    private void cargarDatosEdicion(){
+        tfNombre.setText(this.colaboradorEdicion.getNombre());
+        tfApellidoPaterno.setText(this.colaboradorEdicion.getApellidoPaterno());
+        tfApellidoMaterno.setText(this.colaboradorEdicion.getApellidoMaterno());
+        tfCURP.setText(this.colaboradorEdicion.getCurp());
+        tfLicencia.setText(this.colaboradorEdicion.getNumLicencia());
+        tfNoPersonal.setText(this.colaboradorEdicion.getNoPersonal().toString());
+        pfPassword.setText(this.colaboradorEdicion.getContrasenia());
+        tfCorreo.setText(this.colaboradorEdicion.getCorreo());
+        int posicionRol = obtenerPosicionRol(this.colaboradorEdicion.getIdRol());
+        cbRol.getSelectionModel().select(posicionRol);
+        
+        cbRol.setDisable(true);
+        tfNoPersonal.setDisable(true);
+    }
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
@@ -122,7 +152,6 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         colaborador.setContrasenia(password);
         colaborador.setCorreo(correo);
         colaborador.setIdRol(idRol);
-        colaborador.setFoto(correo);
         
         if (ivLicencia.getImage() != null) {
         try {
@@ -131,24 +160,22 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             ImageIO.write(bufferedImage, "png", outputStream);
             byte[] imageBytes = outputStream.toByteArray();
             String fotoBase64 = Base64.getEncoder().encodeToString(imageBytes);
-
-            
             colaborador.setFoto(fotoBase64);
-
         } catch (IOException e) {
             Utilidades.mostrarAlertaSimple("Error al procesar la imagen", "No se pudo procesar la imagen seleccionada.", Alert.AlertType.ERROR);
             return; 
         }
-    } else {
+    } else if(!modoEdicion){
         Utilidades.mostrarAlertaSimple("Falta la foto", "Debe cargar una foto para registrar el colaborador.", Alert.AlertType.WARNING);
         return;
     }
         
         if(sonCamposValidos(colaborador)){
-            try{
+            if(!modoEdicion){
                 guardarDatosColaborador(colaborador);
-            }catch(Exception e){
-                Utilidades.mostrarAlertaSimple("Error","error: " + e, Alert.AlertType.ERROR);  
+            }else{
+                colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
+                editarDatosColaborador(colaborador);
             }
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar","Existen algunos campos vacios necesarios para guardar la información", Alert.AlertType.ERROR);
@@ -173,20 +200,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
                 String fotoBase64 = Base64.getEncoder().encodeToString(imageBytes);
 
                 Image imagen = new Image(new ByteArrayInputStream(imageBytes));
-                ivLicencia.setImage(imagen);
-                
-                //envia la foto al server
-                //String url = Constantes.URL_wS+ "colaborador/subirFoto/" + idColaborador;
-                /*RespuestaHTTP respuesta = ConexionWS.peticionPUTImg(url, imageBytes);  // Usar los bytes para la petición PUT
-
-                if (respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK) {
-                System.out.println("Foto guardada exitosamente");
-            } else {
-                System.out.println("Error al guardar la foto: " + respuesta.getContenido());
-            }*/
-                
-            // Aqui se llama a l método para subir la foto al servidor
-            //ColaboradorDAO.subirFotoColaborador(idColaborador, fotoBase64); 
+                ivLicencia.setImage(imagen); 
             
             }catch(IOException e){
                 e.printStackTrace();
@@ -196,7 +210,6 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         }else{
             Utilidades.mostrarAlertaSimple("Sin imagen", "No se seleccionó ninguna imagen", Alert.AlertType.WARNING);
         }
-       // cargarFoto(idColaborador);
     }
     
     private void cargarRolesEmpleados() {
@@ -213,9 +226,21 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Colaborador registrado", "La información del colaborador "+colaborador.getNombre() + ", "+"se registro correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
-            //observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
+            observador.notificarOperacionExitosa("Guardar", colaborador.getNombre());
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar",msj.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void editarDatosColaborador(Colaborador colaborador){
+        Mensaje msj = ColaboradorDAO.editarColaborador(colaborador);
+        System.out.println("Datos del colaborador: " + colaborador);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Colaborador editado","La información del colaborador " +colaborador.getNombre() +" se a modificado correctamente", Alert.AlertType.INFORMATION);
+            cerrarVentana();
+            observador.notificarOperacionExitosa("Editar", colaborador.getNombre());
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al editaar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
     
@@ -313,9 +338,11 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             lbNumLicencia.setText("");
         }
         //validacion para foto
+        if(!modoEdicion){
         if(colaborador.getFoto().isEmpty()){
             camposValidos = false;
             lbFotoFaltante.setText("*El campo foto no puede ir vacio");
+        }      
         }
         return camposValidos;
     }
@@ -351,7 +378,15 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             System.out.println("Error al decodificar la imagen" +e.getMessage());
             return null;
         }
-        
     }
 
+    private int obtenerPosicionRol(int idRol){
+        for (int i = 0; i < roles.size(); i++) {
+            if(idRol == roles.get(i).getIdRol()){
+                return i;
+            }
+        }
+        return 0;
+    }
+    
 }
