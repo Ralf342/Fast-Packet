@@ -65,4 +65,20 @@ public class ClienteDAO {
         return clientes;
     }
     
+     public static List<Cliente> buscarCliente(String correo){
+        List<Cliente> paquetes = null;
+        String url = Constantes.URL_wS+"cliente/buscarClientePorCorreo/"+correo;
+        RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
+        try{
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                Gson gson = new Gson();
+                Type tipoLista = new TypeToken<List<Cliente>>(){}.getType();
+                paquetes = gson.fromJson(respuesta.getContenido(), tipoLista);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return paquetes;
+    }
+    
 }

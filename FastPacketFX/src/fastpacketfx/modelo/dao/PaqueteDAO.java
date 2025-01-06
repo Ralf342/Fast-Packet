@@ -53,10 +53,6 @@ public class PaqueteDAO {
     }
     public static List<Paquete> buscarPaquete(Integer numGuia){
         List<Paquete> paquetes = null;
-        if (numGuia == null || numGuia <= 0) {
-                System.out.println("Número de guía inválido.");
-                return null;
-        }
         String url = Constantes.URL_wS+"paquete/consultarPaquetePorEnvio/"+numGuia;
         RespuestaHTTP respuesta = ConexionWS.peticionGET(url);
         try{

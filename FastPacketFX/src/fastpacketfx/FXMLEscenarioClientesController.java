@@ -72,7 +72,20 @@ public class FXMLEscenarioClientesController implements Initializable {
 
     @FXML
     private void onClickBuscar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioClientesController.onClickBuscar()");
+        String correo=tf_buscar.getText();
+        clientes = FXCollections.observableArrayList();
+        //obtener lo que trae el dao
+        if(correo.isEmpty()){
+            cargarInformacionTabla();
+        }else{
+            List<Cliente> listaWS = ClienteDAO.buscarCliente(correo);
+        if(listaWS != null){
+            clientes.addAll(listaWS);
+            tbClientes.setItems(clientes);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos no disponible", "Lo sentimos, por el momento no se puede cargar la info de colaboradores", Alert.AlertType.ERROR);
+            }
+        }
     }
 
     @FXML
