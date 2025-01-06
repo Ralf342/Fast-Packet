@@ -127,4 +127,19 @@ public class WSEnvio {
         return ImpEnvio.obtenerNumeroDeGuia();
     
     }
+    
+    //WS para movil
+    @Path("listaEnviosAsignados")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerListaEnviosAsignados() {
+        return ImpEnvio.obtenerListaEnviosAsignados();
+    }
+    
+    @Path("detalleEnvios")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerDetalleEnvios() {
+        return ImpEnvio.obtenerDetalleEnvios();
+    }
 }

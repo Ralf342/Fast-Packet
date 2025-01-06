@@ -129,4 +129,40 @@ public class ImpEnvio {
         }
         return numeros;
     }
+    
+    //movil
+    //lista de envíos asignados
+    public static List<Envio> obtenerListaEnviosAsignados() {
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        List<Envio> listaEnvios = null;
+        if (conexionBD != null) {
+            try {
+                listaEnvios = conexionBD.selectList("envio.listaEnviosAsignados");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conexionBD.close();
+            }
+        }
+        return listaEnvios;
+    }
+    
+    
+
+    // detalles de los envíos
+    public static List<Envio> obtenerDetalleEnvios() {
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        List<Envio> detallesEnvios = null;
+        if (conexionBD != null) {
+            try {
+                detallesEnvios = conexionBD.selectList("envio.detalleEnvios");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                conexionBD.close();
+            }
+        }
+        return detallesEnvios;
+    }
+    
 }
