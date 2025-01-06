@@ -24,6 +24,16 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.btnIniciarSesion.setOnClickListener {
+            val noPersonal = binding.etNumeroPersonal.text.toString()
+            val contrasenia = binding.etContrasenia.text.toString()
+            if (sonCamposValido(noPersonal.toInt(),contrasenia)){
+                verificarCredenciales(noPersonal.toInt(),contrasenia)
+            }
+        }
+    }
 
     fun verificarCredenciales(noPersonal: Int, contrasenia: String){
         Ion.getDefault(this@LoginActivity).conscryptMiddleware.enable(false)
