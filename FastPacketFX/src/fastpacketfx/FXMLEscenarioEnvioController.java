@@ -91,7 +91,21 @@ public class FXMLEscenarioEnvioController implements Initializable {
 
     @FXML
     private void onClickBuscar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioEnvioController.onClickBuscar()");
+        String numGuiaString=tf_buscar.getText();
+        Integer numeroGuia = (numGuiaString.isEmpty()) ?  0 : Integer.valueOf(numGuiaString);
+        envios = FXCollections.observableArrayList();
+        //obtener lo que trae el dao
+        if(numeroGuia==0 || numeroGuia<0){
+            cargarInformacionTabla();
+        }else{
+            List<Envio> listaWS = EnvioDAO.buscarEnvio(numeroGuia);
+        if(listaWS != null){
+            envios.addAll(listaWS);
+            tbEnvios.setItems(envios);
+        }else{
+            Utilidades.mostrarAlertaSimple("Datos no disponible", "Lo sentimos, por el momento no se puede cargar la info de colaboradores", Alert.AlertType.ERROR);
+        }
+        }
     }
 
     @FXML
