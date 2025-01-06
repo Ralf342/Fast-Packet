@@ -49,7 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de buscar cliente por correo-->
     <select id="buscarClientePorCorreo" resultType="pojo.Cliente">
-        SELECT 
+        SELECT
+            idCliente,
             correo,
             CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombre',
             telefono,
@@ -61,7 +62,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="buscarCliente" resultType="pojo.Cliente">
-        SELECT  
+        SELECT
+            idCliente,
             correo,
             CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombre',
             telefono,

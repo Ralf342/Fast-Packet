@@ -41,7 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <select id="obtenerColaboradorPorNoPersonal" resultType="pojo.Colaborador">
-        SELECT 
+        SELECT
+        idColaborador, 
         noPersonal, 
         CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
         correo, 
@@ -53,7 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtenerColaboradores" resultType="pojo.Colaborador">
-        SELECT 
+        SELECT
+        idColaborador, 
         noPersonal, 
         CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS nombre, 
         correo, 
