@@ -286,19 +286,31 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         if(colaborador.getNombre().isEmpty()){
             camposValidos=false;
             lbNombreFaltante.setText("*Nombre faltante");
+        }else if(!colaborador.getNombre().isEmpty() &&!validarNombre(colaborador.getNombre())){
+            camposValidos=false;
+            lbNombreFaltante.setText("*Contiene caracteres extraños");
         }
         if(colaborador.getApellidoMaterno().isEmpty()){
             camposValidos=false;
             lbApellidoMaternoFaltante.setText("*Apellido Materno faltante");
+        }else if(!colaborador.getApellidoMaterno().isEmpty() &&!validarNombre(colaborador.getApellidoMaterno())){
+            camposValidos=false;
+            lbApellidoMaternoFaltante.setText("*Contiene caracteres extraños");
         }
         if(colaborador.getApellidoPaterno().isEmpty()){
             camposValidos=false;
             lbApellidoPaternoFaltante.setText("*Apellido Paterno faltante");
+        }else if(!colaborador.getApellidoPaterno().isEmpty() &&!validarNombre(colaborador.getApellidoPaterno())){
+            camposValidos=false;
+            lbApellidoPaternoFaltante.setText("*Contiene caracteres extraños");
         }
         //Validacion del curp
         if(colaborador.getCurp().isEmpty()){
             camposValidos=false;
             lbCURPFaltante.setText("*CURP Necesaria");
+        }else if(!colaborador.getCurp().isEmpty() &&!validarCurp(colaborador.getCurp())){
+            camposValidos=false;
+            lbCURPFaltante.setText("*Contiene caracteres extraños");
         }
         //Validacion de Contraseña
         if(colaborador.getContrasenia().isEmpty()){
@@ -316,7 +328,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             lbNumPersonalFaltante.setText("*Numero de personal faltante");
         }else if(!tfNoPersonal.getText().isEmpty() && !tfNoPersonal.getText().matches("\\d+")){
             camposValidos=false;
-            lbNumPersonalFaltante.setText("*Formato Incorrecto");
+            lbNumPersonalFaltante.setText("*Solo números");
         }
         //Validacion Correo
         if(colaborador.getCorreo().isEmpty()){
@@ -346,8 +358,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         }
         return camposValidos;
     }
-    
-
+   
     //para a foto
     private void cargarFoto(Integer idColaborador) {
         String fotoBase = ColaboradorDAO.subirFotoColaborador(idColaborador, fotoBase64);
@@ -365,7 +376,6 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         }
     }
     
-    
     private Image decodificarAFotoBase64(String fotoBase64){
         try{
             //para eliminar los espacios en blanco si hay en la cadena base64
@@ -379,6 +389,24 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             return null;
         }
     }
+    
+    public boolean validarTexto(String texto) {
+        // La expresión regular permite letras, espacios y acentos.
+        String valido = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\.\\s]+$";
+        return texto.matches(valido);
+    }
+    
+    public boolean validarCurp(String texto) {
+        // La expresión regular permite solo letras mayúsculas (A-Z) y números (0-9).
+        String valido = "^[A-Z0-9]+$";
+        return texto.matches(valido);
+    }
+    
+    public boolean validarNombre(String texto) {
+        // La expresión regular permite letras, espacios y acentos.
+        String valido = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$";
+        return texto.matches(valido);
+    }
 
     private int obtenerPosicionRol(int idRol){
         for (int i = 0; i < roles.size(); i++) {
@@ -388,5 +416,4 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         }
         return 0;
     }
-    
 }
