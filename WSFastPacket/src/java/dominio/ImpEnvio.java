@@ -2,6 +2,7 @@ package dominio;
 
 import com.google.gson.Gson;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -150,12 +151,12 @@ public class ImpEnvio {
     
 
     // detalles de los envíos
-    public static List<Envio> obtenerDetalleEnvios() {
+    public static List<Envio> obtenerDetalleEnvios(Integer numeroDeGuia) {
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         List<Envio> detallesEnvios = null;
         if (conexionBD != null) {
             try {
-                detallesEnvios = conexionBD.selectList("envio.detalleEnvios");
+                detallesEnvios = conexionBD.selectList("envio.detalleEnvios", numeroDeGuia);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -164,5 +165,6 @@ public class ImpEnvio {
         }
         return detallesEnvios;
     }
+    
     
 }

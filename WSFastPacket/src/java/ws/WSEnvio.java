@@ -3,6 +3,7 @@ package ws;
 import com.google.gson.Gson;
 import dominio.ImpEnvio;
 import java.util.List;
+import java.util.Map;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -136,10 +137,11 @@ public class WSEnvio {
         return ImpEnvio.obtenerListaEnviosAsignados();
     }
     
-    @Path("detalleEnvios")
+    @Path("detalleEnvios/{numeroDeGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Envio> obtenerDetalleEnvios() {
-        return ImpEnvio.obtenerDetalleEnvios();
+    public List<Envio> obtenerDetalleEnvios(@PathParam ("numeroDeGuia") Integer numeroDeGuia) {
+        return ImpEnvio.obtenerDetalleEnvios(numeroDeGuia);
     }
+    
 }

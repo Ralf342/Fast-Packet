@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:elevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_numero_guia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="No. Guía: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_texto_numero_guia"/>
+
+        <TextView
+            android:id="@+id/tv_texto_numero_guia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:text="XXXX"
+            app:layout_constraintStart_toEndOf="@id/tv_numero_guia"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Destino: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_numero_guia"
+            app:layout_constraintEnd_toStartOf="@id/tv_texto_destino"/>
+
+        <TextView
+            android:id="@+id/tv_texto_destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:text="XXXX"
+            app:layout_constraintStart_toEndOf="@id/tv_destino"
+            app:layout_constraintTop_toBottomOf="@id/tv_texto_numero_guia"/>
+
+        <TextView
+            android:id="@+id/tv_estatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Estatus: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_destino"
+            app:layout_constraintEnd_toStartOf="@id/tv_texto_estatus"/>
+
+        <TextView
+            android:id="@+id/tv_texto_estatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="20sp"
+            android:text="XXXX"
+            app:layout_constraintStart_toEndOf="@id/tv_estatus"
+            app:layout_constraintTop_toBottomOf="@id/tv_texto_destino"/>
+
+        <Button
+            android:id="@+id/btn_detalles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Detalles"
+            android:backgroundTint="#45a049"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

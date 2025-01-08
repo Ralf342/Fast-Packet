@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     fun sonCamposValido(noPersonal:Int, contrasenia:String):Boolean{
-        var valido=true
+        var valido = true
 
         if (noPersonal.toString().isEmpty()){
             valido = false
