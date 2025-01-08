@@ -37,7 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de consultar paquete por envio-->
     <select id="consultarPaquetePorEnvio" resultType="pojo.Paquete">
-        SELECT  
+        SELECT
+            p.idPaquete,
             p.peso, 
             p.alto, 
             p.ancho,
@@ -56,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 alto = #{alto},
                 ancho = #{ancho},
                 profundidad = #{profundidad}, 
-                descripcion = #{descripcion},
+                descripcion = #{descripcion}
         WHERE  idPaquete = #{idPaquete};
     </update>
     

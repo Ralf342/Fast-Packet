@@ -152,5 +152,25 @@ public class ColaboradorDAO {
         }       
         return msj;
         }
+     
+     public static Mensaje editarColaborador(Colaborador colaborador){
+        Mensaje msj = new Mensaje();
+        String url = Constantes.URL_wS+"colaborador/editarColaborador";
+        Gson gson = new Gson();
+        try{
+            String parametros = gson.toJson(colaborador);
+            RespuestaHTTP respuesta = ConexionWS.peticionPUTJson(url, parametros);
+            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
+                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
+            }else{
+                msj.setError(true);
+                msj.setMensaje(respuesta.getContenido());
+            }
+        }catch (Exception e){
+           msj.setError(true);
+           msj.setMensaje(e.getMessage());
+        }
+        return msj;
+    }
 
 }

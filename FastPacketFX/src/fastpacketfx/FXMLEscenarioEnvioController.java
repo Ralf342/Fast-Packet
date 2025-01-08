@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.modelo.dao.EnvioDAO;
 import fastpacketfx.pojo.Cliente;
@@ -24,8 +25,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class FXMLEscenarioEnvioController implements Initializable {
+public class FXMLEscenarioEnvioController implements Initializable, INotificadorOperacion {
 
+    private INotificadorOperacion observador;
+    private Envio envioEdicion;
     private ObservableList<Envio> envios;
     @FXML
     private TextField tf_buscar;
@@ -58,6 +61,8 @@ public class FXMLEscenarioEnvioController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.observador = this;
+        this.envioEdicion = envioEdicion;
         configurarTabla();
         cargarInformacionTabla();
     }
@@ -110,12 +115,27 @@ public class FXMLEscenarioEnvioController implements Initializable {
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
+        agregar(this,null);
+    }
+
+    @FXML
+    private void onClickActualizar(ActionEvent event) {
+        Envio envio = tbEnvios.getSelectionModel().getSelectedItem();
+        if(envio !=null){
+            agregar(this,envio);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar envio de la tabla","Para poder editar debes elecir al envio en la tabla", Alert.AlertType.WARNING);
+        }
+    }
+    
+    private void agregar(INotificadorOperacion observador, Envio envio){
         try{
             Stage escenario = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioEnvio.fxml"));
             Parent vista = cargador.load();
             //--
             FXMLFormularioEnvioController controlador = cargador.getController();
+            controlador.inicializarValores(observador, envio);
             //--
             Scene escenaFormulario = new Scene(vista);
             escenario.setScene(escenaFormulario);
@@ -125,10 +145,12 @@ public class FXMLEscenarioEnvioController implements Initializable {
         }catch (Exception e){
         }
     }
-
-    @FXML
-    private void onClickActualizar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioEnvioController.onClickActualizar()");
+    @Override
+    public void notificarOperacionExitosa(String tipo, String nombre) {
+        System.out.println("Operacion: " + tipo);
+        System.err.println("Nombre: "+nombre);
+        cargarInformacionTabla();
     }
+    
     
 }

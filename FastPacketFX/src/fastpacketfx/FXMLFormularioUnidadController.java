@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.modelo.dao.UnidadDAO;
 import fastpacketfx.pojo.Colaborador;
@@ -25,6 +26,10 @@ public class FXMLFormularioUnidadController implements Initializable {
 
     private ObservableList<TipoUnidad> tipos;
     private ObservableList<Colaborador> conductor;
+    
+    private INotificadorOperacion observador;
+    private Unidad unidadEdicion;
+    private boolean modoEdicion;
     @FXML
     private TextField tfMarca;
     @FXML
@@ -59,6 +64,30 @@ public class FXMLFormularioUnidadController implements Initializable {
         cargarTipoUnidad();
         cargarConductor();
     }    
+    
+    public void inicializarValores(INotificadorOperacion observador, Unidad unidadEdicion){
+        this.observador = observador;
+        this.unidadEdicion = unidadEdicion;
+        if(unidadEdicion !=null){
+            modoEdicion = true;
+            cargarDatosEdicion();
+        }
+    }
+    
+    private void cargarDatosEdicion(){
+        tfMarca.setText(this.unidadEdicion.getMarca());
+        tfModelo.setText(this.unidadEdicion.getModelo());
+        tfAnio.setText(this.unidadEdicion.getAnio());
+        int tipoUnidad = obtenerTipoUnidad(this.unidadEdicion.getIdTipoUnidad());
+        cbTipoUnidad.getSelectionModel().select(tipoUnidad);
+        tfVIN.setText(this.unidadEdicion.getVin());
+        int idConductor = obtenerConductor(this.unidadEdicion.getIdColaborador());
+        cbConductor.getSelectionModel().select(idConductor);
+        tfNII.setText(this.unidadEdicion.getNii());
+        
+        tfVIN.setDisable(true);
+        
+    }
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
@@ -81,11 +110,11 @@ public class FXMLFormularioUnidadController implements Initializable {
         
         if(camposValidos(unidad)){
             unidad.setNii(tfNII.getText());
-            System.out.println(unidad.getNii());
-            try{
+            if(!modoEdicion){
                 guardarDatosUnidad(unidad);
-            }catch(Exception e){
-                Utilidades.mostrarAlertaSimple("Error","El conductor ya se encuentra ligado a un vehiculo, por favor intenta con otro", Alert.AlertType.ERROR);
+            }else{
+                unidad.setIdUnidad(unidadEdicion.getIdUnidad());
+                editarDatosUnidad(unidad);
             }
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar","Existen algunos campos vacios necesarios para guardar la información", Alert.AlertType.ERROR);
@@ -105,6 +134,17 @@ public class FXMLFormularioUnidadController implements Initializable {
             //observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar","Ese conductor ya posee una unidad a su cargo, seleccione otro porfavor", Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void editarDatosUnidad(Unidad unidad){
+        Mensaje msj = UnidadDAO.editarUnidad(unidad);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Unidad editada","La información de la unidad se a modificado correctamente", Alert.AlertType.INFORMATION);
+            cerrarVentana();
+            observador.notificarOperacionExitosa("Editar", unidad.getMarca().toString());
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al editar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
     
@@ -208,5 +248,23 @@ public class FXMLFormularioUnidadController implements Initializable {
             tfNII.setText(unidad.getAnio() + unidad.getVin().substring(0, 4));
         }
         return valido;
+    }
+    
+    private int obtenerTipoUnidad(Integer idTipoUnidad){
+        for (int i = 0; i < tipos.size(); i++) {
+            if(idTipoUnidad == tipos.get(i).getIdTipoUnidad()){
+                return i;
+            }
+        }
+        return 0;
+    }
+    
+    private int obtenerConductor(Integer idColaborador){
+        for (int i = 0; i < conductor.size(); i++) {
+            if(idColaborador == conductor.get(i).getIdColaborador()){
+                return i;
+            }
+        }
+        return 0;
     }
 }

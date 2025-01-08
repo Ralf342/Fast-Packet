@@ -52,9 +52,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             idCliente,
             correo,
-            CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombre',
+            CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombreCompleto',
+            nombre AS nombre,
+            apellidoPaterno,
+            apellidoMaterno,
             telefono,
+<<<<<<< HEAD
             CONCAT (calle, ' ',  colonia, ' ', numeroDeCasa, ' ', codigoPostal) AS 'direccion',
+=======
+            CONCAT (calle, ' ', IFNULL(numeroCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS 'direccion',
+            calle,
+            numeroCasa,
+            colonia,
+            codigoPostal,
+>>>>>>> 48fc20da8e1ab95033d3da7069fe18e3588ab57e
             estado,
             ciudad
         FROM cliente
@@ -65,9 +76,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             idCliente,
             correo,
-            CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombre',
+            CONCAT (nombre, ' ', apellidoPaterno, ' ',apellidoMaterno) AS 'nombreCompleto',
+            nombre AS nombre,
+            apellidoPaterno,
+            apellidoMaterno,
             telefono,
             CONCAT (calle, ' ', IFNULL(numeroCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS 'direccion',
+            calle,
+            numeroCasa,
+            colonia,
+            codigoPostal,
             estado,
             ciudad
         FROM cliente

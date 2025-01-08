@@ -16,11 +16,12 @@ public class Cliente {
     
     //PARA LOS ALIAS
     private String direccion;
+    private String nombreCompleto;
 
     public Cliente() {
     }
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa, String estado, String ciudad, String direccion) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Integer codigoPostal, String calle, String colonia, Integer numeroCasa, String estado, String ciudad, String direccion, String nombreCompleto) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -34,6 +35,7 @@ public class Cliente {
         this.estado = estado;
         this.ciudad = ciudad;
         this.direccion = direccion;
+        this.nombreCompleto = nombreCompleto;
     }
 
     public Integer getIdCliente() {
@@ -138,6 +140,14 @@ public class Cliente {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
     @Override

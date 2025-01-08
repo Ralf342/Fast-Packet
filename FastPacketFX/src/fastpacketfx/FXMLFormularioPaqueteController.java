@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.EnvioDAO;
 import fastpacketfx.modelo.dao.PaqueteDAO;
 import fastpacketfx.pojo.Envio;
@@ -32,6 +33,10 @@ import javafx.stage.Stage;
  * @author joska_
  */
 public class FXMLFormularioPaqueteController implements Initializable {
+    
+    private INotificadorOperacion observador;
+    private Paquete paqueteEdicion;
+    private boolean modoEdicion;
 
     private ObservableList<Envio> envios;
     @FXML
@@ -66,6 +71,28 @@ public class FXMLFormularioPaqueteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cargarNumeroGuia();
     }    
+    
+    public void inicializarValores(INotificadorOperacion observador, Paquete paqueteEdicion){
+        this.observador = observador;
+        this.paqueteEdicion = paqueteEdicion;
+        if(paqueteEdicion !=null){
+            modoEdicion = true;
+            cargarDatosEdicion();
+        }
+    }
+    
+    private void cargarDatosEdicion(){
+        ta_Descripcion.setText(this.paqueteEdicion.getDescripcion());
+        tf_alto.setText(Float.toString(this.paqueteEdicion.getAlto()));
+        tf_ancho.setText(Float.toString(this.paqueteEdicion.getAncho()));
+        tf_profundidad.setText(Float.toString(this.paqueteEdicion.getProfundidad()));
+        tf_peso.setText(Float.toString(this.paqueteEdicion.getPeso()));
+        int numeroGuia = obtenerNumeroGuia(this.paqueteEdicion.getNumeroDeGuia());
+        cbNumeroGuia.getSelectionModel().select(numeroGuia);
+        
+        cbNumeroGuia.setDisable(true);
+        
+    }
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
@@ -91,19 +118,15 @@ public class FXMLFormularioPaqueteController implements Initializable {
         paquete.setNumeroDeGuia(numeroGuia);
         
         if(camposValidos(paquete)){
-          guardarDatosPaquetes(paquete);
-        }else{
-            Utilidades.mostrarAlertaSimple("Datos Faltantes", "Existen campos vacios necesarios por llenar", Alert.AlertType.INFORMATION);
-        }
-        /*if(sonCamposValidos(cliente)){
             if(!modoEdicion){
-                guardarDatosColaborador(colaborador);
+                guardarDatosPaquetes(paquete);
             }else{
-                editarDatosColaborador(colaborador);   
+                paquete.setIdPaquete(paqueteEdicion.getIdPaquete());
+                editarDatosPaquete(paquete);
             }
         }else{
-            //DATOS FALTANTES
-        }*/
+            Utilidades.mostrarAlertaSimple("Error al guardar","Existen algunos campos vacios necesarios para guardar la información", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -116,9 +139,21 @@ public class FXMLFormularioPaqueteController implements Initializable {
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Paquete registrado registrado", "El paquete se registro correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
-            //observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
+            observador.notificarOperacionExitosa("Guardar", paquete.getDescripcion());
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar",msj.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void editarDatosPaquete(Paquete paquete){
+        Mensaje msj = PaqueteDAO.editarPaquete(paquete);
+        System.out.println("Datos del colaborador: " + paquete);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Cliente editado","La información del cliente " +paquete.getDescripcion()+" se a modificado correctamente", Alert.AlertType.INFORMATION);
+            cerrarVentana();
+            observador.notificarOperacionExitosa("Editar", paquete.getDescripcion());
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al editaar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
     
@@ -192,6 +227,15 @@ public class FXMLFormularioPaqueteController implements Initializable {
             lbNumeroGuiaFaltante.setText("*Valor faltante");
         }
         return valido;
+    }
+    
+        private int obtenerNumeroGuia(Integer numeGuia){
+        for (int i = 0; i < envios.size(); i++) {
+            if(numeGuia == envios.get(i).getNumeroDeGuia()){
+                return i;
+            }
+        }
+        return 0;
     }
     
 }

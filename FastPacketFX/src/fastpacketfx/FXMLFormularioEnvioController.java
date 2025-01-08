@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.modelo.dao.EnvioDAO;
 import fastpacketfx.modelo.dao.UnidadDAO;
@@ -25,6 +26,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class FXMLFormularioEnvioController implements Initializable {
+    
+    private INotificadorOperacion observador;
+    private Envio envioEdicion;
+    private boolean modoEdicion;
 
     private ObservableList<Estatus> estatus;
     private ObservableList<ListaClientes> cliente;
@@ -89,7 +94,35 @@ public class FXMLFormularioEnvioController implements Initializable {
         cargarCliente();
         cargarUnidades();
         configurarComboBoxCliente();
-    }    
+    }
+
+    public void inicializarValores(INotificadorOperacion observador, Envio envioEdicion){
+        this.observador = observador;
+        this.envioEdicion = envioEdicion;
+        if(envioEdicion !=null){
+            modoEdicion = true;
+            cargarDatosEdicion();
+        }
+    }
+    
+    private void cargarDatosEdicion(){
+        tfCalleOrigen.setText(this.envioEdicion.getCalleOrigen());
+        tfColoniaOrigen.setText(this.envioEdicion.getColoniaOrigen());
+        tfCPOrigen.setText(this.envioEdicion.getCodigoPostalOrigen().toString());
+        tfCiudadOrigen.setText(this.envioEdicion.getCiudadOrigen());
+        tfEstadoOrigen.setText(this.envioEdicion.getEstadoOrigen());
+        tfCosto.setText(this.envioEdicion.getCosto().toString());
+        int idCliente = obtenerIdCliente(this.envioEdicion.getIdClienteDestino());
+        cbCliente.getSelectionModel().select(idCliente);
+        tfNumGuia.setText(this.envioEdicion.getNumeroDeGuia().toString());
+        int idEstatus = obtenerEstatus(this.envioEdicion.getIdEstatus());
+        cbEstatus.getSelectionModel().select(idEstatus);
+        int idUnidad = obtenerUnidad(this.envioEdicion.getIdUnidad());
+        cbUnidad.getSelectionModel().select(idUnidad);
+        
+        tfNumGuia.setDisable(true);
+        
+    }
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
@@ -123,7 +156,12 @@ public class FXMLFormularioEnvioController implements Initializable {
         envio.setIdUnidad(idUnidad);
         
         if(sonCamposValidos(envio)){
-            guardarDatosEnvio(envio);
+            if(!modoEdicion){
+                guardarDatosEnvio(envio);
+            }else{
+                envio.setNumeroDeGuia(envioEdicion.getNumeroDeGuia());
+                editarDatosEnvio(envio);
+            }
         }else{
             Utilidades.mostrarAlertaSimple("Datos faltantes", "Existen ciertos campos que deben ser llenados, favor de verificar", Alert.AlertType.INFORMATION);
         }
@@ -139,10 +177,21 @@ public class FXMLFormularioEnvioController implements Initializable {
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Envio registrado", "El envio se registro correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
-            //observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
+            observador.notificarOperacionExitosa("Guardar", envio.getNumeroDeGuia().toString());
         }else{
             System.out.println(msj.getMensaje());
             Utilidades.mostrarAlertaSimple("Error al guardar",msj.getMensaje(), Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void editarDatosEnvio(Envio envio){
+        Mensaje msj = EnvioDAO.editarEnvio(envio);
+        if(!msj.isError()){
+            Utilidades.mostrarAlertaSimple("Envio editado","La información del envio " +envio.getNumeroDeGuia()+" se a modificado correctamente", Alert.AlertType.INFORMATION);
+            cerrarVentana();
+            observador.notificarOperacionExitosa("Editar", envio.getNumeroDeGuia().toString());
+        }else{
+            Utilidades.mostrarAlertaSimple("Error al editar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
     
@@ -174,8 +223,8 @@ public class FXMLFormularioEnvioController implements Initializable {
     }
     
     private boolean soloLetras(String cadena) {
-        return cadena.matches("[a-zA-Z ]+"); // Permite letras y espacios
-    }
+        return cadena.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); 
+}
     
     //Verifica que sea un numero
     private boolean esNumerico(String cadena) {
@@ -295,4 +344,32 @@ public class FXMLFormularioEnvioController implements Initializable {
         tfCiudadDestino.setText(cliente.getCiudad());
         tfEstadoDestino.setText(cliente.getEstado());
     }
+    
+    private int obtenerIdCliente(Integer idCliente){
+        for (int i = 0; i < cliente.size(); i++) {
+            if(idCliente == cliente.get(i).getIdCliente()){
+                return i;
+            }
+        }
+        return 0;
+    }
+    
+    private int obtenerEstatus(Integer idEstatus){
+        for (int i = 0; i < estatus.size(); i++) {
+            if(idEstatus == estatus.get(i).getIdEstatus()){
+                return i;
+            }
+        }
+        return 0;
+    }
+    
+    private int obtenerUnidad(Integer idUnidad){
+        for (int i = 0; i < unidad.size(); i++) {
+            if(idUnidad == unidad.get(i).getIdTipoUnidad()){
+                return i;
+            }
+        }
+        return 0;
+    }
+    
 }

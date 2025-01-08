@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.pojo.Colaborador;
 import fastpacketfx.pojo.Mensaje;
@@ -23,8 +24,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class FXMLEscenarioEmpleadosController implements Initializable {
+public class FXMLEscenarioEmpleadosController implements Initializable, INotificadorOperacion {
     
+    private INotificadorOperacion observador;
+    private Colaborador colaboradorEdicion;
     private ObservableList<Colaborador> colaboradores;
     @FXML
     private TextField tf_Buscar;
@@ -43,13 +46,15 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.observador = this;
+        this.colaboradorEdicion = colaboradorEdicion;
         configurarTabla();
         cargarInformacionTabla();
     }
 
     private void configurarTabla(){
         colPersonal.setCellValueFactory(new PropertyValueFactory("noPersonal"));
-        colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+        colNombre.setCellValueFactory(new PropertyValueFactory("nombreCompleto"));
         colCorreo.setCellValueFactory(new PropertyValueFactory("correo"));
         colCurp.setCellValueFactory(new PropertyValueFactory("curp"));
         colRol.setCellValueFactory(new PropertyValueFactory("rol"));
@@ -89,12 +94,17 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
-        agregar();
+        agregar(this,null);
     }
 
     @FXML
     private void onClickEditar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenarioEmpleadosController.onClickEditar()");
+        Colaborador colaborador = tbColaboradores.getSelectionModel().getSelectedItem();
+        if(colaborador !=null){
+            agregar(this,colaborador);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar Colaborador de la tabla","Para poder editar debes elecir al colaborado en la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -104,6 +114,7 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
             boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al colaborador "+ colaborador.getNombre() + "?");
             if(seElimina){
                 eliminarColaborador(colaborador.getIdColaborador());
+                observador.notificarOperacionExitosa("Eliminar", colaborador.getNombre());
             }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccionar Colaborador","Para poder eliminar debes seleccionar al colaborador de la tabla",Alert.AlertType.WARNING);
@@ -121,13 +132,14 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
         }
     }
     
-    private void agregar(){      
+    private void agregar(INotificadorOperacion observador, Colaborador colaborador){      
         try{
             Stage escenario = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioEmpleado.fxml"));
             Parent vista = cargador.load();
             //--
             FXMLFormularioEmpleadoController controlador = cargador.getController();
+            controlador.inicializarValores(observador, colaborador);
             //--
             Scene escenaFormulario = new Scene(vista);
             escenario.setScene(escenaFormulario);
@@ -135,6 +147,16 @@ public class FXMLEscenarioEmpleadosController implements Initializable {
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         }catch (Exception e){
+             e.printStackTrace(); // Imprime el stack trace completo en la consola
+             Utilidades.mostrarAlertaSimple("Error", "Ha ocurrido un error inesperado.", Alert.AlertType.ERROR);
+            }
         }
-        }
+    
+    @Override
+    public void notificarOperacionExitosa(String tipo, String nombre) {
+        System.out.println("Operacion: " + tipo);
+        System.err.println("Nombre: "+nombre);
+        cargarInformacionTabla();
+    }
+    
 }

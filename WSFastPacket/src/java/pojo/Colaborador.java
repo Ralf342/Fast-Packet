@@ -20,11 +20,12 @@ public class Colaborador {
     
     //para los alias
     private String rol;
+    private String nombreCompleto;
    
     public Colaborador() {
     }
 
-    public Colaborador(Integer idColaborador, String correo, String contrasenia, String curp, String nombre, String apellidoPaterno, String apellidoMaterno, Integer noPersonal, Integer idRol, String foto, String numLicencia, String rol) {
+    public Colaborador(Integer idColaborador, String correo, String contrasenia, String curp, String nombre, String apellidoPaterno, String apellidoMaterno, Integer noPersonal, Integer idRol, String foto, String numLicencia, String rol, String nombreCompleto) {
         this.idColaborador = idColaborador;
         this.correo = correo;
         this.contrasenia = contrasenia;
@@ -37,6 +38,7 @@ public class Colaborador {
         this.foto = foto;
         this.numLicencia = numLicencia;
         this.rol = rol;
+        this.nombreCompleto = nombreCompleto;
     }
 
     public Integer getIdColaborador() {
@@ -134,8 +136,14 @@ public class Colaborador {
     public void setRol(String rol) {
         this.rol = rol;
     }
-    
-    
-    
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
+    }
+
     
 }

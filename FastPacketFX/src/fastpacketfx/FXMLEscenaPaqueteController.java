@@ -1,5 +1,6 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.PaqueteDAO;
 import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.Paquete;
@@ -24,8 +25,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class FXMLEscenaPaqueteController implements Initializable {
+public class FXMLEscenaPaqueteController implements Initializable, INotificadorOperacion {
 
+    private INotificadorOperacion observador;
+    private Paquete paqueteEdicion;
     private ObservableList<Paquete> paquetes;
     @FXML
     private TextField tf_buscar;
@@ -46,6 +49,8 @@ public class FXMLEscenaPaqueteController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.observador = this;
+        this.paqueteEdicion = paqueteEdicion;
         configurarTabla();
         cargarInformacionTabla();
     }
@@ -94,12 +99,17 @@ public class FXMLEscenaPaqueteController implements Initializable {
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
-        agregar();
+        agregar(this,null);
     }
 
     @FXML
     private void onClickEditar(ActionEvent event) {
-        System.out.println("fastpacketfx.FXMLEscenaPaqueteController.onClickEditar()");
+        Paquete paquete = tbPaquetes.getSelectionModel().getSelectedItem();
+        if(paquete !=null){
+            agregar(this,paquete);
+        }else{
+            Utilidades.mostrarAlertaSimple("Seleccionar paquete de la tabla","Para poder editar debes elecir al paquete en la tabla", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
@@ -109,6 +119,7 @@ public class FXMLEscenaPaqueteController implements Initializable {
             boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al paquete?");
             if(seElimina){
                 eliminarPaquete(paquete.getIdPaquete());
+                observador.notificarOperacionExitosa("Eliminar", paquete.getDescripcion());
             }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccionar Paquete","Para poder eliminar debes seleccionar al paquete de la tabla",Alert.AlertType.WARNING);
@@ -126,13 +137,14 @@ public class FXMLEscenaPaqueteController implements Initializable {
         }
     }
     
-    private void agregar(){       
+    private void agregar(INotificadorOperacion observador, Paquete paquete){       
         try{
             Stage escenario = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioPaquete.fxml"));
             Parent vista = cargador.load();
             //--
             FXMLFormularioPaqueteController controlador = cargador.getController();
+            controlador.inicializarValores(observador, paquete);
             //--
             Scene escenaFormulario = new Scene(vista);
             escenario.setScene(escenaFormulario);
@@ -142,4 +154,11 @@ public class FXMLEscenaPaqueteController implements Initializable {
         }catch (Exception e){
         }
         }
+    
+    @Override
+    public void notificarOperacionExitosa(String tipo, String nombre) {
+        System.out.println("Operacion: " + tipo);
+        System.err.println("Nombre: "+nombre);
+        cargarInformacionTabla();
     }
+}
