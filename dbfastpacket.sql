@@ -121,7 +121,7 @@ VALUES
 ('Cancelado');
 
 -- tabla cliente
-INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, codigoPostal, calle, colonia, numeroCasa, estado, ciudad) 
+INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, codigoPostal, calle, colonia, numeroDeCasa, estado, ciudad) 
 VALUES
 ('Juan', 'Pérez', 'Gómez', 095554, 'juanperez@paqueteria.com', 64000, 'Calle Falsa', 'Colonia Centro', 101, 'Puebla', 'Puebla de Zaragoza'),
 ('Ana', 'López', 'Martínez', 987654, 'analopez@paqueteria.com', 64010, 'Av. Reforma', 'Colonia Norte', 202, 'Veracruz', 'Xalapa'),
@@ -131,13 +131,13 @@ VALUES
 ('Marta', 'Ramírez', 'Díaz', 953115, 'martaramirez@paqueteria.com', 64050, 'Calle Sol', 'Colonia Norte', 606, 'Mexico', 'CDMX');
 
 --  tabla envio
-INSERT INTO envio (costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, numeroOrigen, codigoPostalOrigen, fechaModificacion, idClienteDestino, idEstatus, idUnidad, idColaboradorModificacion) 
+INSERT INTO envio (costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, numeroCasaOrigen, codigoPostalOrigen, idClienteDestino, fechaModificacion, idUnidad, idColaboradorModificacion, idEstatus, motivo) 
 VALUES
-(150.75, 'México', 'Ciudad de México', 'CDMX', 'Calle Falsa', 'Colonia Centro', 101, 64000, 1, 2, 4, 1),
-(200.50, 'Guadalajara', 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2, 4, 2, 3),
-(120.30, 'Monterrey', 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3, 1, 1, 2),
-(175.60, 'Puebla', 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4, 3, 3, 1),
-(180.00, 'Cancún', 'Quintana Roo', 'Quintana Roo', 'Av. Hidalgo', 'Colonia Este', 505, 64040, 5, 5, 1, 3);
+(150.75, 'Ciudad de México', 'CDMX', 'Calle Nana', 'Colonia Centro', 101, 64000, 1, 3, 2, 1, En espera por clima),
+(200.50, 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2, 1, 1, 2, Asignado a repartidor),
+(120.30, 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3, 4, 3, 3, Esta en aduana),
+(175.60, 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4, 2, 1, 5, Compra cancelada),
+(180.00, 'Veracruz', 'CDMX', 'Av. Hidalgo', 'Colonia Este', 909, 99000, 1, 1, 1, 4, Recibido por persona);
 
 -- tabla rol
 INSERT INTO rol (tipo) 
@@ -151,7 +151,7 @@ VALUES
 INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol, numLicencia) 
 VALUES
 ('juanperez@paqueteria.com', 'r1934', 'PEJ123456HDFRRL01', 'Juan', 'Pérez', 'Gómez', 1001, 1, MXD12569),
-('analopez@paqueteria.com', 'r1235', 'LOA987654MDFRRL02', 'Ana', 'López', 'Martínez', 1002, 2,MXD03812),
+('analopez@paqueteria.com', 'r1235', 'LOA987654MDFRRL02', 'Ana', 'López', 'Martínez', 1002, 2, MXD03812),
 ('carlosgarcia@paqueteria.com', 'c1230', 'GAR13579HDFRRL03', 'Carlos', 'García', 'Rodríguez', 1003, 3, MXD07028),
 -- nuevos valores
 ('laurahernandez@paqueteria.com', 'r1203', 'HER24680MDFRRL04', 'Laura', 'Hernández', 'Sánchez', 1004, 2, MXD00362),
@@ -168,19 +168,19 @@ VALUES
 ('Hibrida');
 
 --  tabla unidad
-INSERT INTO unidad (vin, nii, modelo, marca, motivo, idTipoUnidad, idColaborador) 
+INSERT INTO unidad (vin, nii, modelo, marca, motivo, idTipoUnidad, anio, idColaborador) 
 VALUES
-(235789, 'VIN12345', 'Furgoneta 2024', 'Ford', 'Transporte mercancía pesada', 1, 1001),
-(646701, 'VIN23456', 'Furgoneta 2023', 'Toyota', 'Transporte personal y paquetes pequeños', 2, 1002),
-(346012, 'VIN34567', 'Motocicleta 2022', 'Honda', 'Entrega urgente de 1paquetes pequeños', 3, 1003),
-(456733, 'VIN45678', 'Furgoneta 2023', 'Mercedes-Benz', 'Transporte de carga pesada', 4, 1004);
+(235789, '12345', 'Land RoverSD', 'Ford', 'Transporte mercancía pesada', 1, 2002, 1),
+(646701, '23456', 'DS3 CrossBacck', 'Toyota', 'Transporte personal y paquetes pequeños', 2, 2020 ,2),
+(346012, '34567', 'Merceder TT', 'Honda', 'Entrega urgente de 1paquetes pequeños', 3, 2017 ,3),
+(456733, '45678', 'AClass23', 'Mercedes-Benz', 'Transporte de carga pesada', 4, 2024, 4);
 
 -- tabla paquete
-INSERT INTO paquete (peso, alto, ancho, profundidad, descripcion, numeroDeGuia) 
+INSERT INTO paquete (peso, alto, ancho, numeroDeGuia, idUnidad, ancho, profundidad) 
 VALUES
-(12.4, 3.5, 8.2, 9.0, 'Paquete voluminoso', 6),
-(15.0, 3.0, 8, 7.1, 'Paquete mediano', 2),
-(5.2, 1.8, 2, 5.3, 'Paquete urgente', 3),
-(25.8, 4.5, 7.6, 9.8, 'Paquete grande', 4),
-(10.5, 2.3, 5.7, 12, 'Paquete pequeño', 1),
-(3.7, 2.1, 11, 4.5, 'Paquete frágil', 5);
+(10.5, 2.3, 'Paquete aretes', 145, 1, 12, 8),
+(15, 3, 'Paquete celular', 146, 2, 7, 5),
+(5.2, 1.8, 'Paquete pc', 147, 3, 4, 2),
+(11, 2.4, 'Paquete ring', 147, 1, 5.6, 2),
+(2.5, 1.4, 'Paquete lentes', 146, 1, 3, 2),
+(6.5, 10.4, 'Paquete gato', 147,  1, 12, 2);
