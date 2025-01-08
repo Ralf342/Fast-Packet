@@ -7,20 +7,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de obtener envios-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
-        SELECT e.numeroDeGuia, 
-                c.correo AS correo,
-		e.ciudadOrigen, 
-                e.coloniaOrigen,
-                e.estadoOrigen,
-                CONCAT(e.calleOrigen, ' ', e.coloniaOrigen,' C.P:', e.codigoPostalOrigen) AS 'origen',
-                e.costo,
-                c.nombre AS 'cliente',
-                CONCAT(c.calle,' ', IFNULL(c.numeroDeCasa,'S/N'),' ', c.colonia,' C.P:', codigoPostal) AS 'destino', 
-                c.ciudad,
-                c.estado,
-                es.estatus,
-                CONCAT(cl.nombre, ' ', cl.apellidoPaterno) AS 'conductor', 
-                e.fechaModificacion
+        SELECT 
+            e.numeroDeGuia, 
+            e.ciudadOrigen, 
+            e.estadoOrigen,
+            e.calleOrigen,
+            e.coloniaOrigen,
+            e.codigoPostalOrigen,
+            CONCAT(e.calleOrigen, ' ', e.coloniaOrigen, ' C.P:', e.codigoPostalOrigen) AS 'origen',
+            e.costo,
+            idClienteDestino,
+            IFNULL(c.nombre,'Sin asignar') AS 'cliente',
+            c.calle AS calle,
+            c.numeroCasa AS numeroCasa,
+            c.colonia AS colonia,
+            IFNULL(CONCAT(c.calle, ' ', IFNULL(c.numeroCasa, 'S/N'), ' ', c.colonia, ' C.P:', c.codigoPostal),'Sin asignar') AS 'destino', 
+            IFNULL(c.ciudad,'Sin asignar') AS ciudad,
+            IFNULL(c.estado,'Sin asignar') AS estado,
+            e.idEstatus,
+            e.idUnidad,
+            es.estatus,
+                IFNULL(CONCAT(cl.nombre, ' ', cl.apellidoPaterno),'Sin asignar') AS 'conductor', 
+            e.fechaModificacion
         FROM envio e
         LEFT JOIN cliente c
             ON e.idClienteDestino = c.idCliente
@@ -36,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="registrarEnvio" parameterType="pojo.Envio">
         INSERT INTO envio
         (numeroDeGuia, costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, 
-        codigoPostalOrigen, idClienteDestino, idEstatus, idUnidad) 
+        codigoPostalOrigen, idClienteDestino, idEstatus, idUnidad,idColaboradorModificacion) 
         VALUES (
             #{numeroDeGuia},
             #{costo}, 
@@ -47,7 +55,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{codigoPostalOrigen}, 
             #{idClienteDestino},
             #{idEstatus},
-            #{idUnidad}
+            #{idUnidad},
+            #{idColaboradorModificacion}
             ) 
     </insert>
 
@@ -63,7 +72,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 codigoPostalOrigen = #{codigoPostalOrigen}, 
                 idClienteDestino = #{idClienteDestino},
                 idEstatus = #{idEstatus},
-                idUnidad = #{idUnidad}
+                idUnidad = #{idUnidad},
+                idColaboradorModificacion = #{idColaboradorModificacion}
             WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
     

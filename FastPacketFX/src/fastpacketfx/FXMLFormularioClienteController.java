@@ -182,27 +182,45 @@ public class FXMLFormularioClienteController implements Initializable {
         lbCiudadFaltante.setText(" ");
         lbEstadoFaltante.setText(" ");
         
-        //validacion del nombre completo
+        //validacion del nombre 
         if(cliente.getNombre().isEmpty()){
           camposValidos=false;
           lbNombreFaltante.setText("*Nombre faltante");
+        }else if(!cliente.getNombre().isEmpty() &&!validarNombre(cliente.getNombre())){
+            camposValidos=false;
+            lbNombreFaltante.setText("*Contiene caracteres extraños");
         }
+        //Validacion de apellido paterno
         if(cliente.getApellidoPaterno().isEmpty()){
             camposValidos=false;
             lbApellidoPaternoFaltante.setText("*Apellido faltante");
+        }else if(!cliente.getApellidoPaterno().isEmpty() &&!validarNombre(cliente.getApellidoPaterno())){
+            camposValidos=false;
+            lbApellidoPaternoFaltante.setText("*Contiene caracteres extraños");
         }
+        //Validacion de apellido materno
         if(cliente.getApellidoMaterno().isEmpty()){
             camposValidos=false;
             lbApellidoMaternoFaltante.setText("*Apellido faltante");
+        }else if(!cliente.getApellidoMaterno().isEmpty() &&!validarNombre(cliente.getApellidoMaterno())){
+            camposValidos=false;
+            lbApellidoMaternoFaltante.setText("*Contiene caracteres extraños");
         }
         //Validacion de la direccion
         if(cliente.getCalle().isEmpty()){
             camposValidos=false;
             lbCalleFaltante.setText("*Calle obligatoria");
+        }else if(!cliente.getCalle().isEmpty() &&!validarTexto(cliente.getCalle())){
+            camposValidos=false;
+            lbCalleFaltante.setText("*Contiene caracteres extraños");
         }
+        //Validacion de la colonia
         if(cliente.getColonia().isEmpty()){
             camposValidos=false;
             lbColoniaFaltante.setText("*Colonia obligatoria");
+        }else if(!cliente.getColonia().isEmpty() &&!validarTexto(cliente.getColonia())){
+            camposValidos=false;
+            lbColoniaFaltante.setText("*Contiene caracteres extraños");
         }
         //Validacion del codigo postal
         if(!tfCodigoPostal.getText().isEmpty() && !tfCodigoPostal.getText().matches("\\d+")){
@@ -213,7 +231,7 @@ public class FXMLFormularioClienteController implements Initializable {
             lbCodigoPostalFaltante.setText("*Código Postal necesario");
         }
         //validacion del numero de casa
-        if (!tfNumCasa.getText().isEmpty() && !tfNumCasa.getText().matches("\\d+")) {
+        if (!tfNumCasa.getText().isEmpty() && !tfNumCasa.getText().matches("\\d")) {
             camposValidos = false;
             lbNumeroCasaFaltante.setText("*Número de casa inválido");
         }
@@ -226,11 +244,17 @@ public class FXMLFormularioClienteController implements Initializable {
         if(cliente.getCiudad().isEmpty()){
             camposValidos=false;
             lbCiudadFaltante.setText("*Ciudad obligatoria");
+        }else if(!cliente.getCiudad().isEmpty() &&!validarTexto(cliente.getCiudad())){
+            camposValidos=false;
+            lbCiudadFaltante.setText("*Contiene caracteres extraños");
         }
         //validacion del estado
         if(cliente.getEstado().isEmpty()){
             camposValidos=false;
             lbEstadoFaltante.setText("*Estado obligatorio");
+        }else if(!cliente.getEstado().isEmpty() &&!validarTexto(cliente.getEstado())){
+            camposValidos=false;
+            lbEstadoFaltante.setText("*Contiene caracteres extraños");
         }
         //validacion del Correo
         if(cliente.getCorreo().isEmpty()){
@@ -245,6 +269,18 @@ public class FXMLFormularioClienteController implements Initializable {
     
     private boolean esNumerico(String cadena) {
         return cadena.matches("\\d+"); // Verifica que la cadena contenga solo dígitos
+    }
+    
+    public boolean validarTexto(String texto) {
+        // La expresión regular permite letras, espacios y acentos.
+        String valido = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\.\\s]+$";
+        return texto.matches(valido);
+    }
+    
+    public boolean validarNombre(String texto) {
+        // La expresión regular permite letras, espacios y acentos.
+        String valido = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$";
+        return texto.matches(valido);
     }
     
      private void cerrarVentana(){
