@@ -57,16 +57,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             apellidoPaterno,
             apellidoMaterno,
             telefono,
-            CONCAT (calle, ' ',  colonia, ' ', numeroDeCasa, ' ', codigoPostal) AS 'direccion',
-            CONCAT (calle, ' ', IFNULL(numeroDeCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS 'direccion',
+            CONCAT (calle, ' ', IFNULL(numeroCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS 'direccion',
             calle,
-            numeroDeCasa,
+            numeroCasa,
             colonia,
             codigoPostal,
             estado,
             ciudad
         FROM cliente
-        WHERE correo LIKE CONCAT( #{correo}, '%');
+        WHERE correo LIKE CONCAT(#{correo}, '%');
     </select>
     
     <select id="buscarCliente" resultType="pojo.Cliente">
