@@ -57,15 +57,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             apellidoPaterno,
             apellidoMaterno,
             telefono,
-<<<<<<< HEAD
             CONCAT (calle, ' ',  colonia, ' ', numeroDeCasa, ' ', codigoPostal) AS 'direccion',
-=======
-            CONCAT (calle, ' ', IFNULL(numeroCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS 'direccion',
+            CONCAT (calle, ' ', IFNULL(numeroDeCasa,'S/N'), ' ', colonia, ' ',  ' ',codigoPostal) AS 'direccion',
             calle,
-            numeroCasa,
+            numeroDeCasa,
             colonia,
             codigoPostal,
->>>>>>> 48fc20da8e1ab95033d3da7069fe18e3588ab57e
             estado,
             ciudad
         FROM cliente

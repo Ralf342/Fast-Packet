@@ -41,30 +41,11 @@ class DetalleEnvioActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Inicialización de binding
         binding = ActivityDetalleEnvioBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d("DetalleEnvioActivity", "metodoOnCreate: Iniciando serialización de envio")
         serializarEnvio()
     }
-
-    //para que se devuelva el estatus actualizado de la otra
-    //activity de actualizar estatus a esta
-    private val actualizarEstatusLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data = result.data
-                if (data != null) {
-                    val nuevoEstatus = data.getStringExtra("nuevoEstatus") ?: ""
-                    val motivo = data.getStringExtra("motivo") ?: ""
-
-                    // Actualizar los datos en la UI o la base de datos
-                    binding.tvStatus.text = nuevoEstatus
-                    Log.d("DetalleEnvioActivity", "Nuevo estatus: $nuevoEstatus, Motivo: $motivo")
-                }
-            }
-        }
-
 
     override fun onStart() {
         super.onStart()
@@ -226,11 +207,11 @@ class DetalleEnvioActivity : AppCompatActivity() {
     private fun irActualizarEstatus() {
         Log.d("DetalleEnvioActivity", "irActualizarEstatus: Redirigiendo a la actividad de actualización de estatus")
 
-       // para el error al presionar el btn de actualizar es el m de abajo
+        // para el error al presionar el btn de actualizar es el m de abajo
         val gson = Gson()
         val estatusJson = gson.toJson(Estatus(
             idEstatus = envio.idEstatus,
-            estatus = envio.estatus ?: "",
+            estatus = envio.estatus ?: ""
         ))
         val intent = Intent(this, ActualizarEstatusActivity::class.java)
         intent.putExtra("estatus", estatusJson)
@@ -243,3 +224,4 @@ class DetalleEnvioActivity : AppCompatActivity() {
         finish()
     }
 }
+

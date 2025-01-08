@@ -1,15 +1,14 @@
 package com.example.fastpacketvmovil
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fastpacketvmovil.adapter.ColaboradorAdapter
 import com.example.fastpacketvmovil.databinding.ActivityActualizarEstatusBinding
+import com.example.fastpacketvmovil.poko.Envio
 import com.example.fastpacketvmovil.poko.Estatus
 import com.example.fastpacketvmovil.poko.Mensaje
-import com.example.fastpacketvmovil.poko.Unidad
 import com.example.fastpacketvmovil.util.Constantes
 import com.google.gson.Gson
 import com.koushikdutta.ion.Ion

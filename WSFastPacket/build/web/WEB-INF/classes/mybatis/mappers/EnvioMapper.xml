@@ -7,7 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de obtener envios-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
-<<<<<<< HEAD
         SELECT e.numeroDeGuia, 
                 c.correo AS correo,
 		e.ciudadOrigen, 
@@ -22,30 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 es.estatus,
                 CONCAT(cl.nombre, ' ', cl.apellidoPaterno) AS 'conductor', 
                 e.fechaModificacion
-=======
-        SELECT 
-            e.numeroDeGuia, 
-            e.ciudadOrigen, 
-            e.estadoOrigen,
-            e.calleOrigen,
-            e.coloniaOrigen,
-            e.codigoPostalOrigen,
-            CONCAT(e.calleOrigen, ' ', e.coloniaOrigen, ' C.P:', e.codigoPostalOrigen) AS 'origen',
-            e.costo,
-            idClienteDestino,
-            IFNULL(c.nombre,'Sin asignar') AS 'cliente',
-            c.calle AS calle,
-            c.numeroCasa AS numeroCasa,
-            c.colonia AS colonia,
-            IFNULL(CONCAT(c.calle, ' ', IFNULL(c.numeroCasa, 'S/N'), ' ', c.colonia, ' C.P:', c.codigoPostal),'Sin asignar') AS 'destino', 
-            IFNULL(c.ciudad,'Sin asignar') AS ciudad,
-            IFNULL(c.estado,'Sin asignar') AS estado,
-            e.idEstatus,
-            e.idUnidad,
-            es.estatus,
-            IFNULL(CONCAT(cl.nombre, ' ', cl.apellidoPaterno),'Sin asignar') AS 'conductor', 
-            e.fechaModificacion
->>>>>>> 48fc20da8e1ab95033d3da7069fe18e3588ab57e
         FROM envio e
         LEFT JOIN cliente c
             ON e.idClienteDestino = c.idCliente

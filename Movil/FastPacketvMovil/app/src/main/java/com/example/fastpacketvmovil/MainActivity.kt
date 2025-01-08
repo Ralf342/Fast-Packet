@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var conductor: Colaborador
-
+    private lateinit var cliente: Cliente
+    private lateinit var estatus: Estatus
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +46,24 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
 
     override fun onStart() {
         super.onStart()
-        val jsonConductor = intent.getStringExtra("conductor")
-        if (jsonConductor.isNullOrEmpty()) {
-            Toast.makeText(this, "Error: Datos del conductor no disponibles", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
+        try {
+            val jsonConductor = intent.getStringExtra("conductor")
+            if (jsonConductor.isNullOrEmpty()) {
+                Log.e("ERROR", "JSON del conductor es nulo o vacío")
+                Toast.makeText(this, "Error: Datos del conductor no disponibles", Toast.LENGTH_SHORT).show()
+                finish()
+                return
+            }
 
-        val gson = Gson()
-        conductor = gson.fromJson(jsonConductor, Colaborador::class.java)
-        obtenerEnvios()
+            val gson = Gson()
+            conductor = gson.fromJson(jsonConductor, Colaborador::class.java)
+            Log.d("CONDUCTOR", "Conductor inicializado: $conductor")
+            obtenerEnvios()
+        } catch (e: Exception) {
+            Log.e("ERROR", "Error en onStart: ${e.message}")
+            e.printStackTrace()
+            finish()
+        }
     }
 
     /*@SuppressLint("SetTextI18n")
@@ -87,22 +96,39 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
             .asString()
             .setCallback { e, result ->
                 if (e == null){
+                    Log.d("RESPONSE", "Respuesta exitosa: $result") // Agregar este log
                     serializarEnvios(result)
-                }else
+                }else{
+                    Log.e("ERROR", "Error en la petición: ${e.message}") // Agregar este log
                     Toast.makeText(this@MainActivity,"error",Toast.LENGTH_LONG).show()
+                }
             }
     }
 
     private fun serializarEnvios(json: String){
-        val gson = Gson()
-        val type = object : TypeToken<List<Envio>>() {}.type
-        val listaEnvios: List<Envio> = gson.fromJson(json, type)
-        if(listaEnvios.isNotEmpty())
-            cargarEnvios(listaEnvios)
+        try {
+            val gson = Gson()
+            val type = object : TypeToken<List<Envio>>() {}.type
+            val listaEnvios: List<Envio> = gson.fromJson(json, type)
+            Log.d("ENVIOS", "Número de envíos recibidos: ${listaEnvios.size}") // Agregar este log
+            if(listaEnvios.isNotEmpty()) {
+                cargarEnvios(listaEnvios)
+            } else {
+                Log.d("ENVIOS", "La lista de envíos está vacía")
+            }
+        } catch (e: Exception) {
+            Log.e("ERROR", "Error al serializar JSON: ${e.message}")
+            e.printStackTrace()
+        }
     }
 
     private fun cargarEnvios(envios: List<Envio>){
-        binding.rvEnvios.adapter = EnvioAdapter(envios, this@MainActivity)
+        try {
+            binding.rvEnvios.adapter = EnvioAdapter(envios, this@MainActivity)
+        } catch (e: Exception) {
+            Log.e("ERROR", "Error al cargar el adapter: ${e.message}")
+            e.printStackTrace()
+        }
     }
 
     private fun cerrarSesion() {
@@ -112,11 +138,11 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
         finish()
     }
 
-    /*fun onFilaClick() {
+    fun onFilaClick() {
         Toast.makeText(this, "Fila clickeada", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, DetalleEnvioActivity::class.java)
         startActivity(intent)
-    }*/
+    }
 
     override fun clickDetalleEnvio(
         envio: Envio,

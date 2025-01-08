@@ -78,12 +78,19 @@
         android:minHeight="100dp"
         android:padding="8dp" />
 
+    <Spinner
+        android:id="@+id/spModificacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/edittext_shadow"/>
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="28dp"
         android:backgroundTint="#45a049"
         android:elevation="4dp"
         android:text="Guardar"
@@ -96,7 +103,7 @@
         android:id="@+id/btnVolver"
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="9dp"
         android:backgroundTint="#45a049"
         android:elevation="4dp"
         android:text="Volver"
