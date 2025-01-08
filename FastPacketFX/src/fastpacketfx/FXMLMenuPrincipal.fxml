@@ -120,15 +120,17 @@
                   </Label>
                </children>
             </Pane>
-            <Button layoutX="711.0" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="76.0" prefWidth="84.0" style="-fx-background-color: NULL;" />
-            <ImageView fitHeight="80.0" fitWidth="70.0" layoutX="725.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@recursos/Salida.png" />
-               </image>
-               <effect>
-                  <ColorAdjust brightness="1.0" />
-               </effect>
-            </ImageView>
+            <Button layoutX="695.0" mnemonicParsing="false" onAction="#onClickSalir" prefHeight="100.0" prefWidth="106.0" style="-fx-background-color: NULL;">
+               <graphic>
+                  <ImageView fitHeight="79.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@recursos/Salida.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic></Button>
             <Pane layoutX="115.0" prefHeight="70.0" prefWidth="595.0">
                <children>
                   <Label layoutX="181.0" layoutY="9.0" text="FAST-PACKET" textFill="WHITE">

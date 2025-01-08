@@ -1,5 +1,9 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
+import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.Login;
+import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,13 +15,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class FXMLMenuPrincipalController implements Initializable {
 
+    private INotificadorOperacion observador;
+    private Login login;
     private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     @FXML
@@ -50,7 +60,11 @@ public class FXMLMenuPrincipalController implements Initializable {
                 });
             }
         }, 0, 1000); // Actualización cada segundo
-    }    
+    }
+
+    public void inicializarValores(Login login){
+        this.login = login;
+    }
 
     @FXML
     private void onClickEmpleado(ActionEvent event) {
@@ -74,7 +88,8 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void onClickEnvio(ActionEvent event) {
-        cargarEscenaEnvio();
+        cargarEscenaEnvio(login);
+        System.out.println(login.getColaborador().getNoPersonal());
     }
     
     private void cargarEscenaEmpleado(){
@@ -125,7 +140,7 @@ public class FXMLMenuPrincipalController implements Initializable {
         }
     }
     
-    private void cargarEscenaEnvio(){
+    private void cargarEscenaEnvio(Login login){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("FXMLEscenarioEnvio.fxml"));
@@ -133,12 +148,40 @@ public class FXMLMenuPrincipalController implements Initializable {
             pn_EscenarioUno.getChildren().clear();
             pn_EscenarioUno.getChildren().add(pane);
             FXMLEscenarioEnvioController ee = loader.getController();
+            ee.inicializarValores(login);
         } catch (Exception e) {
         }
+    }
+    
+    private void cerrarVentana(){
+        Stage escenario = (Stage)btn_Empleado.getScene().getWindow();
+        escenario.close();
+        ( (Stage) btn_Empleado.getScene().getWindow()).close();
     }
     
 
     @FXML
     private void onClickSalir(ActionEvent event) {
+        boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Cerrar sesión", "¿Estas seguro de que quieres cerrar sesión?");
+        if(seElimina){
+            try {
+            // Cargar el nuevo escenario desde el archivo FXML
+            Stage escenario = new Stage();
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLInicioSesion.fxml"));
+            Parent vista = cargador.load();
+            
+            // Configurar y mostrar el nuevo escenario
+            escenario.setTitle("Inicio Sesion");
+            FXMLInicioSesionController controlador = cargador.getController();
+            Scene escenaFormulario = new Scene(vista);
+            escenario.setScene(escenaFormulario);
+            cerrarVentana();
+            escenario.initModality(Modality.APPLICATION_MODAL);
+            escenario.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            }
+        }
     }
+
 }

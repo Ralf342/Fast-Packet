@@ -1,6 +1,8 @@
 package fastpacketfx;
 
+import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.LoginDAO;
+import fastpacketfx.pojo.Colaborador;
 import fastpacketfx.pojo.Login;
 import fastpacketfx.utilidades.Utilidades;
 import java.io.IOException;
@@ -33,10 +35,11 @@ public class FXMLInicioSesionController implements Initializable {
     @FXML
     private Button btn_Ingresar;
     
+    private Login login;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    }
 
     @FXML
     private void onClickIngresar(ActionEvent event) {
@@ -72,7 +75,7 @@ public class FXMLInicioSesionController implements Initializable {
                     respuestaLogin.getColaborador().getApellidoPaterno(),Alert.AlertType.INFORMATION);
             tf_numeroPersonal.setText("");
             pf_password.setText("");
-            irMenuPrincipal();
+            irMenuPrincipal(respuestaLogin);
         }else{
             Utilidades.mostrarAlertaSimple("Credenciales incorrectas","Favor de verificar sus credenciales e intentarlo de nuevo",Alert.AlertType.ERROR);
             pf_password.setText("");
@@ -80,16 +83,22 @@ public class FXMLInicioSesionController implements Initializable {
     }
     
     
-    private void irMenuPrincipal(){
+    private void irMenuPrincipal(Login login){
         try{
             Stage escenarioBase = (Stage) btn_Ingresar.getScene().getWindow();
-            Parent menuPrincipal = FXMLLoader.load(getClass().getResource("FXMLMenuPrincipal.fxml"));
-            Scene escenaPrincipal = new Scene(menuPrincipal);
+            FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLMenuPrincipal.fxml"));
+            Parent vista = cargador.load();
+            //
+            FXMLMenuPrincipalController controlador = cargador.getController();
+            controlador.inicializarValores(login);
+            //
+            Scene escenaPrincipal = new Scene(vista);
             escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("Menu");
+            escenarioBase.setTitle("Inicio");
             escenarioBase.show();
         }catch(IOException e){
             
         }
     }
+
 }
