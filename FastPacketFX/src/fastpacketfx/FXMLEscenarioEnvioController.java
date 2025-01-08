@@ -5,6 +5,7 @@ import fastpacketfx.modelo.dao.ClienteDAO;
 import fastpacketfx.modelo.dao.EnvioDAO;
 import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Envio;
+import fastpacketfx.pojo.Login;
 import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
 import java.util.List;
@@ -29,6 +30,7 @@ public class FXMLEscenarioEnvioController implements Initializable, INotificador
 
     private INotificadorOperacion observador;
     private Envio envioEdicion;
+    private Login login;
     private ObservableList<Envio> envios;
     @FXML
     private TextField tf_buscar;
@@ -65,6 +67,10 @@ public class FXMLEscenarioEnvioController implements Initializable, INotificador
         this.envioEdicion = envioEdicion;
         configurarTabla();
         cargarInformacionTabla();
+    }
+    
+    public void inicializarValores(Login login){
+           this.login = login;
     }
 
     private void configurarTabla(){
@@ -115,27 +121,28 @@ public class FXMLEscenarioEnvioController implements Initializable, INotificador
 
     @FXML
     private void onClickAgregar(ActionEvent event) {
-        agregar(this,null);
+        agregar(this,null,login);
     }
 
     @FXML
     private void onClickActualizar(ActionEvent event) {
         Envio envio = tbEnvios.getSelectionModel().getSelectedItem();
+        System.out.println(login.getColaborador().getIdColaborador());
         if(envio !=null){
-            agregar(this,envio);
+            agregar(this,envio,login);
         }else{
             Utilidades.mostrarAlertaSimple("Seleccionar envio de la tabla","Para poder editar debes elecir al envio en la tabla", Alert.AlertType.WARNING);
         }
     }
     
-    private void agregar(INotificadorOperacion observador, Envio envio){
+    private void agregar(INotificadorOperacion observador, Envio envio, Login login){
         try{
             Stage escenario = new Stage();
             FXMLLoader cargador = new FXMLLoader(getClass().getResource("FXMLFormularioEnvio.fxml"));
             Parent vista = cargador.load();
             //--
             FXMLFormularioEnvioController controlador = cargador.getController();
-            controlador.inicializarValores(observador, envio);
+            controlador.inicializarValores(observador, envio, login);
             //--
             Scene escenaFormulario = new Scene(vista);
             escenario.setScene(escenaFormulario);
@@ -151,6 +158,5 @@ public class FXMLEscenarioEnvioController implements Initializable, INotificador
         System.err.println("Nombre: "+nombre);
         cargarInformacionTabla();
     }
-    
     
 }

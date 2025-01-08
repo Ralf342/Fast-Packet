@@ -8,6 +8,7 @@ import fastpacketfx.pojo.Cliente;
 import fastpacketfx.pojo.Envio;
 import fastpacketfx.pojo.Estatus;
 import fastpacketfx.pojo.ListaClientes;
+import fastpacketfx.pojo.Login;
 import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.pojo.Unidad;
 import fastpacketfx.utilidades.Utilidades;
@@ -29,6 +30,7 @@ public class FXMLFormularioEnvioController implements Initializable {
     
     private INotificadorOperacion observador;
     private Envio envioEdicion;
+    private Login login;
     private boolean modoEdicion;
 
     private ObservableList<Estatus> estatus;
@@ -96,9 +98,11 @@ public class FXMLFormularioEnvioController implements Initializable {
         configurarComboBoxCliente();
     }
 
-    public void inicializarValores(INotificadorOperacion observador, Envio envioEdicion){
+    public void inicializarValores(INotificadorOperacion observador, Envio envioEdicion, Login login){
         this.observador = observador;
         this.envioEdicion = envioEdicion;
+        this.login = login;
+        System.out.println(login.getColaborador().getIdColaborador());
         if(envioEdicion !=null){
             modoEdicion = true;
             cargarDatosEdicion();
@@ -154,6 +158,7 @@ public class FXMLFormularioEnvioController implements Initializable {
         envio.setIdClienteDestino(idCliente);
         envio.setIdEstatus(idestatus);
         envio.setIdUnidad(idUnidad);
+        envio.setIdColaboradorModificacion(login.getColaborador().getIdColaborador());
         
         if(sonCamposValidos(envio)){
             if(!modoEdicion){
