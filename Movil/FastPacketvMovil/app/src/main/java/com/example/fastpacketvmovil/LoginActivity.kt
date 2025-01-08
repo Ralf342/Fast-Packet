@@ -10,6 +10,7 @@ import com.example.fastpacketvmovil.databinding.ActivityLoginBinding
 import com.example.fastpacketvmovil.poko.LoginColaborador
 import com.example.fastpacketvmovil.util.Constantes
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import com.koushikdutta.ion.Ion
 
 class LoginActivity : AppCompatActivity() {
@@ -89,4 +90,5 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 }

@@ -7,28 +7,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de obtener envios-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
-        SELECT 
-            e.numeroDeGuia, 
-            e.ciudadOrigen, 
-            e.estadoOrigen,
-            e.calleOrigen,
-            e.coloniaOrigen,
-            e.codigoPostalOrigen,
-            CONCAT(e.calleOrigen, ' ', e.coloniaOrigen, ' C.P:', e.codigoPostalOrigen) AS 'origen',
-            e.costo,
-            idClienteDestino,
-            IFNULL(c.nombre,'Sin asignar') AS 'cliente',
-            c.calle AS calle,
-            c.numeroCasa AS numeroCasa,
-            c.colonia AS colonia,
-            IFNULL(CONCAT(c.calle, ' ', IFNULL(c.numeroCasa, 'S/N'), ' ', c.colonia, ' C.P:', c.codigoPostal),'Sin asignar') AS 'destino', 
-            IFNULL(c.ciudad,'Sin asignar') AS ciudad,
-            IFNULL(c.estado,'Sin asignar') AS estado,
-            e.idEstatus,
-            e.idUnidad,
-            es.estatus,
-            IFNULL(CONCAT(cl.nombre, ' ', cl.apellidoPaterno),'Sin asignar') AS 'conductor', 
-            e.fechaModificacion
+        SELECT e.numeroDeGuia, 
+                c.correo AS correo,
+		e.ciudadOrigen, 
+                e.coloniaOrigen,
+                e.estadoOrigen,
+                CONCAT(e.calleOrigen, ' ', e.coloniaOrigen,' C.P:', e.codigoPostalOrigen) AS 'origen',
+                e.costo,
+                c.nombre AS 'cliente',
+                CONCAT(c.calle,' ', IFNULL(c.numeroDeCasa,'S/N'),' ', c.colonia,' C.P:', codigoPostal) AS 'destino', 
+                c.ciudad,
+                c.estado,
+                es.estatus,
+                CONCAT(cl.nombre, ' ', cl.apellidoPaterno) AS 'conductor', 
+                e.fechaModificacion
         FROM envio e
         LEFT JOIN cliente c
             ON e.idClienteDestino = c.idCliente
@@ -173,6 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--mapper para ver detalles de envios app movil -->
     <select id="detalleEnvios" resultType="pojo.Envio">
         SELECT 
+        e.numeroDeGuia,
         CONCAT(e.calleOrigen, ' ', e.coloniaOrigen, ' ', e.numeroCasaOrigen, ' ', e.codigoPostalOrigen) AS direccionOrigen,
         CONCAT(c.calle, ' ' , c.colonia, ' ' , c.numeroDeCasa, ' ', c.codigoPostal) AS direccion_destino, 
         CONCAT('NoGuia ', p.numeroDeGuia, ' ', p.descripcion) AS paquetes_contenidos,
@@ -185,7 +178,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN paquete p
         ON e.numeroDeGuia = p.numeroDeGuia
         INNER JOIN estatus es
-        ON e.idEstatus = es.idEstatus;
+        ON e.idEstatus = es.idEstatus
+        WHERE e.numeroDeGuia = #{numeroDeGuia};
     </select>
+    
     
 </mapper>
