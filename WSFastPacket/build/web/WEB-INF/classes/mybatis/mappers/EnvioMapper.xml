@@ -103,9 +103,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <!--mapper de servicio de actualiar envio estatus-->
-    <update id="actualizarEstatusEnvio" parameterType="pojo.Envio">
+    <update id="actualizarEstatusEnvio" parameterType="pojo.Envio">   
         UPDATE envio
-            SET estatus = #{estatus}
+            SET idEstatus = idEstatus,
+            motivoModificacion = IFNULL(#{motivoModificacion},'Ninguno'),
+            idColaboradorModificacion =#{idColaboradorModificacion}
         WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
     

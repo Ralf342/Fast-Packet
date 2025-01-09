@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fastpacketvmovil.adapter.ColaboradorAdapter
 import com.example.fastpacketvmovil.databinding.ActivityActualizarEstatusBinding
-import com.example.fastpacketvmovil.poko.Envio
 import com.example.fastpacketvmovil.poko.Estatus
 import com.example.fastpacketvmovil.poko.Mensaje
 import com.example.fastpacketvmovil.util.Constantes
@@ -30,10 +28,11 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         Log.d("ActualizarEstatusActivity", "onStart: Configurando listeners")
         binding.btnGuardar.setOnClickListener {
             if (sonCamposValidos()) {
-                val nuevoEstatus = obtenerEstatusSeleccionado()
-                editarEstatus(nuevoEstatus)
+                val nuevoEstatus = obtenerEstatusSeleccionado() // Esto te devuelve un Pair
+                editarEstatus(nuevoEstatus) // Pasamos el Pair directamente
             }
         }
+
 
         binding.btnVolver.setOnClickListener {
             volver()
@@ -78,21 +77,19 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         }
     }
 
-    private fun obtenerEstatusSeleccionado(): Estatus {
-        val nuevoEstatusTexto = when (binding.rgEstado.checkedRadioButtonId) {
-            R.id.rbEnTransito -> "En Tránsito"
-            R.id.rbDetenido -> "Detenido"
-            R.id.rbEntregado -> "Entregado"
-            R.id.rbPendienteEntrega -> "Pendiente Entrega"
-            R.id.rbCancelado -> "Cancelado"
-            else -> estatus.estatus
+    private fun obtenerEstatusSeleccionado(): Int {
+        val numero = when (binding.rgEstado.checkedRadioButtonId) {
+            R.id.rbEnTransito -> 1
+            R.id.rbDetenido -> 2
+            R.id.rbEntregado -> 3
+            R.id.rbPendienteEntrega -> 4
+            R.id.rbCancelado -> 5
+            else -> 0 // Valor por defecto si no hay selección
         }
 
-        return Estatus(
-            idEstatus = estatus.idEstatus,
-            estatus = nuevoEstatusTexto
+        Log.d("ActualizarEstatusActivity", "Número seleccionado: $numero")
 
-        )
+        return numero
     }
 
     private fun sonCamposValidos(): Boolean {
@@ -103,38 +100,40 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         return true
     }
 
-    /*private fun editarEstatus(estatus: Estatus) {
-        Log.d("ActualizarEstatusActivity", "editarEstatus: Actualizando estatus: $estatus")
-        val gson = Gson()
-        val parametros = gson.toJson(estatus)
 
+    private fun editarEstatus(numeroSeleccionado: Int) {
+        // Obtener el texto del motivo ingresado por el usuario
+        val motivo = binding.etMotivo.text.toString().trim()
+
+        // Validar que el motivo no esté vacío
+        if (motivo.isEmpty()) {
+            Toast.makeText(this, "Por favor ingresa un motivo", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        Log.d("ActualizarEstatusActivity", "editarEstatus: Número seleccionado: $numeroSeleccionado, Motivo: $motivo")
+
+        val gson = Gson()
+
+        // Crear el mapa de parámetros
+        val parametros = mapOf(
+            "numero" to numeroSeleccionado,  // Número asociado al RadioButton
+            "motivo" to motivo               // Texto del motivo ingresado
+        )
+        Log.d("ActualizarEstatusActivity", "editarEstatus: Parámetros: $parametros")
+
+        // Convertir los parámetros a JSON
+        val parametrosJson = gson.toJson(parametros)
+
+        // Enviar la solicitud PUT al servidor
         Ion.with(this)
             .load("PUT", "${Constantes().URL_WS}/envio/actualizarEstatusEnvio")
             .setHeader("Content-Type", "application/json")
-            .setStringBody(parametros)
+            .setStringBody(parametrosJson)
             .asString()
             .setCallback { e, result ->
                 if (e == null && result != null) {
-                    respuestaEdicion(result)
-                } else {
-                    Log.e("ActualizarEstatusActivity", "editarEstatus: Error: ${e?.message}")
-                    mostrarError("Error al actualizar el estatus")
-                }
-            }
-    }*/
-    private fun editarEstatus(estatus: Estatus) {
-        Log.d("ActualizarEstatusActivity", "editarEstatus: Actualizando estatus: $estatus")
-        val gson = Gson()
-        // aca se asegura q el objeto Estatus enviado no incluya el número de guía innecesario
-        val parametros = gson.toJson(Estatus(idEstatus = estatus.idEstatus, estatus = estatus.estatus))
-
-        Ion.with(this)
-            .load("PUT", "${Constantes().URL_WS}/envio/actualizarEstatusEnvio")
-            .setHeader("Content-Type", "application/json")
-            .setStringBody(parametros)
-            .asString()
-            .setCallback { e, result ->
-                if (e == null && result != null) {
+                    Log.d("ActualizarEstatusActivity", "editarEstatus: Info: $result")
                     respuestaEdicion(result)
                 } else {
                     Log.e("ActualizarEstatusActivity", "editarEstatus: Error: ${e?.message}")
@@ -142,6 +141,8 @@ class ActualizarEstatusActivity : AppCompatActivity() {
                 }
             }
     }
+
+
 
 
     private fun respuestaEdicion(resultado: String) {

@@ -26,6 +26,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.koushikdutta.ion.Ion
 
+
 class DetalleEnvioActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetalleEnvioBinding
@@ -224,4 +225,3 @@ class DetalleEnvioActivity : AppCompatActivity() {
         finish()
     }
 }
-

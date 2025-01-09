@@ -103,10 +103,12 @@ public class WSEnvio {
         try{
             Gson gson= new Gson();
             Envio envio = gson.fromJson(jsonEnvio, Envio.class);
-            if(envio.getNumeroDeGuia() != null && envio.getIdEstatus()!= null){
+            if(envio.getNumeroDeGuia() != null && envio.getIdEstatus()!= null && envio.getMotivoModificacion()!= null 
+                    && envio.getIdColaboradorModificacion()!=null){
               return ImpEnvio.actualizarEstatusEnvio(envio);
             }else{
-                return new Mensaje(true, "Numero de guia del envio es vacio o incorrecto para actualizarlo");
+                //return new Mensaje(true, "Numero de guia del envio es vacio o incorrecto para actualizarlhjhhho");
+                return new Mensaje(true,"No tiene nada: "+envio+"");
             }
         }catch(Exception e){
             e.printStackTrace();
