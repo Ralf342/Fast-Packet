@@ -122,34 +122,26 @@ public class FXMLEscenarioUnidadesController implements Initializable,INotificad
         Unidad unidad = tvUnidad.getSelectionModel().getSelectedItem();
         if (unidad != null) {
             TextInputDialog dialogoTexto = new TextInputDialog();
-            dialogoTexto.setTitle("Eliminar Unidad");
-            dialogoTexto.setHeaderText("Motivo de la eliminación");
-            dialogoTexto.setContentText("Por favor, ingresa el motivo de la eliminación:");
+            dialogoTexto.setTitle("Dar de baja Unidad");
+            dialogoTexto.setHeaderText("Motivo de la baja");
+            dialogoTexto.setContentText("Por favor, ingresa el motivo de la baja:");
             Optional<String> resultado = dialogoTexto.showAndWait();
 
             if (resultado.isPresent() && !resultado.get().isEmpty()) {
                 String motivo = resultado.get();
-                boolean seElimina = Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estás seguro de eliminar la unidad?");
-                if (seElimina) {
-                    eliminarColaborador(unidad.getIdUnidad());
-                    observador.notificarOperacionExitosa("Eliminar", unidad.getVin());
-                    Utilidades.mostrarAlertaSimple("Unidad Eliminada", "La unidad ha sido eliminada. Motivo: " + motivo, Alert.AlertType.INFORMATION);
+                unidad.setMotivo(motivo);
+                unidad.setBaja(2);
+                boolean baja = Utilidades.mostrarAlertaConfirmacion("Baja", "¿Estás seguro de quieres dar de baja la unidad?");
+                if (baja) {
+                    UnidadDAO.darBaja(unidad);
+                    observador.notificarOperacionExitosa("Baja", unidad.getVin());
+                    Utilidades.mostrarAlertaSimple("Unidad dada de baja", "La unidad ha sido dada de baja. Motivo: " + motivo, Alert.AlertType.INFORMATION);
                 }
             } else {
-                Utilidades.mostrarAlertaSimple("Acción cancelada", "No se proporcionó un motivo, la eliminación fue cancelada.", Alert.AlertType.WARNING);
+                Utilidades.mostrarAlertaSimple("Acción cancelada", "No se proporcionó un motivo, fue cancelado.", Alert.AlertType.WARNING);
             }
         } else {
-            Utilidades.mostrarAlertaSimple("Seleccionar Unidad", "Para poder eliminar debes seleccionar una unidad de la tabla.", Alert.AlertType.WARNING);
-        }
-    }
-    
-    private void eliminarColaborador(Integer idUnidad){
-        Mensaje msj = UnidadDAO.borrarUnidad(idUnidad);
-        if(!msj.isError()){
-            Utilidades.mostrarAlertaSimple("Unidad eliminada","La información de la unidad se a borrado correctamente", Alert.AlertType.INFORMATION);
-            //observador.notificarOperacionExitosa("Eliminar", null);
-        }else{
-            Utilidades.mostrarAlertaSimple("Error al borrar", msj.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Seleccionar Unidad", "Para poder dar de baja debes seleccionar una unidad de la tabla.", Alert.AlertType.WARNING);
         }
     }
     

@@ -231,7 +231,7 @@ public class FXMLFormularioClienteController implements Initializable {
             lbCodigoPostalFaltante.setText("*Código Postal necesario");
         }
         //validacion del numero de casa
-        if (!tfNumCasa.getText().isEmpty() && !tfNumCasa.getText().matches("\\d")) {
+        if (!tfNumCasa.getText().isEmpty() && !tfNumCasa.getText().matches("\\d+")) {
             camposValidos = false;
             lbNumeroCasaFaltante.setText("*Número de casa inválido");
         }

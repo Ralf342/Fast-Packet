@@ -100,11 +100,11 @@ public class FXMLFormularioPaqueteController implements Initializable {
         String descripcion = ta_Descripcion.getText();
         String altoString = tf_alto.getText();
         Float alto = (altoString.isEmpty() || !esNumerico(altoString)) ?  0 : Float.valueOf(altoString);
-        String anchoString = tf_alto.getText();
+        String anchoString = tf_ancho.getText();
         Float ancho = (anchoString.isEmpty() || !esNumerico(anchoString)) ?  0 : Float.valueOf(anchoString);
-        String profundidadString = tf_alto.getText();
+        String profundidadString = tf_profundidad.getText();
         Float profundidad = (profundidadString.isEmpty() || !esNumerico(profundidadString)) ?  0 : Float.valueOf(profundidadString);
-        String pesoString = tf_alto.getText();
+        String pesoString = tf_peso.getText();
         Float peso = (pesoString.isEmpty() || !esNumerico(pesoString)) ?  0 : Float.valueOf(pesoString);
         int numeroGuia =(cbNumeroGuia.getSelectionModel().getSelectedItem() !=null)
                ? cbNumeroGuia.getSelectionModel().getSelectedItem().getNumeroDeGuia(): 0;
@@ -149,11 +149,11 @@ public class FXMLFormularioPaqueteController implements Initializable {
         Mensaje msj = PaqueteDAO.editarPaquete(paquete);
         System.out.println("Datos del colaborador: " + paquete);
         if(!msj.isError()){
-            Utilidades.mostrarAlertaSimple("Cliente editado","La información del cliente " +paquete.getDescripcion()+" se a modificado correctamente", Alert.AlertType.INFORMATION);
+            Utilidades.mostrarAlertaSimple("Paquete editado","La información del paquete " +paquete.getDescripcion()+" se a modificado correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
             observador.notificarOperacionExitosa("Editar", paquete.getDescripcion());
         }else{
-            Utilidades.mostrarAlertaSimple("Error al editaar", msj.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al editar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
     

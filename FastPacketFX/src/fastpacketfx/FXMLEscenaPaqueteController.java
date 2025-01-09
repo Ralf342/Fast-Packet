@@ -132,9 +132,9 @@ public class FXMLEscenaPaqueteController implements Initializable, INotificadorO
         Mensaje msj = PaqueteDAO.borrarPaquete(idPaquete);
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Colaborador eliminado","La información del colaborador se a borrado correctamente", Alert.AlertType.INFORMATION);
-            //observador.notificarOperacionExitosa("Eliminar", null);
+            observador.notificarOperacionExitosa("Eliminar", null);
         }else{
-            Utilidades.mostrarAlertaSimple("Error al editaar", msj.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al editar", msj.getMensaje(), Alert.AlertType.ERROR);
         }
     }
     
