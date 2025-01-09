@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
         Ion.getDefault(this@MainActivity).conscryptMiddleware.enable(false)
 
         Ion.with(this@MainActivity)
-            .load("GET","${Constantes().URL_WS}/envio/obtenerEnvios")
+            .load("GET","${Constantes().URL_WS}/envio/buscarEnviosConductores/${conductor.idColaborador}")
             .asString()
             .setCallback { e, result ->
                 if (e == null){
