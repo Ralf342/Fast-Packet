@@ -145,16 +145,6 @@ public class FXMLEscenarioUnidadesController implements Initializable,INotificad
         }
     }
     
-    private void eliminarColaborador(Integer idUnidad){
-        Mensaje msj = UnidadDAO.borrarUnidad(idUnidad);
-        if(!msj.isError()){
-            Utilidades.mostrarAlertaSimple("Unidad eliminada","La información de la unidad se a borrado correctamente", Alert.AlertType.INFORMATION);
-            //observador.notificarOperacionExitosa("Eliminar", null);
-        }else{
-            Utilidades.mostrarAlertaSimple("Error al borrar", msj.getMensaje(), Alert.AlertType.ERROR);
-        }
-    }
-    
     private void agregar(INotificadorOperacion observador, Unidad unidad){
         try{
             Stage escenario = new Stage();
