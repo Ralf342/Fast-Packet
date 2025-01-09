@@ -3,6 +3,7 @@ package com.example.fastpacketvmovil
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fastpacketvmovil.databinding.ActivityActualizarEstatusBinding
 import com.example.fastpacketvmovil.poko.Envio
@@ -97,20 +98,28 @@ class ActualizarEstatusActivity : AppCompatActivity() {
 
     private fun sonCamposValidos(): Boolean {
         if (binding.rgEstado.checkedRadioButtonId == -1) {
-            Toast.makeText(this, "Por favor selecciona un estado", Toast.LENGTH_SHORT).show()
+            mostrarDialogo("Error", "Por favor selecciona un estado")
             return false
         }
         return true
     }
 
+    private fun mostrarDialogo(titulo: String, mensaje: String) {
+        AlertDialog.Builder(this)
+            .setTitle(titulo)
+            .setMessage(mensaje)
+            .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+            .create()
+            .show()
+    }
 
     private fun editarEstatus(numeroSeleccionado: Int) {
-        // Obtener el texto del motivo ingresado por el usuario
+        // obtencion el texto del motivo ingresado por el usuario
         val motivo = binding.etMotivo.text.toString().trim()
 
-        // Validar que el motivo no esté vacío
+        // validacion de que el motivo no esté vacío
         if (motivo.isEmpty()) {
-            Toast.makeText(this, "Por favor ingresa un motivo", Toast.LENGTH_SHORT).show()
+            mostrarDialogo("Por favor", "Ingresa un motivo")
             return
         }
 
@@ -118,7 +127,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
 
         val gson = Gson()
 
-        // Crear el mapa de parámetros
+        // crear el mapa de parametros
         val parametros = mapOf(
             "idEstatus" to numeroSeleccionado,  // Número asociado al RadioButton
             "motivoModificacion" to motivo,               // Texto del motivo ingresado
@@ -127,10 +136,10 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         )
         Log.d("ActualizarEstatusActivity", "editarEstatus: Parámetros: $parametros")
 
-        // Convertir los parámetros a JSON
+        //se convierten los parámetros a JSON
         val parametrosJson = gson.toJson(parametros)
 
-        // Enviar la solicitud PUT al servidor
+        // para enviar la solicitud PUT al servidor
         Ion.with(this)
             .load("PUT", "${Constantes().URL_WS}/envio/actualizarEstatusEnvio")
             .setHeader("Content-Type", "application/json")
@@ -147,6 +156,11 @@ class ActualizarEstatusActivity : AppCompatActivity() {
             }
     }
 
+    private fun esFormatoValido(texto: String): Boolean {
+        //  acepta solo letras (mayúsculas y minúsculas) y números
+        val patron = "^[a-zA-Z0-9\\s]*$".toRegex()
+        return patron.matches(texto)
+    }
 
     fun serializarEnvio(envios : String?){
         val gson = Gson()

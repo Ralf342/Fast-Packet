@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -61,35 +62,100 @@ class EditarPerfilActivity : AppCompatActivity() {
 
     private fun sonCamposValidos(): Boolean {
         var valido = true
+
+        // validacion de campos vacíos nombre y apellidos
         if (binding.etNombre.text.isEmpty()) {
             valido = false
             binding.etNombre.error = "Campo Obligatorio"
         }
+
         if (binding.etApellidoPaterno.text.isEmpty()) {
             valido = false
             binding.etApellidoPaterno.error = "Campo Obligatorio"
         }
+
         if (binding.etApellidoMaterno.text.isEmpty()) {
             valido = false
             binding.etApellidoMaterno.error = "Campo Obligatorio"
         }
+
         if (binding.etCurp.text.isEmpty()) {
             valido = false
             binding.etCurp.error = "Campo Obligatorio"
         }
+
         if (binding.etCorreo.text.isEmpty()) {
             valido = false
             binding.etCorreo.error = "Campo Obligatorio"
         }
+
         if (binding.etLicencia.text.isEmpty()) {
             valido = false
             binding.etLicencia.error = "Campo Obligatorio"
         }
+
         if (binding.etPassword.text.isEmpty()) {
             valido = false
             binding.etPassword.error = "Campo Obligatorio"
         }
+
+        // v de formato para nombres y apellidos (letras, espacios y acentos)
+        if (!Regex("^[a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜñÑ ]+$")
+                .matches(binding.etNombre.text.toString())) {
+            valido = false
+            mostrarAlerta("Nombre inválido", "Solo se permiten letras y acentos")
+        }
+
+        if (!Regex("^[a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜñÑ ]+$")
+                .matches(binding.etApellidoPaterno.text.toString())) {
+            valido = false
+            mostrarAlerta("Apellido paterno inválido", "Solo se permiten letras y acentos")
+        }
+
+        if (!Regex("^[a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙäëïöüÄËÏÖÜñÑ ]+$")
+                .matches(binding.etApellidoMaterno.text.toString())) {
+            valido = false
+            mostrarAlerta("Apellido materno inválido", "Solo se permiten letras y acentos")
+        }
+
+        // validacion de CURP acepta letras y numeros sin espacios y sin estar vacia
+        val curp = binding.etCurp.text.toString()
+        if (binding.etCurp.text.toString().isEmpty() ||
+            !Regex("^[A-Za-z0-9]{16}$").matches(binding.etCurp.text.toString())) {
+            valido = false
+            mostrarAlerta("CURP inválida", "El CURP debe tener exactamente 18 caracteres, no puede estar vacío, no debe contener espacios y solo puede incluir letras y números.")
+        }
+
+
+        // correo (debe contener @ y terminar en .com, sin espacios)
+        val correo = binding.etCorreo.text.toString()
+        if (!Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com$").matches(correo)) {
+            valido = false
+            mostrarAlerta("Correo inválido", "El correo debe contener @ y terminar en .com, sin espacios")
+        }
+
+        // licencia (letras y números, sin espacios)
+        val licencia = binding.etLicencia.text.toString()
+        if (!Regex("^[a-zA-Z0-9]+$").matches(licencia)) {
+            valido = false
+            mostrarAlerta("Licencia inválida", "Solo se permiten letras y números, sin espacios")
+        }
+
+        // sin espacios y que no sea vacia en passw
+        if (binding.etPassword.text.isEmpty() || binding.etPassword.text.toString().contains(" ")) {
+            valido = false
+            mostrarAlerta("Contraseña inválida", "La contraseña no puede estar vacía ni contener espacios")
+        }
+
         return valido
+    }
+
+    private fun mostrarAlerta(titulo: String, mensaje: String) {
+        AlertDialog.Builder(this@EditarPerfilActivity)
+            .setTitle(titulo)
+            .setMessage(mensaje)
+            .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     private fun editarCliente(colaborador: Colaborador){

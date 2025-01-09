@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fastpacketvmovil.databinding.ActivityLoginBinding
 import com.example.fastpacketvmovil.poko.LoginColaborador
@@ -28,8 +29,9 @@ class LoginActivity : AppCompatActivity() {
         binding.btnIniciarSesion.setOnClickListener {
             val noPersonal = binding.etNumeroPersonal.text.toString()
             val contrasenia = binding.etContrasenia.text.toString()
-            if (sonCamposValido(noPersonal.toInt(),contrasenia)){
-                verificarCredenciales(noPersonal.toInt(),contrasenia)
+            if (sonCamposValido(noPersonal, contrasenia)){
+                // solo se convierte a Int cuando se valida
+                verificarCredenciales(noPersonal.toInt(), contrasenia)
             }
         }
     }
@@ -66,22 +68,58 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    fun sonCamposValido(noPersonal: String, contrasenia: String): Boolean {
+        var valido = true
 
-    fun sonCamposValido(noPersonal:Int, contrasenia:String):Boolean{
-        var valido=true
+        // campos no vacios
+        if (noPersonal.isEmpty()) {
+            valido = false
+            binding.etNumeroPersonal.error = "Número personal es obligatorio"
+        }
 
-        if (noPersonal.toString().isEmpty()){
+        if (contrasenia.isEmpty()) {
             valido = false
-            binding.etNumeroPersonal.setError("Numero personal es obligatorio")
+            binding.etContrasenia.error = "Contraseña es obligatoria"
         }
-        if (contrasenia.isEmpty()){
+
+        // formato del número personal
+        /*if (!Regex("^\\d{4}$").matches(noPersonal)) {
             valido = false
-            binding.etContrasenia.setError("Contraseña es obligatoria")
+            mostrarAlerta("Número personal inválido",
+                "El número personal debe ser un número de 4 dígitos.")
+        }*/
+
+        // espacios en blanco
+        if (noPersonal.contains(" ") || contrasenia.contains(" ")) {
+            valido = false
+            mostrarAlerta("Espacios en blanco",
+                "No se permiten espacios en blanco en el número personal o contraseña.")
         }
+
+        //formato de passwrd con caracteres
+        //if (!Regex("^[a-zA-Z0-9#*/]{4,8}$").matches(contrasenia)) {
+        /* valido = false
+         mostrarAlerta("Contraseña inválida",
+             "La contraseña puede entre 4 y 8 y sin caracteres")
+     }*/
+
+        //pass sin caracteres
+        /*if (!Regex("^[a-zA-Z0-9]{4,12}$").matches(contrasenia)) {
+            valido = false
+            mostrarAlerta("Contraseña inválida",
+                "La contraseña debe tener entre 4 y 8 caracteres y solo puede incluir letras y números")
+        }*/
 
         return valido
     }
 
+    fun mostrarAlerta(titulo: String, mensaje: String) {
+        AlertDialog.Builder(this@LoginActivity)
+            .setTitle(titulo)
+            .setMessage(mensaje)
+            .setPositiveButton("Aceptar") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
 
     fun irPantallaPrincipal(jsonColaborador : String){
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
