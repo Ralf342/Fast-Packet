@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS envio (
     idEstatus INT NOT NULL,
     idUnidad INT NOT NULL,
     idColaboradorModificacion INT NOT NULL,
+    motivoModificacion VARCHAR(30) NOT NULL,
     FOREIGN KEY (idClienteDestino) REFERENCES cliente(idCliente) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (idEstatus) REFERENCES estatus(idEstatus) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (idUnidad) REFERENCES unidad(idUnidad) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -84,7 +85,7 @@ CREATE TABLE IF NOT EXISTS unidad (
     modelo VARCHAR(30),
     marca VARCHAR(30),
     motivo VARCHAR(60),
-    idColaborador INT UNIQUE INDEX,
+    idColaborador INT,
     idTipoUnidad INT NOT NULL,
     FOREIGN KEY (idTipoUnidad) REFERENCES tipoUnidad(idTipoUnidad) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (idColaborador) REFERENCES colaborador(idColaborador) ON DELETE CASCADE ON UPDATE CASCADE
@@ -120,7 +121,7 @@ VALUES
 ('Entregado'),
 ('Cancelado');
 
--- tabla cliente
+-- insert tabla cliente
 INSERT INTO cliente (nombre, apellidoPaterno, apellidoMaterno, telefono, correo, codigoPostal, calle, colonia, numeroDeCasa, estado, ciudad) 
 VALUES
 ('Juan', 'Pérez', 'Gómez', 095554, 'juanperez@paqueteria.com', 64000, 'Calle Falsa', 'Colonia Centro', 101, 'Puebla', 'Puebla de Zaragoza'),
@@ -131,13 +132,13 @@ VALUES
 ('Marta', 'Ramírez', 'Díaz', 953115, 'martaramirez@paqueteria.com', 64050, 'Calle Sol', 'Colonia Norte', 606, 'Mexico', 'CDMX');
 
 --  tabla envio
-INSERT INTO envio (costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, numeroCasaOrigen, codigoPostalOrigen, idClienteDestino, fechaModificacion, idUnidad, idColaboradorModificacion, idEstatus, motivo) 
+INSERT INTO envio (costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, numeroCasaOrigen, codigoPostalOrigen, idClienteDestino, idUnidad, idColaboradorModificacion, idEstatus, motivoModificacion) 
 VALUES
-(150.75, 'Ciudad de México', 'CDMX', 'Calle Nana', 'Colonia Centro', 101, 64000, 1, 3, 2, 1, En espera por clima),
-(200.50, 'Jalisco', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2, 1, 1, 2, Asignado a repartidor),
-(120.30, 'Nuevo León', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3, 4, 3, 3, Esta en aduana),
-(175.60, 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4, 2, 1, 5, Compra cancelada),
-(180.00, 'Veracruz', 'CDMX', 'Av. Hidalgo', 'Colonia Este', 909, 99000, 1, 1, 1, 4, Recibido por persona);
+(150.75, 'Ciudad de México', 'CDMX', 'Calle Nana', 'Colonia Centro', 101, 64000, 1, 3, 2, 1, 'En espera por clima'),
+(200.50, 'Guadalajara', 'Jalisco', 'Av. Reforma', 'Colonia Norte', 202, 64010, 2, 1, 1, 2, 'Asignado a repartidor'),
+(120.30, 'Monterrey', 'Nuevo León', 'Calle 10', 'Colonia Sur', 303, 64020, 3, 4, 3, 3, 'Está en aduana'),
+(175.60, 'Puebla', 'Puebla', 'Calle Luna', 'Colonia Oeste', 404, 64030, 4, 2, 1, 5, 'Compra cancelada'),
+(180.00, 'Veracruz', 'Veracruz', 'Av. Hidalgo', 'Colonia Este', 909, 99000, 1, 1, 1, 4, 'Recibido por persona');
 
 -- tabla rol
 INSERT INTO rol (tipo) 
@@ -150,14 +151,13 @@ VALUES
 -- tabla colaborador 
 INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol, numLicencia) 
 VALUES
-('juanperez@paqueteria.com', 'r1934', 'PEJ123456HDFRRL01', 'Juan', 'Pérez', 'Gómez', 1001, 1, MXD12569),
-('analopez@paqueteria.com', 'r1235', 'LOA987654MDFRRL02', 'Ana', 'López', 'Martínez', 1002, 2, MXD03812),
-('carlosgarcia@paqueteria.com', 'c1230', 'GAR13579HDFRRL03', 'Carlos', 'García', 'Rodríguez', 1003, 3, MXD07028),
--- nuevos valores
-('laurahernandez@paqueteria.com', 'r1203', 'HER24680MDFRRL04', 'Laura', 'Hernández', 'Sánchez', 1004, 2, MXD00362),
-('luisgomez@paqueteria.com', 'r1236', 'GOM112233HDFRRL05', 'Luis', 'Gómez', 'Ruiz', 1005, 3, MXD3407),
-('martaramirez@paqueteria.com', 'c1247', 'RAM112233MDFRRL06', 'Marta', 'Ramírez', 'Díaz', 1006, 2, MXD07247),
-('edgar@paqueteria.com', 'e1289', 'EDJ927982MDFRRL06', 'Edgar', 'Juarez', 'Cadena', 1007, 3, MXD11678);
+('juanperez@paqueteria.com', 'r1934', 'PEJ123456HDFRRL01', 'Juan', 'Pérez', 'Gómez', 1001, 1, 'MXD12569'),
+('analopez@paqueteria.com', 'r1235', 'LOA987654MDFRRL02', 'Ana', 'López', 'Martínez', 1002, 2, 'MXD03812'),
+('carlosgarcia@paqueteria.com', 'c1230', 'GAR13579HDFRRL03', 'Carlos', 'García', 'Rodríguez', 1003, 3, 'MXD07028'),
+('laurahernandez@paqueteria.com', 'r1203', 'HER24680MDFRRL04', 'Laura', 'Hernández', 'Sánchez', 1004, 2, 'MXD00362'),
+('luisgomez@paqueteria.com', 'r1236', 'GOM112233HDFRRL05', 'Luis', 'Gómez', 'Ruiz', 1005, 3, 'MXD3407'),
+('martaramirez@paqueteria.com', 'c1247', 'RAM112233MDFRRL06', 'Marta', 'Ramírez', 'Díaz', 1006, 2, 'MXD07247'),
+('edgar@paqueteria.com', 'e1289', 'EDJ927982MDFRRL06', 'Edgar', 'Juarez', 'Cadena', 1007, 3, 'MXD11678');
 
 --  tabla tipoUnidad
 INSERT INTO tipoUnidad (tipo) 
