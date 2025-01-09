@@ -3,6 +3,7 @@ package fastpacketfx;
 import fastpacketfx.interfaces.INotificadorOperacion;
 import fastpacketfx.modelo.dao.ColaboradorDAO;
 import fastpacketfx.pojo.Colaborador;
+import fastpacketfx.pojo.Login;
 import fastpacketfx.pojo.Mensaje;
 import fastpacketfx.utilidades.Utilidades;
 import java.net.URL;
@@ -29,6 +30,7 @@ public class FXMLEscenarioEmpleadosController implements Initializable, INotific
     
     private INotificadorOperacion observador;
     private Colaborador colaboradorEdicion;
+    private Login login;
     private ObservableList<Colaborador> colaboradores;
     @FXML
     private TextField tf_Buscar;
@@ -51,6 +53,10 @@ public class FXMLEscenarioEmpleadosController implements Initializable, INotific
         this.colaboradorEdicion = colaboradorEdicion;
         configurarTabla();
         cargarInformacionTabla();
+    }
+    
+    public void inicializarValores(Login login){
+           this.login = login;
     }
 
     private void configurarTabla(){
@@ -114,8 +120,12 @@ public class FXMLEscenarioEmpleadosController implements Initializable, INotific
         if(colaborador !=null){
             boolean seElimina= Utilidades.mostrarAlertaConfirmacion("Eliminar", "¿Estas seguro de eliminar al colaborador "+ colaborador.getNombre() + "?");
             if(seElimina){
-                eliminarColaborador(colaborador.getIdColaborador());
-                observador.notificarOperacionExitosa("Eliminar", colaborador.getNombre());
+                if(colaborador.getIdColaborador()==login.getColaborador().getIdColaborador()){
+                    Utilidades.mostrarAlertaSimple("Eliminar Colaborador","No puedes borrar el colaborador con el que te encuentras logeado",Alert.AlertType.ERROR);
+                }else{
+                    eliminarColaborador(colaborador.getIdColaborador());
+                    observador.notificarOperacionExitosa("Eliminar", colaborador.getNombre());
+                }    
             }
         }else{
             Utilidades.mostrarAlertaSimple("Seleccionar Colaborador","Para poder eliminar debes seleccionar al colaborador de la tabla",Alert.AlertType.WARNING);

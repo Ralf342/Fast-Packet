@@ -167,8 +167,8 @@ public class FXMLFormularioPaqueteController implements Initializable {
     }
     
     private boolean esNumerico(String cadena) {
-        return cadena.matches("\\d+(\\.\\d+)?"); // Permite enteros y decimales positivos
-    }
+        return cadena.matches("\\d+(\\.\\d+)?");
+    }   
     
     private void cerrarVentana(){
         Stage escenario = (Stage)ta_Descripcion.getScene().getWindow();

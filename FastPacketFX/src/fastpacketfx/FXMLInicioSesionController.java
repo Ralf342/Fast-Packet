@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -50,8 +51,15 @@ public class FXMLInicioSesionController implements Initializable {
 
         // Carga la imagen desde una ruta relativa (Classpath)
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/fastpacketfx/recursos/LOGO.png")));
-    });
+        
+        pf_password.setOnKeyPressed(event -> {
+        if (event.getCode() == KeyCode.ENTER) {
+            btn_Ingresar.fire(); // Ejecuta la acción del botón "Ingresar"
+        }
+            });
+        });
     }
+    
 
     @FXML
     private void onClickIngresar(ActionEvent event) {
