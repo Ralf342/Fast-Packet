@@ -60,8 +60,6 @@ public class FXMLEscenarioEnvioController implements Initializable, INotificador
     @FXML
     private TableColumn tcConductor;
     
-    
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.observador = this;

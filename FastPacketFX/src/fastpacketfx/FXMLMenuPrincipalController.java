@@ -68,7 +68,7 @@ public class FXMLMenuPrincipalController implements Initializable {
 
     @FXML
     private void onClickEmpleado(ActionEvent event) {
-        cargarEscenaEmpleado();
+        cargarEscenaEmpleado(login);
     }
 
     @FXML
@@ -92,7 +92,7 @@ public class FXMLMenuPrincipalController implements Initializable {
         System.out.println(login.getColaborador().getNoPersonal());
     }
     
-    private void cargarEscenaEmpleado(){
+    private void cargarEscenaEmpleado(Login login){
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("FXMLEscenarioEmpleados.fxml"));
@@ -100,6 +100,7 @@ public class FXMLMenuPrincipalController implements Initializable {
             pn_EscenarioUno.getChildren().clear();
             pn_EscenarioUno.getChildren().add(pane);
             FXMLEscenarioEmpleadosController e = loader.getController();
+            e.inicializarValores(login);
         } catch (Exception e) {
         }
     }
