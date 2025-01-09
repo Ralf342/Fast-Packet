@@ -116,6 +116,8 @@ public class FXMLFormularioEnvioController implements Initializable {
         tfCiudadOrigen.setText(this.envioEdicion.getCiudadOrigen());
         tfEstadoOrigen.setText(this.envioEdicion.getEstadoOrigen());
         tfCosto.setText(this.envioEdicion.getCosto().toString());
+
+        
         int idCliente = obtenerIdCliente(this.envioEdicion.getIdClienteDestino());
         cbCliente.getSelectionModel().select(idCliente);
         tfNumGuia.setText(this.envioEdicion.getNumeroDeGuia().toString());
@@ -358,16 +360,20 @@ public class FXMLFormularioEnvioController implements Initializable {
         tfEstadoDestino.setText(cliente.getEstado());
     }
     
-    private int obtenerIdCliente(Integer idCliente){
+    private int obtenerIdCliente(Integer idCliente) {
+        if (idCliente == null) {
+            return 0; // Retorna 0 si el idCliente es nulo
+        }
         for (int i = 0; i < cliente.size(); i++) {
-            if(idCliente == cliente.get(i).getIdCliente()){
+            if (idCliente.equals(cliente.get(i).getIdCliente())) {
                 return i;
             }
         }
-        return 0;
+        return 0; // Retorna 0 si no encuentra un cliente con el ID proporcionado
     }
     
     private int obtenerEstatus(Integer idEstatus){
+        
         for (int i = 0; i < estatus.size(); i++) {
             if(idEstatus == estatus.get(i).getIdEstatus()){
                 return i;
@@ -377,6 +383,9 @@ public class FXMLFormularioEnvioController implements Initializable {
     }
     
     private int obtenerUnidad(Integer idUnidad){
+        if (idUnidad == null) {
+            return 0; // Retorna 0 si el idCliente es nulo
+        }
         for (int i = 0; i < unidad.size(); i++) {
             if(idUnidad == unidad.get(i).getIdTipoUnidad()){
                 return i;

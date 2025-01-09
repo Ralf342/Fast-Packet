@@ -126,7 +126,7 @@ public class FXMLEscenarioEnvioController implements Initializable, INotificador
     @FXML
     private void onClickActualizar(ActionEvent event) {
         Envio envio = tbEnvios.getSelectionModel().getSelectedItem();
-        System.out.println(login.getColaborador().getIdColaborador());
+        System.out.println(envio.getIdClienteDestino());
         if(envio !=null){
             agregar(this,envio,login);
         }else{

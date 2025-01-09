@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 marca = #{marca}, 
                 modelo = #{modelo}, 
                 anio = #{anio}, 
-                idUnidad = #{idUnidad}, 
+                idTipoUnidad = #{idTipoUnidad}, 
                 nii = #{nii}, 
                 idColaborador = #{idColaborador} 
             WHERE  idUnidad = #{idUnidad};
