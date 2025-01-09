@@ -36,14 +36,14 @@ public class Envio {
     private String paquetes_contenidos;
     private String contacto_cliente;
     private String correo;
-    private String motivo;
+    private String motivoModificacion;
    
     
     
     public Envio() {
     }
 
-    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String cliente, String destino, String estatus, String conductor, String calle, String numeroCasa, String colonia, String codigoPostal, String ciudad, String estado, String origen, String direccionOrigen, String direccion_destino, String paquetes_contenidos, String contacto_cliente, String correo, String motivo) {
+    public Envio(Integer numeroDeGuia, Float costo, String ciudadOrigen, String estadoOrigen, String calleOrigen, String coloniaOrigen, Integer numeroCasaOrigen, Integer codigoPostalOrigen, Integer idClienteDestino, String fechaModificacion, Integer idEstatus, Integer idUnidad, Integer idColaboradorModificacion, String cliente, String destino, String estatus, String conductor, String calle, String numeroCasa, String colonia, String codigoPostal, String ciudad, String estado, String origen, String direccionOrigen, String direccion_destino, String paquetes_contenidos, String contacto_cliente, String correo, String motivoModificacion) {
         this.numeroDeGuia = numeroDeGuia;
         this.costo = costo;
         this.ciudadOrigen = ciudadOrigen;
@@ -73,7 +73,7 @@ public class Envio {
         this.paquetes_contenidos = paquetes_contenidos;
         this.contacto_cliente = contacto_cliente;
         this.correo = correo;
-        this.motivo = motivo;
+        this.motivoModificacion = motivoModificacion;
     }
 
     public Integer getNumeroDeGuia() {
@@ -308,14 +308,13 @@ public class Envio {
         this.correo = correo;
     }
 
-    public String getMotivo() {
-        return motivo;
+    public String getMotivoModificacion() {
+        return motivoModificacion;
     }
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
+    public void setMotivoModificacion(String motivoModificacion) {
+        this.motivoModificacion = motivoModificacion;
     }
 
-    
     
 }
