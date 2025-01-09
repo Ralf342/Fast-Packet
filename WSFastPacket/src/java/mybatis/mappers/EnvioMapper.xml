@@ -186,5 +186,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE e.numeroDeGuia = #{numeroDeGuia};
     </select>
     
+    <select id="obtenerEnviosConductores" resulType="pojo.Envio">
+        SELECT 
+            e.numeroDeGuia,
+            e.idColaboradorModificacion,
+            e.ciudadOrigen, 
+            e.estadoOrigen,
+            e.calleOrigen,
+            e.coloniaOrigen,
+            e.codigoPostalOrigen,
+            CONCAT(e.calleOrigen, ' ', e.coloniaOrigen, ' C.P:', e.codigoPostalOrigen) AS 'origen',
+            e.costo,
+            idClienteDestino,
+            IFNULL(c.nombre,'Sin asignar') AS 'cliente',
+            c.calle AS calle,
+            c.numeroCasa AS numeroCasa,
+            c.colonia AS colonia,
+            IFNULL(CONCAT(c.calle, ' ', IFNULL(c.numeroCasa, 'S/N'), ' ', c.colonia, ' C.P:', c.codigoPostal),'Sin asignar') AS 'destino', 
+            IFNULL(c.ciudad,'Sin asignar') AS ciudad,
+            IFNULL(c.estado,'Sin asignar') AS estado,
+            e.idEstatus,
+            e.idUnidad,
+            es.estatus,
+                IFNULL(CONCAT(cl.nombre, ' ', cl.apellidoPaterno),'Sin asignar') AS 'conductor', 
+            e.fechaModificacion
+        FROM envio e
+        LEFT JOIN cliente c
+            ON e.idClienteDestino = c.idCliente
+        LEFT JOIN estatus es
+            ON es.idEstatus = e.idEstatus
+        LEFT JOIN unidad u
+            ON u.idUnidad = e.idUnidad
+        LEFT JOIN colaborador cl
+            ON cl.idColaborador = u.idColaborador
+        WHERE cl.idColaborador = #{idColaborador}
+    </select>
+    
     
 </mapper>
