@@ -147,8 +147,6 @@ public class ImpEnvio {
         }
         return listaEnvios;
     }
-    
-    
 
     // detalles de los envíos
     public static List<Envio> obtenerDetalleEnvios(Integer numeroDeGuia) {
@@ -166,5 +164,9 @@ public class ImpEnvio {
         return detallesEnvios;
     }
     
-    
+    public static List<Envio> obtenerEnviosConductores(Integer idColaborador){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosConductores", idColaborador);
+        return envio;
+    }
 }

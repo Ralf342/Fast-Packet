@@ -186,7 +186,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE e.numeroDeGuia = #{numeroDeGuia};
     </select>
     
-    <select id="obtenerEnviosConductores" resulType="pojo.Envio">
+    <select id="obtenerEnviosConductores" resultType="pojo.Envio">
         SELECT 
             e.numeroDeGuia,
             e.idColaboradorModificacion,
@@ -219,7 +219,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ON u.idUnidad = e.idUnidad
         LEFT JOIN colaborador cl
             ON cl.idColaborador = u.idColaborador
-        WHERE cl.idColaborador = #{idColaborador}
+        WHERE cl.idColaborador = #{idColaborador};
     </select>
     
     

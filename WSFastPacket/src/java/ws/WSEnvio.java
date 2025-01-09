@@ -146,4 +146,11 @@ public class WSEnvio {
         return ImpEnvio.obtenerDetalleEnvios(numeroDeGuia);
     }
     
+    @Path("buscarEnviosConductores/{idColaborador}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Envio> buscarEnviosColaboradores(@PathParam("idColaborador") Integer idColaborador){
+        return ImpEnvio.obtenerEnviosConductores(idColaborador);   
+    }
+    
 }
