@@ -8,6 +8,7 @@ import fastpacketfx.utilidades.Utilidades;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,6 +41,16 @@ public class FXMLInicioSesionController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Platform.runLater(() -> {
+        // Obtén el Stage de la ventana actual
+        Stage stage = (Stage) tf_numeroPersonal.getScene().getWindow();
+
+        // Establece el título de la ventana
+        stage.setTitle("Inicio Sesion");
+
+        // Carga la imagen desde una ruta relativa (Classpath)
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/fastpacketfx/recursos/LOGO.png")));
+    });
     }
 
     @FXML
@@ -94,7 +106,8 @@ public class FXMLInicioSesionController implements Initializable {
             //
             Scene escenaPrincipal = new Scene(vista);
             escenarioBase.setScene(escenaPrincipal);
-            escenarioBase.setTitle("Inicio");
+            escenarioBase.setTitle("Menu Principal");
+            escenarioBase.getIcons().add(new Image(getClass().getResourceAsStream("/fastpacketfx/recursos/LOGO.png")));
             escenarioBase.show();
         }catch(IOException e){
             

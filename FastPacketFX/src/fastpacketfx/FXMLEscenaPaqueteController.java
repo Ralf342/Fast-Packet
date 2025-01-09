@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -149,6 +150,7 @@ public class FXMLEscenaPaqueteController implements Initializable, INotificadorO
             Scene escenaFormulario = new Scene(vista);
             escenario.setScene(escenaFormulario);
             escenario.setTitle("Agregar");
+            escenario.getIcons().add(new Image(getClass().getResourceAsStream("/fastpacketfx/recursos/LOGO.png")));
             escenario.initModality(Modality.APPLICATION_MODAL);
             escenario.showAndWait();
         }catch (Exception e){

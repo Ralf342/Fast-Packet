@@ -15,7 +15,7 @@
          <effect>
             <DropShadow />
          </effect></Separator>
-      <TextField fx:id="tf_buscar" layoutX="150.0" layoutY="65.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar paquete por envío" style="-fx-background-radius: 5;">
+      <TextField fx:id="tf_buscar" layoutX="150.0" layoutY="65.0" prefHeight="30.0" prefWidth="300.0" promptText="Buscar paquete por N° de Guía" style="-fx-background-radius: 5;">
          <font>
             <Font size="14.0" />
          </font></TextField>

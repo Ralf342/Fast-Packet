@@ -229,7 +229,7 @@ public class FXMLFormularioEnvioController implements Initializable {
     
     private boolean soloLetras(String cadena) {
         return cadena.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); 
-}
+    }
     
     //Verifica que sea un numero
     private boolean esNumerico(String cadena) {
