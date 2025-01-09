@@ -1,7 +1,7 @@
 const modoActivo = localStorage.getItem('modo') || 'oscuro';
 document.body.classList.add(modoActivo);
 
-const URL_WS = 'http://localhost:8084/WSFastPacket/api/envio/obtenerEnviosInfo/';
+const URL_WS = 'http://localhost:8084/WSFastPacket/api/envio/buscarEnviosInfo/';
 
 // Al cargar la página, ejecuta la lógica
 document.addEventListener('DOMContentLoaded', async () => {

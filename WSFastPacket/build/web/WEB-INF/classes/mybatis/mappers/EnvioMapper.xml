@@ -80,37 +80,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--mapper de servicio de obtener info para el servicio web-->
     <select id="obtenerEnviosInfo" resultType="pojo.Envio">
-        SELECT 
-            e.numeroDeGuia, 
-            e.ciudadOrigen, 
-            e.estadoOrigen,
+       SELECT
             e.calleOrigen,
-            e.coloniaOrigen,
+            e.ciudadOrigen,
             e.codigoPostalOrigen,
-            CONCAT(e.calleOrigen, ' ', e.coloniaOrigen, ' C.P:', e.codigoPostalOrigen) AS 'origen',
-            e.costo,
-            idClienteDestino,
-            IFNULL(c.nombre,'Sin asignar') AS 'cliente',
-            c.calle AS calle,
-            c.numeroCasa AS numeroCasa,
-            c.colonia AS colonia,
-            IFNULL(CONCAT(c.calle, ' ', IFNULL(c.numeroCasa, 'S/N'), ' ', c.colonia, ' C.P:', c.codigoPostal),'Sin asignar') AS 'destino', 
-            IFNULL(c.ciudad,'Sin asignar') AS ciudad,
-            IFNULL(c.estado,'Sin asignar') AS estado,
-            e.idEstatus,
-            e.idUnidad,
+            e.coloniaOrigen,
+            e.estadoOrigen,
+            e.fechaModificacion,
+            e.idClienteDestino,
             es.estatus,
-                IFNULL(CONCAT(cl.nombre, ' ', cl.apellidoPaterno),'Sin asignar') AS 'conductor', 
-            e.fechaModificacion
+            c.calle,
+            c.ciudad,
+            c.codigoPostal,
+            c.colonia,
+            c.estado,
+            c.numeroCasa
         FROM envio e
-        LEFT JOIN cliente c
-            ON e.idClienteDestino = c.idCliente
-        LEFT JOIN estatus es
-            ON es.idEstatus = e.idEstatus
-        LEFT JOIN unidad u
-            ON u.idUnidad = e.idUnidad
-        LEFT JOIN colaborador cl
-            ON cl.idColaborador = u.idColaborador;
+        INNER JOIN cliente c
+        ON c.idCliente = e.idClienteDestino
+        INNER JOIN estatus es
+        ON es.idEstatus = e.idEstatus
+        WHERE e.numeroDeGuia = #{numeroDeGuia};
     </select>
     
     <!--mapper de servicio de actualiar envio estatus-->

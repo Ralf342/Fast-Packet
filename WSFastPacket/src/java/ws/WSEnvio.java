@@ -116,11 +116,11 @@ public class WSEnvio {
         }
     }
     
-    @Path("buscarEnvioPorNumeroGuia/{numeroDeGuia}")
+    @Path("buscarEnviosInfo/{numeroDeGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON) 
     public List<Envio> buscarClientePorCorreo(@PathParam("numeroDeGuia") Integer numeroDeGuia){
-        return ImpEnvio.buscarEnvioPorNumeroGuia(numeroDeGuia);   
+        return ImpEnvio.obtenerEnviosInfo(numeroDeGuia);   
     }
     
     @Path("numeroGuia")
