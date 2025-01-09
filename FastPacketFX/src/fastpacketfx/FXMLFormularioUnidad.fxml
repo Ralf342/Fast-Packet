@@ -27,13 +27,34 @@
             <InnerShadow />
          </effect>
          <children>
-            <Label fx:id="lbConductorFaltante" layoutX="166.0" layoutY="169.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
-            <Label fx:id="lbVINFaltante" layoutX="14.0" layoutY="120.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
-            <Label fx:id="lbTipoUnidadFaltante" layoutX="167.0" layoutY="120.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
-            <Label fx:id="lbNIIFaltante" layoutX="312.0" layoutY="120.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
-            <Label fx:id="lbAnioFaltante" layoutX="312.0" layoutY="60.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
-            <Label fx:id="lbModeloFaltante" layoutX="167.0" layoutY="60.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
-            <Label fx:id="lbMarcaFaltante" layoutX="17.0" layoutY="60.0" prefHeight="15.0" prefWidth="125.0" textFill="RED" />
+            <Label fx:id="lbConductorFaltante" layoutX="166.0" layoutY="169.0" prefHeight="15.0" prefWidth="125.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbVINFaltante" layoutX="14.0" layoutY="120.0" prefHeight="15.0" prefWidth="125.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbTipoUnidadFaltante" layoutX="167.0" layoutY="120.0" prefHeight="15.0" prefWidth="125.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbNIIFaltante" layoutX="312.0" layoutY="120.0" prefHeight="15.0" prefWidth="125.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbAnioFaltante" layoutX="312.0" layoutY="60.0" prefHeight="15.0" prefWidth="125.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbModeloFaltante" layoutX="167.0" layoutY="60.0" prefHeight="15.0" prefWidth="125.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="lbMarcaFaltante" layoutX="17.0" layoutY="60.0" prefHeight="15.0" prefWidth="125.0" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
             <ComboBox fx:id="cbConductor" layoutX="166.0" layoutY="139.0" prefHeight="30.0" prefWidth="125.0" />
             <Label layoutX="80.0" layoutY="142.0" text="Conductor" textFill="WHITE">
                <font>

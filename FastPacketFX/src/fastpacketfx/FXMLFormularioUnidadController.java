@@ -199,14 +199,14 @@ public class FXMLFormularioUnidadController implements Initializable {
         lbVINFaltante.setText(" ");
         
         //Validacion de año
-        if(!esNumerico(unidad.getAnio()) || unidad.getAnio().length()>4){
-            valido=false;
-            validacionnii=false;
-            lbAnioFaltante.setText("formato incorrecto");
-        }else if(unidad.getAnio().isEmpty()){
+        if(unidad.getAnio().isEmpty()){
             valido=false;
             validacionnii=false;
             lbAnioFaltante.setText("Campo Año vacio");
+        }else if(!unidad.getAnio().matches("\\d{4}")){
+            valido=false;
+            validacionnii=false;
+            lbAnioFaltante.setText("formato incorrecto");
         }
         //validacion de conductor
         if(unidad.getIdColaborador()==0){
@@ -227,11 +227,6 @@ public class FXMLFormularioUnidadController implements Initializable {
         if(unidad.getModelo().isEmpty()){
             valido=false;
             lbModeloFaltante.setText("Campo incompleto");
-        }
-        //validacion año
-        if(unidad.getAnio().isEmpty()){
-            valido=false;
-            lbAnioFaltante.setText("Campo incompleto");
         }
         //validacion vii
         if(unidad.getVin().isEmpty()){

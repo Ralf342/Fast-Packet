@@ -227,8 +227,15 @@ public class FXMLFormularioEnvioController implements Initializable {
         }
     }
     
-    private boolean soloLetras(String cadena) {
-        return cadena.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+"); 
+    public boolean validarNombre(String texto) {
+        // La expresión regular permite letras, espacios y acentos.
+        String valido = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\s]+$";
+        return texto.matches(valido);
+    }
+    public boolean validarTexto(String texto) {
+        // La expresión regular permite letras, espacios y acentos.
+        String valido = "^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\\.\\s]+$";
+        return texto.matches(valido);
     }
     
     //Verifica que sea un numero
@@ -253,12 +260,13 @@ public class FXMLFormularioEnvioController implements Initializable {
         lbEstatusFaltante.setText(" ");
         lbUnidadFaltante.setText(" ");
         
-        if(!tfCalleOrigen.getText().isEmpty() && !soloLetras(tfCalleOrigen.getText())){
-            camposValidos=false;
-            lbCalleFaltante.setText("*Formato incorrecto");
-        }else if(envio.getCalleOrigen().isEmpty()){
+        //validacion de la cale
+        if(envio.getCalleOrigen().isEmpty()){
             camposValidos=false;
             lbCalleFaltante.setText("*Campo obligatorio");
+        }else if(!tfCalleOrigen.getText().isEmpty() && !validarNombre(tfCalleOrigen.getText())){
+            camposValidos=false;
+            lbCalleFaltante.setText("*Formato incorrecto");
         }
         //
         if(envio.getIdClienteDestino() == 0){
@@ -273,31 +281,31 @@ public class FXMLFormularioEnvioController implements Initializable {
             camposValidos=false;
             lbCodigoPostalFaltante.setText("*Campo obligatorio");
         }
-        //
-        if(!tfColoniaOrigen.getText().isEmpty() && !soloLetras(tfColoniaOrigen.getText())){
-            camposValidos=false;
-            lbColoniaFaltante.setText("*Formato incorrecto");
-        }else if(envio.getColoniaOrigen().isEmpty()){
+        // validacion de la colonia
+        if(envio.getColoniaOrigen().isEmpty()){
             camposValidos=false;
             lbColoniaFaltante.setText("*Campo obligatorio");
-        }
-        //
-        if(!tfCiudadOrigen.getText().isEmpty() && !soloLetras(tfCiudadOrigen.getText())){
+        }else if(!tfColoniaOrigen.getText().isEmpty() && !validarTexto(tfColoniaOrigen.getText())){
             camposValidos=false;
-            lbCiudadFaltante.setText("*Formato incorrecto");
-        }else if(envio.getCiudadOrigen().isEmpty()){
+            lbColoniaFaltante.setText("*Formato incorrecto");
+        }
+        //validar ciudad
+        if(envio.getCiudadOrigen().isEmpty()){
             camposValidos=false;
             lbCiudadFaltante.setText("*Campo obligatorio");
-        }
-        //
-        if(!tfEstadoOrigen.getText().isEmpty() && !soloLetras(tfEstadoOrigen.getText())){
+        }else if(!tfCiudadOrigen.getText().isEmpty() && !validarNombre(tfCiudadOrigen.getText())){
             camposValidos=false;
-            lbEstadoFaltante.setText("*Formato incorrecto");
-        }else if(envio.getEstadoOrigen().isEmpty()){
+            lbCiudadFaltante.setText("*Formato incorrecto");
+        } 
+        //validar estado
+        if(envio.getEstadoOrigen().isEmpty()){
             camposValidos=false;
             lbEstadoFaltante.setText("*Campo obligatorio");
+        }else if(!tfEstadoOrigen.getText().isEmpty() && !validarNombre(tfEstadoOrigen.getText())){
+            camposValidos=false;
+            lbEstadoFaltante.setText("*Formato incorrecto");
         }
-        //
+        //validacion costo
         if(!tfCosto.getText().isEmpty() && !esDecimal(tfCosto.getText())){
             camposValidos=false;
             lbCostoFaltante.setText("*Formato incorrecto");
@@ -305,7 +313,7 @@ public class FXMLFormularioEnvioController implements Initializable {
             camposValidos=false;
             lbCostoFaltante.setText("*Campo obligatorio");
         }
-        //
+        //validacion numero de guia
         if(!tfNumGuia.getText().isEmpty() && !esNumerico(tfNumGuia.getText())){
             camposValidos=false;
             lbNumeroGuiaFaltante.setText("*Formato incorrecto");
@@ -313,12 +321,12 @@ public class FXMLFormularioEnvioController implements Initializable {
             camposValidos=false;
             lbNumeroGuiaFaltante.setText("*Campo obligatorio");
         }
-        //
+        //validacion del estatus
         if(envio.getIdEstatus() == 0){
             camposValidos=false;
             lbEstatusFaltante.setText("*Campo obligatorio");
         }
-        //
+        //validacion de unidad
         if(envio.getIdUnidad()== 0){
             camposValidos=false;
             lbUnidadFaltante.setText("*Campo obligatorio");
