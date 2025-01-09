@@ -131,7 +131,7 @@ public class FXMLFormularioUnidadController implements Initializable {
         if(!msj.isError()){
             Utilidades.mostrarAlertaSimple("Unidad registrada", "La unidad se registro correctamente", Alert.AlertType.INFORMATION);
             cerrarVentana();
-            //observador.notificarOperacionExitosa("Guardar", cliente.getNombre());
+            observador.notificarOperacionExitosa("Guardar", unidad.getMarca());
         }else{
             Utilidades.mostrarAlertaSimple("Error al guardar","Ese conductor ya posee una unidad a su cargo, seleccione otro porfavor", Alert.AlertType.ERROR);
         }

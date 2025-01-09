@@ -96,7 +96,7 @@ public class WSPaquete {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje eliminarPaquete(@PathParam("idPaquete") Integer idPaquete){
-        if(idPaquete != null && idPaquete <= 10){
+        if(idPaquete != null){
             return ImpPaquete.eliminarPaquete(idPaquete);
         }
         throw new BadRequestException();
