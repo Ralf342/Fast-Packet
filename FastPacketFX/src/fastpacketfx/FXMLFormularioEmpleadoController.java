@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -153,32 +154,64 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         colaborador.setCorreo(correo);
         colaborador.setIdRol(idRol);
         
-        if (ivLicencia.getImage() != null) {
-        try {
-            BufferedImage bufferedImage = SwingFXUtils.fromFXImage(ivLicencia.getImage(), null);
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", outputStream);
-            byte[] imageBytes = outputStream.toByteArray();
-            String fotoBase64 = Base64.getEncoder().encodeToString(imageBytes);
-            colaborador.setFoto(fotoBase64);
-        } catch (IOException e) {
-            Utilidades.mostrarAlertaSimple("Error al procesar la imagen", "No se pudo procesar la imagen seleccionada.", Alert.AlertType.ERROR);
-            return; 
-        }
-    } else if(!modoEdicion){
-        Utilidades.mostrarAlertaSimple("Falta la foto", "Debe cargar una foto para registrar el colaborador.", Alert.AlertType.WARNING);
-        return;
-    }
-        
-        if(sonCamposValidos(colaborador)){
-            if(!modoEdicion){
-                guardarDatosColaborador(colaborador);
-            }else{
-                colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
-                editarDatosColaborador(colaborador);
+       if (ivLicencia.getImage() != null || modoEdicion) {
+            Task<Void> task = new Task<Void>() {
+        @Override
+        protected Void call() throws Exception {
+            if (ivLicencia.getImage() != null) {
+                try {
+                    // Convierte la imagen en base64
+                    BufferedImage bufferedImage = SwingFXUtils.fromFXImage(ivLicencia.getImage(), null);
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    ImageIO.write(bufferedImage, "png", outputStream);
+                    byte[] imageBytes = outputStream.toByteArray();
+                    String fotoBase64 = Base64.getEncoder().encodeToString(imageBytes);
+                    colaborador.setFoto(fotoBase64);
+                } catch (IOException e) {
+                    throw new RuntimeException("Error al procesar la imagen.");
+                }
             }
-        }else{
-            Utilidades.mostrarAlertaSimple("Error al guardar","Existen algunos campos vacios necesarios para guardar la información", Alert.AlertType.ERROR);
+            return null;
+        }
+
+        @Override
+        protected void succeeded() {
+            // Este método se ejecuta cuando la tarea termina correctamente
+            if (sonCamposValidos(colaborador)) {
+                if (!modoEdicion) {
+                    guardarDatosColaborador(colaborador);
+                } else {
+                    colaborador.setIdColaborador(colaboradorEdicion.getIdColaborador());
+                    editarDatosColaborador(colaborador);
+                }
+            } else {
+                Utilidades.mostrarAlertaSimple(
+                    "Error al guardar",
+                    "Existen algunos campos vacíos necesarios para guardar la información",
+                    Alert.AlertType.ERROR
+                );
+            }
+        }
+
+        @Override
+        protected void failed() {
+            // Este método se ejecuta si ocurre un error en la tarea
+            Utilidades.mostrarAlertaSimple(
+                "Error al procesar la tarea",
+                getException().getMessage(),
+                Alert.AlertType.ERROR
+            );
+        }
+    };
+
+            new Thread(task).start();
+        } else {
+            // Si no hay imagen y no estás en modo edición, mostrar alerta.
+            Utilidades.mostrarAlertaSimple(
+                "Falta la foto",
+                "Debe cargar una foto para registrar el colaborador.",
+                Alert.AlertType.WARNING
+            );
         }
     }
 

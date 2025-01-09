@@ -37,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         contrasenia = #{contrasenia}, 
         curp = #{curp},
         numLicencia = #{numLicencia},
-        foto = #{foto} 
+        foto = IFNULL(#{foto},foto) 
         WHERE idColaborador = #{idColaborador}
     </update>
     
@@ -54,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         contrasenia,
         numLicencia,
         rol.tipo AS 'rol',
+        foto,
         colaborador.idrol
         FROM colaborador 
         INNER JOIN rol ON rol.idRol = colaborador.idRol
@@ -72,6 +73,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         curp,
         contrasenia,
         numLicencia,
+        foto,
         rol.tipo AS 'rol',
         colaborador.idrol
         FROM colaborador 
