@@ -21,7 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         INNER JOIN tipoUnidad tu
         ON u.idTipoUnidad = tu.idTipoUnidad
         LEFT JOIN colaborador c
-        ON u.idColaborador = c.idColaborador   
+        ON u.idColaborador = c.idColaborador
+        WHERE baja=1   
     </select>
     
     <!--mapper de servicio de registrarUnidad-->
@@ -60,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ON u.idTipoUnidad = tu.idTipoUnidad
         LEFT JOIN colaborador c
         ON u.idColaborador = c.idColaborador    
-        WHERE nii LIKE CONCAT(#{nii},'%')
+        WHERE nii LIKE CONCAT(#{nii},'%') AND baja=1
     </select>
     
     <select id="obtenerListaUnidades" resultType="pojo.Unidad">
