@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fastpacketvmovil.databinding.ActivityActualizarEstatusBinding
+import com.example.fastpacketvmovil.poko.Envio
 import com.example.fastpacketvmovil.poko.Estatus
 import com.example.fastpacketvmovil.poko.Mensaje
 import com.example.fastpacketvmovil.util.Constantes
@@ -14,6 +15,7 @@ import com.koushikdutta.ion.Ion
 class ActualizarEstatusActivity : AppCompatActivity() {
     private lateinit var binding: ActivityActualizarEstatusBinding
     private lateinit var estatus: Estatus
+    private lateinit var envio: Envio
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +23,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d("ActualizarEstatusActivity", "onCreate: Iniciando actividad")
         obtenerDatos()
+        serializarEnvio(intent.getStringExtra("envio"))
     }
 
     override fun onStart() {
@@ -79,10 +82,10 @@ class ActualizarEstatusActivity : AppCompatActivity() {
 
     private fun obtenerEstatusSeleccionado(): Int {
         val numero = when (binding.rgEstado.checkedRadioButtonId) {
-            R.id.rbEnTransito -> 1
-            R.id.rbDetenido -> 2
-            R.id.rbEntregado -> 3
-            R.id.rbPendienteEntrega -> 4
+            R.id.rbPendienteEntrega -> 1
+            R.id.rbEnTransito -> 2
+            R.id.rbDetenido -> 3
+            R.id.rbEntregado -> 4
             R.id.rbCancelado -> 5
             else -> 0 // Valor por defecto si no hay selección
         }
@@ -117,8 +120,10 @@ class ActualizarEstatusActivity : AppCompatActivity() {
 
         // Crear el mapa de parámetros
         val parametros = mapOf(
-            "numero" to numeroSeleccionado,  // Número asociado al RadioButton
-            "motivo" to motivo               // Texto del motivo ingresado
+            "idEstatus" to numeroSeleccionado,  // Número asociado al RadioButton
+            "motivoModificacion" to motivo,               // Texto del motivo ingresado
+            "numeroDeGuia" to envio.numeroDeGuia,
+            "idColaboradorModificacion" to envio.idColaboradorModificacion
         )
         Log.d("ActualizarEstatusActivity", "editarEstatus: Parámetros: $parametros")
 
@@ -143,7 +148,10 @@ class ActualizarEstatusActivity : AppCompatActivity() {
     }
 
 
-
+    fun serializarEnvio(envios : String?){
+        val gson = Gson()
+        envio = gson.fromJson(envios,Envio::class.java)
+    }
 
     private fun respuestaEdicion(resultado: String) {
         try {

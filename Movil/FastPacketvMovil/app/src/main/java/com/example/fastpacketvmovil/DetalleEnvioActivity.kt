@@ -210,11 +210,13 @@ class DetalleEnvioActivity : AppCompatActivity() {
 
         // para el error al presionar el btn de actualizar es el m de abajo
         val gson = Gson()
+        val envios = gson.toJson(envio)
         val estatusJson = gson.toJson(Estatus(
             idEstatus = envio.idEstatus,
             estatus = envio.estatus ?: ""
         ))
         val intent = Intent(this, ActualizarEstatusActivity::class.java)
+        intent.putExtra("envios",envios)
         intent.putExtra("estatus", estatusJson)
         startActivity(intent)
     }

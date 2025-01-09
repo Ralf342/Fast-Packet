@@ -144,17 +144,23 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
         startActivity(intent)
     }
 
-    override fun clickDetalleEnvio(
-        envio: Envio,
-        position: Int
-    ) {
+    override fun clickDetalleEnvio(envio: Envio, position: Int) {
         Log.i("Info", envio.toString())
         val gson = Gson()
-        val intent = Intent(this@MainActivity, DetalleEnvioActivity::class.java)
+
+        // Extraer los datos necesarios
+        val idColaboradorModificacion = conductor.idColaborador // Asegúrate de que este campo exista
+        val numeroGuia = envio.numeroDeGuia         // Asegúrate de que este campo exista
+
+        // Crear el intent para redirigir a ActualizarEstatusActivity
+        val intent = Intent(this@MainActivity, ActualizarEstatusActivity::class.java)
+        intent.putExtra("idColaboradorModificacion", idColaboradorModificacion)
+        intent.putExtra("numeroGuia", numeroGuia)
+
+        // Opcional: Agregar el objeto envío completo, si es necesario
         val datosEnvio = gson.toJson(envio)
-        val datosColaborador = gson.toJson(conductor)
         intent.putExtra("envio", datosEnvio)
-        intent.putExtra("colaborador", datosColaborador)
+
         startActivity(intent)
     }
 }

@@ -8,7 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--mapper de servicio de obtener envios-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
         SELECT 
-            e.numeroDeGuia, 
+            e.numeroDeGuia,
+            e.idColaboradorModificacion,
             e.ciudadOrigen, 
             e.estadoOrigen,
             e.calleOrigen,
@@ -115,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!--mapper de servicio de actualiar envio estatus-->
     <update id="actualizarEstatusEnvio" parameterType="pojo.Envio">   
         UPDATE envio
-            SET idEstatus = idEstatus,
+            SET idEstatus = #{idEstatus},
             motivoModificacion = IFNULL(#{motivoModificacion},'Ninguno'),
             idColaboradorModificacion =#{idColaboradorModificacion}
         WHERE  numeroDeGuia = #{numeroDeGuia};

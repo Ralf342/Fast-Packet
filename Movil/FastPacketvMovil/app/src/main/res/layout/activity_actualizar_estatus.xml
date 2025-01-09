@@ -31,6 +31,13 @@
         android:layout_marginBottom="16dp">
 
         <RadioButton
+            android:id="@+id/rbPendienteEntrega"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendiente de entrega"
+            android:textColor="#000000" />
+
+        <RadioButton
             android:id="@+id/rbEnTransito"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,13 +56,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Entregado"
-            android:textColor="#000000" />
-
-        <RadioButton
-            android:id="@+id/rbPendienteEntrega"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pendiente de entrega"
             android:textColor="#000000" />
 
         <RadioButton
