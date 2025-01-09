@@ -81,4 +81,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             WHERE  idUnidad = #{idUnidad};
     </update>
     
+    <update id="darBaja" parameterType="pojo.Unidad">
+        UPDATE unidad
+        SET 
+            motivo = #{motivo},
+            baja = #{baja}
+        WHERE  idUnidad = #{idUnidad};
+    </update>
+    
 </mapper>

@@ -105,5 +105,24 @@ public class WSUnidad {
             throw new BadRequestException();
         }
     }
+    
+    @Path("darBaja")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Mensaje darBaja(String jsonUnidad){
+        try{
+            Gson gson= new Gson();
+            Unidad unidad=gson.fromJson(jsonUnidad, Unidad.class);
+            if(unidad.getIdUnidad()!=null){
+              return ImpUnidad.darBaja(unidad);
+            }else{
+                return new Mensaje(true, "ID de la unidad es vacio o incorrecto para actualizarlo");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            throw new BadRequestException();
+        }
+    }
 }
 

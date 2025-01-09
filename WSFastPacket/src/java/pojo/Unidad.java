@@ -14,6 +14,7 @@ public class Unidad {
     private String motivo;
     private Integer idTipoUnidad;
     private Integer idColaborador;
+    private Integer baja;
     
     //Para los alias
     private String conductor;
@@ -22,7 +23,7 @@ public class Unidad {
     public Unidad() {
     }
 
-    public Unidad(Integer idUnidad, String vin, String nii, String anio, String modelo, String marca, String motivo, Integer idTipoUnidad, Integer idColaborador, String conductor, String tipo) {
+    public Unidad(Integer idUnidad, String vin, String nii, String anio, String modelo, String marca, String motivo, Integer idTipoUnidad, Integer idColaborador, Integer baja, String conductor, String tipo) {
         this.idUnidad = idUnidad;
         this.vin = vin;
         this.nii = nii;
@@ -32,6 +33,7 @@ public class Unidad {
         this.motivo = motivo;
         this.idTipoUnidad = idTipoUnidad;
         this.idColaborador = idColaborador;
+        this.baja = baja;
         this.conductor = conductor;
         this.tipo = tipo;
     }
@@ -108,6 +110,14 @@ public class Unidad {
         this.idColaborador = idColaborador;
     }
 
+    public Integer getBaja() {
+        return baja;
+    }
+
+    public void setBaja(Integer baja) {
+        this.baja = baja;
+    }
+
     public String getConductor() {
         return conductor;
     }
@@ -124,6 +134,6 @@ public class Unidad {
         this.tipo = tipo;
     }
 
-   
+    
 }
 
