@@ -18,10 +18,7 @@ import javax.ws.rs.core.UriInfo;
 import pojo.Envio;
 import pojo.Mensaje;
 
-/**
- *
- * @author Ballo
- */
+
 @Path("envio")
 public class WSEnvio {
     
@@ -31,7 +28,7 @@ public class WSEnvio {
     public WSEnvio() {
     }
     
-    //obtener envios
+    //WS para obtener todos los envios
     @Path("obtenerEnvios")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -39,7 +36,7 @@ public class WSEnvio {
         return ImpEnvio.obtenerEnvios();
     }
     
-    //WS registrar envio
+    //WS para registrar un nuevo envio
    @Path("registrarEnvio")
    @POST
    @Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +55,7 @@ public class WSEnvio {
                 && envio.getIdEstatus()!= null){
                 return ImpEnvio.registrarEnvio(envio);
             }else{
-               return new Mensaje(true, "Datos faltantes o incorrectos");
+               return new Mensaje(true, "El envio se encuentra con algunos faltantes o incorrectos, no se pudo registrar");
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -66,7 +63,7 @@ public class WSEnvio {
         }
     }
     
-    //WS
+    //WS para obtener los envios por su numero de guia
     @Path("obtenerEnviosPorNumeroGuia/{numeroDeGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON) 
@@ -74,7 +71,7 @@ public class WSEnvio {
         return ImpEnvio.buscarEnvioPorNumeroGuia(numeroDeGuia);   
     }
     
-    //WS actualizar envio
+    //WS para actualizar un envio existente
     @Path("actualizarEnvio")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -94,7 +91,7 @@ public class WSEnvio {
         }
     }
     
-    //WS actualizar envio
+    //WS para actualizar el estatus del envio (Movil)
     @Path("actualizarEstatusEnvio")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -107,8 +104,7 @@ public class WSEnvio {
                     && envio.getIdColaboradorModificacion()!=null){
               return ImpEnvio.actualizarEstatusEnvio(envio);
             }else{
-                //return new Mensaje(true, "Numero de guia del envio es vacio o incorrecto para actualizarlhjhhho");
-                return new Mensaje(true,"No tiene nada: "+envio+"");
+                return new Mensaje(true,"El envio no tiene nada de datos: "+envio+"");
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -116,6 +112,7 @@ public class WSEnvio {
         }
     }
     
+    //WS para obtener la informacion de un envio por su numero de guia (Web)
     @Path("buscarEnviosInfo/{numeroDeGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON) 
@@ -123,6 +120,7 @@ public class WSEnvio {
         return ImpEnvio.obtenerEnviosInfo(numeroDeGuia);   
     }
     
+    //WS para obtener los numeros de guia existentes
     @Path("numeroGuia")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -132,6 +130,7 @@ public class WSEnvio {
     }
     
     //WS para movil
+    //WS para listar la lista de envios
     @Path("listaEnviosAsignados")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -139,6 +138,7 @@ public class WSEnvio {
         return ImpEnvio.obtenerListaEnviosAsignados();
     }
     
+    //WS para obtener los detalles de los envios 
     @Path("detalleEnvios/{numeroDeGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -146,6 +146,7 @@ public class WSEnvio {
         return ImpEnvio.obtenerDetalleEnvios(numeroDeGuia);
     }
     
+    //WS para buscar los envios asignados a un conductor
     @Path("buscarEnviosConductores/{idColaborador}")
     @GET
     @Produces(MediaType.APPLICATION_JSON) 

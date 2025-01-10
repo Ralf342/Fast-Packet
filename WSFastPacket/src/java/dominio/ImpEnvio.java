@@ -20,14 +20,15 @@ import pojo.Mensaje;
  * @author Jossellin
  */
 public class ImpEnvio {
-    //obtener envios
+    
+    //Implementacion para obtener todos los envios registrados
     public static List<Envio> obtenerEnvios(){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         List<Envio> envio = conexionBD.selectList("envio.obtenerEnvios");
         return envio;
     }
     
-    //registrar envio
+    //Implementacion para registrar un nuevo envio
     public static Mensaje registrarEnvio(Envio envio){
         Mensaje msj = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -53,16 +54,7 @@ public class ImpEnvio {
         return msj;
     }
     
-     
-    //consultare envio info de clientes, origen y destino
-    public static List<Envio> obtenerEnviosInfo(Integer numeroDeGuia ){
-        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-            List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosInfo", numeroDeGuia);
-        return envio;
-    }
-    
-    
-    //actualizar status
+    //actualizar los datos de un envio registrado
     public static Mensaje actualizarEnvio(Envio envio){
         Mensaje msj= new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -84,39 +76,15 @@ public class ImpEnvio {
         }
         return msj;
     }
-     
-    //actualizar estatus envio
-    public static Mensaje actualizarEstatusEnvio(Envio envio){
-        Mensaje msj= new Mensaje();
-        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-        if(conexionBD!=null){
-            try {
-                int filasAfectadas= conexionBD.update("envio.actualizarEstatusEnvio", envio);
-                conexionBD.commit();
-                if(filasAfectadas>0){
-                    msj.setError(false);
-                    msj.setMensaje("El estatus fue actualizado con exito.");
-                }else{
-                    msj.setError(true);
-                    msj.setMensaje("No se encontró el envío con ese número de guía para actualizar.");
-                }
-            }catch(Exception e){
-                msj.setError(true);
-                msj.setMensaje(e.getMessage());
-            }
-        }else{
-            msj.setError(true);
-            msj.setMensaje("Por el momento el servicio no esta disponible.");
-        }
-        return msj;
-    }
     
+    //Implementacion para buscar los envios por su numero de guia
     public static List<Envio> buscarEnvioPorNumeroGuia(Integer numeroGuia){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
             List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosPorNumeroGuia", numeroGuia);
         return envio;
     }
     
+    //Implementacion para obtener los numeros de guia del envio
     public static List<Envio> obtenerNumeroDeGuia(){
         List<Envio> numeros = null;
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -148,7 +116,7 @@ public class ImpEnvio {
         return listaEnvios;
     }
 
-    // detalles de los envíos
+    //Implementacion para obtener los detalles de los envíos
     public static List<Envio> obtenerDetalleEnvios(Integer numeroDeGuia) {
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         List<Envio> detallesEnvios = null;
@@ -164,9 +132,43 @@ public class ImpEnvio {
         return detallesEnvios;
     }
     
+    //Implementacion para obtener los envios asignados a cierto conductor
     public static List<Envio> obtenerEnviosConductores(Integer idColaborador){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
             List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosConductores", idColaborador);
+        return envio;
+    }
+    
+    //actualizar el estatus de un envio (Movil)
+    public static Mensaje actualizarEstatusEnvio(Envio envio){
+        Mensaje msj= new Mensaje();
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+        if(conexionBD!=null){
+            try {
+                int filasAfectadas= conexionBD.update("envio.actualizarEstatusEnvio", envio);
+                conexionBD.commit();
+                if(filasAfectadas>0){
+                    msj.setError(false);
+                    msj.setMensaje("El estatus fue actualizado con exito.");
+                }else{
+                    msj.setError(true);
+                    msj.setMensaje("No se encontró el envío con ese número de guía para actualizar.");
+                }
+            }catch(Exception e){
+                msj.setError(true);
+                msj.setMensaje(e.getMessage());
+            }
+        }else{
+            msj.setError(true);
+            msj.setMensaje("Por el momento el servicio no esta disponible.");
+        }
+        return msj;
+    }
+        
+    //consultar la informacion del clientes, origen y destino asignados a un envio (Web)
+    public static List<Envio> obtenerEnviosInfo(Integer numeroDeGuia ){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Envio> envio = conexionBD.selectList("envio.obtenerEnviosInfo", numeroDeGuia);
         return envio;
     }
 }
