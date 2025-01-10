@@ -64,7 +64,7 @@ public class ImpEnvio {
                 conexionBD.commit();
                 if(filasAfectadas>0){
                     msj.setError(false);
-                    msj.setMensaje("El paquete fue actualizado con exito.");
+                    msj.setMensaje("El envio fue actualizado con exito.");
                 }
             }catch(Exception e){
                 msj.setError(true);
