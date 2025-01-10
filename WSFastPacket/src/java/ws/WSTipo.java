@@ -13,6 +13,7 @@ import pojo.TipoUnidad;
 @Path("tipo")
 public class WSTipo {
     
+    //WS para el catalogo de los tipos de roles de los colaboradores
     @Path("obtener-roles")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -20,6 +21,7 @@ public class WSTipo {
         return ImpTipos.obtenerRoles();
     }
     
+    //WS para el catalogo de los tipos de unidades
     @Path("obtener-tipos-vehiculos")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -27,6 +29,7 @@ public class WSTipo {
         return ImpTipos.obtenerUnidades();
     }
     
+    //WS para el catalogo de los estados del estatus
     @Path("obtener-estatus")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

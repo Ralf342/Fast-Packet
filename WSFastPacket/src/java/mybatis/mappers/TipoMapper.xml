@@ -5,16 +5,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="tipos">
 
+    <!--mapper para el catalogo de los roles de empleado-->
     <select id="rolEmpleado" resultType="pojo.RolEmpleado">
         SELECT idRol,tipo
         FROM rol
     </select>
     
+    <!--mapper para el catalogo de los tipos de Unidad-->
     <select id="tipoUnidad" resultType="pojo.TipoUnidad">
         SELECT idTipoUnidad,tipo
         FROM tipoUnidad
     </select>
     
+    <!--mapper para el catalogo de los estados de estatus-->
     <select id="estatus" resultType="pojo.Estatus">
         SELECT idEstatus,estatus
         FROM estatus

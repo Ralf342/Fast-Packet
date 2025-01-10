@@ -87,7 +87,7 @@ class GestionDatosActivity : AppCompatActivity() {
     }
 
     fun irEditarPerfil() {
-        Toast.makeText(this, "Redirigiendo a Mi perfil", Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this, "Redirigiendo a Mi perfil", Toast.LENGTH_SHORT).show()
         val gson = Gson()
         val stringConductor = gson.toJson(colaborador)
         val intent = Intent(this@GestionDatosActivity, EditarPerfilActivity::class.java)
@@ -95,7 +95,7 @@ class GestionDatosActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun regresarMain() {
-        Toast.makeText(this, "Redirigiendo a Main", Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this, "Redirigiendo a Main", Toast.LENGTH_SHORT).show()
         val gson = Gson()
         val stringConductor = gson.toJson(colaborador)
         val intent = Intent(this@GestionDatosActivity, MainActivity::class.java)

@@ -122,6 +122,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
         tfNoPersonal.setText(this.colaboradorEdicion.getNoPersonal().toString());
         pfPassword.setText(this.colaboradorEdicion.getContrasenia());
         tfCorreo.setText(this.colaboradorEdicion.getCorreo());
+        setBase64ImageToImageView(this.colaboradorEdicion.getFoto());
         int posicionRol = obtenerPosicionRol(this.colaboradorEdicion.getIdRol());
         cbRol.getSelectionModel().select(posicionRol);
         
@@ -261,7 +262,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             cerrarVentana();
             observador.notificarOperacionExitosa("Guardar", colaborador.getNombre());
         }else{
-            Utilidades.mostrarAlertaSimple("Error al guardar",msj.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al guardar","numero de personal repetido", Alert.AlertType.ERROR);
         }
     }
     
@@ -273,7 +274,7 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             cerrarVentana();
             observador.notificarOperacionExitosa("Editar", colaborador.getNombre());
         }else{
-            Utilidades.mostrarAlertaSimple("Error al editaar", msj.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al editar", "numero de personal repetido", Alert.AlertType.ERROR);
         }
     }
     
@@ -420,6 +421,25 @@ public class FXMLFormularioEmpleadoController implements Initializable {
             e.printStackTrace();
             System.out.println("Error al decodificar la imagen" +e.getMessage());
             return null;
+        }
+    }
+    
+    public void setBase64ImageToImageView(String foto) {
+        try {
+            // Decodifica el string Base64 en un array de bytes
+            byte[] decodificar = Base64.getDecoder().decode(foto);
+
+            // Convierte los bytes a un InputStream
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(decodificar);
+
+            // Crea un objeto Image desde el InputStream
+            Image image = new Image(inputStream);
+
+            // Establece la imagen en el ImageView
+            ivLicencia.setImage(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al decodificar la imagen Base64.");
         }
     }
     

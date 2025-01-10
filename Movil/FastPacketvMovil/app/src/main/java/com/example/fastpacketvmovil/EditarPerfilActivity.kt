@@ -182,18 +182,18 @@ class EditarPerfilActivity : AppCompatActivity() {
             // Intenta deserializar como un objeto JSON
             if (resultado.trim().startsWith("{")) {
                 val mensaje = gson.fromJson(resultado, Mensaje::class.java)
-                Toast.makeText(this@EditarPerfilActivity, mensaje.mensaje, Toast.LENGTH_LONG).show()
+                //Toast.makeText(this@EditarPerfilActivity, mensaje.mensaje, Toast.LENGTH_LONG).show()
                 if (!mensaje.error) {
                     finish()
                 }
                 Log.i("EditarPerfilActivity", mensaje.mensaje)
             } else {
                 // Si no es un objeto JSON, simplemente muestra el mensaje como cadena
-                Toast.makeText(this@EditarPerfilActivity, resultado, Toast.LENGTH_LONG).show()
+               // Toast.makeText(this@EditarPerfilActivity, resultado, Toast.LENGTH_LONG).show()
                 Log.i("EditarPerfilActivity", resultado)
             }
         } catch (e: Exception) {
-            Toast.makeText(this@EditarPerfilActivity, "Error al leer la respuesta del servicio", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this@EditarPerfilActivity, "Error al leer la respuesta del servicio", Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
     }
@@ -220,12 +220,12 @@ class EditarPerfilActivity : AppCompatActivity() {
     }
 
     fun cerrarSesion() {
-        Toast.makeText(this, "Redirigiendo a cerrar sesion", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Redirigiendo a cerrar sesion", Toast.LENGTH_SHORT).show()
         val intent = Intent(this@EditarPerfilActivity, LoginActivity::class.java)
         startActivity(intent)
     }
     fun regresarPerfil() {
-        Toast.makeText(this, "Redirigiendo a cerrar sesion", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Redirigiendo a cerrar sesion", Toast.LENGTH_SHORT).show()
         val gson = Gson()
         val stringConductor = gson.toJson(colaborador)
         val intent = Intent(this@EditarPerfilActivity, GestionDatosActivity::class.java)

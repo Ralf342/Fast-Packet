@@ -8,6 +8,8 @@ import pojo.RolEmpleado;
 import pojo.TipoUnidad;
 
 public class ImpTipos {
+    
+    //Implementacion para obtener los tipos de roles de los colaboradores
     public static List<RolEmpleado> obtenerRoles(){
         List<RolEmpleado> roles = null;
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -20,6 +22,8 @@ public class ImpTipos {
         }
         return roles;
     }
+    
+    //Implementacion para obtener los tipos de unidades
     public static List<TipoUnidad> obtenerUnidades(){
         List<TipoUnidad> unidades = null;
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -33,6 +37,7 @@ public class ImpTipos {
         return unidades;
     }
     
+    //Implementacion para obtener los estatus para los envios
     public static List<Estatus> obtenerEstatus(){
         List<Estatus> estatus = null;
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();

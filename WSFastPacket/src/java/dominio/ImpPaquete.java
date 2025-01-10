@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import java.util.List;
@@ -21,14 +16,15 @@ import pojo.Paquete;
  * @author Jossellin
  */
 public class ImpPaquete {
-    //obtener paquetes
+    
+    //Implementacion para obtener todos los paquetes
     public static List<Paquete> obtenerPaquetes(){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         List<Paquete> paquete = conexionBD.selectList("paquete.obtenerPaquetes");
         return paquete;
     }
     
-    //registrar paquete
+    //Implementacion para registrar un nuevo paquete
     public static Mensaje registrarPaquete(Paquete paquete){
         Mensaje msj = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -39,9 +35,7 @@ public class ImpPaquete {
                 conexionBD.commit();
                 if(filasAfectadas>0){
                     msj.setError(false);
-                    msj.setMensaje("El paquete " + paquete.getIdPaquete()+ " " 
-                    +paquete.getDescripcion() +", fue resgistrado con éxito.");
-                    
+                    msj.setMensaje("El paquete con numero de guia: " + paquete.getNumeroDeGuia()+", fue resgistrado con éxito.");
                 }else{
                     msj.setError(true);
                     msj.setMensaje("El paquete no pudo ser registrado");
@@ -55,17 +49,9 @@ public class ImpPaquete {
             msj.setMensaje("Por le momento el servicio no esta disponible.");
         }
         return msj;
-
     }
     
-    //consultarPaquetePorEnvio
-    public static List<Paquete> consultarPaquetePorEnvio(Integer numeroDeGuia){
-        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-            List<Paquete> paquete = conexionBD.selectList("paquete.consultarPaquetePorEnvio", numeroDeGuia);
-        return paquete;
-    }
-    
-    //actualizarPaquete
+    //Implementacion para actualizar un paquete existente
     public static Mensaje actualizarPaquete(Paquete paquete){
         Mensaje msj= new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();  
@@ -76,7 +62,10 @@ public class ImpPaquete {
                 conexionBD.commit();
                 if(filasAfectadas>0){
                     msj.setError(false);
-                    msj.setMensaje("El paquete, fue actualizado con exito.");
+                    msj.setMensaje("El paquete con numero de guia: "+ paquete.getNumeroDeGuia()+ ", fue actualizado con exito.");
+                }else{
+                    msj.setError(true);
+                    msj.setMensaje("El Paquete no pudo ser actualizado");
                 }
             }catch(Exception e){
                 msj.setError(true);
@@ -89,7 +78,7 @@ public class ImpPaquete {
         return msj;
     }
     
-    //eliminar paquete
+    //Implementacion para eliminar un paquete
     public static Mensaje eliminarPaquete(Integer idPaquete){
         Mensaje msj = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -113,5 +102,12 @@ public class ImpPaquete {
             msj.setMensaje("Por le momento el servicio no esta disponible.");
         }
         return msj;
+    }
+    
+    //Implementacion para poder consultar un paquete por su numero de envio
+    public static List<Paquete> consultarPaquetePorEnvio(Integer numeroDeGuia){
+        SqlSession conexionBD = MyBatisUtil.obtenerConexion();
+            List<Paquete> paquete = conexionBD.selectList("paquete.consultarPaquetePorEnvio", numeroDeGuia);
+        return paquete;
     }
 }

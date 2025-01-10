@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="envio">
     
-    <!--mapper de servicio de obtener envios-->
+    <!--mapper de servicio de obtener todos los envios disponibles-->
     <select id="obtenerEnvios" resultType="pojo.Envio">
         SELECT 
             e.numeroDeGuia,
@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             e.idEstatus,
             e.idUnidad,
             es.estatus,
-                IFNULL(CONCAT(cl.nombre, ' ', cl.apellidoPaterno),'Sin asignar') AS 'conductor', 
+            IFNULL(CONCAT(cl.nombre, ' ', cl.apellidoPaterno),'Sin asignar') AS 'conductor', 
             e.fechaModificacion
         FROM envio e
         LEFT JOIN cliente c
@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ON cl.idColaborador = u.idColaborador;
     </select>
     
-    <!--mapper de servicio de registrar envios-->
+    <!--mapper de servicio para registrar un nuevo envios-->
     <insert id="registrarEnvio" parameterType="pojo.Envio">
         INSERT INTO envio
         (numeroDeGuia, costo, ciudadOrigen, estadoOrigen, calleOrigen, coloniaOrigen, 
@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ) 
     </insert>
 
-    <!--mapper de servicio de actualiar envio-->
+    <!--mapper de servicio para actualiar los valores de un envio-->
     <update id="actualizarEnvio" parameterType="pojo.Envio">
         UPDATE envio
             SET 
@@ -78,32 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
     
-    <!--mapper de servicio de obtener info para el servicio web-->
-    <select id="obtenerEnviosInfo" resultType="pojo.Envio">
-       SELECT
-            e.calleOrigen,
-            e.ciudadOrigen,
-            e.codigoPostalOrigen,
-            e.coloniaOrigen,
-            e.estadoOrigen,
-            e.fechaModificacion,
-            e.idClienteDestino,
-            es.estatus,
-            c.calle,
-            c.ciudad,
-            c.codigoPostal,
-            c.colonia,
-            c.estado,
-            c.numeroCasa
-        FROM envio e
-        INNER JOIN cliente c
-        ON c.idCliente = e.idClienteDestino
-        INNER JOIN estatus es
-        ON es.idEstatus = e.idEstatus
-        WHERE e.numeroDeGuia = #{numeroDeGuia};
-    </select>
-    
-    <!--mapper de servicio de actualiar envio estatus-->
+    <!--mapper de servicio de actualiar  el estatus de un envio, se usa en movil-->
     <update id="actualizarEstatusEnvio" parameterType="pojo.Envio">   
         UPDATE envio
             SET idEstatus = #{idEstatus},
@@ -112,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE  numeroDeGuia = #{numeroDeGuia};
     </update>
     
+    <!--mapper de servicio para obtener los envios por su numero de guia-->
     <select id="obtenerEnviosPorNumeroGuia" resultType="pojo.Envio">
         SELECT 
             e.numeroDeGuia, 
@@ -147,6 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE e.numeroDeGuia LIKE CONCAT( #{numeroDeGuia}, '%');
     </select>
     
+    <!--mapper de servicio para listar los numeros de guia que existen, para un comboBox-->
     <select id="obtenerNumerosDeGuia" resultType="pojo.Envio">
         SELECT numeroDeGuia 
         FROM envio
@@ -166,7 +143,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ON es.idEstatus = e.idEstatus;
     </select>
     
-    <!--mapper para ver detalles de envios app movil -->
+    <!--mapper para ver detalles de envios en app movil -->
     <select id="detalleEnvios" resultType="pojo.Envio">
         SELECT 
         e.numeroDeGuia,
@@ -186,6 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE e.numeroDeGuia = #{numeroDeGuia};
     </select>
     
+    <!--mapper para obtener los envios que tienen asignados los conductores -->
     <select id="obtenerEnviosConductores" resultType="pojo.Envio">
         SELECT 
             e.numeroDeGuia,
@@ -222,5 +200,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE cl.idColaborador = #{idColaborador};
     </select>
     
+    <!--mapper de servicio de obtener informacion de los envios para el servicio web-->
+    <select id="obtenerEnviosInfo" resultType="pojo.Envio">
+       SELECT
+            e.calleOrigen,
+            e.ciudadOrigen,
+            e.codigoPostalOrigen,
+            e.coloniaOrigen,
+            e.estadoOrigen,
+            e.fechaModificacion,
+            e.idClienteDestino,
+            es.estatus,
+            c.calle,
+            c.ciudad,
+            c.codigoPostal,
+            c.colonia,
+            c.estado,
+            c.numeroCasa
+        FROM envio e
+        INNER JOIN cliente c
+        ON c.idCliente = e.idClienteDestino
+        INNER JOIN estatus es
+        ON es.idEstatus = e.idEstatus
+        WHERE e.numeroDeGuia = #{numeroDeGuia};
+    </select>
     
 </mapper>

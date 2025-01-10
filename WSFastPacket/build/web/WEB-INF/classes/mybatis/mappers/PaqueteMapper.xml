@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="paquete">
-    <!--mapper de servicio de obtener paquetes-->
+    <!--mapper de servicio de obtener los paquetes existentes-->
     <select id="obtenerPaquetes" resultType="pojo.Paquete">
         SELECT
             p.idPaquete,
@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM paquete p
     </select>
     
-    <!--mapper de servicio de registrar paquete-->
+    <!--mapper de servicio para registrar un nuevo paquete-->
     <insert id="registrarPaquete" parameterType="pojo.Paquete">
         INSERT INTO paquete
             (peso,
@@ -35,21 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{numeroDeGuia}) 
     </insert>
     
-    <!--mapper de servicio de consultar paquete por envio-->
-    <select id="consultarPaquetePorEnvio" resultType="pojo.Paquete">
-        SELECT
-            p.idPaquete,
-            p.peso, 
-            p.alto, 
-            p.ancho,
-            p.profundidad, 
-            p.descripcion, 
-            p.numeroDeGuia
-        FROM paquete p
-        WHERE p.numeroDeGuia LIKE CONCAT( #{numeroDeGuia}, '%')
-    </select>
-    
-    <!--mapper de servicio de actualizar paquete-->
+    <!--mapper de servicio de actualizar un paquete existente-->
     <update id="actualizarPaquete" parameterType="pojo.Paquete">
         UPDATE paquete 
             SET 
@@ -67,4 +53,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idPaquete = #{idPaquete};
     </delete>
     
+    <!--mapper de servicio de consultar paquete por su numero de envio-->
+    <select id="consultarPaquetePorEnvio" resultType="pojo.Paquete">
+        SELECT
+            p.idPaquete,
+            p.peso, 
+            p.alto, 
+            p.ancho,
+            p.profundidad, 
+            p.descripcion, 
+            p.numeroDeGuia
+        FROM paquete p
+        WHERE p.numeroDeGuia LIKE CONCAT( #{numeroDeGuia}, '%')
+    </select>
+  
 </mapper>

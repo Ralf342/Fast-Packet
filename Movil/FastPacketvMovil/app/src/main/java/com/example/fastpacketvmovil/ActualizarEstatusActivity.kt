@@ -32,7 +32,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
         Log.d("ActualizarEstatusActivity", "onStart: Configurando listeners")
         binding.btnGuardar.setOnClickListener {
             if (sonCamposValidos()) {
-                val nuevoEstatus = obtenerEstatusSeleccionado() // Esto te devuelve un Pair
+                val nuevoEstatus = obtenerEstatusSeleccionado() // esto  devuelve un Pair
                 editarEstatus(nuevoEstatus) // Pasamos el Pair directamente
             }
         }
@@ -187,7 +187,7 @@ class ActualizarEstatusActivity : AppCompatActivity() {
 
     private fun mostrarError(mensaje: String) {
         runOnUiThread {
-            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
         }
     }
 

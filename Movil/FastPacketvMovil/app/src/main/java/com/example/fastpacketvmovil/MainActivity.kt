@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
             val jsonConductor = intent.getStringExtra("conductor")
             if (jsonConductor.isNullOrEmpty()) {
                 Log.e("ERROR", "JSON del conductor es nulo o vacío")
-                Toast.makeText(this, "Error: Datos del conductor no disponibles", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(this, "Error: Datos del conductor no disponibles", Toast.LENGTH_SHORT).show()
                 finish()
                 return
             }
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
 
 
     private fun onMiPerfilClick() {
-        Toast.makeText(this, "Redirigiendo a Mi perfil", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Redirigiendo a Mi perfil", Toast.LENGTH_SHORT).show()
         val gson = Gson()
         val stringConductor = gson.toJson(conductor)
         val intent = Intent(this@MainActivity, GestionDatosActivity::class.java)
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
                     serializarEnvios(result)
                 }else{
                     Log.e("ERROR", "Error en la petición: ${e.message}") // Agregar este log
-                    Toast.makeText(this@MainActivity,"error",Toast.LENGTH_LONG).show()
+                   // Toast.makeText(this@MainActivity,"error",Toast.LENGTH_LONG).show()
                 }
             }
     }
@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity(), ListenerRecycleEnvios {
     }
 
     private fun cerrarSesion() {
-        Toast.makeText(this, "Redirigiendo a cerrar sesión", Toast.LENGTH_SHORT).show()
+      //  Toast.makeText(this, "Redirigiendo a cerrar sesión", Toast.LENGTH_SHORT).show()
         val intent = Intent(this@MainActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()

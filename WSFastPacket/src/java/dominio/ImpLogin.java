@@ -13,6 +13,7 @@ import pojo.LoginColaborador;
  */
 public class ImpLogin {
     
+    //Implementacion para el login de colaboraborador por parte del escritorio
     public static LoginColaborador validarSesionColaborador(String noPersonal, String contrasenia){
         LoginColaborador respuesta = new LoginColaborador();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -30,7 +31,6 @@ public class ImpLogin {
                 respuesta.setError(true);
                 respuesta.setMensaje("No. de personal y/o password incorrectos");
               } 
-   
            }catch(Exception e){
                respuesta.setError(true);
                respuesta.setMensaje(e.getMessage());
@@ -41,6 +41,7 @@ public class ImpLogin {
         return respuesta;
     }
     
+    //Implementacion del login de conductores para la app movil
     public static LoginColaborador validarSesionConductor(String noPersonal, String contrasenia){
         LoginColaborador respuesta = new LoginColaborador();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -51,9 +52,14 @@ public class ImpLogin {
                 parametros.put("contrasenia",contrasenia);
              Colaborador conductor = conexionBD.selectOne("login.LoginConductor",parametros);
                 if(conductor!=null){
-                  respuesta.setError(false);
-                  respuesta.setMensaje("Credenciales correctas del conductor: "+conductor.getNombre());
-                  respuesta.setColaborador(conductor);
+                    if(conductor.getIdColaborador()!=3){
+                        respuesta.setError(false);
+                        respuesta.setMensaje("La aplicación solo puede ser utilizada por conductores");
+                    }else{
+                        respuesta.setError(false);
+                        respuesta.setMensaje("Credenciales correctas del conductor: "+conductor.getNombre());
+                        respuesta.setColaborador(conductor);
+                    }
                 }else{
                 respuesta.setError(true);
                 respuesta.setMensaje("No. de personal y/o password incorrectos");
@@ -65,6 +71,6 @@ public class ImpLogin {
         }else{
             respuesta.setMensaje("Por el momento no hay servicio a la base de datos");
         }
-        return respuesta;
+    return respuesta;
     }
 }

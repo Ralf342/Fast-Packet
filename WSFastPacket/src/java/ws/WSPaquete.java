@@ -31,7 +31,7 @@ public class WSPaquete {
     public WSPaquete() {
     }
     
-    //obtener paquetes
+    //WS para obtener los paquetes disponibles
     @Path("obtenerPaquetes")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -39,7 +39,7 @@ public class WSPaquete {
         return ImpPaquete.obtenerPaquetes();
     }
     
-    //WS registrar paquete
+    //WS para registrar un nuevo paquete
     @Path("registrarPaquete")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -47,30 +47,21 @@ public class WSPaquete {
     public Mensaje registrarPaquete(String jsonPaquete){
         try{
             Gson gson = new Gson();
-            Paquete paquete = gson.fromJson(jsonPaquete, Paquete.class);
-            
+            Paquete paquete = gson.fromJson(jsonPaquete, Paquete.class);    
         if(paquete.getAlto() > 0 && paquete.getAncho()>0 && paquete.getProfundidad()>0&&
-           paquete.getDescripcion() != null && !paquete.getDescripcion().isEmpty()
+           paquete.getPeso() > 0 && paquete.getDescripcion() != null && !paquete.getDescripcion().isEmpty()
         ){
             return ImpPaquete.registrarPaquete(paquete);
         }else{
-            return new Mensaje (true,"Datos faltantes o incorrectos");
+            return new Mensaje (true,"Existen datos faltantes o incorrectos");
         }
         }catch(Exception e){
             e.printStackTrace();
             throw new BadRequestException();
         }
     }
-    
-    //WS consultar paquete por envio
-    @Path("consultarPaquetePorEnvio/{numeroDeGuia}")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON) 
-    public List<Paquete> consultarPaquetePorEnvio(@PathParam("numeroDeGuia") Integer numeroDeGuia){
-        return ImpPaquete.consultarPaquetePorEnvio(numeroDeGuia);   
-    }
 
-    //WS actualizar paquete
+    //WS para actualizar un paquete existente
     @Path("actualizarPaquete")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,9 +80,8 @@ public class WSPaquete {
             throw new BadRequestException();
         }
     }
-    
-    
-    //WS eliminar paquete
+      
+    //WS para eliminar un paquete
     @Path("eliminarPaquete/{idPaquete}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
@@ -100,5 +90,13 @@ public class WSPaquete {
             return ImpPaquete.eliminarPaquete(idPaquete);
         }
         throw new BadRequestException();
+    }
+    
+    //WS consultar paquete por envio
+    @Path("consultarPaquetePorEnvio/{numeroDeGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<Paquete> consultarPaquetePorEnvio(@PathParam("numeroDeGuia") Integer numeroDeGuia){
+        return ImpPaquete.consultarPaquetePorEnvio(numeroDeGuia);   
     }
 }

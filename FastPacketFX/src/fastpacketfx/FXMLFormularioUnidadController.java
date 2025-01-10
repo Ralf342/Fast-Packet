@@ -144,7 +144,7 @@ public class FXMLFormularioUnidadController implements Initializable {
             cerrarVentana();
             observador.notificarOperacionExitosa("Editar", unidad.getMarca().toString());
         }else{
-            Utilidades.mostrarAlertaSimple("Error al editar", msj.getMensaje(), Alert.AlertType.ERROR);
+            Utilidades.mostrarAlertaSimple("Error al editar","Ese conductor ya posee una unidad a su cargo, seleccione otro porfavor", Alert.AlertType.ERROR);
         }
     }
     

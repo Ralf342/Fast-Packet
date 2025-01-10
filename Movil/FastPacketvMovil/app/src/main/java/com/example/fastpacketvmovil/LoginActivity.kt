@@ -59,9 +59,9 @@ class LoginActivity : AppCompatActivity() {
         val gson = Gson()
         val resultadoLoginColaborador = gson.fromJson(json, LoginColaborador::class.java)
         Log.d("LoginActivity", "Respuesta del resultadoLOgin: $resultadoLoginColaborador")
-        Toast.makeText(this@LoginActivity,resultadoLoginColaborador.mensaje, Toast.LENGTH_LONG).show()
+        //Toast.makeText(this@LoginActivity,resultadoLoginColaborador.mensaje, Toast.LENGTH_LONG).show()
         if (!resultadoLoginColaborador.error){
-            Toast.makeText(this@LoginActivity,"serializacion",Toast.LENGTH_LONG).show()
+            //Toast.makeText(this@LoginActivity,"serializacion",Toast.LENGTH_LONG).show()
             val jsonConductor = gson.toJson(resultadoLoginColaborador.colaborador)
             Log.d("LoginActivity", "Respuesta del servidor: $jsonConductor")
             irPantallaPrincipal(jsonConductor)

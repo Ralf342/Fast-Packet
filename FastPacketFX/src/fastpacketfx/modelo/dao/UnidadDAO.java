@@ -13,6 +13,8 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 public class UnidadDAO {
+    
+    //Implementacion para mostrar todas las unidades que no se han dado de baja
     public static List<Unidad> obtenerUnidades(){
         List<Unidad> colaboradores = null;
         String url = Constantes.URL_wS+"unidad/obtenerUnidades";
@@ -29,6 +31,7 @@ public class UnidadDAO {
         return colaboradores;
     }
     
+    //Implemenacion para mostrar el catalogo de los tipos de unidades que existen
     public static List <TipoUnidad> obtenerTiposUnidades(){
           List<TipoUnidad>tipos =null;
           String url = Constantes.URL_wS+"tipo/obtener-tipos-vehiculos";
@@ -45,6 +48,7 @@ public class UnidadDAO {
           return tipos;
     }
     
+    //Implementacion para registrar una nueva unidad
     public static Mensaje registrarUnidad(Unidad unidad){
         Mensaje msj = new Mensaje();
         String url = Constantes.URL_wS+"unidad/registrarUnidad";
@@ -66,6 +70,7 @@ public class UnidadDAO {
         return msj;
     }
     
+    //Implementacion para listar las unidades disponibles para un envio
     public static List <Unidad> listarUnidades(){
           List<Unidad>tipos =null;
           String url = Constantes.URL_wS+"unidad/listaUnidad";
@@ -82,6 +87,7 @@ public class UnidadDAO {
           return tipos;
     }
     
+    //Implementacion para buscar una unidad por su NII
     public static List<Unidad> buscarUnidad(String nii){
         List<Unidad> unidades = null;
         String url = Constantes.URL_wS+"unidad/buscarUnidadNII/"+nii;
@@ -98,23 +104,7 @@ public class UnidadDAO {
         return unidades;
     }
     
-    public static Mensaje borrarUnidad(Integer idUnidad){
-        Mensaje msj = new Mensaje();
-        String url = Constantes.URL_wS+"unidad/eliminarUnidad/" + idUnidad;
-        Gson gson = new Gson();
-        try{
-            RespuestaHTTP respuesta = ConexionWS.peticionDELETE(url,null);
-            if(respuesta.getCodigoRespuesta() == HttpURLConnection.HTTP_OK){
-                System.out.print("Estoy borrando los datos");
-                msj = gson.fromJson(respuesta.getContenido(), Mensaje.class);
-            }
-        }catch(Exception e){
-            msj.setError(true);
-            msj.setMensaje(e.getMessage());
-        }       
-        return msj;
-        }
-    
+    //Implementacion para editar una unidad existente
      public static Mensaje editarUnidad(Unidad unidad){
         Mensaje msj = new Mensaje();
         String url = Constantes.URL_wS+"unidad/editarUnidad";
@@ -134,7 +124,8 @@ public class UnidadDAO {
         }
         return msj;
     }
-     
+    
+    //Implementacion para dar de baja una unidad (No la elimina de la base de datos) 
     public static Mensaje darBaja(Unidad unidad){
         Mensaje msj = new Mensaje();
         String url = Constantes.URL_wS+"unidad/darBaja";

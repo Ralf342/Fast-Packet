@@ -4,7 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="unidad">
-    <!--mapper de servicio de obtener unidades-->
+    
+    <!--mapper de servicio de para obtener todas las unidades-->
     <select id="obtenerUnidades" resultType="pojo.Unidad">
         SELECT
         idUnidad,  
@@ -25,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE baja=1   
     </select>
     
-    <!--mapper de servicio de registrarUnidad-->
+    <!--mapper de servicio para registrar una nueva unidad-->
     <insert id="registrarUnidad" parameterType="pojo.Unidad">
         INSERT INTO unidad 
         (vin, nii, anio, modelo,marca,idTipoUnidad,idColaborador)
@@ -39,11 +40,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{idColaborador})
     </insert>
     
-    <delete id="eliminar">
-        DELETE FROM unidad 
-        WHERE idUnidad = #{idUnidad};
-    </delete>
+    <!--mapper de servicio para actualizar una unidad existente-->
+    <update id="actualizarUnidad" parameterType="pojo.Unidad">
+        UPDATE unidad
+            SET 
+                marca = #{marca}, 
+                modelo = #{modelo}, 
+                anio = #{anio}, 
+                idTipoUnidad = #{idTipoUnidad}, 
+                nii = #{nii}, 
+                idColaborador = #{idColaborador} 
+            WHERE  idUnidad = #{idUnidad};
+    </update>
+    
+    <!--mapper de servicio para dar de baja una unidad-->
+    <update id="darBaja" parameterType="pojo.Unidad">
+        UPDATE unidad
+        SET 
+            motivo = #{motivo},
+            baja = #{baja}
+        WHERE  idUnidad = #{idUnidad};
+    </update>
 
+    <!--mapper de servicio para obtener una unidad por su NII-->
     <select id="obtenerUnidadesPorNII" resultType="pojo.Unidad">
         SELECT
         idUnidad,  
@@ -64,30 +83,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE nii LIKE CONCAT(#{nii},'%') AND baja=1
     </select>
     
+    <!--mapper de servicio para listar las unidades disponibles para envios-->
     <select id="obtenerListaUnidades" resultType="pojo.Unidad">
         SELECT
             idUnidad, modelo, marca
         FROM unidad
     </select>
-    
-    <update id="actualizarUnidad" parameterType="pojo.Unidad">
-        UPDATE unidad
-            SET 
-                marca = #{marca}, 
-                modelo = #{modelo}, 
-                anio = #{anio}, 
-                idTipoUnidad = #{idTipoUnidad}, 
-                nii = #{nii}, 
-                idColaborador = #{idColaborador} 
-            WHERE  idUnidad = #{idUnidad};
-    </update>
-    
-    <update id="darBaja" parameterType="pojo.Unidad">
-        UPDATE unidad
-        SET 
-            motivo = #{motivo},
-            baja = #{baja}
-        WHERE  idUnidad = #{idUnidad};
-    </update>
     
 </mapper>

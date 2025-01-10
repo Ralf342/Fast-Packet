@@ -25,9 +25,17 @@ public class WSColaborador {
     private UriInfo context;
     
     public WSColaborador(){
-        
     }
     
+    //WS para obtener a todos los colaboradores
+    @Path("obtenerColaboradores")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Colaborador> obtenerColaboradores(){
+        return ImpColaborador.obtenerColaboradores();
+    }
+    
+    //WS para registrar un nuevo colaborador
     @Path("registro")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -37,10 +45,11 @@ public class WSColaborador {
         Gson gson = new Gson();
         Colaborador colaborador = gson.fromJson(jsonColaborador, Colaborador.class);
         if(colaborador.getNoPersonal() !=null && !colaborador.getNoPersonal().toString().isEmpty()
-                && colaborador.getContrasenia() != null && !colaborador.getContrasenia().isEmpty()){
+                && colaborador.getContrasenia() != null && !colaborador.getContrasenia().isEmpty() 
+                && colaborador.getIdRol()!=null){
             return ImpColaborador.agregarColaborador(colaborador);
         }else{
-            return new Mensaje (true,"Numero de personal y/O contraseña faltante o incorrectos");
+            return new Mensaje (true,"Numero de personal, contraseña o Rol faltante o incorrectos");
         }
         }catch(Exception e){
             e.printStackTrace();
@@ -48,16 +57,18 @@ public class WSColaborador {
         }
       }
     
+    //WS para eliminar un colaborador
     @Path("eliminarColaborador/{idColaborador}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje eliminarColaborador(@PathParam("idColaborador") String idColaborador){
-        if((idColaborador != null && !idColaborador.isEmpty()) && idColaborador.length() <= 10){
+        if((idColaborador != null && !idColaborador.isEmpty())){
             return ImpColaborador.eliminarColaborador(idColaborador);
         }
         throw new BadRequestException();
     }
     
+    //WS para editar un colaborador existente
     @Path("editarColaborador")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -73,13 +84,7 @@ public class WSColaborador {
         }
     }
     
-    @Path("obtenerColaboradores")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador> obtenerColaboradores(){
-        return ImpColaborador.obtenerColaboradores();
-    }
-    
+    //WS para buscar un colaborador por su numero de personal
     @Path("buscarNoPersonalColaborador/{noPersonal}")
     @GET
     @Produces(MediaType.APPLICATION_JSON) 
@@ -87,6 +92,15 @@ public class WSColaborador {
         return ImpColaborador.buscarNoPersonalColaborador(noPersonal);
     }
     
+    //WS para obtener los colaboradores que poseen el rol de conductores
+    @Path("obtener-conductores")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Colaborador> obtenerConductores(){
+        return ImpColaborador.obtenerConductores();
+    }
+    
+    //WS para subir la foto de un colaborador
     @Path("subirFoto/{idColaborador}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -97,6 +111,7 @@ public class WSColaborador {
         throw new BadRequestException();
     }
     
+    //WS para obtener la foto de un colaborador
     @Path("obtenerFoto/{idColaborador}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -107,11 +122,4 @@ public class WSColaborador {
         throw new BadRequestException();
     }
     
-    @Path("obtener-conductores")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Colaborador> obtenerConductores(){
-        return ImpColaborador.obtenerConductores();
-    
-    }
 }

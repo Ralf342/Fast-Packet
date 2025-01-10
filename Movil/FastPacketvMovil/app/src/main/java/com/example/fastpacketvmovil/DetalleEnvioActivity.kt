@@ -134,7 +134,7 @@ class DetalleEnvioActivity : AppCompatActivity() {
                     cargarDatos()
                 } catch (e: Exception) {
                     Log.e("Error", "Error al cargar datos: ${e.message}")
-                    Toast.makeText(this, "Error al cargar los datos", Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(this, "Error al cargar los datos", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -152,20 +152,10 @@ class DetalleEnvioActivity : AppCompatActivity() {
             binding.tvStatus.text = envio.estatus ?: "Estatus no disponible"
         } catch (e: Exception) {
             Log.e("Error", "Error en cargarDatos: ${e.message}")
-            Toast.makeText(this, "Error al mostrar los datos", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(this, "Error al mostrar los datos", Toast.LENGTH_SHORT).show()
         }
     }
 
-    /*override fun onStart() {
-        super.onStart()
-        Log.d("DetalleEnvioActivity", "onStart: Estableciendo listeners de botones")
-        binding.btnRegresar.setOnClickListener {
-            regresarMain()
-        }
-        binding.btnActualizarEstado.setOnClickListener {
-            irActualizarEstatus()
-        }
-    }*/
 
     private fun obtenerCliente() {
         Ion.getDefault(this).conscryptMiddleware.enable(false)
@@ -180,7 +170,7 @@ class DetalleEnvioActivity : AppCompatActivity() {
                 } else {
                     Log.e("Error", "Error al obtener cliente: ${e?.message}")
                     runOnUiThread {
-                        Toast.makeText(this, "Error al obtener datos del cliente", Toast.LENGTH_LONG).show()
+                       // Toast.makeText(this, "Error al obtener datos del cliente", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -223,7 +213,7 @@ class DetalleEnvioActivity : AppCompatActivity() {
 
     private fun regresarMain() {
         Log.d("DetalleEnvioActivity", "regresarMain: Redirigiendo a la pantalla principal")
-        Toast.makeText(this, "Redirigiendo a la pantalla principal", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, "Redirigiendo a la pantalla principal", Toast.LENGTH_SHORT).show()
         finish()
     }
 }

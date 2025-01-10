@@ -2,7 +2,6 @@ package ws;
 
 import com.google.gson.Gson;
 import dominio.ImpCliente;
-import dominio.ImpColaborador;
 import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
@@ -18,7 +17,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import mybatis.MyBatisUtil;
-import org.apache.ibatis.session.SqlSession;
 import pojo.Cliente;
 import pojo.ListaClientes;
 import pojo.Mensaje;
@@ -28,14 +26,24 @@ import pojo.Mensaje;
  * @author Jossellin
  */
 @Path("cliente")
+
 public class WSCliente {
+    
     @Context
     private UriInfo context;
 
     public WSCliente() {
     }
     
-    //ws registrar cliente
+    //WS para obtener todos los clientes disponibles
+    @Path("obtenerClientes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Cliente> obtenerColaboradores(){
+        return ImpCliente.obtenerCliente();
+    }
+    
+    //WS para registrar un nuevo cliente
     @Path("registrarCliente")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -55,7 +63,7 @@ public class WSCliente {
         }
     }
     
-    //WS editar cliente
+    //WS para editar un cliente existente
     @Path("editarCliente")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -75,7 +83,7 @@ public class WSCliente {
         }
     }
     
-    //WS eliminar cliente
+    //WS para eliminar un cliente
     @Path("eliminarCliente/{idCliente}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
@@ -86,7 +94,7 @@ public class WSCliente {
         throw new BadRequestException();
     }
     
-    //WS buscar cliente por correo
+    //WS para buscar un cliente por correo
     @Path("buscarClientePorCorreo/{correo}")
     @GET
     @Produces(MediaType.APPLICATION_JSON) 
@@ -94,18 +102,11 @@ public class WSCliente {
         return ImpCliente.buscarClientePorCorreo(correo);   
     }
     
-    @Path("obtenerClientes")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Cliente> obtenerColaboradores(){
-        return ImpCliente.obtenerCliente();
-    }
-    
+    //WS para listar y obtener los datos de un cliente
     @Path("obtenerListaClientes")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<ListaClientes> obtenerListaClientes(){
         return ImpCliente.obtenerListaClientes();
     }
-    
 }

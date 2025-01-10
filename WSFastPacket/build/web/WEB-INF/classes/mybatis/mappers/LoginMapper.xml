@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="login">
 
+    <!--mapper para el login de escritorio-->
     <select id="LoginColaborador" resultType="pojo.Colaborador">
         SELECT idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, 
         noPersonal, correo, curp,colaborador.idRol, rol.tipo AS 'rol' 
@@ -13,9 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE noPersonal = #{noPersonal} AND contrasenia = #{contrasenia}
     </select>
     
+    <!--mapper para el login de la app movil -->
     <select id="LoginConductor" resultType="pojo.Colaborador">
         SELECT idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, 
-        noPersonal, correo,contrasenia, curp,colaborador.idRol, rol.tipo AS 'rol',numLicencia 
+        noPersonal, correo,contrasenia, curp,colaborador.idRol, rol.tipo AS 'rol',numLicencia,foto 
         FROM colaborador 
         INNER JOIN rol ON rol.idRol = colaborador.idRol
         WHERE noPersonal = #{noPersonal} AND contrasenia = #{contrasenia} AND colaborador.idRol = 3

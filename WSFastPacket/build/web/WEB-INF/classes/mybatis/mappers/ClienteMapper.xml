@@ -68,6 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE correo LIKE CONCAT(#{correo}, '%');
     </select>
     
+    <!--mapper de servicio para obtener todos los clientes-->
     <select id="buscarCliente" resultType="pojo.Cliente">
         SELECT
             idCliente,
@@ -87,6 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM cliente
     </select>
     
+    <!--mapper de servicio para cargar los datos del cliente para recuperarlos en el envio-->
     <select id="buscarListaClientes" resultType="pojo.ListaClientes">
         SELECT
             idCliente, nombre, apellidoPaterno, calle, colonia, codigoPostal, ciudad, estado

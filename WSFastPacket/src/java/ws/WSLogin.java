@@ -21,9 +21,9 @@ public class WSLogin {
     private UriInfo context;
     
     public WSLogin(){
-        
     }
     
+    //WS para probar que exista conexion a la base de datos
     @Path("ProbarConexion")
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -32,6 +32,7 @@ public class WSLogin {
         return (conexionBD!=null);
     }
     
+    //WS para el login de colaborador por parte de escritorio
     @Path("colaborador")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,6 +43,7 @@ public class WSLogin {
         throw new BadRequestException();
     }
     
+    //WS para el login de conductores por parte de android
     @Path("conductor")
     @POST
     @Produces(MediaType.APPLICATION_JSON)

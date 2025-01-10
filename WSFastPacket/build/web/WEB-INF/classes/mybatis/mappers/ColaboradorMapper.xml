@@ -4,7 +4,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="colaborador">
-    <!--mapper de servicio de insertarColaboradores-->
+    <!--mapper de servicio para mostrar a todos los Colaboradores-->
+    <select id="obtenerColaboradores" resultType="pojo.Colaborador">
+        SELECT
+        idColaborador, 
+        noPersonal, 
+        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS 'nombreCompleto',
+        colaborador.nombre AS nombre,
+        colaborador.apellidoPaterno,
+        colaborador.apellidoMaterno, 
+        correo, 
+        curp,
+        contrasenia,
+        numLicencia,
+        foto,
+        rol.tipo AS 'rol',
+        colaborador.idrol
+        FROM colaborador 
+        INNER JOIN rol ON rol.idRol = colaborador.idRol
+    </select>
+    
+    <!--mapper de servicio para insertar Colaboradores-->
     <insert id="registro" parameterType="pojo.Colaborador">
         INSERT INTO colaborador (correo, contrasenia, curp, nombre, apellidoPaterno, apellidoMaterno, noPersonal, idRol,foto,numLicencia)
          VALUES (
@@ -20,13 +40,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{numLicencia}) 
     </insert>
     
-    <!--mapper de servicio de borrarColaboradores-->
+    <!--mapper de servicio para borrar Colaboradores-->
     <delete id="eliminar">
         DELETE FROM colaborador 
         WHERE idColaborador = #{idColaborador};
     </delete>
     
-    <!--mapper de servicio de editarColaboradores-->
+    <!--mapper de servicio para editar Colaboradores-->
     <update id="editar" parameterType="pojo.Colaborador">
         UPDATE colaborador 
         SET 
@@ -41,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idColaborador = #{idColaborador}
     </update>
     
+    <!--mapper de servicio para obtener a los Colaboradores por su numero de Personal-->
     <select id="obtenerColaboradorPorNoPersonal" resultType="pojo.Colaborador">
         SELECT
         idColaborador, 
@@ -61,41 +82,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE colaborador.noPersonal LIKE CONCAT(#{noPersonal},'%')
     </select>
     
-    <select id="obtenerColaboradores" resultType="pojo.Colaborador">
-        SELECT
-        idColaborador, 
-        noPersonal, 
-        CONCAT(colaborador.nombre,' ' ,apellidoPaterno, ' ',apellidoMaterno)AS 'nombreCompleto',
-        colaborador.nombre AS nombre,
-        colaborador.apellidoPaterno,
-        colaborador.apellidoMaterno, 
-        correo, 
-        curp,
-        contrasenia,
-        numLicencia,
-        foto,
-        rol.tipo AS 'rol',
-        colaborador.idrol
-        FROM colaborador 
-        INNER JOIN rol ON rol.idRol = colaborador.idRol
+    <!--mapper de servicio para obtener Colaboradores-->
+    <select id="obtenerConductores" resultType="pojo.Colaborador">
+        SELECT idColaborador,nombre, apellidoPaterno
+        FROM colaborador
+        WHERE idRol = 3
     </select>
     
+    <!--mapper de servicio para guardar la foto del colaborador-->
     <update id="guardarFoto" parameterType="map">
         UPDATE colaborador
             SET foto = #{foto}
         WHERE noPersonal = #{noPersonal}
     </update>
     
+    <!--mapper de servicio para obtener la foto del colaborador-->
     <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
         SELECT idColaborador, nombre, apellidoPaterno, apellidoMaterno, TO_BASE64(foto) AS 'foto'
         FROM colaborador
         WHERE idColaborador = #{idColaborador};
-    </select>
-    
-    <select id="obtenerConductores" resultType="pojo.Colaborador">
-        SELECT idColaborador,nombre, apellidoPaterno
-        FROM colaborador
-        WHERE idRol = 3
     </select>
     
 </mapper>

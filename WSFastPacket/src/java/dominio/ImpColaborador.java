@@ -6,7 +6,6 @@ import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Colaborador;
-import pojo.LoginColaborador;
 import pojo.Mensaje;
 
 /**
@@ -14,8 +13,9 @@ import pojo.Mensaje;
  * @author joska_
  */
 public class ImpColaborador {
+    
+    //Implementacion para agregar un colaborador nuevo
     public static Mensaje agregarColaborador(Colaborador colaborador){
-
     Mensaje msj = new Mensaje();
     SqlSession conexionBD = MyBatisUtil.obtenerConexion();
 
@@ -38,10 +38,9 @@ public class ImpColaborador {
         msj.setError(true);
         msj.setMensaje("Por le momento el servicio no esta disponible.");
     }
-    return msj;
-
-}
-        
+        return msj;
+    }
+    //Implementacion para eliminar un colaborador    
     public static Mensaje eliminarColaborador(String idColaborador) {
         Mensaje respuesta = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -69,19 +68,13 @@ public class ImpColaborador {
         return respuesta;
     }
     
+    //Implementacion para editar un colaborador existente
     public static Mensaje editarColaborador(Colaborador colaborador){
-     
         Mensaje msj = new Mensaje();   
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         
         if(conexionBD != null){
             try{
-                
-                //validaciones para campos que no se editan
-                // Obtener datos actuales del colaborador desde la base de datos
-               
-                
-                //las otras validaciones  ala bd
                 int resultado = conexionBD.update("colaborador.editar", colaborador);
                 conexionBD.commit();
                 if(resultado > 0){
@@ -102,18 +95,21 @@ public class ImpColaborador {
         return msj;
     }
     
+    //Implementacion para listar a todos los colaboradores
     public static List<Colaborador> obtenerColaboradores(){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
-                List<Colaborador> colaboradores = conexionBD.selectList("colaborador.obtenerColaboradores");
+            List<Colaborador> colaboradores = conexionBD.selectList("colaborador.obtenerColaboradores");
         return colaboradores;
     }
     
+    //Implementacion para buscar a los colaboradores por su numero de personal
     public static List<Colaborador> buscarNoPersonalColaborador(String noPersonal){
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
             List<Colaborador> colaborador = conexionBD.selectList("colaborador.obtenerColaboradorPorNoPersonal", noPersonal);
             return colaborador;    
     }
     
+    //Implementacion para guardar una foto de un colaborador
     public static Mensaje guardarFoto(Integer idColaborador, byte [] foto){
         Mensaje respuesta = new Mensaje();
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -126,7 +122,7 @@ public class ImpColaborador {
                 conexionBD.commit();
                 if(filasAfectadas > 0){
                     respuesta.setError(false);
-                    respuesta.setMensaje("Fotografia guardada correctamente");
+                    respuesta.setMensaje("Fotografia del colaborador guardada correctamente");
                 }else{
                     respuesta.setError(true);
                     respuesta.setMensaje("Lo sentimos, no se pudo guardar la foto");
@@ -136,7 +132,6 @@ public class ImpColaborador {
                 respuesta.setError(true);
                 respuesta.setMensaje(e.getMessage());
             }
-            
         }else{
             respuesta.setError(true);
             respuesta.setMensaje("Lo sentimos, no se pudo almacenar a la Base de Datos");
@@ -144,6 +139,7 @@ public class ImpColaborador {
         return  respuesta;
     }
     
+    //Implementacion para obtener la foto de un colaborador
     public static Colaborador obtenerFoto(Integer idColaborador){
         Colaborador colaborador = null;
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
@@ -157,14 +153,14 @@ public class ImpColaborador {
         }
         return colaborador;
     }
-    
+
+    //Implementacion para obtener a todos los colaboradores que son conductores
     public static List<Colaborador> obtenerConductores(){
         List<Colaborador> conductores = null;
         SqlSession conexionBD = MyBatisUtil.obtenerConexion();
         if(conexionBD !=null){
             try{
                 conductores = conexionBD.selectList("colaborador.obtenerConductores");
-            
             }catch (Exception e){
                 e.printStackTrace();
             }

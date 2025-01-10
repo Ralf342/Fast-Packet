@@ -23,6 +23,7 @@ import pojo.Unidad;
 @Path("unidad")
 public class WSUnidad {
     
+    //WS para obtener todas las unidades que no esten dadas de baja
     @Path("obtenerUnidades")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -30,6 +31,7 @@ public class WSUnidad {
         return ImpUnidad.obtenerUnidades();
     }
     
+   //WS para registrar una nueva unidad 
    @Path("registrarUnidad")
    @POST
    @Produces(MediaType.APPLICATION_JSON)
@@ -46,7 +48,7 @@ public class WSUnidad {
             ){
                 return ImpUnidad.agregarUnidad(unidad);
             }else{
-               return new Mensaje(true, "Existen campos vacios o incorrectos");
+               return new Mensaje(true, "Existen campos vacios o incorrectos, se impidio registrar la unidad");
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -54,25 +56,7 @@ public class WSUnidad {
         }
     }
     
-    @Path("eliminarUnidad/{idUnidad}")
-    @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarColaborador(@PathParam("idUnidad") String idUnidad){
-        
-        if((idUnidad != null && !idUnidad.isEmpty()) && idUnidad.length() <= 10){
-            return ImpUnidad.eliminarUnidad(idUnidad);
-        }
-        throw new BadRequestException();
-        
-    }
-    
-    @Path("mostrarUnidades")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Unidad> mostrarUnidades(){
-        return ImpUnidad.mostrarUnidad();
-    }
-    
+    //WS para buscar una unidad por su NII
     @Path("buscarUnidadNII/{nii}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -80,6 +64,7 @@ public class WSUnidad {
         return ImpUnidad.buscarUnidadPorNII(nii);
     }
     
+    //WS para listar las unidades existentes
     @Path("listaUnidad")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -87,6 +72,7 @@ public class WSUnidad {
         return ImpUnidad.listarUnidades();
     }
     
+    //WS para editar una unidad existente
     @Path("editarUnidad")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -98,7 +84,7 @@ public class WSUnidad {
             if(unidad.getIdUnidad()!=null){
               return ImpUnidad.editarUnidad(unidad);
             }else{
-                return new Mensaje(true, "ID de cliente vacio o incorrecto para actualizarlo");
+                return new Mensaje(true, "ID de la unidad vacio o incorrecto para actualizarlo");
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -106,6 +92,7 @@ public class WSUnidad {
         }
     }
     
+    //WS para dar de baja una unidad (no la eliminara de la base de datos)
     @Path("darBaja")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)

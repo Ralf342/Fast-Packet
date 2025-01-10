@@ -101,7 +101,8 @@ CREATE TABLE IF NOT EXISTS paquete (
     descripcion VARCHAR(60),
     numeroDeGuia INT,
     idUnidad INT,
-    FOREIGN KEY (numeroDeGuia) REFERENCES envio(numeroDeGuia) ON DELETE CASCADE ON UPDATE CASCADE
+    baja INT,
+    FOREIGN KEY (numeroDeGuia) REFERENCES envio(numeroDeGuia) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (idUnidad) REFERENCES unidad(idUnidad) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
